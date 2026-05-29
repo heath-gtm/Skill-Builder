@@ -1,0 +1,17 @@
+# Built skill bundles (regenerate via scripts/package_skill.py)
+*.skill
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp

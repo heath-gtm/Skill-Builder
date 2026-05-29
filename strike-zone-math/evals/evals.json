@@ -1,0 +1,26 @@
+{
+  "skill_name": "strike-zone-math",
+  "evals": [
+    {
+      "id": 0,
+      "name": "product-pipeline-diagnosis",
+      "prompt": "Why are we not driving pipeline from our Product channel? What is the problem?",
+      "expected_output": "A leader-mode diagnostic that pulls live SFDC data on the Product cohort, identifies the specific leaky gate (likely cohort→meeting given the question), matches it to a named failure mode from the diagnostic pattern framework, and recommends a specific action with Who/What/By when filled in.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "inbound-show-rate-drop",
+      "prompt": "Our Inbound show rate seems to have dropped lately. Diagnose what's happening and tell me what to do about it.",
+      "expected_output": "A focused Gate-2 (show rate) diagnosis with period-over-period comparison, identification of one of the three known show-rate failure modes (booking window, confirmation workflow, stakeholder quality), and a specific action.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "rep-drill-outbound",
+      "prompt": "Drill into one of our Outbound AEs — pick one with enough cohort data — and show me their strike zone vs. team baseline. What does this rep need to focus on?",
+      "expected_output": "A rep-mode tactical diagnostic. Picks a real Outbound AE from SFDC, pulls their cohort, compares per-gate conversion to team baseline, identifies their weakest gate, and gives tactical recommendations (specific accounts, messaging changes) — not structural leader-mode changes.",
+      "files": []
+    }
+  ]
+}
