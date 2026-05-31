@@ -99,6 +99,21 @@ BUDGET REALLOCATION CONSIDERATION:
 - For per-deal diagnosis (use Deal-Health Analyst)
 - For dashboard-style building (use the existing strike-zone-math skill directly)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.LeadSource + Opportunity.Channel__c (canonical channel classification, § 5)
+- Opportunity.StageName, CloseDate, IsClosed, IsWon (cohort conversion math)
+- Opportunity.Amount (dollarization of leverage points)
+- Account.Website (Amplitude join for Product channel cohort, § 10)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #11 (channel classifier), #18 (PQA detection), strike-zone-math skill (parent).

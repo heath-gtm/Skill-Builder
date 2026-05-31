@@ -86,6 +86,23 @@ Next moves (named):
 - For specific at-risk save plays (use customer-battle-plan skill)
 - For new-business pipeline (use Pipeline-Creation Analyst)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.DWH_DS_Customer_ARR__c + DWH_SS_Customer_ARR__c (per-account ARR rollup)
+- Account.Open_Renewal_ARR__c (renewal pipeline math)
+- Account.RP_Renewal_Period_End__c (renewal queue 90/120/180-day windows)
+- Account.Product_Engagement_Verdict__c (health composite)
+- Account.LastActivityDate via 4-source check (going-dark detector, § 8)
+- Opportunity (Type='Renewal', open) per CSM
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #14 v7 (play types — RENEWAL_DEFENCE + EXPANSION), #16 v9.1 (4-source activity), #28 (Deal Health Summary), product-engagement-story skill.

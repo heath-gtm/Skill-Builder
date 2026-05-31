@@ -111,6 +111,20 @@ Suggested play: EXPANSION (currently DS customer, healthy footprint, growing tre
 - For "what did we say" questions (use Conversation Analyst)
 - For accounts that aren't in Amplitude yet (cold prospects with no signups)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.Website (canonical → gp:domain join, § 10)
+- Account.Aero_Product_Engagement_Score__c (override detection)
+- Writes back: Product_Engagement_Verdict__c, Product_Engagement_Last_Run__c, Product_Engagement_Active_Latest__c, Aero_False_Negative__c (§ 1)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 This analyst inherits lock-ins #14 (play type override contract — Ghost-Active and Aero False-Negative), #18 (new user signal), and the override row format for `aero_feedback_queue/`. Read `Account Brief Pipeline/LOCKED_DESIGN.md` and the `product-engagement-story` SKILL.md before any invocation.

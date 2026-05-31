@@ -196,6 +196,19 @@ Full report: [link to HTML]
 - For pulling SFDC / Amplitude / Mixmax data directly (use the read analysts)
 - For one-off questions about a single account (use SFDC + Amplitude + Conversation analysts directly)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- No direct SFDC reads — consumes the audit TSVs that other analysts write.
+- Reads salesforce_analyst_audit, comms_audit, etc. for drift detection.
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 The QA Agent reads the audit-trail outputs of every other analyst. It doesn't have its own lock-in dependencies beyond the file-system layout. Lock-in #2 (single-writer manifest rule), #8 (Aero feedback queue), and the auditability requirements of every other lock-in are what makes this agent possible.

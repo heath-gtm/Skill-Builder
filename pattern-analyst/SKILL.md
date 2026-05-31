@@ -127,6 +127,21 @@ PREDICTIVE CHURN WATCH (current active accounts matching pattern):
 - For per-account predictive churn analysis (use Renewal-Health or Book-of-Business)
 - For real-time competitive intel during a call (use Conversation Analyst)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Closed-Won cohort per § 9 snippet G (12-month trailing)
+- Closed-Lost cohort per § 9 snippet H (6-month trailing) including Loss_Reason__c + Competitor__c
+- Churn cohort per § 9 snippet I (12-month trailing, Type='Renewal', Closed Lost — Churn)
+- Account-level signals on each cohort: CR_Number_of_Employees__c, Email_Provider__c, CRM__c, Sales_Acceleration_Tool__c, Industry, Type
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #11 (channel classifier), #14 v7 (play type taxonomy), #26 (tech stack signal fields).

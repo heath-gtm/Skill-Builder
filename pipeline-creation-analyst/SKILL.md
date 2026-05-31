@@ -89,6 +89,22 @@ Next moves (named):
 - For active deal health (use Deal-Health Analyst)
 - For funnel-stage leakage (use Strike-Zone Analyst)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.Website (canonical → channel classification + Amplitude join, § 5 + § 10)
+- Account.LeadSource + Opportunity.Channel__c (channel classification, § 5)
+- Account.Aero_Account_Fit_Score__c + CR_Sales_Team_Hiring__c (top-of-funnel signal)
+- Account.DWH_Forecasted_ARR__c (Q-target coverage math)
+- 4-source activity check for engagement velocity per AE (§ 8)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #11 (channel classifier), #14 v7 (play types — ACTIVATE / CONVERT / COLD OUTBOUND), #16 v9.1 (4-source activity), #18 (new user signal), #25 (Daily Drop format), #26 (tech stack + hiring fields).

@@ -101,6 +101,21 @@ For "Give me a conversation pulse on Acme Corp":
 - For product usage questions (use Amplitude Analyst — capability data is its domain)
 - For pure email send/automation (use Mixmax directly)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.Id, Account.Website
+- Contact.Email, Contact.LastActivityDate
+- OpportunityContactRole.IsPrimary (champion identification)
+- Task / Event via salesforce_query_activities() (4-source activity, § 8)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 This analyst inherits lock-in #16 v9.1 (multi-source activity check — same rule, but applied at the conversation-detail layer not just the date-flag layer). Read `Account Brief Pipeline/LOCKED_DESIGN.md` and the existing `account-intelligence` plugin skills (`meeting-followup-generator`, `weekly-meeting-prep`, `weekly-meeting-digest`) before any invocation — those are the inheritance source for meeting digest and follow-up drafting patterns.

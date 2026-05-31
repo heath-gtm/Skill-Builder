@@ -81,6 +81,20 @@ Recommended order:
 - For active deals already in pipeline (use Deal-Health Analyst)
 - For pre-funnel ICP qualification (use ICP Analyst first)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Contact.Email, LeadSource, LastActivityDate (lead-level status classifier)
+- Account.Aero_Account_Fit_Score__c (hot lead ranking)
+- Mixmax sequence enrollment via mixmax_query_sequence_enrollment (cross-system)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #11 (channel classifier), #16 v9.1 (4-source activity), #25 (Daily Drop format).

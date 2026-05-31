@@ -129,6 +129,19 @@ Next pass: Sunday 2026-06-06 (after next QA Agent digest)
 - For pulling data from connectors (uses other analysts as upstream — never queries directly)
 - For autonomous decisions — every change requires Heath's PR approval
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- No direct SFDC reads — consumes audit logs from other analysts + outcome attribution data.
+- Generates GitHub PRs that may amend this library file when field changes are needed.
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-in #33 (QA Agent — Evolution is the next layer on top). This skill's existence locks-in #34 (the AI-native flywheel). All lock-ins and SKILL.md files are downstream targets for Evolution Agent PRs.

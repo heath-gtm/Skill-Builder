@@ -80,6 +80,23 @@ Recommended pitch: Multi-year + Calendar expansion. Project value: $609K over 3y
 - For new-business deals (use Deal-Health Analyst)
 - For multi-touch save sequence drafting (use Comms Analyst + customer-battle-plan)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.Open_Renewal_ARR__c, RP_Renewal_Period_Start__c, RP_Renewal_Period_End__c
+- Account.Past_Renewals__c, Last_Renewal_Touch__c, Days_Since_Last_Renewal_Touch__c
+- Account.All_Purchased_Seats__c, Stripe_Subscription_Start_Date__c/End_Date__c
+- Account.CSM__c, CSM_Text__c
+- Account.Product_Engagement_Verdict__c (for the PES adoption story in the pitch)
+- Opportunity (Type='Renewal' queries, § 9 snippet F)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #7 (Renewal Defence play type), #14 v7 (Aero override), #28 (Deal Health Summary), product-engagement-story skill.

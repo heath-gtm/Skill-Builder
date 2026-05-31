@@ -103,6 +103,20 @@ outbound target this week.
 - For "have they used the product" questions (use Amplitude Analyst)
 - For pure CRUD of ICP scores in SFDC (use the Salesforce MCP directly)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.* (Aero scoring, CR_* enrichment, tech-stack-as-displacement fields per § 1)
+- Account.LeadSource + Opportunity.Channel__c (canonical channel classification, § 5)
+- Writes to icp_override_queue audit when composite disagrees with Aero/Octave
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 This analyst inherits lock-ins #11 (channel classifier), #14 v7 (play type taxonomy + Aero override contract), #18 (new user signal), #26 (tech stack + hiring fields), and the Aero False-Negative override logic from the `product-engagement-story` skill. Read `Account Brief Pipeline/LOCKED_DESIGN.md` before any invocation.

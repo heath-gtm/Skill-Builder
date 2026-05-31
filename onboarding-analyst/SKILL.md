@@ -87,6 +87,23 @@ Next moves (named):
 - For pre-Closed-Won deal health (use Deal-Health Analyst)
 - For multi-product expansion pitches (use Comms Analyst + customer-battle-plan)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.CreatedDate (Day-30/60/90 milestone calc)
+- Account.Implementation_Status__c (onboarding state)
+- Account.Account_Notes__c + Last_Updated__c (PLAN-transfer-at-handoff check)
+- Account.Aero_Product_Engagement_Score__c (Aero false-negative on customers)
+- Account.Website (Amplitude join, § 10)
+- CSM__c / CSM_Text__c (handoff target)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #14 v7 (Aero false-negative — applies to customers too), #16 v9.1 (4-source activity), #18 (new user signal — applies during onboarding), product-engagement-story skill.

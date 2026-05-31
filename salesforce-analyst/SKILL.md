@@ -85,6 +85,22 @@ Next move: HM's meeting at 12:30pm today. Stage 7 means commercial close is the 
 - For "what did we last talk about" questions (use Conversation Analyst instead)
 - For pure Salesforce CRUD with no analysis (use the Salesforce MCP directly)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.* (all 22 GTM custom fields per § 1)
+- Opportunity.* (full set including PLAN fields, ForecastCategoryName, Channel__c)
+- Contact.* (Email, Phone, MobilePhone, Title, LeadSource, LastActivityDate)
+- Task / Event via salesforce_query_activities() (canonical 4-source check, § 8)
+- OpportunityContactRole (multi-thread check, § 6 + § 10)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 This analyst inherits lock-ins #14 (play type), #16 v9.1 (multi-source activity), #19 (role boundaries), #26 (22 custom fields + PLAN Selling), #27 (Deal Health Summary). Read `Account Brief Pipeline/LOCKED_DESIGN.md` before any invocation.

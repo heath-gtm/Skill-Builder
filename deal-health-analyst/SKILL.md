@@ -70,6 +70,21 @@ Next moves (named):
 - For top-of-funnel pipeline coverage (use Pipeline-Creation Analyst)
 - For per-rep coaching priorities (use Coaching Analyst)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Opportunity.* (StageName, ForecastCategoryName, Amount, CloseDate, LastActivityDate, the 4 PLAN fields, Channel__c)
+- Account.LastActivityDate (4-source activity, § 8)
+- OpportunityContactRole (multi-thread check, § 6)
+- Task / Event via salesforce_query_activities() (canonical 4-source check, § 8)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #8 (deal-risk taxonomy), #16 v9.1 (4-source activity), #26 (PLAN Selling terminology — never MEDDIC), #28 (Deal Health Summary card spec).

@@ -110,6 +110,21 @@ Reaction counter scheduled: EOD leaderboard at 17:00 CT (counts 🎯 🔥 ✅ �
 - For data enrichment / discovery (use Enrichment Analyst)
 - The Comms Analyst is ONLY for write / send / notify operations
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.Id (for field updates)
+- Account.Account_Notes__c + Account_Notes_Last_Updated__c (timestamped updates)
+- Account.Account_Brief_URL__c, Product_Engagement_Verdict__c, the 4 PLAN fields
+- Contact create/update (lock-in #13: FullEnrich beats stale CRM for MobilePhone)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 This analyst inherits lock-in #2 (single-writer manifest rule — never writes to `reports.json`), lock-in #12 (clickable gap tags + #brief-requests channel), lock-in #13 (SFDC Contact write-back contract), lock-in #25 (Daily Drop format + EOD leaderboard mechanics), and the Slack channel registry (`C0ADW3Z8M7C` Daily Drop, `C0B6MD314MR` brief requests, `C085CP9QXB7` GTM Central). Read `Account Brief Pipeline/LOCKED_DESIGN.md` before any invocation.

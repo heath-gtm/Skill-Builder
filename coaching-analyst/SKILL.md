@@ -88,6 +88,21 @@ Pre-forecast call brief (Thursday):
 - For deal-by-deal diagnosis (use Deal-Health Analyst directly)
 - For top-of-funnel coverage gaps (use Pipeline-Creation Analyst)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Opportunity.* (PLAN-completeness rate per rep — § 3 stage matrix)
+- Opportunity.StageName, ForecastCategoryName, CloseDate (deal velocity per rep)
+- Task / Event via 4-source check (activity quality per rep, § 8)
+- Account.Account_Notes_Last_Updated__c (stale-notes detection per rep)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #8 (deal-risk taxonomy), #16 v9.1 (4-source activity), #26 (PLAN Selling — never MEDDIC), #28 (Deal Health Summary).

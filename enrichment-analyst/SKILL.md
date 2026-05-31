@@ -81,6 +81,20 @@ Recommended next action: Pass the 12 enriched contacts to Comms Analyst for SFDC
 - For scoring whether a contact is worth enriching (use ICP Analyst first to triage, then enrich the qualifying subset)
 - For mass list builds from scratch (use a TAM build tool — Apollo, ZoomInfo, etc. directly — the Enrichment Analyst optimizes per-contact, not whole-population)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- Account.Website (for company-level enrichment)
+- Contact.Email + Name + Account.Name (for contact-level enrichment join)
+- Writes back: Contact.MobilePhone, Contact.LinkedIn (via Comms Analyst — lock-in #13)
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 This analyst inherits lock-in #13 (SFDC Contact write-back contract — FullEnrich beats stale CRM for `MobilePhone`, never overwrites `Email` unless explicitly told to) + the FullEnrich waterfall rules from `spec-inproduct.md` + the LinkedIn identity-validation rules from the `linkedin-url-lookup` skill.

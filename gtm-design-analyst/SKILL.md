@@ -90,6 +90,18 @@ Recommended action: 3 warnings are 5-min fixes. Run before publish.
 - For content / copy / messaging (use heath-voice-humanizer or humanizer)
 - For HTML output that intentionally doesn't follow brand (one-off internal docs)
 
+## Salesforce field reference
+
+This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
+the single source of truth for every field name, definition, and canonical
+interpretation. Specifically, this analyst reads:
+
+- No SFDC reads — operates on HTML artifacts + brand spec.
+
+If a query needs a field not in the library, FAIL LOUD and request a library
+amendment via Evolution Agent — never invent ad-hoc field names or definitions.
+Apples-to-apples consistency across every analyst output is the goal.
+
 ## Inheritance from LOCKED_DESIGN.md
 
 Lock-ins #21 (chip-strip nav + collapsible sections), #24 (default light theme), and the `mixmax-gtm-brand-guidelines` skill as canonical spec.
