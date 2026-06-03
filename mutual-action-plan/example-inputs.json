@@ -1,0 +1,115 @@
+{
+  "customer": "Quantum Metric",
+  "date_range": "April 1, 2026 – April 30, 2026",
+  "decision_date": "April 30, 2026",
+  "recipients": [
+    {"name": "Angus Kennedy", "title": "Vice President, Sales Operations & Strategy"},
+    {"name": "Chris Re", "title": "Director of Sales Enablement"},
+    {"name": "Alli Rodgers", "title": "Senior Manager, IT & Applications"}
+  ],
+  "salutation_first_names": "Angus, Chris, and Alli",
+  "business_challenges": [
+    "Rep workflow friction — manual processes slowing down outreach and follow-up activity",
+    "Salesforce data desync — CRM records are not being updated reliably, creating visibility gaps for leadership",
+    "Low sales tool adoption — difficulty ensuring all AEs are consistently using and getting value from tooling",
+    "Lack of engagement signals — limited visibility into prospect behavior such as email opens, clicks, and responsiveness",
+    "Inefficient follow-up cadences — no structured, repeatable process for timely outreach across the team",
+    "Longer-than-desired sales cycles — deals stalling due to inconsistent rep activity and follow-through"
+  ],
+  "desired_outcomes": [
+    "Automate rep follow-up so no deal goes cold due to missed outreach",
+    "Eliminate manual Salesforce logging — all email activity, engagement, and tasks sync automatically",
+    "Drive adoption across all AEs with an inbox-native tool that requires minimal behaviour change",
+    "Provide real-time engagement signals (opens, clicks, devices, timing) to help reps prioritize their pipeline",
+    "Give leadership and Sales Ops visibility into rep activity, sequence usage, and leading indicators",
+    "Integrate with LinkedIn Sales Navigator and Gong to consolidate the sales workflow in one place",
+    "Enable structured sequences with multi-channel steps to shorten cycles"
+  ],
+  "trial_activities": [
+    "Install Mixmax across all trial AEs and confirm Salesforce integration is syncing activity correctly",
+    "Send at least 5 tracked emails and review open, click, and engagement data in the sidebar",
+    "Set up scheduling links and confirm calendar availability is displaying correctly; test booking on behalf of another rep",
+    "Build and launch one sequence with a minimum of 3 steps (email, LinkedIn task, follow-up email) for an active prospecting motion",
+    "Enroll at least 10 contacts into a sequence via Salesforce report or CSV",
+    "Create a shared email template that the full team can pull from inside their inbox",
+    "Set up at least one automated workflow rule (e.g. pre-meeting email)",
+    "Review Salesforce Insights report to confirm activity is tracking accurately",
+    "Use sequence step completion metrics to validate adoption — identify any AEs with zero sequence activity"
+  ],
+  "success_metrics": [
+    {"metric": "Adoption rate", "target": "90%+ of trial AEs actively using Mixmax (sequences enrolled, emails tracked)"},
+    {"metric": "Salesforce sync accuracy", "target": "100% of outbound emails and key activities logging to correct CRM records"},
+    {"metric": "Sequence engagement", "target": "Measurable improvement in reply rates and follow-up consistency vs. baseline"},
+    {"metric": "Meetings booked", "target": "Increase in meetings booked per rep — target fewer than 7 touches to book vs. industry average of 18"},
+    {"metric": "Rep time savings", "target": "Reps self-report reduced time on manual logging and follow-up management"},
+    {"metric": "Leadership visibility", "target": "Sales Ops and leadership can pull accurate activity and pipeline reports from Salesforce"},
+    {"metric": "Cycle velocity", "target": "Early signal of shorter time-to-next-step, target 50% reduction in sales cycle length"}
+  ],
+  "schedule": [
+    {
+      "phase": "IT & Admin Setup",
+      "date": "April 1–3, 2026",
+      "activities": [
+        "Confirm outstanding ToS items resolved with Kel",
+        "Set up Mixmax Trial for Alli, integrations: Chrome extension, Salesforce, Slack, Gong, LinkedIn Sales Navigator",
+        "Confirm Salesforce integration is live and syncing, Insights reporting set up",
+        "Quantum Metric to send over user list for Monday, April 6",
+        "Build example sequence and template for reps to reference and clone"
+      ]
+    },
+    {
+      "phase": "Trial Kick-Off Call — Rep Onboarding & Training",
+      "date": "Week of April 6, 2026",
+      "activities": [
+        "Walk reps through Mixmax inbox functionality — tracking, sidebar, categorization",
+        "Set up trial users' integrations",
+        "Set up trial users' scheduling links",
+        "Send first tracked emails and review sidebar engagement data"
+      ]
+    },
+    {
+      "phase": "Trial Check-In Call 1",
+      "date": "Week of April 14, 2026",
+      "activities": [
+        "Review early adoption metrics — which AEs are active?",
+        "Launch first sequence (3+ steps) for an active prospecting motion",
+        "Enroll 10+ contacts via Salesforce report or CSV",
+        "Create shared team template"
+      ]
+    },
+    {
+      "phase": "Trial Check-In Call 2",
+      "date": "Week of April 21, 2026",
+      "activities": [
+        "Review sequence engagement data and step completion rates",
+        "Validate Salesforce activity logging accuracy",
+        "Set up automated workflow rule (e.g. pre-meeting email)",
+        "Use scheduling links for 3+ meetings and review booking metrics"
+      ]
+    },
+    {
+      "phase": "Trial Check-In Call 3 — Results Review",
+      "date": "Week of April 28, 2026",
+      "activities": [
+        "Pull Salesforce Insights report and review leading indicators",
+        "Identify AEs with low/zero sequence activity and address blockers",
+        "Introduce dedicated CSM and identify power users for advanced onboarding"
+      ]
+    },
+    {
+      "phase": "Trial Wrap-Up & Signature",
+      "date": "April 30, 2026",
+      "activities": [
+        "Final results review against success metrics",
+        "Agreement signature if results and terms align",
+        "Onboarding plan confirmed for full team rollout"
+      ]
+    }
+  ],
+  "rep": {
+    "name": "Isabelle Tuomi",
+    "title": "Account Executive",
+    "email": "isabelle@mixmax.com",
+    "phone": "647 988 3032"
+  }
+}
