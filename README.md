@@ -17,6 +17,7 @@ The Skills concept comes from Anthropic — full reference at [docs.claude.com/s
 | Skill | Version | What it does | Kickoff phrases |
 |---|---|---|---|
 | [`strike-zone-math`](./strike-zone-math/) | v2.0 | Mixmax's funnel + PQA diagnostic engine. Three modes: funnel diagnosis, multi-source PQA sprint planning, and Aero scoring audit. | _"diagnose the funnel"_ · _"score our PQAs"_ · _"is Aero missing accounts"_ |
+| [`mutual-action-plan`](./mutual-action-plan/) | v1.0 | Generate a deal-specific Mutual Action Plan (Trial Success Plan) — Mixmax-branded `.docx` ready to send to the champion. Unlocks the Stage 3 → 4 exit gate. | _"draft a MAP for [account]"_ · _"build a Mutual Action Plan"_ · _"trial success plan for [company]"_ |
 
 _More coming — backing up the rest of the library next._
 
