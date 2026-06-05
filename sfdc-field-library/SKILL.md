@@ -138,6 +138,12 @@ When PLAN is incomplete, ALWAYS name the missing field. Never just "PLAN incompl
 | `Implementation_Status__c` | Onboarding state |
 | `CSM__c` / `CSM_Text__c` | Assigned CSM (record ref + text fallback) |
 
+### Channel attribution (source of the lead) — CANONICAL
+
+| Field | Definition |
+|---|---|
+| `Channel_Source__c` | **THE canonical channel attribution field.** Formula (text) on Account = the source of the lead. Values: `Inbound` / `Outbound` / `Product`. See § 5. Channel is attributed at the **account** level; an opportunity inherits its account's channel. **Never** use `Opportunity.Channel__c` for attribution (see § 2). Formula field — non-groupable in SOQL: filter on it, never `GROUP BY`. |
+
 ---
 
 ## 2. Opportunity fields
@@ -147,6 +153,8 @@ When PLAN is incomplete, ALWAYS name the missing field. Never just "PLAN incompl
 
 ### Custom
 `ForecastCategoryName`, `Loss_Reason__c`, `Competitor__c`, `Channel__c`
+
+⚠️ **`Opportunity.Channel__c` is NOT the channel attribution field.** It is a separate legacy formula whose values (`Direct`, `Virality & Product`, `Other/Unknown`, …) do not map to the lead source and routinely disagree with the account's true channel. For channel attribution always use `Account.Channel_Source__c` (Inbound / Outbound / Product — see § 5).
 
 ### Opportunity stage canonical values
 
@@ -208,22 +216,30 @@ In Vercel runtime, this is wrapped by `salesforce_query_activities()`. NEVER inl
 
 ## 5. Channel classification (canonical)
 
-```
-INBOUND      LeadSource IN ('Inbound Web Form', 'Demo Request',
-                            'Content Download', 'Pricing Page', 'Sales Inquiry')
-              OR Opportunity.Channel__c = 'Inbound'
+**Canonical attribution field: `Account.Channel_Source__c`** — a formula (text) field that = the source of the lead. This is the SINGLE source of truth for channel. Read it directly; do not reconstruct channel from heuristics when this field is populated.
 
-OUTBOUND     LeadSource IN ('SDR Sourced', 'AE Sourced', 'Cold Outreach',
-                            'List Import')
+```
+INBOUND      Account.Channel_Source__c = 'Inbound'    (lead came to us — web form, demo request, MQA)
+OUTBOUND     Account.Channel_Source__c = 'Outbound'   (we went to them — SDR/AE sourced, OQA)
+PRODUCT      Account.Channel_Source__c = 'Product'    (self-serve signup / PQA — product-led)
+```
+
+**Channel is attributed at the Account level (the source of the lead). An Opportunity inherits the channel of its Account — read `Opportunity.Account.Channel_Source__c`. Never derive channel from the Opportunity alone.**
+
+⚠️ **Do NOT use `Opportunity.Channel__c`.** It is a separate legacy formula whose values (`Direct`, `Virality & Product`, `Other/Unknown`, …) do not map to the lead source and frequently disagree with the account's true channel (e.g. an `Outbound` account shows `Virality & Product` on the opp). It is not the channel attribution field.
+
+`Channel_Source__c` is a formula field — **non-groupable in SOQL. Filter on it (`WHERE Channel_Source__c = 'Outbound'`); never `GROUP BY Channel_Source__c`.**
+
+**Fallback heuristics (use ONLY when `Channel_Source__c` is null):**
+```
+INBOUND   LeadSource IN ('Inbound Web Form', 'Demo Request', 'Content Download',
+                         'Pricing Page', 'Sales Inquiry')
+OUTBOUND  LeadSource IN ('SDR Sourced', 'AE Sourced', 'Cold Outreach', 'List Import')
               OR Mixmax sequence enrollment exists on primary contact
-              OR Opportunity.Channel__c = 'Outbound'
-
-PRODUCT      Account.Website domain has Amplitude `_active` > 0 in trailing 30d
+PRODUCT   Account.Website domain has Amplitude `_active` > 0 in trailing 30d
               AND (LeadSource = 'Self-Serve Signup' OR PQA threshold met)
-              OR Opportunity.Channel__c = 'Product'
 ```
-
-If multiple criteria match, **priority is Product > Inbound > Outbound** (lock-in #11 v5). The 3 channels are mutually exclusive at the Opportunity level.
+If a fallback produces multiple matches, **priority is Product > Inbound > Outbound** (lock-in #11 v5). The 3 channels are mutually exclusive at the account level.
 
 ---
 
@@ -269,7 +285,8 @@ SELECT
   Open_Renewal_ARR__c, RP_Renewal_Period_Start__c, RP_Renewal_Period_End__c,
   Past_Renewals__c, Last_Renewal_Touch__c, Days_Since_Last_Renewal_Touch__c,
   All_Purchased_Seats__c, Stripe_Subscription_Start_Date__c, Stripe_Subscription_End_Date__c,
-  Implementation_Status__c, CSM__c, CSM_Text__c
+  Implementation_Status__c, CSM__c, CSM_Text__c,
+  Channel_Source__c
 FROM Account WHERE {filter}
 ```
 
@@ -281,7 +298,7 @@ SELECT
   StageName, ForecastCategoryName, Amount, CloseDate, Probability,
   LastActivityDate, LastModifiedDate, Owner.Email, Type,
   Problems_Account__c, Leverage_Alignment__c, Address_Decision_Dynamics__c, Next_Steps_Account__c,
-  Loss_Reason__c, Competitor__c, Channel__c
+  Loss_Reason__c, Competitor__c, Account.Channel_Source__c
 FROM Opportunity
 WHERE IsClosed = false AND Owner.Email = '{ae_email}'
 ORDER BY CloseDate ASC
@@ -305,7 +322,7 @@ ORDER BY CloseDate ASC
 SELECT Id, AccountId, Account.Name, Account.Website, Account.Type,
        Account.CR_Number_of_Employees__c, Account.Industry,
        Account.Email_Provider__c, Account.CRM__c, Account.Sales_Acceleration_Tool__c,
-       Amount, CloseDate, Channel__c, Type, Probability, Owner.Email
+       Amount, CloseDate, Account.Channel_Source__c, Type, Probability, Owner.Email
 FROM Opportunity
 WHERE IsClosed = true AND IsWon = true AND CloseDate = LAST_N_MONTHS:6
 ```
@@ -314,7 +331,7 @@ WHERE IsClosed = true AND IsWon = true AND CloseDate = LAST_N_MONTHS:6
 
 ```sql
 SELECT Id, AccountId, Account.Name, Account.Website, Amount, CloseDate,
-       StageName, Channel__c, Loss_Reason__c, Competitor__c, Owner.Email
+       StageName, Account.Channel_Source__c, Loss_Reason__c, Competitor__c, Owner.Email
 FROM Opportunity
 WHERE IsClosed = true AND IsWon = false
   AND StageName LIKE 'Closed Lost%' AND CloseDate = LAST_N_MONTHS:6
@@ -326,7 +343,7 @@ WHERE IsClosed = true AND IsWon = false
 SELECT Id, AccountId, Account.Name, Account.Website,
        Account.DWH_DS_Customer_ARR__c, Account.DWH_SS_Customer_ARR__c,
        Account.CSM__c, Account.RP_Renewal_Period_End__c,
-       Amount, CloseDate, Channel__c, Loss_Reason__c, Competitor__c
+       Amount, CloseDate, Account.Channel_Source__c, Loss_Reason__c, Competitor__c
 FROM Opportunity
 WHERE Type = 'Renewal' AND IsClosed = true AND IsWon = false
   AND StageName = 'Closed Lost — Churn'

@@ -165,6 +165,12 @@ A null `Decision_Maker__c` at Proposal stage = CRM hygiene flag (Coaching Analys
 | `Implementation_Status__c` | New customer onboarding state (Onboarding Analyst reads) |
 | `CSM__c` / `CSM_Text__c` | Assigned CSM (record ref + text fallback) |
 
+### Channel attribution (source of the lead) — CANONICAL
+
+| Field | Definition |
+|---|---|
+| `Channel_Source__c` | **THE canonical channel attribution field.** Formula (text) on Account = the source of the lead. Values: `Inbound` / `Outbound` / `Product` (see § 5). Channel is attributed at the **account** level; an opportunity inherits its account's channel via `Opportunity.Account.Channel_Source__c`. **Never** use `Opportunity.Channel__c` for attribution. Formula field — non-groupable in SOQL: filter on it, never `GROUP BY`. |
+
 ---
 
 ## 2. Opportunity object
@@ -195,7 +201,7 @@ A null `Decision_Maker__c` at Proposal stage = CRM hygiene flag (Coaching Analys
 | `ForecastCategoryName` | Commit / Best Case / Pipeline / Omitted — see § 4 |
 | `Loss_Reason__c` | Why we lost (when Closed Lost) — feeds Pattern Analyst |
 | `Competitor__c` | Who we lost to (when Closed Lost) — feeds Pattern Analyst |
-| `Channel__c` | Inbound / Outbound / Product — see § 5 |
+| `Channel__c` | ⚠️ **Legacy formula — NOT the channel attribution field.** Values (`Direct` / `Virality & Product` / `Other/Unknown`) do not map to the lead source and disagree with the account's true channel. Use `Account.Channel_Source__c` for channel attribution — see § 5 |
 
 ### Opportunity Contact Roles
 
@@ -248,25 +254,35 @@ Omitted      Closed Won, Closed Lost, or excluded by rep judgment.
 
 ## 5. Channel classification (canonical — used by every channel-aware analyst)
 
+**Canonical attribution field: `Account.Channel_Source__c`** — a formula (text) field = the source of the lead. This is the SINGLE source of truth for channel. Read it directly; do not reconstruct channel from heuristics when this field is populated.
+
 ```
-INBOUND      LeadSource IN (
-                'Inbound Web Form', 'Demo Request', 'Content Download',
-                'Pricing Page', 'Sales Inquiry'
-              )
-              OR Opportunity.Channel__c = 'Inbound'
-
-OUTBOUND     LeadSource IN (
-                'SDR Sourced', 'AE Sourced', 'Cold Outreach', 'List Import'
-              )
-              OR Mixmax sequence enrollment exists on primary contact
-              OR Opportunity.Channel__c = 'Outbound'
-
-PRODUCT      Account.Website domain has Amplitude `_active` > 0 in trailing 30d
-              AND (LeadSource = 'Self-Serve Signup' OR PQA threshold met)
-              OR Opportunity.Channel__c = 'Product'
+INBOUND      Account.Channel_Source__c = 'Inbound'    (lead came to us — web form, demo request, MQA)
+OUTBOUND     Account.Channel_Source__c = 'Outbound'   (we went to them — SDR/AE sourced, OQA)
+PRODUCT      Account.Channel_Source__c = 'Product'    (self-serve signup / PQA — product-led)
 ```
 
-The 3 channels are mutually exclusive at the Opportunity level. If multiple criteria match, priority is **Product > Inbound > Outbound** (lock-in #11 v5).
+**Channel is attributed at the Account level (the source of the lead). An Opportunity inherits the channel of its Account — read `Opportunity.Account.Channel_Source__c`. Never derive channel from the Opportunity alone.**
+
+⚠️ **Do NOT use `Opportunity.Channel__c`.** It is a separate legacy formula whose values (`Direct`, `Virality & Product`, `Other/Unknown`, …) do not map to the lead source and frequently disagree with the account's true channel (e.g. an `Outbound` account shows `Virality & Product` on the opp). It is not the channel attribution field.
+
+`Channel_Source__c` is a formula field — **non-groupable in SOQL. Filter on it (`WHERE Channel_Source__c = 'Outbound'`); never `GROUP BY Channel_Source__c`.**
+
+**Fallback heuristics (use ONLY when `Channel_Source__c` is null):**
+```
+INBOUND   LeadSource IN (
+            'Inbound Web Form', 'Demo Request', 'Content Download',
+            'Pricing Page', 'Sales Inquiry'
+          )
+OUTBOUND  LeadSource IN (
+            'SDR Sourced', 'AE Sourced', 'Cold Outreach', 'List Import'
+          )
+          OR Mixmax sequence enrollment exists on primary contact
+PRODUCT   Account.Website domain has Amplitude `_active` > 0 in trailing 30d
+          AND (LeadSource = 'Self-Serve Signup' OR PQA threshold met)
+```
+
+The 3 channels are mutually exclusive at the account level. If a fallback heuristic produces multiple matches, priority is **Product > Inbound > Outbound** (lock-in #11 v5).
 
 ---
 
@@ -378,7 +394,8 @@ SELECT
   Open_Renewal_ARR__c, RP_Renewal_Period_Start__c, RP_Renewal_Period_End__c,
   Past_Renewals__c, Last_Renewal_Touch__c, Days_Since_Last_Renewal_Touch__c,
   All_Purchased_Seats__c, Stripe_Subscription_Start_Date__c, Stripe_Subscription_End_Date__c,
-  Implementation_Status__c, CSM__c, CSM_Text__c
+  Implementation_Status__c, CSM__c, CSM_Text__c,
+  Channel_Source__c
 FROM Account
 WHERE {account_filter}
 ```
@@ -391,7 +408,7 @@ SELECT
   StageName, ForecastCategoryName, Amount, CloseDate, Probability,
   LastActivityDate, LastModifiedDate, Owner.Email, Type,
   Problems_Account__c, Leverage_Alignment__c, Address_Decision_Dynamics__c, Next_Steps_Account__c,
-  Loss_Reason__c, Competitor__c, Channel__c
+  Loss_Reason__c, Competitor__c, Account.Channel_Source__c
 FROM Opportunity
 WHERE IsClosed = false
   AND Owner.Email = '{ae_email}'
@@ -443,7 +460,7 @@ SELECT
   Id, AccountId, Account.Name, Account.Website, Account.Type,
   Account.CR_Number_of_Employees__c, Account.Industry,
   Account.Email_Provider__c, Account.CRM__c, Account.Sales_Acceleration_Tool__c,
-  Amount, CloseDate, Channel__c, Type, Probability,
+  Amount, CloseDate, Account.Channel_Source__c, Type, Probability,
   Owner.Email,
   (SELECT Role, IsPrimary, Contact.Title FROM OpportunityContactRoles)
 FROM Opportunity
@@ -456,7 +473,7 @@ WHERE IsClosed = true AND IsWon = true
 ```sql
 SELECT
   Id, AccountId, Account.Name, Account.Website,
-  Amount, CloseDate, StageName, Channel__c,
+  Amount, CloseDate, StageName, Account.Channel_Source__c,
   Loss_Reason__c, Competitor__c,
   Owner.Email
 FROM Opportunity
@@ -472,7 +489,7 @@ SELECT
   Id, AccountId, Account.Name, Account.Website,
   Account.DWH_DS_Customer_ARR__c, Account.DWH_SS_Customer_ARR__c,
   Account.CSM__c, Account.RP_Renewal_Period_End__c,
-  Amount, CloseDate, Channel__c, Loss_Reason__c, Competitor__c
+  Amount, CloseDate, Account.Channel_Source__c, Loss_Reason__c, Competitor__c
 FROM Opportunity
 WHERE Type = 'Renewal' AND IsClosed = true AND IsWon = false
   AND StageName = 'Closed Lost — Churn'
@@ -571,7 +588,10 @@ Never invent fields in a SKILL.md or in code without amending this document firs
 
 ## 15. Adding a new picklist value (the process)
 
-For picklist fields (`StageName`, `ForecastCategoryName`, `Type`, `DWH_Customer_Type__c`, `Product_Engagement_Verdict__c`, `Channel__c`):
+For picklist fields (`StageName`, `ForecastCategoryName`, `Type`, `DWH_Customer_Type__c`, `Product_Engagement_Verdict__c`):
+
+> Note: channel is **not** a picklist — it is the `Account.Channel_Source__c` formula (Inbound / Outbound / Product, see § 5). Its values change only if the underlying formula is edited in Salesforce, not via this process.
+
 
 1. Add the new value to the canonical list here
 2. Document its meaning + the analyst rules that change for it

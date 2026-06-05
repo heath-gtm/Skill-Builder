@@ -110,7 +110,7 @@ the single source of truth for every field name, definition, and canonical
 interpretation. Specifically, this analyst reads:
 
 - Account.* (Aero scoring, CR_* enrichment, tech-stack-as-displacement fields per § 1)
-- Account.LeadSource + Opportunity.Channel__c (canonical channel classification, § 5)
+- Account.Channel_Source__c (canonical channel attribution, § 5; `Account.LeadSource` is fallback only — never `Opportunity.Channel__c`)
 - Writes to icp_override_queue audit when composite disagrees with Aero/Octave
 
 If a query needs a field not in the library, FAIL LOUD and request a library

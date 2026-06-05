@@ -199,7 +199,7 @@ This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
 the single source of truth for every field name, definition, and canonical
 interpretation. Specifically, this analyst reads:
 
-- Account.LeadSource + Opportunity.Channel__c (canonical channel classification, § 5)
+- Account.Channel_Source__c (canonical channel attribution, § 5; `Account.LeadSource` is fallback only — never `Opportunity.Channel__c`)
 - Opportunity.StageName, CloseDate, IsClosed, IsWon (cohort conversion math)
 - Opportunity.Amount (dollarization of leverage points)
 - Account.Website (Amplitude join for Product channel cohort, § 10)

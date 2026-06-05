@@ -76,7 +76,7 @@ This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
 the single source of truth for every field name, definition, and canonical
 interpretation. Specifically, this analyst reads:
 
-- Opportunity.* (StageName, ForecastCategoryName, Amount, CloseDate, LastActivityDate, the 4 PLAN fields, Channel__c)
+- Opportunity.* (StageName, ForecastCategoryName, Amount, CloseDate, LastActivityDate, the 4 PLAN fields) + `Account.Channel_Source__c` for channel attribution (§ 5 — NOT `Opportunity.Channel__c`, a legacy formula)
 - Account.LastActivityDate (4-source activity, § 8)
 - OpportunityContactRole (multi-thread check, § 6)
 - Task / Event via salesforce_query_activities() (canonical 4-source check, § 8)

@@ -96,7 +96,7 @@ the single source of truth for every field name, definition, and canonical
 interpretation. Specifically, this analyst reads:
 
 - Account.Website (canonical → channel classification + Amplitude join, § 5 + § 10)
-- Account.LeadSource + Opportunity.Channel__c (channel classification, § 5)
+- Account.Channel_Source__c (canonical channel attribution, § 5; `Account.LeadSource` is fallback only — never `Opportunity.Channel__c`)
 - Account.Aero_Account_Fit_Score__c + CR_Sales_Team_Hiring__c (top-of-funnel signal)
 - Account.DWH_Forecasted_ARR__c (Q-target coverage math)
 - 4-source activity check for engagement velocity per AE (§ 8)

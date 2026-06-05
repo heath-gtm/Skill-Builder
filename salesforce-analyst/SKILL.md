@@ -91,8 +91,8 @@ This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
 the single source of truth for every field name, definition, and canonical
 interpretation. Specifically, this analyst reads:
 
-- Account.* (all 22 GTM custom fields per § 1)
-- Opportunity.* (full set including PLAN fields, ForecastCategoryName, Channel__c)
+- Account.* (all 22 GTM custom fields per § 1, including `Channel_Source__c` — the canonical channel attribution field)
+- Opportunity.* (full set including PLAN fields, ForecastCategoryName). For channel attribution read `Opportunity.Account.Channel_Source__c` (§ 5) — **never** `Opportunity.Channel__c`, which is a legacy formula and not the channel field
 - Contact.* (Email, Phone, MobilePhone, Title, LeadSource, LastActivityDate)
 - Task / Event via salesforce_query_activities() (canonical 4-source check, § 8)
 - OpportunityContactRole (multi-thread check, § 6 + § 10)
