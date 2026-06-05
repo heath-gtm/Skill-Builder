@@ -1,6 +1,9 @@
-# Mixmax Analyst Suite v1.2.1
+# Mixmax Analyst Suite v1.2.2
 
 21 skills covering every stage of the customer lifecycle + the AI-native self-learning meta layer + compute-aware refresh orchestration.
+
+## v1.2.2 — what's new
+- **amplitude-event-taxonomy** (NEW) — canonical Amplitude event + 11-capability reference (the product-usage mirror of sfdc-field-library). Auto-triggers on any product-usage question; the analyst/report skills now read event meaning from it.
 
 ## v1.2.1 — what's new
 - **PLAN Selling everywhere.** `salesforce-analyst` no longer uses "MEDDIC-equivalent" phrasing — it reads as a PLAN-based strategic read (lock-in #26: never MEDDIC).

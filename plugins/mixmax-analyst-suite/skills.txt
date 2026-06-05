@@ -21,3 +21,4 @@ renewal-health-analyst
 salesforce-analyst
 sfdc-field-library
 strike-zone-analyst
+amplitude-event-taxonomy

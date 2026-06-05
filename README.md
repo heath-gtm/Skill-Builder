@@ -142,7 +142,7 @@ python3 scripts/build_plugin.py mixmax-analyst-suite
 Bump the `version` in the manifest before rebuilding so Cowork offers the update. `dist/` is git-ignored.
 
 ### Plugins defined here
-- **mixmax-analyst-suite** — 21 GTM analyst skills (skills pulled from repo root).
+- **mixmax-analyst-suite** — 22 GTM analyst skills incl. two auto-loading canonicals: `sfdc-field-library` (Salesforce) + `amplitude-event-taxonomy` (product usage). Skills pulled from repo root.
 - **mixmax-weekly-gtm-report**, **mixmax-monthly-gtm-report**, **mixmax-quarterly-gtm-report** — revenue report engine (skills vendored per plugin; monthly==quarterly, weekly is the lighter cadence).
 - **mixmax-publishing-core** — shared GitHub Pages publishing config used by the reports.
 - **mixmax-report-accuracy** — pre-publish QA gate.

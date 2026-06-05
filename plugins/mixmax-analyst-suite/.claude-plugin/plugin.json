@@ -1,10 +1,24 @@
 {
   "name": "mixmax-analyst-suite",
-  "version": "1.2.1",
-  "description": "21 productized GTM analyst agents + Daily-Sales-Assistant workflow + sfdc-field-library (canonical SFDC reference, auto-triggers) + refresh-orchestrator (compute-aware caching, ~50% cost savings). Lifecycle-aligned with AI-native self-learning loop. PLAN Selling throughout (never MEDDIC).",
-  "author": { "name": "Heath Barnett", "email": "heath@mixmax.com" },
+  "version": "1.2.2",
+  "description": "22 productized GTM analyst agents + Daily-Sales-Assistant workflow + two canonical references that auto-trigger (sfdc-field-library for Salesforce, amplitude-event-taxonomy for product usage) + refresh-orchestrator (compute-aware caching). Lifecycle-aligned, PLAN Selling throughout (never MEDDIC).",
+  "author": {
+    "name": "Heath Barnett",
+    "email": "heath@mixmax.com"
+  },
   "homepage": "https://github.com/heath-gtm/Skill-Builder",
   "repository": "https://github.com/heath-gtm/Skill-Builder",
   "license": "MIT",
-  "keywords": ["gtm","sales","customer-success","revenue-operations","ai-native","salesforce","amplitude","mixmax","compute-aware","caching"]
+  "keywords": [
+    "gtm",
+    "sales",
+    "customer-success",
+    "revenue-operations",
+    "ai-native",
+    "salesforce",
+    "amplitude",
+    "mixmax",
+    "compute-aware",
+    "caching"
+  ]
 }
