@@ -1,0 +1,7 @@
+# mixmax-weekly-gtm-report composition (vendored skills under ./skills/)
+deal-management
+mixmax-revenue-reporting
+pipeline-building
+renewals-management
+revenue-analysis
+weekly-report-setup

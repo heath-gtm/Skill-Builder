@@ -1,0 +1,11 @@
+# mixmax-quarterly-gtm-report composition (vendored skills under ./skills/)
+accuracy-reconciliation
+customer-success
+deal-management
+direct-sales
+mixmax-revenue-reporting
+pipeline-building
+quarterly-report-setup
+quarterly-risk-register
+renewals-management
+revenue-analysis

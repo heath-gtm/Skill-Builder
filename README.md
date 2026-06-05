@@ -117,3 +117,32 @@ MIT (TBD — pending decision). Skills here document Mixmax-specific workflows a
 ---
 
 _Maintained by Heath Barnett · DM on Slack with questions or contributions._
+
+---
+
+## Building a plugin from this repo
+
+Some skills are distributed together as a Cowork **plugin**. Plugin definitions live in `plugins/<name>/`:
+
+```
+plugins/<name>/
+├── .claude-plugin/plugin.json   ← manifest (name, version, repository)
+├── README.md                    ← plugin readme / changelog
+└── skills.txt                   ← which repo-root skill folders compose it
+```
+
+Build a `.plugin` bundle (validates that no skill references retired skills or MEDDIC):
+
+```bash
+python3 scripts/build_plugin.py mixmax-analyst-suite
+# → dist/mixmax-analyst-suite/        (assembled plugin dir)
+# → dist/mixmax-analyst-suite.plugin  (installable bundle)
+```
+
+Bump the `version` in the manifest before rebuilding so Cowork offers the update. `dist/` is git-ignored.
+
+### Plugins defined here
+- **mixmax-analyst-suite** — 21 GTM analyst skills (skills pulled from repo root).
+- **mixmax-weekly-gtm-report**, **mixmax-monthly-gtm-report**, **mixmax-quarterly-gtm-report** — revenue report engine (skills vendored per plugin; monthly==quarterly, weekly is the lighter cadence).
+- **mixmax-publishing-core** — shared GitHub Pages publishing config used by the reports.
+- **mixmax-report-accuracy** — pre-publish QA gate.

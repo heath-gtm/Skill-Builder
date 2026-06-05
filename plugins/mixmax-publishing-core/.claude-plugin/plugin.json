@@ -1,0 +1,16 @@
+{
+  "name": "mixmax-publishing-core",
+  "version": "0.1.1",
+  "description": "Shared GitHub Pages publishing foundation for all Mixmax revenue-reporting plugins (weekly, monthly, quarterly, leader updates). Provides a single-source-of-truth config for the GitHub PAT, repo, branch, Pages URL, and per-artifact path roots \u2014 so PAT rotations or repo migrations require editing one file. Required dependency for the Mixmax leader-update, sales-leader-weekly, and cs-leader-weekly plugins.",
+  "author": {
+    "name": "Mixmax RevOps"
+  },
+  "keywords": [
+    "mixmax",
+    "revops",
+    "github-pages",
+    "publishing",
+    "config",
+    "infrastructure"
+  ]
+}
