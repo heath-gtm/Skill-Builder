@@ -14,7 +14,7 @@ description: Your deal analyst. Connect Salesforce — turns any "what's happeni
 In plain English, the Salesforce Analyst answers questions like:
 
 - "What's happening with Acme Corp?" → 60-second account summary with current state, last activity, PLAN gaps, risk flag
-- "Run a deal review on the Acme renewal" → MEDDIC-equivalent strategic read with risk classification + recommended next move
+- "Run a deal review on the Acme renewal" → PLAN-based strategic read with risk classification + recommended next move
 - "Is the customguide.com deal healthy?" → Deal risk verdict + 4-source activity audit + days dark
 - "What's stuck in Karan's pipeline?" → Cross-deal Deal Health Summary with compound-risk Top 3 intervention priorities
 - "Deal autopsy on Mirakl" → Closed-lost analysis with stage-by-stage timeline + champion analysis + preventability verdict

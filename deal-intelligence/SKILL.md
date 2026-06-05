@@ -1,14 +1,14 @@
 ---
 name: deal-intelligence
 description: >-
-  Analyze active deals, deal risk, forecast quality, and deal-review readiness for Mixmax GTM. Two modes: (1) DEAL MANAGEMENT — forecast-category distribution, stuck/stalled deals, stage velocity, concentration risk, close-date accuracy, deal-level and rep-level summaries from the AE Forecast + Rep Summary tabs; (2) DEAL REVIEW PREP — synthesize Mixmax meeting transcripts, summaries, and action items into a MEDDIC brief with pains, objections, competitive mentions, champion/economic-buyer signals, and risk flags. Trigger on deals, deal risk, forecast categories, stuck deals, deal velocity, AE forecast, rep pipeline, deal concentration, close dates, deal stages, 'how are deals looking', 'deal review', 'forecast review', "what's closing", deal health, account brief, 'what do we know about [account]', the AE Forecast tab or Rep Summary Deals by Forecast Category section, or any request to summarize meeting history for an account. Also fire when a manager preps a forecast call.
+  Analyze active deals, deal risk, forecast quality, and deal-review readiness for Mixmax GTM. Two modes: (1) DEAL MANAGEMENT — forecast-category distribution, stuck/stalled deals, stage velocity, concentration risk, close-date accuracy, deal-level and rep-level summaries from the AE Forecast + Rep Summary tabs; (2) DEAL REVIEW PREP — synthesize Mixmax meeting transcripts and action items into a brief on Mixmax's PLAN Selling framework (Problems, Leverage Alignment, Address Decision Dynamics, Next Steps — NEVER MEDDIC), with PLAN-vs-stage gap detection, decision-maker/champion signals, and risk flags. Trigger on deals, deal risk, forecast categories, stuck deals, deal velocity, AE forecast, rep pipeline, deal concentration, close dates, deal stages, 'how are deals looking', 'deal review', 'forecast review', "what's closing", deal health, account brief, 'what do we know about [account]', the AE Forecast tab, or the Rep Summary Deals by Forecast Category section.
 ---
 
 # Deal Intelligence
 
 The unified engine for active-deal analysis at Mixmax, consolidating the former
 `deal-management` (sheet-based forecast/risk analysis) and `deal-review-prep`
-(MEDDIC briefs from Mixmax meeting data) into one skill with two modes.
+(meeting-based deal-review briefs) into one skill with two modes.
 
 | Mode | Question it answers | Source |
 |---|---|---|
@@ -85,11 +85,22 @@ Account IDs appear in the AE Forecast and Rep Summary tabs.
 
 ---
 
-## Mode B — Deal Review Prep (MEDDIC from Mixmax)
+## Mode B — Deal Review Prep (PLAN Selling from Mixmax)
 
 You are a deal review analyst. Pull meeting intelligence from Mixmax and
 synthesize it into a structured brief a rep or manager can walk into a deal
 review with — fully prepared, with evidence from actual conversations.
+
+**Framework: PLAN Selling — Mixmax's own methodology. NEVER MEDDIC / MEDDPICC.**
+PLAN is the qualification spine and it maps 1:1 to the canonical Salesforce PLAN
+fields (see `sfdc-field-library`). Structure every brief against these four:
+
+| PLAN letter | What you're looking for in the conversations | SFDC field | Required by stage |
+|---|---|---|---|
+| **P — Problems** | The prospect's specific, ideally quantified problems/pains | `Problems_Account__c` | Discovery |
+| **L — Leverage Alignment** | How Mixmax's value is aligned to those problems — the business case / where we create leverage | `Leverage_Alignment__c` | Solution Validation |
+| **A — Address Decision Dynamics** | The decision process, criteria, stakeholders, approvals, timeline, and the named decision maker | `Address_Decision_Dynamics__c` (+ `Decision_Maker__c`) | Proposal |
+| **N — Next Steps** | Mutually agreed next steps with dates | `Next_Steps_Account__c` | Negotiation + Commit |
 
 ### Critical: always use Mixmax for meeting data
 When retrieving meeting data, transcripts, summaries, or action items, ALWAYS use
@@ -105,39 +116,48 @@ happened — Mixmax tells you what was said, decided, and what needs to happen n
 ### Step 2 — Pull meeting data from Mixmax
 Retrieve all meetings for the account(s) and range — transcripts, summaries, action items, participant lists. With many meetings, prioritize the most recent but scan all for themes.
 
-### Step 3 — Structure with MEDDIC
-MEDDIC isn't just formatting: teams using it improve forecast accuracy from ~65% to ~90% because the qualification data is predictive. For each element, pull evidence directly from transcripts.
+### Step 3 — Structure the brief on PLAN
+For each PLAN element, pull evidence directly from the transcripts and bind it to the SFDC field. Where a field is empty in conversation, that is a qualification gap, not a formatting choice — call it out.
 
-- **Metrics** — quantified outcomes the prospect mentioned (revenue, cost/time savings, headcount). If found, quote it and the meeting; if missing, flag "No quantified business case discussed yet."
-- **Economic Buyer** — has the actual decision-maker been in any meeting? Check participant lists/titles. If absent, flag — significant risk late in the deal.
-- **Decision Criteria** — requirements, must-haves, evaluation criteria (features, integrations, security, pricing thresholds, competitive comparisons). If unclear, flag.
-- **Decision Process** — steps, timeline, approvals (procurement, legal, pilot, committee, board). Note any stated deadline.
-- **Identified Pain** — specific problems, direct quotes. Categorize "burning platform" vs "nice to fix." Repetition across meetings signals real urgency.
-- **Champion** — is someone internally advocating? Look for forward-looking questions ("how would we roll this out?"), volunteering intros. No champion = high risk.
+- **P — Problems.** What specific, quantified problems has the prospect named (revenue, cost/time, headcount, tooling pain)? Quote it and the meeting. If absent → flag "No quantified Problems captured" (P gap).
+- **L — Leverage Alignment.** Has Mixmax's value been explicitly tied to those problems — a business case or ROI the prospect agreed with? If we've demoed features but not aligned them to a problem, that's an L gap.
+- **A — Address Decision Dynamics.** Who decides, on what criteria, through what process (procurement, legal, security, pilot, committee, board), by when — and is the **named decision maker** identified and engaged? An absent/unengaged decision maker past Discovery is a significant risk. Map to `Decision_Maker__c` / `Decision_Maker_Title__c`.
+- **N — Next Steps.** Are there mutually agreed next steps with real dates? "Sometime next quarter" is an N gap.
+- **Champion (CHAMP).** Mixmax also runs CHAMP — is someone internally advocating? Look for forward-looking questions ("how would we roll this out?"), volunteering intros. No champion = high risk.
 
-### Step 4 — Surface deal-risk signals
-- No economic-buyer involvement (especially past discovery)
+### Step 4 — PLAN-vs-stage gap check (the BS detector)
+Compare PLAN coverage to the deal's current stage and name any missing field — never just "PLAN incomplete":
+
+```
+Stage = 'Discovery'           and Problems_Account__c          empty → PLAN_GAP (P)
+Stage = 'Solution Validation' and Leverage_Alignment__c        empty → PLAN_GAP (L)
+Stage = 'Proposal'            and Address_Decision_Dynamics__c empty → PLAN_GAP (A)
+Stage = 'Negotiation'         and Next_Steps_Account__c        empty → PLAN_GAP (N)
+ForecastCategory = 'Commit'   and ANY of the 4 PLAN fields empty → COMMIT_RISK
+```
+
+### Step 5 — Surface deal-risk signals
+- PLAN gap for the current stage (name the field)
+- COMMIT_RISK (a Commit deal missing any PLAN field)
+- Decision maker not identified/engaged past Discovery
 - Stale deal (no meetings 2+ weeks, no clear next step)
 - Competitor mentioned (quote it + which meeting)
-- Missing business case (no quantified metrics/ROI)
-- Vague timeline ("sometime next quarter")
-- Single-threaded (one contact; if they leave, deal dies)
+- Vague or dateless Next Steps
+- Single-threaded (one contact; if they leave, the deal dies)
 - Action items overdue
 
-### Step 5 — Compile open action items
-List all outstanding items grouped by owner (rep vs prospect), noting which are overdue based on dates mentioned.
-
 ### Step 6 — Suggest next steps
-2-3 specific, prescriptive moves, e.g.:
-- "Schedule a meeting that includes [economic buyer] — they haven't been in any conversation."
-- "Quantify the ROI: prospect mentioned [pain] but no number — prep a business case with estimated savings."
-- "Prospect is evaluating [competitor] on [date] — prepare a comparison focused on [their criteria]."
+2-3 specific, prescriptive moves tied to the PLAN gaps, e.g.:
+- "Problems aren't quantified — book a discovery follow-up to attach a number to [pain]."
+- "No named decision maker — get [champion] to map the approval process and introduce the economic buyer."
+- "Prospect is evaluating [competitor] on [date] — prep a comparison on [their stated criteria]."
 
 ### Output format (Mode B)
-Clear headers per section. Use direct transcript quotes to keep the brief credible and specific. Open with a 2-3 sentence executive summary capturing current state, biggest risk, and recommended next action.
+Clear headers per PLAN element. Use direct transcript quotes to keep the brief credible. Open with a 2-3 sentence executive summary: current state, biggest PLAN gap / risk, recommended next action.
 
 ### Adapting for portfolio reviews
-When a manager wants a review across deals: a shorter summary per account (exec summary + top risk + next step), a portfolio-level view (healthy / at-risk / stalled), and patterns across the portfolio (common objections, competitive threats in multiple deals, qualification gaps signaling a coaching opportunity).
+When a manager wants a review across deals: a shorter summary per account (exec summary + top PLAN gap + next step), a portfolio-level view (healthy / at-risk / stalled), and patterns across the portfolio (common objections, competitive threats, recurring PLAN gaps that signal a coaching opportunity).
+
 
 ---
 
