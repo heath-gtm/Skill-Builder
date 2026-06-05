@@ -87,7 +87,7 @@ Recommended action: 3 warnings are 5-min fixes. Run before publish.
 ## When NOT to use
 
 - For scoring-model / numbers QA (use QA Agent)
-- For content / copy / messaging (use heath-voice-humanizer or humanizer)
+- For content / copy / messaging (use heath-voice-humanizer)
 - For HTML output that intentionally doesn't follow brand (one-off internal docs)
 
 ## Salesforce field reference

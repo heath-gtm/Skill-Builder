@@ -16,7 +16,10 @@ The Skills concept comes from Anthropic — full reference at [docs.claude.com/s
 
 | Skill | Version | What it does | Kickoff phrases |
 |---|---|---|---|
-| [`strike-zone-math`](./strike-zone-math/) | v2.0 | Mixmax's funnel + PQA diagnostic engine. Three modes: funnel diagnosis, multi-source PQA sprint planning, and Aero scoring audit. | _"diagnose the funnel"_ · _"score our PQAs"_ · _"is Aero missing accounts"_ |
+| [`strike-zone-analyst`](./strike-zone-analyst/) | v2.1 | Mixmax's funnel + PQA diagnostic engine (absorbed the former `strike-zone-math`). Three modes: funnel diagnosis, multi-source PQA sprint planning, and Aero scoring audit. | _"diagnose the funnel"_ · _"score our PQAs"_ · _"is Aero missing accounts"_ |
+| [`pipeline-intelligence`](./pipeline-intelligence/) | v1.0 | Merged pipeline coverage + account prioritization + monthly ICP-quality engine. | _"which accounts to go after"_ · _"pipeline coverage"_ · _"pipeline ICP quality"_ |
+| [`revenue-reporting`](./revenue-reporting/) | v1.0 | Canonical Gen 1 revenue analysis: weekly/monthly/quarterly wrap-ups, ARR/variance, pacing, schema + reporting rules. | _"weekly revenue wrap-up"_ · _"how are we pacing"_ |
+| [`deal-intelligence`](./deal-intelligence/) | v1.0 | Active-deal forecast/risk analysis + MEDDIC deal-review briefs from Mixmax meetings. | _"deal review"_ · _"how are deals looking"_ · _"what's closing"_ |
 | [`mutual-action-plan`](./mutual-action-plan/) | v1.0 | Generate a deal-specific Mutual Action Plan (Trial Success Plan) — Mixmax-branded `.docx` ready to send to the champion. Unlocks the Stage 3 → 4 exit gate. | _"draft a MAP for [account]"_ · _"build a Mutual Action Plan"_ · _"trial success plan for [company]"_ |
 
 _More coming — backing up the rest of the library next._
@@ -54,8 +57,8 @@ If you'd rather build the `.skill` file yourself from source:
 ```bash
 git clone https://github.com/heath-gtm/Skill-Builder.git
 cd Skill-Builder
-python scripts/package_skill.py strike-zone-math/
-# This produces strike-zone-math.skill in the current directory.
+python scripts/package_skill.py strike-zone-analyst/
+# This produces strike-zone-analyst.skill in the current directory.
 ```
 
 See [INSTALL.md](./INSTALL.md) for detailed steps including troubleshooting.
@@ -78,7 +81,7 @@ See [INSTALL.md](./INSTALL.md) for detailed steps including troubleshooting.
 Skills are versioned independently via prefixed git tags:
 
 ```
-strike-zone-math/v2.0
+strike-zone-analyst/v2.1
 customer-strategy-brief/v1.1
 ```
 
@@ -96,7 +99,7 @@ Backwards-compatible content tweaks don't require a version bump.
 To share an individual skill, link to its folder:
 
 ```
-https://github.com/heath-gtm/Skill-Builder/tree/main/strike-zone-math
+https://github.com/heath-gtm/Skill-Builder/tree/main/strike-zone-analyst
 ```
 
 To share the whole library, just send the repo URL:
