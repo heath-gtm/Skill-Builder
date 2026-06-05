@@ -209,7 +209,7 @@ DATA QUALITY FLAGS
 - **Win/loss interview list** — use a Closed Won / Closed Lost report; this skill is for active paying customers
 - **NPS or generic VoC surveys** — this is a curated qualitative-interview slate, not a survey distribution list
 - **Per-account QBR prep** — use `customer-strategy-brief` or `customer-strategy-deep-dive`
-- **Pipeline / forecast review** — use `salesforce-analyst` or `deal-management`
+- **Pipeline / forecast review** — use `salesforce-analyst` or `deal-intelligence`
 
 ## Cross-links
 
