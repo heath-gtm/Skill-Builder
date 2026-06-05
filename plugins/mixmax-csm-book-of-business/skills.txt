@@ -1,0 +1,3 @@
+# mixmax-csm-book-of-business composition (vendored skills under ./skills/)
+csm-book-runbook
+csm-book-setup

@@ -1,0 +1,18 @@
+{
+  "name": "mixmax-churn-analysis",
+  "version": "1.1.1",
+  "description": "Monthly and quarterly churn & downgrade analysis for Mixmax GTM. Pulls the Churn Analysis tab from Gen 1, runs Amplitude product-usage deep-dives and Mixmax meeting transcript searches for every churned account, and produces a self-contained HTML report with thematic categorization, SVG pie charts, and per-account deep-dive cards. Published to GitHub Pages.",
+  "author": {
+    "name": "Mixmax RevOps"
+  },
+  "keywords": [
+    "mixmax",
+    "revops",
+    "churn",
+    "downgrade",
+    "analysis",
+    "amplitude",
+    "meetings",
+    "github-pages"
+  ]
+}

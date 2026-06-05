@@ -1,0 +1,17 @@
+{
+  "name": "mixmax-csm-book-of-business",
+  "version": "1.1.1",
+  "description": "On-demand CSM Book of Business analysis for Mixmax. Full deep-dives on every account with Amplitude usage, meeting transcripts, Gmail engagement, sequence enrollment, Octave strategic plays, and top contacts. Published to GitHub Pages.",
+  "author": {
+    "name": "Mixmax RevOps"
+  },
+  "keywords": [
+    "mixmax",
+    "revops",
+    "csm",
+    "customer-success",
+    "book-of-business",
+    "renewals",
+    "analysis"
+  ]
+}

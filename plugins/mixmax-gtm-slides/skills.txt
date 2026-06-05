@@ -1,0 +1,3 @@
+# mixmax-gtm-slides composition (vendored skills under ./skills/)
+gtm-slides-runbook
+gtm-slides-setup

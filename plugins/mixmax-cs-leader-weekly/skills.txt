@@ -1,0 +1,3 @@
+# mixmax-cs-leader-weekly composition (vendored skills under ./skills/)
+cs-leader-weekly-runbook
+cs-leader-weekly-setup

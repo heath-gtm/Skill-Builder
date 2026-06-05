@@ -146,3 +146,7 @@ Bump the `version` in the manifest before rebuilding so Cowork offers the update
 - **mixmax-weekly-gtm-report**, **mixmax-monthly-gtm-report**, **mixmax-quarterly-gtm-report** — revenue report engine (skills vendored per plugin; monthly==quarterly, weekly is the lighter cadence).
 - **mixmax-publishing-core** — shared GitHub Pages publishing config used by the reports.
 - **mixmax-report-accuracy** — pre-publish QA gate.
+- **mixmax-sales-leader-weekly**, **mixmax-cs-leader-weekly** — weekly leader briefs.
+- **mixmax-ae-pipeline-analysis**, **mixmax-csm-book-of-business** — per-rep / per-CSM analyses.
+- **mixmax-churn-analysis**, **mixmax-closed-won-analysis**, **mixmax-closed-lost-analysis** — deal/account retrospectives.
+- **mixmax-leader-update-slides**, **mixmax-gtm-slides** — slide-content workbenches.
