@@ -7,7 +7,7 @@ pulls each listed skill folder from the repo root, validates, and writes:
   dist/<plugin-name>/            (assembled plugin dir)
   dist/<plugin-name>.plugin      (zip bundle, ready to install)
 """
-import sys, os, shutil, json, zipfile, re
+import sys, os, shutil, json, zipfile, re, stat
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -30,8 +30,10 @@ def main():
     skills = [l.strip() for l in skills_txt.read_text().splitlines()
               if l.strip() and not l.strip().startswith('#')]
 
+    def _force_rm(func, path, exc):
+        os.chmod(path, stat.S_IWUSR | stat.S_IRUSR | stat.S_IXUSR); func(path)
     dist = REPO / "dist" / name
-    if dist.exists(): shutil.rmtree(dist)
+    if dist.exists(): shutil.rmtree(dist, onerror=_force_rm)
     (dist / ".claude-plugin").mkdir(parents=True)
     shutil.copy2(manifest, dist / ".claude-plugin" / "plugin.json")
     if (src / "README.md").exists():

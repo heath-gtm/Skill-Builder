@@ -1,0 +1,7 @@
+# mixmax-meeting-intelligence composition (vendored skills under ./skills/)
+account-health-monitor
+meeting-followup-generator
+octave-outreach-drafter
+prospect-enrollment-check
+weekly-meeting-digest
+weekly-meeting-prep

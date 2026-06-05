@@ -1,0 +1,35 @@
+{
+  "skill_name": "weekly-meeting-prep",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run my weekly prep",
+      "expected_output": "Mode A — Full workflow: pull calendar for the upcoming week, identify external customer meetings by scanning attendee domains against the exclusion list, search Mixmax for historical meeting context per customer, research each company via web search, run Amplitude deep dive per domain, and produce a complete briefing document per customer following the exact template format. If no external meetings found, report that clearly and stop.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Prep my week — I have a lot of customer calls coming up and I want to be ready for all of them",
+      "expected_output": "Mode A — Same full workflow as eval 1 but triggered by a more casual/verbose phrasing. Should still execute all 6 steps in order, produce briefings for each external customer meeting, and include historical Mixmax meeting context, Amplitude data, and company research. The casual tone should not affect the rigor of the output.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "What customer meetings do I have this week? I want the full rundown with product usage data.",
+      "expected_output": "Mode A — Should trigger the weekly-meeting-prep skill even though the phrasing is a question rather than a command. The 'full rundown with product usage data' is a clear signal for the complete workflow. Should execute all 6 steps and produce complete briefings.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Prep me for my call with Datadog — I'm meeting with their sales ops team tomorrow and want to walk in sharp",
+      "expected_output": "Mode B — Single-company prep. Should NOT scan the full week's calendar. Instead: (1) identify 'Datadog' as the target company with domain datadog.com, (2) optionally search calendar for the specific Datadog meeting to get attendee names/time, (3) search Mixmax for historical meeting context with datadog.com, (4) research Datadog via web search, (5) run full Amplitude deep dive for datadog.com, (6) produce one complete briefing document for Datadog following the standard template — including historical meeting context, company background, Amplitude data, user roster, feature adoption, conversation angles, and bottom line.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Do some product research on Gong — I want to see how they're using Mixmax and what their adoption looks like",
+      "expected_output": "Mode C — Product research only. Should NOT search Mixmax for meeting history or generate conversation angles. Instead: (1) research Gong via web search for business context, (2) run full Amplitude deep dive for gong.io domain, (3) produce a Product Intelligence Report with company background, account overview, user roster, email volume, feature adoption, integrations, health assessment, and bottom line. No historical meeting context section, no 'Top 3 People to Reach Out To', no conversation angles.",
+      "files": []
+    }
+  ]
+}

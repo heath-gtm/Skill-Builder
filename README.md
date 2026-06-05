@@ -150,3 +150,5 @@ Bump the `version` in the manifest before rebuilding so Cowork offers the update
 - **mixmax-ae-pipeline-analysis**, **mixmax-csm-book-of-business** — per-rep / per-CSM analyses.
 - **mixmax-churn-analysis**, **mixmax-closed-won-analysis**, **mixmax-closed-lost-analysis** — deal/account retrospectives.
 - **mixmax-leader-update-slides**, **mixmax-gtm-slides** — slide-content workbenches.
+- **account-intelligence** — AE 360 intelligence suite (note: ships its own `deal-intelligence` skill, distinct from the root merged one; vendored/isolated).
+- **mixmax-meeting-intelligence** — meeting prep / follow-up / enrollment skills.
