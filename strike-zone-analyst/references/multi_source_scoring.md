@@ -1,3 +1,5 @@
+> **⚠️ Superseded for account-level scoring (2026-06-05).** The canonical Mixmax composite model is now **v4** (two-stage gate→fit→intent, channel-aware), backtested on won/lost + convert cohorts. See the `mixmax-composite-scoring` skill and the published methodology: https://psychic-adventure-p3jj6y9.pages.github.io/operational/mixmax-composite-scoring-v4-methodology-2026-06-05.html . The v2 rubric below remains only as the internal reference for strike-zone Mode 2 (Sprint Planning) / Mode 3 (Scoring Audit); do not use it to rank accounts against v4.
+
 # Multi-Source Composite Scoring — v2 Rubric
 
 The scoring rubric for Mode 2 (Sprint Planning) and Mode 3 (Scoring Audit). Composite score is 0-100, computed as a weighted sum of 10 sub-scores. Each sub-score is independently 0-100 so weights are transparent.
