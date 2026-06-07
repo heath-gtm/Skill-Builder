@@ -3,7 +3,7 @@ name: mixmax-composite-scoring
 description: Self-contained orchestrator that computes the Mixmax composite ICP score (v5.3 — layered, evidence-weighted) for one or many accounts and returns a stack-ranked priority list. v5 replaces blended pools with a layered model — gates, then an external-signal base rank computed for EVERY account, then product/intent escalators as bounded additive boosts. Three models read one signal library: Model A prospect acquisition, Model B customer expansion, Model C win-back. Weights are locked to a 100-won/60-lost truth-cohort backtest (2026-06-06). Trigger on "composite score", "score these accounts", "rescore", "rank by composite", "stack rank", "ICP score for X", "is this an Aero false negative", "prioritize these leads", or any multi-source account qualification. Canonical methodology: https://psychic-adventure-p3jj6y9.pages.github.io/operational/mixmax-signal-stack-v5-blueprint-2026-06-06.html
 ---
 
-# Mixmax Composite Scoring v5.4 — Layered Signal Library
+# Mixmax Composite Scoring v6 — Layered Signal Library (MASTER)
 
 **Canonical (locked 2026-06-06, QA-verified):** https://psychic-adventure-p3jj6y9.pages.github.io/operational/mixmax-signal-stack-v5-blueprint-2026-06-06.html
 Supersedes v4. Three models, one library: **A** prospect acquisition · **B** customer expansion · **C** win-back.
@@ -96,6 +96,30 @@ Field name corrections (verified live): `Sold_to_AEs__c`, `Sold_to_full_cycle_AE
 - **PES-M v1 built** (the Mixmax Product Engagement Score, separate model): `0.25*activity + 0.35*breadth + 0.40*depth` from the Amplitude capability matrix; GHOST_ACTIVE/NO_DATA overrides; verdicts Power/Established/Emerging/Dormant. Validated 9.0x: 34% of paying accounts >=Established vs 4% non-paying. Artifact: Revenue Reviews/specs/pesm_v1_2026-06-07.csv. The product escalator and Model B adoption component read PES-M. SFDC mapping: Product_Engagement_Verdict__c + PESM_Score__c (RevOps to create).
 - **Team whitespace validated on the full paying book:** computable 495/777; median coverage 0.00; 280 zero-Sold_to accounts (partly flag hygiene — on the DQ list); 185 addressable targets (>=3 users on unsold teams) on $3.25M ARR. Stays shadow until the forward expansion-outcome lift test; target list ships into the Expansion play now.
 - **T8 forward test registered + baselined:** 173 strike vs 173 size-matched 50-79 controls; outcome = new opp or external meeting 2026-06-07 -> 2026-09-04; pass >=2.0x; baseline opp counts snapshotted. Register: Revenue Reviews/specs/t8_forward_test_register.json.
+
+
+## v6 MASTER (locked 2026-06-07) — the shipping spec
+
+Supersedes the v5.x weight tables above. Rule: weighted only if tested won/lost lift OR written reason survives challenge. Weights evidence-proportional (excess lift), renormalized over filled.
+
+**Gates (unchanged, all validated):** email Gmail 1.00 / unknown 0.90 / Microsoft 0.55 (2.67x) · Octave DQ -> FLAG (not ranked) · zero sales-motion fingerprints -> cap 55.
+
+**Rank (Model A):**
+| w | Component | Source | Evidence |
+|---|---|---|---|
+| .35 | Salesforce/HubSpot in stack | SFDC CRM__c | tested 1.64x (52% vs 32%, n=160) |
+| .30 | Sales hiring presence <=90d | TheirStack via Deepline | tested 1.55x |
+| .13 | Contact-sales/demo CTA | PredictLeads + Firecrawl | tested 1.22x |
+| .12 | DM findability | FullEnrich search (free) | reason-kept: feasibility; 12/18 sample; lift test pre-registered |
+| .10 | Size band 25-2000 FTE | Crustdata | tested (won 108 vs lost 46 median FTE) |
+
+**Removed from rank:** Octave score (gate+context only; 1.03x within deals), history (echo 1.02x; context), competitor-in-stack (7/160 fills untestable; messaging layer — picks the Octave play), committee depth (superseded by DM findability).
+
+**Escalators:** product +6 = PES-M EMERGING, +12 = PES-M ESTABLISHED/POWER (breadth escalator removed — redundant, 35% of PES-M) · intent +8/+15 (CR ls_464, 3.22x) · DQ flagged-not-ranked.
+
+**Model B:** adoption .30 = PES-M (validated 9.0x); seat-whitespace .25, hiring .20, headroom .15, util .10 = heuristic, pre-registered for expansion-outcome backtest. SAVE-FIRST unchanged. Team whitespace = trigger/context until forward lift test.
+
+**Architecture:** Score ranks -> Triggers flip the play (SAVE-FIRST, GHOST_ACTIVE, DQ, no-sales-DM, declining-usage v1.1) -> Brief explains (>=90 auto first wave, >=80 second, ad-hoc via agents). Nothing flows backward; the only door into the score is a pre-registered lift test.
 
 ## Cross-references
 Canonical v5.3 doc (above, incl. section 06d play mapping) · v4 methodology (superseded) · `sfdc-field-library` · `product-engagement-story` · `strike-zone-analyst`
