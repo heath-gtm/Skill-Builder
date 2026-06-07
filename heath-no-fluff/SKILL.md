@@ -38,7 +38,9 @@ Nine patterns that bloat documents. Learn to spot them on sight:
 
 **8. Boilerplate transitions** — "Building on the above," "It's worth noting that," "As we look ahead to," "In conclusion." Delete all of them.
 
-**9. Administrative metadata** — Sections like "Data sources," "Build sequence," "Brand guidelines," "Appendix A: methodology" that are relevant to the author but not the intended reader. When the audience is leadership, cut these entirely or move to a literal appendix. Do not just compress them — remove them.
+**9. Prose-buried lists** — A sentence enumerating 3+ parallel actions, criteria, or items, glued together with commas and "and". The reader can't scan it, can't reference item 3, can't check items off. Break it into a numbered or bulleted list. (See "Formatting pass" below for the worked example.)
+
+**10. Administrative metadata** — Sections like "Data sources," "Build sequence," "Brand guidelines," "Appendix A: methodology" that are relevant to the author but not the intended reader. When the audience is leadership, cut these entirely or move to a literal appendix. Do not just compress them — remove them.
 
 ## Five-pass compression protocol
 
@@ -53,6 +55,26 @@ Work in sequence. Don't skip passes.
 **Pass 4 — Sentence-level cuts.** Remove every sentence that doesn't add new information. For each sentence, ask: "Does this change what the reader knows or does?" If no, delete it.
 
 **Pass 5 — Voice pass.** Apply Heath's voice rules (below). The document should read like it was written by someone who knows the answer, not someone building a case.
+
+**Pass 6 — Formatting pass.** Scan every paragraph for prose-buried lists: 3+ parallel actions, steps, criteria, or named items chained inside one sentence. Pull them out into a numbered list (use bullets only when order truly doesn't matter). Keep the framing sentence before the list and the consequence/payoff sentence after it as prose.
+
+Worked example — before:
+
+> Tracking is necessary, but it is the enabler, not the crux. The crux is behavior and focus: keep the Stage 0→1 gate hard, refuse low-quality noise from channels that haven't earned a meeting, narrow the focus, diversify the pipeline beyond inbound, and force a clean qualify-in / qualify-out decision on every deal. Those moves can start Monday.
+
+After:
+
+> Tracking is necessary, but it is the enabler, not the crux. The crux is behavior and focus:
+>
+> 1. Keep the Stage 0→1 gate hard
+> 2. Refuse low-quality noise from channels that haven't earned a meeting
+> 3. Narrow the focus
+> 4. Diversify the pipeline beyond inbound
+> 5. Force a clean qualify-in / qualify-out decision on every deal
+>
+> Those moves can start Monday.
+
+Boundary rule: this converts *enumerating sentences* into lists. It does NOT convert narrative paragraphs into bullets — that anti-pattern still holds. The test: if the clauses are parallel and independently actionable/checkable, list them; if they build an argument, leave them as prose. In HTML output, emit a real `<ol>`/`<ul>`, not line breaks.
 
 ## Heath's voice rules (baked in — do not delegate to humanizer)
 
@@ -146,7 +168,7 @@ CUTS:
 
 Do not do these:
 
-- **Don't summarize into bullet points** unless the original was bullets. Preserve the document's form — compress its words.
+- **Don't summarize into bullet points** unless the original was bullets. Preserve the document's form — compress its words. (Exception: Pass 6 — sentences that *enumerate* 3+ parallel items become lists; narrative stays prose.)
 - **Don't lose the numbers.** If the original says "42%," the compressed version must say "42%." Vague compression is worse than no compression.
 - **Don't invent.** If the verdict isn't explicitly stated, find the strongest implicit one and flag it: "Reading the verdict as: [X]. If that's wrong, correct me."
 - **Don't compress tables of data.** Threshold tables, weight matrices, event registries — these are already compressed. Leave them. Cut the prose around them.
