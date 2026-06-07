@@ -52,5 +52,27 @@ Adoption/PES .30 · seat-whitespace (seats/employees; *denominator upgrade: Crus
 ## Discipline (the AI-native loop)
 New signals enter at weight zero -> shadow-score -> won/lost lift test (promotion >=~1.5x; <1.2x stays qualifier) -> promote/retire. Quarterly re-fit on the grown cohort; every re-fit ships as a versioned, QA-verified canonical page. Tests are pre-registered before data is seen (canonical doc section 06b falsification protocol).
 
+
+## v5.3.1 delivery layer — Plays + per-account evidence (2026-06-07)
+
+Scores rank; **plays decide the motion.** One account = one play, evaluated top-down (canonical doc section 06d):
+Competitor-exclude > In-Flight (open opp) > Expansion (`DWH_DS_Customer_ARR__c` > 0 or RT=Customer) > SS->DS (`DWH_SS_Customer_ARR__c` > 0, DS=0) > Win-Back (RT=Fall Off, no ARR) > PQA Re-Engage (RT=Prospect + PQA date) > Net-New.
+
+**Hard rules:**
+- `Account.RecordTypeId` is the lifecycle gate — never derive cohorts from field filters alone. Re-pull on every refresh (drift is real week-to-week).
+- ARR truth = `DWH_DS/SS_Customer_ARR__c` + `DWH_Customer_Type__c`. Never read ARR from derived sheets. Self-serve payers keep RT=Prospect by design.
+- Channel (`Channel_Source__c`) segments WITHIN a play; it is never a model input or play gate. (2026-06-07 product-channel remap in SFDC: model + plays unaffected; channel cuts in downstream reports have a break-in-series at that date.)
+
+**Per-account evidence contract ("Why this score"), in order:**
+1. Escalators first (live product usage + buyer-intent) — the rep's outreach context.
+2. Fit case: CRM-in-stack (Salesforce/HubSpot = the strongest correlated stack signal), hiring count, displaceable competitor, talk-to-sales CTA.
+3. Gmail as qualifier ("they qualify for our motion"), never as the win driver. Microsoft = the cap explained.
+4. Caveats stated plainly: Octave DQ cap, coverage cap, unknown email stack haircut.
+Plus per account: Amplitude capability breakdown (what they use / don't, from `amplitude-event-taxonomy`; flag ghost-active), Octave play (native assignment where scored; rule-based fallback marked *), SFDC deep link, and for Win-Back the loss story (last lost renewal CloseDate + Amount + `Loss_Reason__c` + `Main_Competitor__c`, `Past_Renewals__c` tenure, still-active users).
+
+**Proposed v5.4 (not yet weighted):** capability breadth (uses x/6 tracked capabilities) as a bounded escalator. Requires backtest per the discipline loop.
+
+**Field/event fixes (verified live 2026-06-07):** Opportunity competitor field is `Main_Competitor__c` (`Competitor__c` does not exist). Amplitude `Template` filter is `action = "Create"` (capitalized). `followup created` returned zero volume in 90d — taxonomy needs the current AI-followups event name.
+
 ## Cross-references
-Canonical v5.3 doc (above) · v4 methodology (superseded) · `sfdc-field-library` · `product-engagement-story` · `strike-zone-analyst`
+Canonical v5.3 doc (above, incl. section 06d play mapping) · v4 methodology (superseded) · `sfdc-field-library` · `product-engagement-story` · `strike-zone-analyst`
