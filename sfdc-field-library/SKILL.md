@@ -214,9 +214,27 @@ In Vercel runtime, this is wrapped by `salesforce_query_activities()`. NEVER inl
 
 ---
 
-## 5. Channel classification (canonical)
+### Funnel-stage qualification dates (channel-specific) — CANONICAL
 
-**Canonical attribution field: `Account.Channel_Source__c`** — a formula (text) field that = the source of the lead. This is the SINGLE source of truth for channel. Read it directly; do not reconstruct channel from heuristics when this field is populated.
+The lead/account qualification stage for each channel lives in a different Account date field. These are the join keys for any MQA/OQA/PQA → SQO funnel analysis. (Verified 2026-06-05.)
+
+| Field | Stage | Channel | Notes |
+|---|---|---|---|
+| `MQA_Date_2024__c` | **MQA** (Marketing Qualified Account) | Inbound | **The populated inbound stamp.** Use this — NOT the Lead `MQL__c`/`MQL_Date__c` fields, which are **empty** in the live org (inbound auto-creates opps and bypasses lead-level MQL stamping). Populated from 2024 Q4 onward. |
+| `OQA_Date__c` | **OQA** (Outbound Qualified Account) | Outbound | Tracking began Jan 2026 — small population, too new to trend QoQ. No "OQL" field exists. |
+| `Sales_PQA_Date_Account__c` | **PQA** (Product Qualified Account) | Product | Clean history from 2025. Also `PQA_Date_Initial__c`, `PQA_Date_Most_Recent__c`, `CR_PQA_Score__c`. |
+
+**MQA/OQA/PQA → SQO conversion** = join the account-stage date to its New-Business opps where `SQL__c = true` (the SQO marker, see § 2), time-bounded with `SQO_Date__c` on/after the qualification date to exclude pre-stage SQOs.
+
+⚠️ **Lead MQL fields are EMPTY** — `Lead.MQL__c`, `MQL_Date__c`, `MQL_Assigned_Date_Time__c` returned 0 rows (trailing 18mo, verified 2026-06-05). Do not use them; use `Account.MQA_Date_2024__c` for the inbound funnel.
+
+---
+
+---
+
+## 5. Channel classification (canonical — used by every channel-aware analyst)
+
+**Canonical attribution field: `Account.Channel_Source__c`** — a formula (text) field = the source of the lead. This is the SINGLE source of truth for channel. Read it directly; do not reconstruct channel from heuristics when this field is populated.
 
 ```
 INBOUND      Account.Channel_Source__c = 'Inbound'    (lead came to us — web form, demo request, MQA)
@@ -226,20 +244,123 @@ PRODUCT      Account.Channel_Source__c = 'Product'    (self-serve signup / PQA �
 
 **Channel is attributed at the Account level (the source of the lead). An Opportunity inherits the channel of its Account — read `Opportunity.Account.Channel_Source__c`. Never derive channel from the Opportunity alone.**
 
+**How the formula works (empirically verified 2026-06-07, 0 counterexamples):**
+`Channel_Source__c` = channel of the EARLIEST qualification date on the account:
+`MQA_Date_2024__c` → Inbound · `OQA_Date__c` → Outbound · `Sales_PQA_Date_Account__c` → Product.
+Ties resolve to Inbound (MQA evaluated first). **If NO qualification date exists → defaults to
+'Outbound'** — verified across the full org (every no-date account reads Outbound; every Inbound
+account has an MQA date; every Product account has a PQA date; 51/51 dual-stamped accounts follow
+earliest-wins). Three caveats: (1) 'Outbound' is overloaded — it includes the entire unqualified
+account universe (~88K no-date accounts), not just OQA-qualified accounts; (2) `MQA_Date_2024__c`
+exists only since Q4 2024 and `OQA_Date__c` only since Jan 2026, so accounts qualified before
+those fields existed fall to the Outbound default regardless of true origin; (3) it is a live
+formula — stamping a date retroactively re-attributes the account and all its historical opps.
+
 ⚠️ **Do NOT use `Opportunity.Channel__c`.** It is a separate legacy formula whose values (`Direct`, `Virality & Product`, `Other/Unknown`, …) do not map to the lead source and frequently disagree with the account's true channel (e.g. an `Outbound` account shows `Virality & Product` on the opp). It is not the channel attribution field.
 
 `Channel_Source__c` is a formula field — **non-groupable in SOQL. Filter on it (`WHERE Channel_Source__c = 'Outbound'`); never `GROUP BY Channel_Source__c`.**
 
-**Fallback heuristics (use ONLY when `Channel_Source__c` is null):**
+### Two-layer attribution model (Heath-canonical 2026-06-07)
+
+Attribution is tracked at TWO layers. Never mix them up:
+
+**Layer 1 — LEAD attribution (Account level, set before any opp exists):**
+
+| What | Field |
+|---|---|
+| Channel Source | `Account.Channel_Source__c` (formula; Inbound/Outbound/Product) |
+| Inbound qualification | `Account.MQA_Date_2024__c` (MQA date) |
+| Product qualification | `Account.Sales_PQA_Date_Account__c` (PQA date) |
+| Outbound qualification | `Account.OQA_Date__c` (OQA date; populated since Jan 2026) |
+
+**Layer 2 — OPPORTUNITY SOURCE attribution (once an opp is created):**
+
+| What | Field | Notes |
+|---|---|---|
+| Opportunity record type | `RecordTypeId` / `RecordType.Name` | lifecycle gate (Net New / Conversion / Renewal / Expansion) |
+| Type | `Type` | picklist: New Business / Convert SS to DS / Expansion / Renewal / … |
+| Opportunity Source | `Opportunity_Source__c` | **Formula (Text)** — computed FROM `Opportunity_Source_Details__c`. Non-groupable, NOT directly writable. To change Source, change Details. |
+| Opportunity Source Details | `Opportunity_Source_Details__c` | **Restricted picklist (writable)** — the driver field. Value sets are record-type-scoped (the Renewal record type does NOT allow `Product - *` values). |
+
+**Hard rule (Heath, 2026-06-07):** any opportunity with `RecordType.DeveloperName =
+'Mixmax_Conversion_Direct_Sales'` (RT Id `012VS000005ln5fYAA`) OR `Type = 'Convert SS to DS'`
+must carry `Opportunity_Source_Details__c = 'Product - SS Customer'` so `Opportunity_Source__c`
+rolls to **Product**. Conversions tagged `Inbound - Marketing` or `Outbound - *` are
+misclassifications. A Salesforce automation (record-triggered flow or validation rule) should
+enforce this going forward — spec drafted 2026-06-07, pending admin deployment.
+
+⚠️ **Picklist traps when correcting records:** `Opportunity_Source_Details__c` is a restricted,
+dependency-constrained picklist — (a) the `Mixmax - Renewal` record type's value set blocks all
+`Product - *` values; (b) `Type` controls availability too (e.g. `Type='InApp Expansion'` blocks
+Product values — set `Type='Convert SS to DS'` in the SAME update).
+
+**Bookings-by-channel reporting basis (Heath-canonical 2026-06-07):** when reporting bookings
+by channel against the master performance tracker, filter to `RecordTypeId IN
+('0121R000001QF50QAG' /*Net New - DS*/, '012VS000005ln5fYAA' /*Conversion - DS*/)` — new
+business + conversions ONLY. Expansion (DS + Organic), Renewal, and all other record types are
+excluded even when they carry a `Product`/`Inbound`/`Outbound` Opportunity Source (e.g. 24 won
+Product-source deals / $69,019 since 2024 sit on Expansion - Organic — excluded by design:
+already-converted customers).
+
+**Cleanup record (2026-06-07):** audited all 97 conversions created since 2024-01-01; 55 were
+misclassified (43 Inbound - Marketing, 10 Outbound - SDR/AE/Hybrid, 2 In+Out Hybrid) including
+26 won deals / **$185,559** wrongly credited to Inbound/Outbound. 54 corrected to
+`Product - SS Customer`. 1 outstanding: Checkr `006VS0000050nlpYAA` (Closed Lost, record type
+`Mixmax - Renewal` blocks Product picklist values — also a Type/RecordType contradiction; left
+flagged). Null `Opportunity_Source_Details__c` exists ONLY on Renewal-type opps (389 since 2024) — by design.
+**Sweep 2 (same day):** all opps on RT `Mixmax - Conversion - Direct Sales` regardless of Type —
+3 more fixed (Citrus Patrimonial, SumUp won $4,854, Truckbase.io incl. Type correction
+InApp Expansion→Convert SS to DS). Conversion RT now 0 non-Product.
+**Sweep 3 (same day, Heath expanded scope to all-time on Net New DS + Conversion DS RTs):**
+339 of 346 pre-2024 legacy conversions on Net New DS corrected — including ALL 182 won deals
+($1,264,596 all-time bookings moved to Product). 7 unfixable, all Closed Lost ($0 won impact):
+blocked by the "Please choose a specific Product Gap" validation rule (null `Product_Gaps__c`
+on 2017–2022 records; do not fabricate a value — admin can bypass if ever needed). Post-sweep
+all-time Product won = 363 deals / $2,071,131. Remaining known non-Product conversions sit on
+Expansion - Organic (138) and Expansion - DS (28) RTs + 1 Renewal (Checkr) — out of rule scope.
+
+### ⚠️ PRODUCT-CHANNEL OVERRIDE — SS→DS conversions (Heath-confirmed 2026-06-06)
+
+**Every `Opportunity.Type = 'Convert SS to DS'` belongs to the PRODUCT channel** for any
+channel/motion/funnel analysis — **regardless of the account's `Channel_Source__c` value.**
+
+Why: a self-serve→direct-sales conversion is the product-led motion by definition, but the
+account keeps its *original* lead-source stamp (usually `Inbound` — how the self-serve signup
+first arrived). A naive `Channel_Source__c = 'Product'` filter therefore misses the product
+motion almost entirely (found 1 win where the real number was **16 wins / $79.9K**, Jan 2025 →
+May 2026 — which reconciles to the team's ~$80K product bookings figure).
+
+Canonical motion definitions for new-logo funnel work:
+
 ```
-INBOUND   LeadSource IN ('Inbound Web Form', 'Demo Request', 'Content Download',
-                         'Pricing Page', 'Sales Inquiry')
-OUTBOUND  LeadSource IN ('SDR Sourced', 'AE Sourced', 'Cold Outreach', 'List Import')
-              OR Mixmax sequence enrollment exists on primary contact
-PRODUCT   Account.Website domain has Amplitude `_active` > 0 in trailing 30d
-              AND (LeadSource = 'Self-Serve Signup' OR PQA threshold met)
+INBOUND  motion = Type = 'New Business'      AND Account.Channel_Source__c = 'Inbound'
+OUTBOUND motion = Type = 'New Business'      AND Account.Channel_Source__c = 'Outbound'
+PRODUCT  motion = Type = 'Convert SS to DS'  (ANY channel stamp)
+                  OR (Type = 'New Business' AND Account.Channel_Source__c = 'Product')
 ```
-If a fallback produces multiple matches, **priority is Product > Inbound > Outbound** (lock-in #11 v5). The 3 channels are mutually exclusive at the account level.
+
+The three motions are mutually exclusive (a conversion is Product even on an Inbound-stamped
+account). Exclude Expansion / Upsell / Cross-sell / Renewal types from new-logo channel analysis.
+
+**Fallback heuristics (use ONLY when `Channel_Source__c` is null — which, as of 2026-06-05, is never on new-business opps).**
+
+⚠️ The enum values below were refreshed 2026-06-05 to the **actual live-org `LeadSource` picklist**. The prior values (`'Inbound Web Form'`, `'Demo Request'`, `'SDR Sourced'`, `'Cold Outreach'`, `'Self-Serve Signup'`) **do not exist** in the org. Note `LeadSource` is messy — `Direct` is a ~70% catch-all — so this fallback is coarse; prefer `Channel_Source__c` always.
+
+```
+INBOUND   LeadSource IN (
+            'Direct', 'Website', 'Organic Search', 'Google - Organic',
+            'Sign-up', 'Referral', 'Employee Referral', 'Partner',
+            'Webinar', 'Sponsorship', 'Other', 'Intercom', 'Capterra'
+          )
+OUTBOUND  LeadSource IN (
+            'Outbound', 'Practical Prospecting', 'List Import', 'Linkedin'
+          )
+          OR Mixmax sequence enrollment exists on primary contact
+PRODUCT   LeadSource IN ('Product', 'Virality')
+          OR (Amplitude `_active` > 0 trailing 30d AND PQA threshold met)
+```
+
+The 3 channels are mutually exclusive at the account level. If a fallback heuristic produces multiple matches, priority is **Product > Inbound > Outbound** (lock-in #11 v5). NOTE: this LeadSource fallback under-counts Outbound (agency/SDR leads are often logged `Direct`); `Channel_Source__c` is authoritative and should be used whenever populated.
 
 ---
 
