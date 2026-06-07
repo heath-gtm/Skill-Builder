@@ -164,6 +164,22 @@ CUTS:
 - Hedged closing → rewritten as a concrete design principle
 ```
 
+## The 5-minute-read structure (progressive disclosure)
+
+Every multi-page report or decision document leads with a block a reader can finish in 5 minutes and act on. Structure, in order:
+
+1. **The story in ≤5 sentences.** Plain prose. What's true, what changed, what we do. A sentence each — no clause-stacking.
+2. **The numbered do-this list.** The actions, each one line, hardest-hitting number inline.
+3. **Deeper reads.** A short link list — companion pages, appendix, verification trail — each with a one-phrase reason to click ("why touchpoints are the gap", "every won deal, linked").
+
+Everything below that block is evidence, not argument. The argument is complete in the 5-minute block; sections exist for the reader who wants to audit it. Tests:
+
+- Can someone who reads ONLY the top block make the decision? If no, the block is missing a sentence — not the reader missing a section.
+- Does any section below introduce a NEW conclusion? If yes, hoist it into the story; sections defend, they don't reveal.
+- Is every deep-dive one click away with a stated reason to click? Bare links are dead links.
+
+Companion documents follow the same rule recursively: each leads with its own verdict block and links back. The set forms a hub: 5 minutes on the main page, every detail reachable in one click.
+
 ## Anti-patterns
 
 Do not do these:
