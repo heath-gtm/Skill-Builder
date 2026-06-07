@@ -89,5 +89,13 @@ Validated on an 18-account stratified sample (3 per play, full enrichment rebuil
 
 Field name corrections (verified live): `Sold_to_AEs__c`, `Sold_to_full_cycle_AE_team__c` (not Sold_to_full_cycle_AE__c); Opportunity competitor = `Main_Competitor__c`; channel context = `Channel_Source__c` for prospects without an open opp, `Opportunity_Source__c` on new-business/conversion deals.
 
+
+## Model close-out (2026-06-07) — all open questions resolved
+
+- **History: OUT of the score.** Echo test: prior-won accounts won at 84% vs 82% baseline (1.02x) within engaged accounts — flat + circular. History is context-grade: evidence text + routing only. Weights renormalize over remaining filled components.
+- **PES-M v1 built** (the Mixmax Product Engagement Score, separate model): `0.25*activity + 0.35*breadth + 0.40*depth` from the Amplitude capability matrix; GHOST_ACTIVE/NO_DATA overrides; verdicts Power/Established/Emerging/Dormant. Validated 9.0x: 34% of paying accounts >=Established vs 4% non-paying. Artifact: Revenue Reviews/specs/pesm_v1_2026-06-07.csv. The product escalator and Model B adoption component read PES-M. SFDC mapping: Product_Engagement_Verdict__c + PESM_Score__c (RevOps to create).
+- **Team whitespace validated on the full paying book:** computable 495/777; median coverage 0.00; 280 zero-Sold_to accounts (partly flag hygiene — on the DQ list); 185 addressable targets (>=3 users on unsold teams) on $3.25M ARR. Stays shadow until the forward expansion-outcome lift test; target list ships into the Expansion play now.
+- **T8 forward test registered + baselined:** 173 strike vs 173 size-matched 50-79 controls; outcome = new opp or external meeting 2026-06-07 -> 2026-09-04; pass >=2.0x; baseline opp counts snapshotted. Register: Revenue Reviews/specs/t8_forward_test_register.json.
+
 ## Cross-references
 Canonical v5.3 doc (above, incl. section 06d play mapping) · v4 methodology (superseded) · `sfdc-field-library` · `product-engagement-story` · `strike-zone-analyst`
