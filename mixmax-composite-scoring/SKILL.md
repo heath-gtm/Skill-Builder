@@ -3,7 +3,7 @@ name: mixmax-composite-scoring
 description: Self-contained orchestrator that computes the Mixmax composite ICP score (v5.3 — layered, evidence-weighted) for one or many accounts and returns a stack-ranked priority list. v5 replaces blended pools with a layered model — gates, then an external-signal base rank computed for EVERY account, then product/intent escalators as bounded additive boosts. Three models read one signal library: Model A prospect acquisition, Model B customer expansion, Model C win-back. Weights are locked to a 100-won/60-lost truth-cohort backtest (2026-06-06). Trigger on "composite score", "score these accounts", "rescore", "rank by composite", "stack rank", "ICP score for X", "is this an Aero false negative", "prioritize these leads", or any multi-source account qualification. Canonical methodology: https://psychic-adventure-p3jj6y9.pages.github.io/operational/mixmax-signal-stack-v5-blueprint-2026-06-06.html
 ---
 
-# Mixmax Composite Scoring v5.3 — Layered Signal Library
+# Mixmax Composite Scoring v5.4 — Layered Signal Library
 
 **Canonical (locked 2026-06-06, QA-verified):** https://psychic-adventure-p3jj6y9.pages.github.io/operational/mixmax-signal-stack-v5-blueprint-2026-06-06.html
 Supersedes v4. Three models, one library: **A** prospect acquisition · **B** customer expansion · **C** win-back.
@@ -73,6 +73,21 @@ Plus per account: Amplitude capability breakdown (what they use / don't, from `a
 **Proposed v5.4 (not yet weighted):** capability breadth (uses x/6 tracked capabilities) as a bounded escalator. Requires backtest per the discipline loop.
 
 **Field/event fixes (verified live 2026-06-07):** Opportunity competitor field is `Main_Competitor__c` (`Competitor__c` does not exist). Amplitude `Template` filter is `action = "Create"` (capitalized). `followup created` returned zero volume in 90d — taxonomy needs the current AI-followups event name.
+
+
+## v5.4 (sample-validated 2026-06-07) — pipeline changes
+
+Validated on an 18-account stratified sample (3 per play, full enrichment rebuild, byte-identical re-run). Weights unchanged pending re-fit; these are STRUCTURAL changes:
+
+1. **People component (.10) = DM findability, not committee depth.** FullEnrich database search (search_people, zero credits): sales-leadership title found at the domain = 100, not found = 0. Found 12/18 on sample; misses correctly identify non-ICP motion (nonprofits, VCs, consumer). Waterfall enrichment (email+mobile) only fires on play entry.
+2. **Product escalator reads Amplitude ONLY** (never Aero PES): +6 = >=5 active users 30d at gp:domain; +12 = >=2 capabilities with >=3 users (or paying + active). Read order: SFDC Product_Engagement_Verdict__c (fresh) -> existing Customer Strategy Brief (same taxonomy — apples-to-apples) -> fresh Amplitude pull last.
+3. **DQ accounts: flagged, never ranked.** They exit play work queues; capped score retained for audit/grading only.
+4. **Model selection by commercial state, never play:** DWH ARR > 0 -> Model B; else Model A. (In-Flight prospects = A; In-Flight payers = B.)
+5. **Octave reframed: validated qualifier.** Flat-within-closed-deals (1.03x) is the expected result for a gate — every tested deal already passed ICP. The DQ boundary is the validated part; keep gate + weight, revisit at re-fit with this framing.
+6. **Shadow signals (computed, not weighted):** capability breadth (x/6) and team whitespace (teams sold / DWH teams present, fields: Sold_to_SDRs/AEs/full_cycle_AE_team/Success/Partner_Manager_Team/Recruiting/Other__c over DWH_of_Teams__c + DWH_of_AE/SDR/CS_Users__c). Promote per the discipline loop only.
+7. **SS->DS play gate:** a paying SS account with no findable sales-titled DM cannot run a conversion motion — route to usage-expansion touch instead.
+
+Field name corrections (verified live): `Sold_to_AEs__c`, `Sold_to_full_cycle_AE_team__c` (not Sold_to_full_cycle_AE__c); Opportunity competitor = `Main_Competitor__c`; channel context = `Channel_Source__c` for prospects without an open opp, `Opportunity_Source__c` on new-business/conversion deals.
 
 ## Cross-references
 Canonical v5.3 doc (above, incl. section 06d play mapping) · v4 methodology (superseded) · `sfdc-field-library` · `product-engagement-story` · `strike-zone-analyst`
