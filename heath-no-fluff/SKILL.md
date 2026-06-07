@@ -1,6 +1,5 @@
 ---
 name: heath-no-fluff
-version: 1.0.0
 description: >
   Cut any document — report, analysis, brief, email, spec, or LinkedIn draft —
   to its essential core, restructure it verdict-first, and rewrite it in Heath's
