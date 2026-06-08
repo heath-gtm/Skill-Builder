@@ -31,6 +31,10 @@ description: Your top-of-funnel analyst. Connect Salesforce + Amplitude — turn
 
 **Daily Drop has named recommended picker.** Not "good account" — instead, "Karan owns Acme territory but Felipe has bandwidth and Acme has 14 sales hires."
 
+**Daily Drop claim-rate must be monitored weekly.** After each Drop, check how many of the 10 picks were "claimed" (rep reacted to or replied in Slack). If claim rate = 0% for ≥2 consecutive weeks, it indicates the Drop Slack format is not driving rep action — surface this to Heath as DAILY_DROP_ENGAGEMENT_FAILURE. Do NOT silently continue generating drops into a void. Evidence gate: June 1–5, 2026 — 10 picks, 0 claims, 0 meetings booked. carVertical closed won anyway (0K ARR) but was not claimed — the win happened despite the Drop, not because of it.
+
+**Daily Drop Slack format must include explicit rep CTA.** Each AE must be @-mentioned with "Your pick: [Account] — reply ✅ to claim or 🔄 to skip." This converts passive drop → active ownership signal. The claim reaction is the north-star proxy until meetings data is available.
+
 **Under-prospected surfacing is segment + channel.** Names exact gaps: "Mid-market SaaS Inbound: 22% of pipeline target, 8% of pipeline current."
 
 ## Output format example
