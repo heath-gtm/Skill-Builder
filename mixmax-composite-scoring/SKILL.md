@@ -36,18 +36,66 @@ The v4/v3 lesson: components with different fill rates cannot share one weighted
 ## Model B (customer expansion) — per-domain
 Adoption/PES .30 · seat-whitespace (seats/employees; *denominator upgrade: Crustdata sales headcount*) .25 · sales-hiring timing .20 · ARR headroom .15 · utilization (used/purchased) .10. **Rule: utilization <40% AND PES <40 -> SAVE-FIRST flag — retention play before any expansion pitch.**
 
-## Execution
+## Execution — the end-to-end run (self-contained; follow in order, checkpoint after every step)
 
-1. **SFDC-first reads.** Check signal stamps + `*_Refreshed_At__c`; only pull a provider when stale (volatile weekly: hiring, intent; slow monthly: CTA, headcount, tech). Write-back field spec: canonical doc section 06c.
-2. **Universe + channel:** `Channel_Source__c` validated by PQA/MQA/OQA stamps (Product > Inbound > Outbound).
-3. **SFDC baseline (one bulk SOQL):** Id, Website, `Email_Provider__c` (cross-validate vs MX), `CRM__c`, `Sales_Acceleration_Tool__c`, `Channel_Source__c`, opp history (StageName/IsClosed/IsWon/CloseDate), contacts/titles.
-4. **Deepline enrichment (managed billing, all verified live):**
-   - Hiring: `theirstack_job_search`, `company_domain_or` batches of 40, `job_title_pattern_or` as separate plain patterns ["sdr","bdr","sales development","account executive","account manager","revenue operations","head of sales","sales manager","vp sales"], `posted_at_max_age_days` 90.
-   - CTA: `predictleads_company_website_evolution` per domain (limit 100); regex `(?i)(contact[ -]sales|talk[ -]to[ -]sales|book[ -]a[ -]demo|request[ -]a?[ -]?demo|get[ -]a[ -]demo|schedule[ -]a[ -]demo|speak (to|with) (sales|an expert))` over subpage text+urls; Firecrawl fallback for the ~3% misses.
-   - Headcount (gate + Model B denominator only): `crustdata_v2_enrich_company`, `company_domain` 25/batch, `fields:"headcount"` -> `linkedin_headcount_by_role_absolute.Sales`, totals, growth timeseries. PDL premium NOT required.
-5. **Common Room:** `commonroom_list_objects` Contact grain per domain -> committee count + buyer-intent people (`memberLeadScorePercentile >=75`, scoreId `ls_464`).
-6. **Octave:** `qualify_company` on the base-rank shortlist (expensive calls go where the cheap signals point).
-7. Score per layer math, stack rank, deliver with per-component transparency + Coverage + Aero grade report.
+This section is sufficient to run the entire scoring workflow autonomously. Rules of the road: **a component is a question, the CRM is a source, never the verdict** — cross-validate filled SFDC fields against their external source on every full pass; fill gaps from the waterfall; store every answer locally (domain · question · answer · source · validated-by · timestamp) as the backfill payload. Keep SOQL responses ≤100 records (chunk with LIMIT/OFFSET or `Id IN` lists). Pull high-volume Amplitude events in gp:domain `glob match` letter chunks (`a*`…`[!a-z]*`) — the 1,000-group cap silently truncates the long tail otherwise. Checkpoint each pull to disk before the next.
+
+### The question → waterfall map (run one row at a time)
+
+| # | Question | First answer | Cross-validate / fill | Last resort |
+|---|---|---|---|---|
+| 0 | Lifecycle + commercial state? | SFDC `RecordTypeId` + `DWH_DS/SS_Customer_ARR__c` | never cached, never overridden | — |
+| 1 | Which email stack? | **MX records** (`dig +short MX {domain}` — free, every domain) | SFDC `Email_Provider__c` audited vs MX; disagreements → discrepancy report | DWH connected-client |
+| 2 | Salesforce / HubSpot in stack? | SFDC `CRM__c` | Common Room / Crustdata technographics | BuiltWith via Deepline |
+| 3 | Hiring sales now? | TheirStack via Deepline (≤90d, batches of 40 domains) | — single tested source | PDL jobs |
+| 4 | Sell like our buyers (CTA)? | PredictLeads via Deepline | Firecrawl crawl on miss | — |
+| 5 | Reachable sales DM? | SFDC contacts / `Decision_Maker__c` | FullEnrich `search_people` (FREE — run on every account) | FullEnrich credit waterfall (ONLY on play entry) |
+| 6 | Right size? | Crustdata headcount (25/batch) | SFDC `CR_Number_of_Employees__c` | LinkedIn via Deepline |
+| 7 | Using the product? | Amplitude → PES-M v2 (chunked pulls) | SFDC verdict + existing brief = cache only, never source | — |
+| 8 | Anyone in-market? | Common Room `ls_464` ≥75pct | — | — |
+| 9 | ICP at all? | Octave `qualify_company` — shortlist only, after cheap signals | — | — |
+
+### Every provider in the flow — the complete enrichment map
+
+| Provider | Via | Delivers | Consumed by | Cost posture |
+|---|---|---|---|---|
+| Salesforce | MCP direct | RecordType, PQA/OQA dates, opps, contacts, Sold_to_*, PLAN fields | Play gate · triggers · context | free, every refresh |
+| Warehouse (DWH) | SFDC fields | DS/SS ARR, customer type, team+user counts | Model selection · Model B · whitespace | free, every refresh |
+| MX records | DNS direct | Email provider ground truth | Email gate + SFDC audit | free, every domain |
+| Amplitude | MCP direct (proj 130895, gp:domain) | Capability matrix → PES-M v2 + AI Score | Product escalator · AI escalator · ghost trigger | free, every refresh |
+| TheirStack | Deepline | Sales postings ≤90d | Hiring (.30, 1.55x) | cheap, weekly |
+| PredictLeads | Deepline | CTA / pricing evolution | CTA (.13, 1.22x) · sales-motion gate | cheap, monthly |
+| Firecrawl | Deepline fallback | Direct crawl on PredictLeads miss | CTA backfill | cheap, on miss |
+| Crustdata | Deepline | Headcount by role, totals, growth | Size (.10) · CRM cross-check · Model B denominator | moderate, monthly |
+| Common Room | MCP direct | Intent people (ls_464), contacts, technographics | Intent +8/+15 (3.22x) · CRM cross-check | licensed, weekly |
+| FullEnrich | MCP direct / Deepline | Search = DM findability (free); waterfall = verified email+mobile (credits) | DM (.12) · SS→DS gate · outreach contacts | search free; credits on play entry ONLY |
+| Octave | MCP direct | Qualitative ICP + hard DQs + playbook | DQ gate · Octave Play column | expensive — shortlist only |
+
+**Budget posture (locked): money follows the score, it never precedes it.** Rank everyone with the free/cheap rows; spend (FullEnrich credits, Octave) only where an account enters a play. Freshness, not trust: `*_Refreshed_At__c` stamps decide when to re-pull, never whether to verify.
+
+### Run order
+
+1. **Universe (SFDC):** bulk SOQL — Id, Name, Website, `RecordTypeId`, `Account_GTM_Stage__c`, Owner.Name, `Email_Provider__c`, `CRM__c`, `Sales_Acceleration_Tool__c`, `Channel_Source__c`, DWH ARR fields, PQA/OQA dates, opp history. Re-pull lifecycle every run; drift is real.
+2. **Lifecycle gate → play candidate** (mutually exclusive, priority order): Competitor-exclude → In-Flight → Expansion → SS→DS → Win-Back → PQA Re-Engage → Net-New. Channel segments within a play, never defines it.
+3. **Enrich** every account through the question→waterfall map above (full universe BEFORE scoring; coverage caps flag pipeline failures, they never excuse unanswered questions). Hiring: `theirstack_job_search`, `posted_at_max_age_days` 90, title patterns ["sdr","bdr","sales development","account executive","account manager","revenue operations","head of sales","sales manager","vp sales"]. CTA: `predictleads_company_website_evolution`, regex `(?i)(contact[ -]sales|talk[ -]to[ -]sales|book[ -]a[ -]demo|request[ -]a?[ -]?demo|get[ -]a[ -]demo|schedule[ -]a[ -]demo|speak (to|with) (sales|an expert))`.
+4. **PES-M v2 + AI Score:** run `Revenue Reviews/specs/pesm_v2_scorer.py` against fresh chunked Amplitude pulls (or reuse a ≤7-day-old score set).
+5. **Score** per the layer math above (gates → renormalized base → escalators). Model by commercial state (DWH ARR>0 → Model B), never by play.
+6. **Deliver:** stack rank + tier + per-component "why this score" + Coverage + AI negative-space line + play + Octave playbook + best contact. The score is never delivered without its evidence.
+7. **Local store:** write the enrichment store + scores to disk; this is the system of record until RevOps creates the `Composite_*` fields, then it is the backfill payload.
+
+### Self-QA (mandatory before any deliverable leaves the run)
+
+1. **Lifecycle audit:** zero Fall-Off/Customer accounts in prospect plays; spot-check 5 accounts' RecordType live.
+2. **Distribution sanity:** tier distribution within ±30% of the last accepted run (flag, don't auto-ship, if outside).
+3. **Known-account regression:** Disqo-class spot checks — 3 accounts with briefs; score story must match brief story.
+4. **Coverage audit:** % accounts with each question answered; any component <80% filled on the scored cohort → investigate truncation/pipeline failure before shipping.
+5. **Discrepancy report:** SFDC-vs-external disagreements (email, CRM, size) written out for RevOps.
+6. **Math audit:** recompute 5 random scores by hand from components; must match.
+7. **Evidence audit:** every delivered row has non-empty why-text, play, and tier.
+
+### Model feedback report (ship with every full run)
+
+Emit `model_feedback_{date}.md` with: (a) per-component fill rates + any component whose fill changed >10pts; (b) per-component paying-vs-free separation on the current universe vs the locked benchmarks (CRM 1.64x · hiring 1.55x · CTA 1.22x · intent 3.22x · PES-M verdict 4.7x · AI>0 1.43x); (c) escalator hit-rates (how many accounts got +6/+12, +3/+5, +8/+15); (d) DQ + ghost-active counts; (e) **suggested updates** — any component whose live separation falls below 1.2x (flag for demotion test), any shadow signal above 1.5x (flag for promotion test), instrumentation bugs hit. Suggestions feed the quarterly re-fit; nothing changes weights without a pre-registered test (section: Discipline).
 
 ## Discipline (the AI-native loop)
 New signals enter at weight zero -> shadow-score -> won/lost lift test (promotion >=~1.5x; <1.2x stays qualifier) -> promote/retire. Quarterly re-fit on the grown cohort; every re-fit ships as a versioned, QA-verified canonical page. Tests are pre-registered before data is seen (canonical doc section 06b falsification protocol).
@@ -122,4 +170,4 @@ Supersedes the v5.x weight tables above. Rule: weighted only if tested won/lost 
 **Architecture:** Score ranks -> Triggers flip the play (SAVE-FIRST, GHOST_ACTIVE, DQ, no-sales-DM, declining-usage v1.1) -> Brief explains (>=90 auto first wave, >=80 second, ad-hoc via agents). Nothing flows backward; the only door into the score is a pre-registered lift test.
 
 ## Cross-references
-Canonical v5.3 doc (above, incl. section 06d play mapping) · v4 methodology (superseded) · `sfdc-field-library` · `product-engagement-story` · `strike-zone-analyst`
+Canonical model doc: https://psychic-adventure-p3jj6y9.pages.github.io/operational/mixmax-signal-stack-v5-blueprint-2026-06-06.html (s09 = pipeline + provider map, s13 = PES-M v2 appendix) · PES-M v2 methodology: https://psychic-adventure-p3jj6y9.pages.github.io/operational/pesm-v2-methodology-2026-06-07.html · `sfdc-field-library` · `product-engagement-story` · `strike-zone-analyst`
