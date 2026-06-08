@@ -169,5 +169,26 @@ Supersedes the v5.x weight tables above. Rule: weighted only if tested won/lost 
 
 **Architecture:** Score ranks -> Triggers flip the play (SAVE-FIRST, GHOST_ACTIVE, DQ, no-sales-DM, declining-usage v1.1) -> Brief explains (>=90 auto first wave, >=80 second, ad-hoc via agents). Nothing flows backward; the only door into the score is a pre-registered lift test.
 
+## Context output framework (lifecycle-aware) — locked 2026-06-08
+
+`Account.Score_Context__c` (the rep-facing narrative) follows ONE four-block skeleton that adapts its CONTENT to the account's lifecycle/play (section 06d gate). Labels stay constant so reps learn one format; the evidence block is rendered per lifecycle. Voice = heath-no-fluff: plain English, humanized counts ("32 weekly users"), no internal jargon (no "PES-M", no raw scores — those are their own fields), one named next move + contact at the end.
+
+**Skeleton:** (1) SITUATION/USING — who they are to us + the headline signal · (2) EVIDENCE — the lifecycle-specific proof; **buyer intent surfaced here whenever present** · (3) FIT — company + commercial · (4) MOVE — one specific action + named contact (or "Find a sales DM first").
+
+**By lifecycle (play from 06d):**
+- **Product lead (PQA / product-channel prospect)** — renders `USING: <adopted capabilities> — N weekly users, M power users` / `NOT USING: <dark capabilities>` / `FIT:` / `REACH OUT ABOUT: <one capability hook>. Contact: …`. Capabilities = the 4 PES-M buckets (Sequences / CRM sidebar / Meetings / AI) per `amplitude-event-taxonomy`. Hook picker (first match): heavy-sequences-no-AI → AI Compose; books-demos-no-Copilot → Meeting Copilot; runs-Salesforce/HubSpot-no-sidebar → CRM sidebar; else Smart Send AI. **Ghost-active** → "seats idle, nothing created" + activation move (never a feature pitch); **Dormant** → "used earlier, gone quiet" + re-light; **product-silent** (PQA, no Amplitude footprint) → "raised hand, not active yet" + re-engage.
+- **Open deal (In-Flight)** — SITUATION = stage + amount + close date · EVIDENCE = last meeting, champion status, buyer intent, any product usage · MOVE = the next step to advance + owner/champion.
+- **Expansion (DS customer)** — SITUATION = ARR + renewal + health · EVIDENCE = teams sold vs using-but-not-sold (whitespace), product depth, intent · MOVE = which unsold team/product to open + the buyer.
+- **SS→DS** — SITUATION = self-serve payer · EVIDENCE = usage depth + DM presence · MOVE = conversion pitch on real usage, or usage-expansion touch if no sales DM.
+- **Win-Back (Fall Off)** — SITUATION = churned date + ARR + tenure · EVIDENCE = loss reason/competitor, still-active users, intent · MOVE = re-entry angle on what changed.
+- **Cold / Net-New** — SITUATION = fits ICP, not in product · EVIDENCE = buyer intent + fit signals · MOVE = value hook + contact.
+
+Locked product-lead template + generator backfilled to `Account.Score_Context__c` on the June 2026 PQA Strike Sprint cohort (125 accounts) 2026-06-08.
+
+**Buyer intent — make it a first-class buying signal (decision 2026-06-08):**
+- **Future runs: regrade buyer intent continuously.** Move Common Room intent (`ls_464`) from the binary ≥75th-percentile gate to a CONTINUOUS score in the Signals block (higher percentile / more in-market people = higher), sized to the tested **3.22x (11x at ≥2 people)**. This is the one validated continuous lever — the other Signals sub-signals stay binary (presence) because volume variants were falsified (hiring ≥3 = 0.91x). Regrading also spreads the round-number Signals distribution.
+- **Strengthen the source in Common Room** (Heath/RevOps): configure CR so the emitted buyer-intent signal maps to real buying behavior — a STRONG buying indicator — then both the model and the context lean on it.
+- **Surface intent in the context EVIDENCE block across all lifecycles** whenever present ("N people in-market this week").
+
 ## Cross-references
 Canonical model doc: https://psychic-adventure-p3jj6y9.pages.github.io/operational/mixmax-signal-stack-v5-blueprint-2026-06-06.html (s09 = pipeline + provider map, s13 = PES-M v2 appendix) · PES-M v2 methodology: https://psychic-adventure-p3jj6y9.pages.github.io/operational/pesm-v2-methodology-2026-06-07.html · `sfdc-field-library` · `product-engagement-story` · `strike-zone-analyst`
