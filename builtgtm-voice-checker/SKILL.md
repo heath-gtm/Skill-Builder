@@ -52,12 +52,21 @@ Every instance of these words/phrases must be flagged:
 - "Impactful"
 - "Revolutionary" or "transformative"
 - "Paradigm shift"
+- "Delve" (as in "let's delve into")
+- "Seamlessly"
+- "Actionable insights"
+- "Data-driven" (as a standalone modifier)
+- "Best-in-class"
+- "Cutting-edge"
+- "Results-driven"
 - "Excited to share" / "Thrilled to announce" / "Humbled by"
 - "Journey" (metaphorical — "my entrepreneurial journey," "this journey")
 - "Straightforward" / "Genuinely" / "Honestly" (as filler at the start of a sentence)
 - "In conclusion" / "To wrap up" / "In summary"
 - "The future of GTM is..."
 - "It's worth noting" / "It's important to understand"
+- "Importantly" / "Notably" / "It should be emphasized"
+- "This analysis reveals" / "The data shows" / "Our research indicates"
 - "As we've seen"
 
 **How to flag:** Quote the phrase. Provide a rewrite.
@@ -66,6 +75,16 @@ Every instance of these words/phrases must be flagged:
 Any instructive claim (something the reader should do or believe) that has no receipt attached — no specific time saved, dollars moved, deal outcome, or named failure. The claim exists without evidence.
 
 **How to flag:** Quote the instructive sentence. Ask: "What's the receipt for this? Add the specific outcome or cut the claim."
+
+### 4a. Naked numbers
+Any number that appears without a behavior consequence attached. "47% of reps miss quota" is naked. "47% of reps miss quota — in most cases it's not activity, it's pipeline quality" is grounded. Flag every bare statistic: "What's the behavior this number is attached to?"
+
+**How to flag:** Quote the sentence. Add the behavior consequence or demote the number.
+
+### 4b. Over-qualified claims
+Sentences hedged into meaninglessness: "It's possible that, in some cases, there may be an opportunity to consider..." Pick a lane. Either it's true or it isn't.
+
+**How to flag:** Quote the hedged sentence. Rewrite as a direct declarative.
 
 ---
 

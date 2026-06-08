@@ -26,6 +26,18 @@ When invoked, read the user's content request, apply these rules to every senten
 
 ---
 
+## What GTM Actually Is
+
+**The precise definition:**
+GTM is the system that gets the right product to the right buyer at the right time with the right message through the right channel at a cost that makes the unit economics work.
+
+**The human definition:**
+It is the engine that impacts anything customer-facing or dollar-making.
+
+These two definitions are the foundation. Use the human definition on public surfaces. Use the precise definition when the audience needs to understand scope.
+
+---
+
 ## The Brand in One Paragraph
 
 Built GTM is the playbook for the GTM Operator era. The operator's job is the 20%: build the right tech stack, build the right AI context, design the workflow so the system knows what good output looks like. AI does the 80%: the scalable engine of quality output. Most GTM operators have it inverted — 80% of their week on production work, 20% on strategy. Built GTM exists to flip that. Battle-tested, scar-approved workflows you can build this week.
@@ -51,6 +63,11 @@ Built GTM is the playbook for the GTM Operator era. The operator's job is the 20
 - Present-tense. What works NOW. What broke NOW. Not future-tense speculation.
 - Direct. If it reads like a SaaS press release, it goes in the bin.
 - Practitioner voice. Not a coach selling theory. An operator narrating the seat.
+- Numbers attached to behaviors: "A number alone is data; a number attached to a behavior is a story." Never write a number without a verb consequence attached.
+- Rates become frequencies: 47% → "about 1 in 2." 64% → "2 of every 3." Readers feel frequencies; they compute percentages.
+- Round to human scale in narrative: ~70% not 68.3%. "About half" not 47.2%. Exact figures live one click away; the narrative rounds.
+- Verdict first. The most important sentence goes first. Every time.
+- Weekly targets become daily rituals: "8.8 booked per week" → "fewer than 2 booked meetings a day."
 
 ### Never do this:
 - Emojis. None.
@@ -58,6 +75,9 @@ Built GTM is the playbook for the GTM Operator era. The operator's job is the 20
 - Em dashes (—). None. Use a period or a new sentence.
 - "Straightforward," "genuinely," "honestly," "impactful," "robust," "leverage" (as a verb).
 - "Game-changer," "revolutionary," "paradigm shift," "unlock," "synergy."
+- "Delve," "seamlessly," "actionable insights," "data-driven," "best-in-class," "cutting-edge."
+- Hyphenated compound adjective filler: "best-in-class," "cutting-edge," "results-driven."
+- "Importantly," "notably," "it should be emphasized," "it's worth noting," "it's important to understand."
 - Bumper-sticker aphorisms. If it could live on a motivational poster, cut it.
 - The rule of three used for rhetorical emphasis.
 - Bow-tied endings. No "In conclusion." No neat wrap-up.
@@ -65,9 +85,13 @@ Built GTM is the playbook for the GTM Operator era. The operator's job is the 20
 - Mixmax corporate brand voice. Built GTM is Heath's personal brand, not his employer's.
 - Generic placeholders. Not "a leading SaaS company." Name the company.
 - Passive voice.
-- AI-sounding hedges. No "it's worth noting." No "it's important to understand."
+- Over-qualified claims: "It's possible that, in some cases, there may be an opportunity to consider..." — pick a lane.
+- Context bombing: opening a piece by explaining why we're talking about this topic. The reader already knows.
+- Buried verdict: conclusion in paragraph 5. Move it to sentence 1.
+- Symmetric coverage: treating 3 items with equal depth when one is 10× more important.
 - "Journey" (in a metaphorical sense).
 - "Excited to share," "thrilled to announce," "humbled by."
+- "This analysis reveals," "the data shows," "our research indicates."
 
 ---
 

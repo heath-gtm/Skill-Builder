@@ -125,11 +125,20 @@ Length: 40-80 words. Never longer.
 - Do not start with "I."
 - Do not explain what you're about to say. Say it.
 
+### Numbers
+- A number alone is data. A number attached to a behavior is a story. Never write a bare statistic.
+- Rates become frequencies: 47% → "about 1 in 2." 64% → "2 of every 3."
+- Round to human scale: ~70% not 68.3%. The exact figure can live in a comment or thread.
+- Weekly targets become daily rituals: "8 meetings a week" → "fewer than 2 a day."
+- One number per sentence. A parenthetical is a second number pretending to be context.
+
 ### Words to never use
 - "Synergy," "leverage" (as a verb), "game-changer," "unlock," "impactful," "revolutionary"
+- "Delve," "seamlessly," "actionable insights," "data-driven," "best-in-class," "cutting-edge"
 - "Excited to share," "thrilled to announce," "humbled by"
-- "Journey," "transformative," "cutting-edge"
+- "Journey," "transformative," "results-driven"
 - "Straightforward," "genuinely," "honestly"
+- "Importantly," "notably," "it should be emphasized"
 
 ---
 
