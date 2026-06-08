@@ -223,6 +223,19 @@ Three rules that came out of live presentation reviews:
 
 And one structural rule from the same review: **never present a target blend, ratio, or standard without its justification one link away** — "why this blend →" is mandatory next to any prescribed number.
 
+## Make this presentable — the deck view
+
+Trigger on "make this presentable", "slide view", "deck this", "give me something to drive the convo". Any document that has a do-this block is ~20 minutes from a presentation, because the block maps onto slides 1:1:
+
+1. **The arc → 3 slides** (Where we are / Where we need to be / How to get there) — one humanized headline number per slide.
+2. **Each numbered action → 1 slide**, or one "the moves" slide with owners inline when there are ≤5.
+3. **One proof slide** — the single trendline or comparison that says "this is achievable" (e.g., "we already hit the target rate twice").
+4. **Closer = deeper reads** — the link list as the final slide.
+
+Rules: **8–12 slides, one idea each**; humanized numbers only (exact figures live in the linked doc — the deck never carries precision the document must defend); **every slide links to its evidence anchor** so a challenge in the room is one click from the source; the deck is an HTML page on the same Pages site (arrow-key/space navigation, dots, print = one slide per page for the PDF handout); the source document gets a **"▶ Present"** button in its sticky header. Deck inherits the report's CSS variables; the accordion/sticky-header validator warnings don't apply to deck format.
+
+The deck is a VIEW of the document, never a fork — it is regenerated from the do-this block after any revision, and its QA line states which report rev it mirrors.
+
 ## Anti-patterns
 
 Do not do these:
