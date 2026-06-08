@@ -199,6 +199,18 @@ A section a reader must scroll to understand is a failed section. Every long sec
 
 Hero/directive blocks carry the verdict only: one bold number per item and a "See the math →" link to the evidence block — never the proof table itself. Duplicating the table in the hero is the same point twice (pattern #7).
 
+## ELI5 the math, backlink the data, cut the author's notes
+
+Three rules that came out of live presentation reviews:
+
+**1. ELI5 before arithmetic.** Every model or formula gets one plain-language sentence explaining the mechanism BEFORE any table — written so a reader with zero context follows it ("a rep has fixed hours, so the only decisions are which doors to knock on and how good we are inside; meetings are the bill, not the goal"). Then show the table. A model whose intro needs the table to be understood is backwards.
+
+**2. Every referenced number links to its source.** Any statistic, model output, or claim that lives in another section or page gets an anchor link to it at the point of mention ("47.2% SQO→win" → the funnel block; "45/40/15" → the blend justification). If a number can't be backlinked to a source block, it doesn't belong in the summary. This is also how stale numbers get caught — an unlinked number is an unaudited number.
+
+**3. Cut the author's teaching notes.** Framings that taught the ANALYST something during the work ("treat X as time management, not allocation") do not belong in reader-facing actions — the reader needs the conclusion, not the analyst's correction history. If it shaped the model, it lives in the model's justification block; it is never an action item.
+
+And one structural rule from the same review: **never present a target blend, ratio, or standard without its justification one link away** — "why this blend →" is mandatory next to any prescribed number.
+
 ## Anti-patterns
 
 Do not do these:
