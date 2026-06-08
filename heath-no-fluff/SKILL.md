@@ -104,11 +104,18 @@ Apply these on Pass 5 without exception:
 
 ## Output contract
 
-Always produce three things:
+Always produce four things:
 
-1. **Compressed document** — the full rewritten output, ready to use
-2. **Cut list** — a brief log of what was removed and why (one line per major cut, not per sentence)
-3. **Word count delta** — `Original: N words → Compressed: M words (X% reduction)`
+1. **The "If you read nothing else — do this" block** — generated for EVERY document reviewed, even if the original had nothing like it. Template:
+   - The story arc (≤3 lines): *Where we are → Where we need to be → How to get there*, humanized numbers
+   - The numbered actions — each verb-first, carrying its one proving number, its **owner**, and its **measure-by-when**
+   - Deeper reads — links with a one-phrase reason to click
+   If the document doesn't support a do-this block (no actions derivable), say so explicitly — that is itself the finding.
+2. **Compressed document** — the full rewritten output, ready to use
+3. **Cut list** — a brief log of what was removed and why (one line per major cut, not per sentence)
+4. **Word count delta** — `Original: N words → Compressed: M words (X% reduction)`
+
+**Action cards vs lists — the formatting test:** formatting earns its place only when it adds a scannable dimension (owner, measure, deadline, status); boxes around the same sentences are fluff. Default = numbered list with owner + measure inline (preserves reading order). Upgrade to a card grid only when the block is a standing dashboard rather than a one-time read.
 
 Format the cut list as:
 ```
