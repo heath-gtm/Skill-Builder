@@ -1,6 +1,6 @@
 ---
 name: heath-no-fluff
-description: Cut any document to its essential core, HUMANIZE THE NUMBERS, restructure verdict-first as a 5-minute read, and rewrite in Heath's voice. The core move: a number alone is data; a number attached to a behavior is a story. Round to human scale in narrative ("~70%", "1 in 2", "2 of every 3"), turn rates into frequencies and weekly targets into daily rituals ("fewer than 2 booked meetings a day"), keep exact figures one click away in the evidence layer so QA precision survives. Fire whenever Heath says "this is too long", "cut this down", "humanize the numbers", "too much to read", "explain it like I'm 5", "make this land", "tighten this up", "remove the fluff", or pastes a document/data block for a cleaner version. Also fire proactively on any reader-facing doc whose summary contains a naked statistic, a buried verdict, or prose-buried lists.
+description: Cut any document to its essential core, HUMANIZE THE NUMBERS, restructure verdict-first as a 5-minute read, and rewrite in Heath's voice. The core move: a number alone is data; a number attached to a behavior is a story. Round to human scale in narrative ("~70%", "1 in 2", "2 of every 3"), turn rates into frequencies and weekly targets into daily rituals ("fewer than 2 booked meetings a day"), keep exact figures one click away in the evidence layer so QA precision survives. Fire whenever Heath says "this is too long", "cut this down", "humanize the numbers", "too much to read", "explain it like I'm 5", "make this land", "tighten this up", "remove the fluff", or pastes a document/data block for a cleaner version. Also fire proactively on any reader-facing doc whose summary contains a naked statistic, a buried verdict, or prose-buried lists. ALSO handles EXPLAINER MODE: when a document explains how something WORKS (a score, model, system, process, policy), restructure it around the reader's four questions (what is it / where's the data from / how does it add up / what do I do with it), add a trust contract and one end-to-end worked example, and close with an execution bridge. Fire on 'make this digestible', 'rep-facing', 'explain how this works', 'they just need to know X, Y, Z', 'simplify so anyone can act on it', 'say more with less'.
 
 license: MIT
 compatibility: cowork claude-code
@@ -104,6 +104,8 @@ Apply these on Pass 5 without exception:
 
 ## Output contract
 
+**Explainer mode swaps the structure** (see below): the reader's four questions replace the verdict-first arc, and the end-to-end worked example plus the execution bridge are the closers. The voice rules, humanized numbers, trust contract, and cut passes still apply.
+
 Always produce four things:
 
 1. **The "If you read nothing else — do this" block** — generated for EVERY document reviewed, even if the original had nothing like it. Template:
@@ -141,6 +143,7 @@ CUTS:
 | Executive brief / leadership update | 35–50% of original |
 | Technical spec / scoring methodology | 50–65% prose reduction (preserve data tables and threshold values) |
 | Email / Slack message | 30–50% of original |
+| Explainer / how-it-works (score, model, system, policy) | restructure, do not just cut — reader's four questions + worked example + execution bridge; depth behind toggles |
 | LinkedIn draft | 40–60% of original |
 
 **Important on specs:** Preserve the DATA (weights, thresholds, formulas, event names). Cut the PROSE scaffolding around it aggressively. A spec can lose 50% of its words while keeping 100% of its information.
@@ -191,6 +194,34 @@ Everything below that block is evidence, not argument. The argument is complete 
 - Is every deep-dive one click away with a stated reason to click? Bare links are dead links.
 
 Companion documents follow the same rule recursively: each leads with its own verdict block and links back. The set forms a hub: 5 minutes on the main page, every detail reachable in one click.
+
+## Explainer mode — structure by the reader's questions
+
+Some documents don't report a finding — they explain how something WORKS: a score, a model, a system, a process, a policy. For these, verdict-first becomes **question-first**. The reader of an explainer arrives with the same fixed questions every time, in the same order. Lead with those questions, answer each in one screen, push the math behind a toggle. Don't make them hunt for the shape of the thing — hand it to them in the order their head is already asking.
+
+The reader's four questions (rename the labels to the domain — "score" becomes "policy", "verdict", "number", "decision"):
+
+1. **What is it?** The output, first and biggest — one number, verdict, or one-line answer. Visual, not buried in prose. If there is a scale or set of outcomes, show the ladder.
+2. **Where does it come from?** The inputs and sources, as scannable cards, each tied to the exact question it answers ("hiring data, are they growing sales?"). Not a methodology dump — a trust map.
+3. **How does it add up?** The mechanism. ELI5 sentence first (the rule already holds), the real math behind a "show me the math" toggle. The skimmable reader never opens it; the skeptic always can.
+4. **What do I do with it?** The reader's payoff — the context, the angle, the next move this unlocks. An explainer that stops at "now you understand" stopped half-way.
+
+Two closers are mandatory in explainer mode:
+
+- **One worked example, end to end.** A single real case run through all four questions — the actual number, where its data came from, how it added up, what to do about it. Abstract explanations get doubted; a concrete case is where trust is won. (e.g. one account: "Score 100. Here is the data. Here is the math. Here is your opener.")
+- **The execution bridge.** End on "here is how you act on this today" — numbered steps or literal copy-paste prompts, not a summary. The best explainer hands the reader the next action with the friction already removed (e.g. score then brief then draft then launch, as three prompts they can paste).
+
+Test: read only the four answer-headers and the worked example — could the reader use the thing? If no, an answer is missing a sentence, not the reader missing a section.
+
+## The trust contract — earn the right to be executed on
+
+A reader only executes on an output they trust. For anything the reader is meant to act on without re-deriving it — a score, a lead list, a recommendation, an enriched record — trust is the product, and you build it on purpose:
+
+1. **State what was done FOR them, up front.** "We checked 9 sources, cross-validated the CRM against the truth, and only spend on accounts you will touch." This is the permission slip to stop re-checking and start acting. Without it, a careful reader re-verifies everything and the document saved them nothing.
+2. **Keep the caveats visible, never buried.** "When the data is thin, the score says so." A limitation you can see reads as a system you can trust; a limitation you hide reads as a black box. Surfacing the honest edge is what makes the confident parts believable.
+3. **Hand over the conclusion and the next move — never the homework.** If the reader has to assemble the answer from parts, the document did not finish its job. The deliverable is the verdict plus the action, with the parts one click away for anyone who wants to audit.
+
+This is the difference between a document that informs and one that gets acted on. The tone is "we have your back": the work was done, here is the result, here is how to use it. Reassurance is not fluff — it is what converts a correct document into an executed one.
 
 ## Action data vs supporting data — the highlight rule
 
