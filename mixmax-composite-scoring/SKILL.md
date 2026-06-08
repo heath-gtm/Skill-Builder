@@ -12,7 +12,7 @@ Supersedes v4. Three models, one library: **A** prospect acquisition · **B** cu
 
 The v4/v3 lesson: components with different fill rates cannot share one weighted pool — the highest-fill signal dominates regardless of weights. v5 layers:
 
-1. **Layer 0 — gates:** email stack multiplier (Gmail 1.00 / Microsoft 0.55 / unknown 0.90); Octave disqualifier -> cap 40; zero sales-motion fingerprints -> cap 55.
+1. **Layer 0 — gates:** email stack multiplier (Gmail 1.00 / Microsoft 0.55 / unknown-or-other 0.90). **The email question is answered by MX records (DNS) first** — free, every domain; SFDC `Email_Provider__c` is cross-validated against MX, never trusted alone (disagreements -> discrepancy report); Octave disqualifier -> cap 40; zero sales-motion fingerprints -> cap 55.
 2. **Layer 1 — base rank** from EXTERNAL signals, renormalized over filled components (`score = SUM(wi*Fi*filledi)/SUM(wi*filledi)`), with a Coverage stamp (cap 65 when <0.5). Missing enrichment is never scored as zero.
 3. **Layer 2 — escalators**, bounded ADDITIVE boosts (multiplicative saturates the ceiling): product usage +6 (PES>=40 / free seats / trial) or +12 (PES>=75 / paid usage); first-party buyer intent +8 (1 person, CR ls_464 >=75pct) or +15 (>=2 people). DQ accounts: boosts capped at +4.
 
@@ -40,7 +40,7 @@ Adoption/PES .30 · seat-whitespace (seats/employees; *denominator upgrade: Crus
 
 1. **SFDC-first reads.** Check signal stamps + `*_Refreshed_At__c`; only pull a provider when stale (volatile weekly: hiring, intent; slow monthly: CTA, headcount, tech). Write-back field spec: canonical doc section 06c.
 2. **Universe + channel:** `Channel_Source__c` validated by PQA/MQA/OQA stamps (Product > Inbound > Outbound).
-3. **SFDC baseline (one bulk SOQL):** Id, Website, `Email_Provider__c`, `CRM__c`, `Sales_Acceleration_Tool__c`, `Channel_Source__c`, opp history (StageName/IsClosed/IsWon/CloseDate), contacts/titles.
+3. **SFDC baseline (one bulk SOQL):** Id, Website, `Email_Provider__c` (cross-validate vs MX), `CRM__c`, `Sales_Acceleration_Tool__c`, `Channel_Source__c`, opp history (StageName/IsClosed/IsWon/CloseDate), contacts/titles.
 4. **Deepline enrichment (managed billing, all verified live):**
    - Hiring: `theirstack_job_search`, `company_domain_or` batches of 40, `job_title_pattern_or` as separate plain patterns ["sdr","bdr","sales development","account executive","account manager","revenue operations","head of sales","sales manager","vp sales"], `posted_at_max_age_days` 90.
    - CTA: `predictleads_company_website_evolution` per domain (limit 100); regex `(?i)(contact[ -]sales|talk[ -]to[ -]sales|book[ -]a[ -]demo|request[ -]a?[ -]?demo|get[ -]a[ -]demo|schedule[ -]a[ -]demo|speak (to|with) (sales|an expert))` over subpage text+urls; Firecrawl fallback for the ~3% misses.
@@ -102,7 +102,7 @@ Field name corrections (verified live): `Sold_to_AEs__c`, `Sold_to_full_cycle_AE
 
 Supersedes the v5.x weight tables above. Rule: weighted only if tested won/lost lift OR written reason survives challenge. Weights evidence-proportional (excess lift), renormalized over filled.
 
-**Gates (unchanged, all validated):** email Gmail 1.00 / unknown 0.90 / Microsoft 0.55 (2.67x) · Octave DQ -> FLAG (not ranked) · zero sales-motion fingerprints -> cap 55.
+**Gates (all validated):** email via MX-primary (Gmail 1.00 / unknown-or-other 0.90 / Microsoft 0.55, 2.67x; SFDC field audited against MX) · Octave DQ -> FLAG (not ranked) · zero sales-motion fingerprints -> cap 55.
 
 **Rank (Model A):**
 | w | Component | Source | Evidence |
