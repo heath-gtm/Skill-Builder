@@ -180,6 +180,25 @@ Everything below that block is evidence, not argument. The argument is complete 
 
 Companion documents follow the same rule recursively: each leads with its own verdict block and links back. The set forms a hub: 5 minutes on the main page, every detail reachable in one click.
 
+## Action data vs supporting data — the highlight rule
+
+All data is good data; **only the right data creates action.** Every document divides its numbers into two classes and treats them differently:
+
+- **Action data** — the numbers that change what the reader does Monday (the gate standard, the meetings target, the trigger that tripped). These go in the top block, in bold, attached to a verb.
+- **Supporting data** — everything that defends the action data (cohort tables, method notes, reconciliations). These go behind toggles, in collapsed sub-sections, or in linked appendices. Never deleted — demoted.
+
+Test: if a number appears above the fold but no action changes when it changes, it is supporting data wearing action data's clothes. Demote it.
+
+## Section anatomy — summary first, evidence behind toggles
+
+A section a reader must scroll to understand is a failed section. Every long section follows this anatomy:
+
+1. **One-line sub** + a 2–3 sentence "what this section is" paragraph.
+2. **The actions/conclusions** — visible, never collapsed.
+3. **Evidence in collapsed sub-blocks** (`<details>` in HTML), each with a one-line summary carrying the key numbers — readable without expanding.
+
+Hero/directive blocks carry the verdict only: one bold number per item and a "See the math →" link to the evidence block — never the proof table itself. Duplicating the table in the hero is the same point twice (pattern #7).
+
 ## Anti-patterns
 
 Do not do these:
