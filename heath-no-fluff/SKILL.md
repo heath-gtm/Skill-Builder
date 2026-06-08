@@ -168,7 +168,7 @@ CUTS:
 
 Every multi-page report or decision document leads with a block a reader can finish in 5 minutes and act on. Structure, in order:
 
-1. **The story in ≤5 sentences.** Plain prose. What's true, what changed, what we do. A sentence each — no clause-stacking.
+1. **The story as an arc, ≤3 short lines:** *Where we are → Where we need to be → How to get there.* One plain sentence per leg, the single most causal number in leg one (e.g. "AEs burn 5–7 meetings per inbound SQO, which eats the capacity for product and outbound"). If a sentence needs two parentheticals, it is two supporting-data points pretending to be story.
 2. **The numbered do-this list.** The actions, each one line, hardest-hitting number inline.
 3. **Deeper reads.** A short link list — companion pages, appendix, verification trail — each with a one-phrase reason to click ("why touchpoints are the gap", "every won deal, linked").
 
