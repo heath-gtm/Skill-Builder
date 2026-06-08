@@ -115,7 +115,7 @@ Supersedes the v5.x weight tables above. Rule: weighted only if tested won/lost 
 
 **Removed from rank:** Octave score (gate+context only; 1.03x within deals), history (echo 1.02x; context), competitor-in-stack (7/160 fills untestable; messaging layer — picks the Octave play), committee depth (superseded by DM findability).
 
-**Escalators:** product +6 = PES-M EMERGING, +12 = PES-M ESTABLISHED/POWER (breadth escalator removed — redundant, 35% of PES-M) · intent +8/+15 (CR ls_464, 3.22x) · DQ flagged-not-ranked.
+**Escalators:** product +6 = PES-M v2 EMERGING with >=2 capabilities adopted (foothold guard — v2 Emerging is broad), +12 = ESTABLISHED/POWER; AI adoption +3 = AI Score >=25 (1 AI product), +5 = AI Score >=50 (2+) — locked 2026-06-07 on tested 1.43x lift, the PLG commitment, re-fit quarterly (breadth escalator removed — redundant, 35% of PES-M) · intent +8/+15 (CR ls_464, 3.22x) · DQ flagged-not-ranked.
 
 **Model B:** adoption .30 = PES-M v2 (validated 4.7x verdict separation, see PES-M v2 methodology); seat-whitespace .25, hiring .20, headroom .15, util .10 = heuristic, pre-registered for expansion-outcome backtest. SAVE-FIRST unchanged. Team whitespace = trigger/context until forward lift test.
 
