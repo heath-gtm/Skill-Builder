@@ -1,15 +1,7 @@
 ---
 name: heath-no-fluff
-description: >
-  Cut any document — report, analysis, brief, email, spec, or LinkedIn draft —
-  to its essential core, restructure it verdict-first, and rewrite it in Heath's
-  voice. Target: 40–55% of original length for narrative docs. Fire whenever
-  Heath says "this is too long", "cut this down", "remove the fluff", "tighten
-  this up", "make this more direct", "condense this", "shorten it", "too much
-  detail", or pastes a document and asks for a cleaner version. Also fire
-  proactively when you observe a document that buries its lead, spends more than
-  one paragraph on setup before stating the main point, gives equal coverage to
-  unequal findings, or has a methodology section longer than the findings section.
+description: Cut any document to its essential core, HUMANIZE THE NUMBERS, restructure verdict-first as a 5-minute read, and rewrite in Heath's voice. The core move: a number alone is data; a number attached to a behavior is a story. Round to human scale in narrative ("~70%", "1 in 2", "2 of every 3"), turn rates into frequencies and weekly targets into daily rituals ("fewer than 2 booked meetings a day"), keep exact figures one click away in the evidence layer so QA precision survives. Fire whenever Heath says "this is too long", "cut this down", "humanize the numbers", "too much to read", "explain it like I'm 5", "make this land", "tighten this up", "remove the fluff", or pastes a document/data block for a cleaner version. Also fire proactively on any reader-facing doc whose summary contains a naked statistic, a buried verdict, or prose-buried lists.
+
 license: MIT
 compatibility: cowork claude-code
 ---
@@ -17,6 +9,19 @@ compatibility: cowork claude-code
 # heath-no-fluff
 
 Cut documents to their essential core, restructure verdict-first, rewrite in Heath's voice. Think of it as aggressive editing — not summarizing — where every sentence earns its place.
+
+## Humanizing numbers — the core move
+
+**A number alone is data; a number attached to a behavior is a story.** "Inbound holds 68% of closed volume" makes the reader do math. "Almost everything we close comes through inbound (~70%) — and we pay for it by burning 5–7 meetings per qualified deal" makes the reader wince. Every rewrite applies these five rules to every figure in the narrative layer:
+
+1. **Round to human scale.** ~70%, not 68.3%. "About half," not 47.2%. The exact figure lives one click away in the evidence block — the narrative rounds, the QA trail stays precise. (This precision split is what keeps "humanized" from becoming "approximate.")
+2. **No naked numbers.** Every figure rides with the behavior that produces it or the consequence it causes. If a number appears without a verb consequence, attach one or demote the number to the evidence layer.
+3. **Rates become frequencies.** 47.2% → "about 1 in 2." 64% → "2 of every 3." 24.2% → "1 in 4." People feel frequencies; they compute percentages.
+4. **Weekly abstractions become daily rituals.** 8.8 booked/week → "fewer than 2 booked meetings a day." 5.1 sourced/week → "1 sourced meeting a day." A ritual is adoptable; a weekly quota is negotiable.
+5. **One number per sentence** (a before/after pair counts as one). Two parentheticals in a sentence = two supporting-data points pretending to be story.
+
+Worked example — before: "Inbound holds 68% of closed volume and ~78% of won dollars. Target SQO blend: Inbound 45 / Product 40 / Outbound 15."
+After: "~7 of every 10 closed deals — and nearly 8 of every 10 won dollars — ride on one channel. Spread it: half inbound, 40% product, 15% outbound. *Why this blend →*"
 
 ## What fluffy looks like
 
