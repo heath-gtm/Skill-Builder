@@ -75,14 +75,16 @@ If a bet doesn't fit on one card without scrolling inside the card, it's two bet
 
 ### 5. How we execute (the team section)
 
-The CEO feedback emphasized this: **"lean into the team to make it happen."** A strategic plan that doesn't name the team is one person trying to do everything.
+The CEO feedback emphasized this: **"lean into the team to make it happen."** A strategic plan that doesn't show the team is one person trying to do everything.
+
+**Departments, not individual names** (Heath preference, locked 2026-06-09). Use **department labels** in every team chip, bet ownership chip, and team grid row. Examples: *Sales*, *Customer Success*, *Revenue Operations*, *Sales Operations*, *Marketing*, *Revenue Leadership*. Never write "Heath," "Gabrielle," "Lana," or any individual name in the body of a leadership-facing plan unless the user explicitly requests it. Department-level naming reads as "the team owns this" rather than "Heath is naming who he expects to deliver."
 
 This section has:
 - A short lede ("Two bets. One team.")
-- A grid of named roles, one row each. Each row says: **role name → what they own in each bet**.
-- A rhythm line at the bottom: weekly cadence in one sentence. Detailed ownership lives in Notion (or wherever the user runs RACI).
+- A grid of departments, one row each. Each row says: **department → what they own in each bet**.
+- A rhythm line at the bottom: weekly cadence in one sentence. Detailed ownership lives in Notion (or wherever the user runs RACI). Individual names belong in Notion, not in the plan.
 
-Format names BIG (they're the load-bearing piece). Format ownership descriptions short.
+Format department names BIG (they're the load-bearing piece). Format ownership descriptions short.
 
 ### 6. The closing (standalone, not numbered, not collapsible)
 
@@ -149,6 +151,59 @@ The reader's mental model:
 - "I want to defend the plan" → open the Deep Dive
 - "I want to present the plan" → open the deck
 
+## Publishing checklist (mandatory)
+
+A doc is not published until it's findable. Heath flagged this 2026-06-11 after several docs sat on GitHub Pages but never appeared on the dashboard — invisible to anyone browsing the index. The rule is binary:
+
+**Every HTML doc pushed to `mixmaxhq/GTM-revenue-reports` (or any GitHub Pages reporting repo) must be registered in the repo's `reports.json` manifest in the same commit cycle.** If the manifest update is skipped, the doc doesn't exist as far as the dashboard at `https://psychic-adventure-p3jj6y9.pages.github.io/` is concerned.
+
+### What to register
+
+Each new HTML artifact gets one entry in `reports.json` with this shape:
+
+```json
+{
+  "id": "<type>-<YYYY-MM-DD>-<short-slug>",
+  "title": "<reader-facing title>",
+  "path": "<folder>/<filename>.html",
+  "type": "<one of: operational | analysis | weekly | monthly | quarterly | leader | qa>",
+  "roles": ["leadership", "sales", "cs", "revops", "marketing"],
+  "tags": ["one-or-two-word-tags"],
+  "month": 6,
+  "year": 2026,
+  "date": "2026-06-09",
+  "description": "Two sentences. What it is + the one thing the reader gets from it.",
+  "summary": "One sentence. The hook.",
+  "updated": "<YYYY-MM-DD>"
+}
+```
+
+### The 3-file rule for strategic plans
+
+A strategic plan ships as **three files**, each with its own `reports.json` entry:
+
+1. The tight Plan — `<plan>-<date>.html`
+2. The Deep Dive — `<plan>-deep-dive-<date>.html`
+3. The Deck — `<plan>-deck-<date>.html`
+
+If only 1 or 2 of the three appear in `reports.json`, the team will find the wrong one (or none). Register all three. Use icons in the title — ⚙ for Deep Dive, ▶ for Deck — so they're scannable in the dashboard.
+
+### The publishing flow
+
+For every doc push:
+
+1. Push the HTML file via Contents API.
+2. Fetch the current `reports.json`.
+3. Add or update the entry for this doc.
+4. Push `reports.json` back with the SHA from step 2.
+5. Verify the doc shows up on the dashboard (one quick fetch of the live dashboard).
+
+The validator should fail if the doc isn't in `reports.json`. If it doesn't, that's a validator bug — fix it.
+
+### What to do for non-plan docs
+
+Operational docs, analysis docs, churn reports, closed-lost autopsies — anything that ships to the Pages site — gets one `reports.json` entry. Same shape. The `type` field segregates them on the dashboard.
+
 ## What MUST be cut
 
 The reason most strategic plans fail the 30-second test is because they include reference material in the body. Move ALL of the following OUT of the strategic plan:
@@ -168,7 +223,7 @@ Before publishing, ask:
 
 1. **Am I being reactive?** If the plan responds to >2 problems, it's reactive. Pick the two that matter most.
 2. **Am I bringing thrash?** If a reader could come away with a different "main point" than I intended, the plan is too wide. Tighten the bets until the main point is unmissable.
-3. **Did I name the team?** If the team section uses titles instead of names, fix it. Use real names.
+3. **Did I show the team?** If the team section names individuals, fix it &mdash; use department labels (Sales, Customer Success, Revenue Operations, etc.). If the team section is missing entirely, surface it. Individual names belong in Notion, not in the plan.
 4. **Can I read it without scrolling?** Open the doc. If the closing isn't visible on screen 2, cut more.
 
 ## Length targets
@@ -198,7 +253,7 @@ Things that look like a tight plan but aren't:
 - **The "all the plays" doc dressed as a plan** — 8 plays organized into 3 themes is still 8 plays. Pick 2 bets and let the rest go to receipts.
 - **The "every team has a section" doc** — Sales gets a section. CS gets a section. Marketing gets a section. RevOps gets a section. Each section has its own bets. That's 5 plans, not one. The team owns the SAME 2 bets together.
 - **The "executive summary + full plan" doc** — if the exec summary is enough, the full plan is wasted text. If the full plan is necessary, the exec summary is window dressing. The plan IS the exec summary.
-- **The "we'll figure out the team in Notion" doc** — naming the team is part of the plan. If you don't know who owns it, you don't have a plan; you have a strategy memo.
+- **The "we'll figure out the team in Notion" doc** — showing the team is part of the plan. If the doc doesn't say which departments own each bet, you don't have a plan; you have a strategy memo. (Departments belong in the plan. Individuals belong in Notion.)
 - **The "depth as proof of work" doc** — long ≠ rigorous. Brief ≠ shallow. The CEO doesn't reward depth; she rewards a clear bet on what matters.
 
 ## Worked example
