@@ -101,6 +101,36 @@ Apply these on Pass 5 without exception:
 - Rule of three lists where only two items matter
 - Sycophantic openers: "Great question," "Absolutely," "Certainly"
 - Hyphenated compound adjectives used as filler: "data-driven," "best-in-class," "cutting-edge"
+- Corporate-ops verbs as action headlines: "Activate," "Stand up," "Operationalize," "Roll out," "Cascade," "Implement" — used as the lead verb of an action. See the action-verb rule below.
+
+### Action verbs — strategic intent, not corporate operations
+
+**A number alone is data; a verb alone is structure. An action item lives or dies on its lead verb.** Action items in a do-this block lead with strategic human verbs that sound like a leader giving direction, not a project manager filing a ticket. The specific number or structural detail (the 184, the 1:2:1, "in-house") lives in the WHY line or the measure-by-when, never in the headline.
+
+**Worked examples — Heath called these out by name:**
+- ❌ "Activate the 184 PQAs" → ✅ **"Attack our Product Leads"** (the 184 moves to the Why)
+- ❌ "Stand up the 1:2:1 SDR pod" → ✅ **"Decide on Outbound Strategy"** (the 1:2:1 detail moves to the Why)
+- ❌ "Operationalize the renewal motion" → ✅ **"Ship the renewal strategy"**
+- ❌ "Roll out the routing SOP" → ✅ **"Write down how a lead becomes a deal"**
+
+**The verb swap table:**
+
+| Drop (corporate-ops) | Use (strategic-human) |
+|---|---|
+| Activate | Attack |
+| Stand up | Decide on |
+| Operationalize | Run |
+| Implement | Build / Ship |
+| Roll out | Launch |
+| Drive | Lead |
+| Leverage | Use |
+| Cascade | Push |
+| Onboarding | Help them land |
+| Enable | Coach |
+
+**Why this matters.** Corporate verbs telegraph "consulting deck." Strategic verbs telegraph "we're going to do this on Monday." The reader of a do-this block is making a decision about how to spend the next 30 minutes — the headline has to carry intent, not implementation. The 184, the 1:2:1, the percent, the date are all load-bearing; they live one click down inside the action, not at the front.
+
+**How to apply.** Every action in the do-this block leads with a strategic human verb. Every play name in a deeper section follows the same rule. Specific numbers and structure stay in the WHY/measure-by-when lines beneath. Section headlines (Find / Convert / Grow / Build / Save) also pass this test.
 
 ## Output contract
 
@@ -110,7 +140,7 @@ Always produce four things:
 
 1. **The "If you read nothing else — do this" block** — generated for EVERY document reviewed, even if the original had nothing like it. Template:
    - The story arc (≤3 lines): *Where we are → Where we need to be → How to get there*, humanized numbers
-   - The numbered actions — each verb-first, carrying its one proving number, its **owner**, and its **measure-by-when**
+   - The numbered actions — each verb-first with a **strategic human verb** (Attack / Decide / Ship / Save / Write — never Activate / Stand up / Operationalize; see "Action verbs" in the voice rules above), carrying its one proving number, its **owner**, and its **measure-by-when**. The specific number and structure live in the WHY/measure line, never in the headline.
    - Deeper reads — links with a one-phrase reason to click
    If the document doesn't support a do-this block (no actions derivable), say so explicitly — that is itself the finding.
 2. **Compressed document** — the full rewritten output, ready to use
