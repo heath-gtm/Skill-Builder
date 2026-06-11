@@ -63,17 +63,19 @@ Work in sequence. Don't skip passes.
 
 **Pass 6 — Formatting pass.** Scan every paragraph for prose-buried lists: 3+ parallel actions, steps, criteria, or named items chained inside one sentence. Pull them out into a numbered list (use bullets only when order truly doesn't matter). Keep the framing sentence before the list and the consequence/payoff sentence after it as prose.
 
-**Pass 10 — Thrash filter (for leadership-facing strategic plans).** Locked 2026-06-09 after CEO feedback to Heath: "I bring thrash to the room. My reports are so in-depth, people feel like I don't actually have a plan. Solve 1–2 problems first, then optimize." If the document is a strategic plan (90-day plan, quarterly plan, leadership brief, board update), apply these four hard cuts:
+**Pass 10 — Thrash filter (for leadership-facing strategic plans).** Locked 2026-06-09 after CEO feedback to Heath: "I bring thrash to the room. My reports are so in-depth, people feel like I don't actually have a plan. Solve 1–2 problems first, then optimize." Refined 2026-06-11 (departments-not-names + index registration). If the document is a strategic plan (90-day plan, quarterly plan, leadership brief, board update), apply these five hard cuts:
 
 1. **The 1–2 problem rule.** If the plan responds to more than 2 problems, the plan is reactive. Pick the 1–2 problems whose math actually moves the headline number; let the rest go to receipts. If you cannot cut to 1–2, the user has not picked yet — flag this explicitly: "This reads as 4 priorities. The CEO's feedback was solve 1–2 first. Which two?"
 
-2. **The 30-second test.** After the cut, a reader should be able to answer four questions in 30 seconds: *what are we committing to* (the number), *what's the plan* (the bets), *who's doing what* (named team), *what does winning look like* (Day-90 evidence). If any answer is buried, surface it. If any is missing, demand it from the user.
+2. **The 30-second test.** After the cut, a reader should be able to answer four questions in 30 seconds: *what are we committing to* (the number), *what's the plan* (the bets), *who's doing what* (the team), *what does winning look like* (Day-90 evidence). If any answer is buried, surface it. If any is missing, demand it from the user.
 
-3. **Name the team, by name.** Strategic plans that use titles instead of names ("Sales will own X," "CS will partner on Y") read as memos, not plans. Every bet has a NAMED owner. Every supporting role is NAMED. The plan is a contract, not a memo.
+3. **Show the team, by DEPARTMENT — never by individual name.** Use "Sales," "Customer Success," "Revenue Operations," "Sales Operations," "Marketing," "Revenue Leadership" — not "Gabrielle," "Heath," "Lana." Individual names belong in Notion (RACI), not in leadership-facing plans. Locked Heath preference 2026-06-09. If the draft uses individual names in the body, swap them all to department labels before shipping.
 
 4. **Strategic plan = tight + Deep Dive.** A strategic plan ships in two files: the tight plan (15–25KB, 2 bets max, reads without scrolling) AND a Deep Dive companion (full receipts + Speaking Points block for the presenter to defend the plan live). The tight plan is for the room; the Deep Dive is for the conversation. See [[strategic-plan-structure]] for the full pattern.
 
-When Pass 10 fires, the cut list calls out: "Strategic-plan thrash cuts: removed N bets, moved depth to Deep Dive companion, named team owners."
+5. **Register the doc in the index manifest.** Every HTML doc pushed to a GitHub Pages reporting repo must be added to that repo's `reports.json` (or equivalent index) in the SAME commit cycle as the doc itself. If you skip the manifest, the doc doesn't show up on the dashboard — it exists at a URL but nobody finds it. Heath flagged this 2026-06-11 after Path to Revenue v4.0 sat live on Pages but wasn't on the dashboard. For strategic plans this means three entries: Plan + Deep Dive + Deck. See [[strategic-plan-structure]] §"Publishing checklist" for the entry shape.
+
+When Pass 10 fires, the cut list calls out: "Strategic-plan thrash cuts: removed N bets, moved depth to Deep Dive companion, converted individual names to departments, registered N files in reports.json."
 
 Worked example — before:
 
