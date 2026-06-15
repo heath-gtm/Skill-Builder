@@ -67,6 +67,7 @@ Plus cross-cutting:
 - Opps with PLAN incomplete for current stage (cross-pipeline)
 - SFDC custom field population rate per rep (the field-by-field % filled)
 - Trend: getting better or worse vs last week
+- **Null-activity delta monitor**: Track week-over-week delta on null-activity count (accounts with `LastActivityDate IS NULL`). If count increases >2× in a single week, flag as `DATA_QUALITY_SPIKE` alongside the raw count — a sudden 3× jump (observed: 17→50 in the week of 2026-06-14) is more likely a SOQL sampling-window change or query alteration than a real CRM degradation. Surface both the raw count AND the delta and label accordingly. Rationale: without delta tracking, a 3× spike looks identical to a gradual trend and triggers identical coaching responses, when the correct response is to audit the query first.
 
 ### 💧 3. Enrichment Gaps
 
