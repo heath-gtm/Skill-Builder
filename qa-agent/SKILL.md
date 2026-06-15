@@ -89,6 +89,8 @@ Plus cross-cutting:
 - Meeting-book rate per AE (✅ reactions / 🔥 reactions)
 - Streak watch (top reps by consecutive-day 100% action rate)
 - Week-over-week trend: is engagement rising or declining?
+- **Zero-fire watchdog**: If `drops_fired = 0` for any given week, this is HIGHEST-SEVERITY — promoted to THE ONE THING and flagged in the urgency banner, overriding all other engagement metrics. Surface the failure cause (scheduler failure, trigger abort, workflow dark) as a standalone investigation item. Rationale: two consecutive zero-fire weeks observed in production (Week 1 + Week 2 of June 2026); system provided no alert to Heath. This guard prevents that silence.
+- **Two-consecutive-zero escalation trigger**: If drops_fired = 0 for 2 weeks running, send a Slack DM to Heath (U07CAK8C0CW) with subject '🔴 ESCALATION: Daily Drop dark 2+ consecutive weeks'. This fires regardless of whether the QA Agent's normal Slack posting succeeded.
 
 ### 🚨 6. System Health
 
