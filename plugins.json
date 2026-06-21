@@ -1,0 +1,129 @@
+{
+  "plugins": [
+    {
+      "slug": "prompt-lab",
+      "name": "The Prompt Lab",
+      "tagline": "Get a killer prompt for any AI tool.",
+      "problem": "Better prompts for Claude, app builders, automations, and account briefs. Zero setup, instant value.",
+      "audience": "Anyone building with AI",
+      "connectors": [],
+      "skills": [
+        "prompt-architect",
+        "vibecode-prompt",
+        "automation-prompt",
+        "system-prompt-builder",
+        "account-brief-prompt"
+      ],
+      "visibility": "public",
+      "status": "draft"
+    },
+    {
+      "slug": "writing-desk",
+      "name": "The Writing Desk",
+      "tagline": "Make anything you write land.",
+      "problem": "Cut the fluff, strip the AI tells, and structure a strategic doc, all in your own voice.",
+      "audience": "Operators who write",
+      "connectors": [],
+      "skills": [
+        "cut-the-fluff",
+        "humanize-draft",
+        "strategic-doc-structure"
+      ],
+      "visibility": "public",
+      "status": "draft"
+    },
+    {
+      "slug": "deal-pipeline-command",
+      "name": "Deal & Pipeline Command",
+      "tagline": "Know which deals are real and where the gaps are.",
+      "problem": "Is this deal real, do I have enough pipeline, who needs coaching, why do we win and lose.",
+      "audience": "Sales leaders and managers",
+      "connectors": [
+        "A CRM",
+        "A product-analytics tool"
+      ],
+      "skills": [
+        "deal-health-analyst",
+        "pipeline-creation-analyst",
+        "coaching-analyst",
+        "pattern-analyst",
+        "strike-zone-analyst"
+      ],
+      "visibility": "public",
+      "status": "draft"
+    },
+    {
+      "slug": "retention-expansion",
+      "name": "Retention & Expansion",
+      "tagline": "See the renewal before it slips.",
+      "problem": "Will it renew, what is the state of my book, who is about to go quiet.",
+      "audience": "Customer Success",
+      "connectors": [
+        "A CRM",
+        "A product-analytics tool",
+        "A meeting tool"
+      ],
+      "skills": [
+        "renewal-health-analyst",
+        "book-of-business-analyst",
+        "conversation-analyst"
+      ],
+      "visibility": "public",
+      "status": "draft"
+    },
+    {
+      "slug": "prospecting-engine",
+      "name": "Prospecting Engine",
+      "tagline": "Fill the list, fix the sequences, work the right accounts.",
+      "problem": "Enrich the list, find the leaky sequence stage, and prioritize the accounts worth the sprint.",
+      "audience": "SDRs and full-cycle AEs",
+      "connectors": [
+        "Enrichment tools",
+        "A sequencer",
+        "A CRM"
+      ],
+      "skills": [
+        "enrichment-analyst",
+        "sequence-performance-analyst",
+        "strike-zone-analyst"
+      ],
+      "visibility": "public",
+      "status": "draft"
+    },
+    {
+      "slug": "icp-qualification",
+      "name": "ICP & Qualification",
+      "tagline": "Find your real ICP and learn from it.",
+      "problem": "Find the customers to interview, the patterns that win, and the read on whether an account is real fit.",
+      "audience": "Founders, GTM leaders, PMM",
+      "connectors": [
+        "A CRM"
+      ],
+      "skills": [
+        "icp-interview-finder",
+        "pattern-analyst"
+      ],
+      "visibility": "public",
+      "status": "draft"
+    },
+    {
+      "slug": "content-engine",
+      "name": "Built GTM Content Engine",
+      "tagline": "Write in the Built GTM voice.",
+      "problem": "Posts, articles, newsletters, comments, and voice checks in one bundle. Heath's own brand engine.",
+      "audience": "The Built GTM brand",
+      "connectors": [],
+      "skills": [
+        "builtgtm-brand",
+        "builtgtm-post-writer",
+        "builtgtm-newsletter-writer",
+        "builtgtm-voice-checker",
+        "builtgtm-article-writer",
+        "builtgtm-linkedin-commenter",
+        "builtgtm-content-repurposer"
+      ],
+      "visibility": "private",
+      "status": "draft"
+    }
+  ]
+}
