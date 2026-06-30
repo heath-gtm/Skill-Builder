@@ -256,3 +256,28 @@ This is the first stepping stone for AI-native GTM. Without this loop, the analy
 ## Scheduled run
 
 `qa-agent-weekly` — runs every Sunday at 7:00 PM CT — generates the full weekly QA + posts the digest to Heath's DM by 7:30 PM. Ready for Monday review.
+
+---
+
+## Context Integrity Audit (Built GTM / Re:Built)
+
+A second meta-check beyond the scoring and CRM audits above: is the brand and show context referenced from one source, or has it forked? This is the eval gate for the AI-native context loop. "Looked good once" is not an eval. Run this before anything that uses brand or show context ships, and on the weekly QA run.
+
+**Canonical source of truth:** `get-built-gtm/context/`. Read `get-built-gtm/context/README.md` first.
+
+**Run it:**
+
+```
+bash get-built-gtm/context/sync/audit-context.sh [root-to-scan]
+```
+
+**What it checks, and why each matters:**
+
+1. **Dead session-scoped context paths.** Agents must read a stable repo path, never a `/sessions/.../memory/` scratch path. That bug left the dispatch agent with no voice file.
+2. **References to superseded sources.** No skill, page, or prompt should pull from "GTM Tactical", the GTM-Show-Series docx, or the stale GTM Building Blocks copy.
+3. **Forked brand copies.** Any file carrying the brand voice rules must be GENERATED from canon via `build-context.sh`, not hand-maintained. Hand copies drift.
+4. **Derived vs canon sync.** If canon changed but the derived artifacts (brand SKILL, system prompt, dispatch voice) were not regenerated, the deployed agents are stale.
+
+**Output:** PASS/FAIL per check, exit 1 on drift. Wire it into the build/test step so nothing referencing brand or show ships without it.
+
+**When to fire:** before publishing any Built GTM content or show surface, after any context edit, and on the weekly QA run alongside the sections above.
