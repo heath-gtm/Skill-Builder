@@ -1,0 +1,16 @@
+{
+  "name": "ai-native-motion",
+  "version": "1.0.0",
+  "description": "You are bolting AI onto outbound. The shift is a scored, self-running motion that improves itself. What you get: A scored market, enriched accounts, a product-usage read, a QA agent that watches it, and a loop that learns.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/ai-native-motion",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "strategy",
+    "gtm"
+  ]
+}

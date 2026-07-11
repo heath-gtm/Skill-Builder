@@ -1,0 +1,16 @@
+{
+  "name": "ep1-run-the-loop",
+  "version": "1.0.0",
+  "description": "Episode 1, made runnable. Do not automate the org chart. Run the loop on the workflow that costs you the most. What you get: One workflow reframed as work, a buy-vs-build call per step, and the drag split from the judgment.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/ep1-run-the-loop",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "ai-native",
+    "gtm"
+  ]
+}

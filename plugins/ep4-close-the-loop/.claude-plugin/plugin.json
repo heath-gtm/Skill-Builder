@@ -1,0 +1,16 @@
+{
+  "name": "ep4-close-the-loop",
+  "version": "1.0.0",
+  "description": "Episode 4, made runnable. Attribution, feedback, and the judgment layer that makes the system compound. What you get: A measurement model finance accepts, a QA layer that watches it, and a loop where outcomes change the next action.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/ep4-close-the-loop",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "ai-native",
+    "gtm"
+  ]
+}

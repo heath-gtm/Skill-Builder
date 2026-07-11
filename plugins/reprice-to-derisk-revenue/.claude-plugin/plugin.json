@@ -1,0 +1,16 @@
+{
+  "name": "reprice-to-derisk-revenue",
+  "version": "1.0.0",
+  "description": "Per-seat pricing bets your revenue on your customer's headcount. Reprice to capture the value you create and de-risk the base. What you get: A value metric, clean tiers, a plan for the free base, and the modeled impact before you change a thing.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/reprice-to-derisk-revenue",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "strategy",
+    "gtm"
+  ]
+}

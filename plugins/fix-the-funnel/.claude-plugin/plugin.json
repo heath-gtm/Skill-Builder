@@ -1,0 +1,16 @@
+{
+  "name": "fix-the-funnel",
+  "version": "1.0.0",
+  "description": "The number is soft and nobody can say why. Diagnose the leak and close it. What you get: The leak named, the metrics pinned, the coverage math, and a coaching plan per rep.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/fix-the-funnel",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "revops",
+    "gtm"
+  ]
+}

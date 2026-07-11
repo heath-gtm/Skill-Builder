@@ -1,0 +1,16 @@
+{
+  "name": "save-a-renewal",
+  "version": "1.0.0",
+  "description": "A renewal is slipping. Catch it early and save it before it is a loss. What you get: An early verdict, the real reason, the right levers, and a save sequence with exit criteria.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/save-a-renewal",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "customer-success",
+    "gtm"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "book-a-meeting",
+  "version": "1.0.0",
+  "description": "You have a name on a list and a quarter to hit. Turn it into a booked meeting. What you get: A scored target, a timely reason to reach out, and a multi-channel sequence that gets a reply.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/book-a-meeting",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "sales-development",
+    "gtm"
+  ]
+}

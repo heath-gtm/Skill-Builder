@@ -1,0 +1,16 @@
+{
+  "name": "revops-foundation",
+  "version": "1.0.0",
+  "description": "You cannot trust the number because you cannot trust the data. Fix the plumbing first. What you get: A clean CRM, pinned funnel metrics, routing that gets built, and a stack with the overlap cut.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/revops-foundation",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "revops",
+    "gtm"
+  ]
+}

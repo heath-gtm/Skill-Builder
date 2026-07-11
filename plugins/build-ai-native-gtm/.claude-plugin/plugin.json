@@ -1,0 +1,16 @@
+{
+  "name": "build-ai-native-gtm",
+  "version": "1.0.0",
+  "description": "Series 1 of Build Better, as one runnable playbook. The loop, the context, the signal-to-motion, and the closed loop that makes GTM compound, across all four episodes. What you get: A workflow you framed instead of a hire, a context repo any agent can use, a signal wired to a booked motion, and a closed loop where the outcome changes t...",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/build-ai-native-gtm",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "ai-native",
+    "gtm"
+  ]
+}

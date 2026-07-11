@@ -1,0 +1,16 @@
+{
+  "name": "gtm-plan",
+  "version": "1.0.0",
+  "description": "The annual plan is a wish. Build the number, the capacity, the territories, and the comp that make it real. What you get: A verdict-first plan: the bets, the capacity math, fair territories, and comp that drives the right behavior.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/gtm-plan",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "strategy",
+    "gtm"
+  ]
+}

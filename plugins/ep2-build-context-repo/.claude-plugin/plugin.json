@@ -1,0 +1,16 @@
+{
+  "name": "ep2-build-context-repo",
+  "version": "1.0.0",
+  "description": "Episode 2, made runnable. Context, not tooling, is the moat. Structure it so any agent can use it. What you get: A context pack any teammate or agent can start from, a greppable knowledge base, and a clean workspace.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/ep2-build-context-repo",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "ai-native",
+    "gtm"
+  ]
+}

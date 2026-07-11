@@ -1,0 +1,354 @@
+{
+  "name": "built-gtm",
+  "owner": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "metadata": {
+    "description": "Built GTM playbooks: runnable multi-skill GTM workflows, each a guide plus the skills to run it. From builtgtm.ai.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "build-ai-native-gtm",
+      "source": "./plugins/build-ai-native-gtm",
+      "description": "Build the AI-Native GTM Operating System - A workflow you framed instead of a hire, a context repo any agent can use, a signal wired to a booked motion, and a closed loop where the outcome changes the next action",
+      "category": "ai-native",
+      "keywords": [
+        "playbook",
+        "ai-native"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/build-ai-native-gtm"
+    },
+    {
+      "name": "book-a-meeting",
+      "source": "./plugins/book-a-meeting",
+      "description": "Book a meeting at a target account - A scored target, a timely reason to reach out, and a multi-channel sequence that gets a reply",
+      "category": "sales-development",
+      "keywords": [
+        "playbook",
+        "sales-development"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/book-a-meeting"
+    },
+    {
+      "name": "run-a-deal",
+      "source": "./plugins/run-a-deal",
+      "description": "Run a deal from discovery to signature - A qualified deal, a buyer-specific demo, a business case, and a dated path to signed",
+      "category": "sales",
+      "keywords": [
+        "playbook",
+        "sales"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/run-a-deal"
+    },
+    {
+      "name": "win-the-competitive-deal",
+      "source": "./plugins/win-the-competitive-deal",
+      "description": "Win a deal against an incumbent - A clear read on the deal, a battlecard, a real champion, and a business case that lands",
+      "category": "sales",
+      "keywords": [
+        "playbook",
+        "sales"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/win-the-competitive-deal"
+    },
+    {
+      "name": "save-a-renewal",
+      "source": "./plugins/save-a-renewal",
+      "description": "Save an at-risk renewal - An early verdict, the real reason, the right levers, and a save sequence with exit criteria",
+      "category": "customer-success",
+      "keywords": [
+        "playbook",
+        "customer-success"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/save-a-renewal"
+    },
+    {
+      "name": "grow-an-account",
+      "source": "./plugins/grow-an-account",
+      "description": "Find and land the next expansion - A book-level read, the usage signals, the play, and an executive ask that gets a yes",
+      "category": "customer-success",
+      "keywords": [
+        "playbook",
+        "customer-success"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/grow-an-account"
+    },
+    {
+      "name": "onboard-a-customer",
+      "source": "./plugins/onboard-a-customer",
+      "description": "Get a new customer to value, and keep them - A goal-tied plan, an adoption habit, a first-90-day read, and a QBR that earns the renewal",
+      "category": "customer-success",
+      "keywords": [
+        "playbook",
+        "customer-success"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/onboard-a-customer"
+    },
+    {
+      "name": "score-the-market",
+      "source": "./plugins/score-the-market",
+      "description": "Score the whole market, then work the top - A fit verdict per account, a stack rank, a target list, and a per-lead work plan",
+      "category": "sales",
+      "keywords": [
+        "playbook",
+        "sales"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/score-the-market"
+    },
+    {
+      "name": "fix-the-funnel",
+      "source": "./plugins/fix-the-funnel",
+      "description": "Find the funnel leak and fix it - The leak named, the metrics pinned, the coverage math, and a coaching plan per rep",
+      "category": "revops",
+      "keywords": [
+        "playbook",
+        "revops"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/fix-the-funnel"
+    },
+    {
+      "name": "learn-from-every-close",
+      "source": "./plugins/learn-from-every-close",
+      "description": "Turn closed deals into a repeatable edge - What wins share, why losses happen, a coded pattern, and a change you can ship",
+      "category": "revops",
+      "keywords": [
+        "playbook",
+        "revops"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/learn-from-every-close"
+    },
+    {
+      "name": "weekly-revenue-cadence",
+      "source": "./plugins/weekly-revenue-cadence",
+      "description": "Run the weekly revenue cadence - A revenue read, a pipeline read, a defensible forecast, and a one-screen digest",
+      "category": "leadership",
+      "keywords": [
+        "playbook",
+        "leadership"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/weekly-revenue-cadence"
+    },
+    {
+      "name": "ramp-a-rep",
+      "source": "./plugins/ramp-a-rep",
+      "description": "Ramp a new rep to quota, fast - A scorecard before the hire, a 30/60/90 ramp, and coaching that catches a slow start early",
+      "category": "leadership",
+      "keywords": [
+        "playbook",
+        "leadership"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/ramp-a-rep"
+    },
+    {
+      "name": "launch-a-product",
+      "source": "./plugins/launch-a-product",
+      "description": "Take a product or feature to market - Positioning, a tiered launch plan, the content, a demand plan, and earned media",
+      "category": "marketing",
+      "keywords": [
+        "playbook",
+        "marketing"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/launch-a-product"
+    },
+    {
+      "name": "get-found-in-ai",
+      "source": "./plugins/get-found-in-ai",
+      "description": "Get found in the AI era (AEO/GEO) - Real customer language, sharp positioning, an AEO audit, and content built to be quoted",
+      "category": "strategy",
+      "keywords": [
+        "playbook",
+        "strategy"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/get-found-in-ai"
+    },
+    {
+      "name": "build-your-operator-system",
+      "source": "./plugins/build-your-operator-system",
+      "description": "Build your operator system - A context pack, a decision log, runbooks, a safe closeout, and a system that improves itself",
+      "category": "foundations",
+      "keywords": [
+        "playbook",
+        "foundations"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/build-your-operator-system"
+    },
+    {
+      "name": "icp-playbook",
+      "source": "./plugins/icp-playbook",
+      "description": "Nail your ICP, then act on it - The real ICP from won-customer patterns, a fit score per account, a stack rank, and the channel to work each tier",
+      "category": "strategy",
+      "keywords": [
+        "playbook",
+        "strategy"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/icp-playbook"
+    },
+    {
+      "name": "persona-playbook",
+      "source": "./plugins/persona-playbook",
+      "description": "Find and message your core personas - The personas that matter, who to interview, a message house per persona, and discovery that fits them",
+      "category": "strategy",
+      "keywords": [
+        "playbook",
+        "strategy"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/persona-playbook"
+    },
+    {
+      "name": "gtm-plan",
+      "source": "./plugins/gtm-plan",
+      "description": "Build a GTM plan you can defend - A verdict-first plan: the bets, the capacity math, fair territories, and comp that drives the right behavior",
+      "category": "strategy",
+      "keywords": [
+        "playbook",
+        "strategy"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/gtm-plan"
+    },
+    {
+      "name": "ai-native-motion",
+      "source": "./plugins/ai-native-motion",
+      "description": "Stand up an AI-native GTM motion - A scored market, enriched accounts, a product-usage read, a QA agent that watches it, and a loop that learns",
+      "category": "strategy",
+      "keywords": [
+        "playbook",
+        "strategy"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/ai-native-motion"
+    },
+    {
+      "name": "diagnose-the-miss",
+      "source": "./plugins/diagnose-the-miss",
+      "description": "Diagnose why you are missing the number - The leak named, the deals that are real, the pattern underneath, and a defensible forecast",
+      "category": "strategy",
+      "keywords": [
+        "playbook",
+        "strategy"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/diagnose-the-miss"
+    },
+    {
+      "name": "reprice-to-derisk-revenue",
+      "source": "./plugins/reprice-to-derisk-revenue",
+      "description": "Reprice to de-risk your revenue - A value metric, clean tiers, a plan for the free base, and the modeled impact before you change a thing",
+      "category": "strategy",
+      "keywords": [
+        "playbook",
+        "strategy"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/reprice-to-derisk-revenue"
+    },
+    {
+      "name": "win-the-committee",
+      "source": "./plugins/win-the-committee",
+      "description": "Win the whole buying committee - A real champion, a read on every open deal, the relationship pulse, and a dated close plan",
+      "category": "sales",
+      "keywords": [
+        "playbook",
+        "sales"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/win-the-committee"
+    },
+    {
+      "name": "build-a-partner-channel",
+      "source": "./plugins/build-a-partner-channel",
+      "description": "Build a partner channel that produces pipeline - The right partners, a first joint motion, a named-account co-sell, and events that convert",
+      "category": "marketing",
+      "keywords": [
+        "playbook",
+        "marketing"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/build-a-partner-channel"
+    },
+    {
+      "name": "revops-foundation",
+      "source": "./plugins/revops-foundation",
+      "description": "Stand up the RevOps foundation - A clean CRM, pinned funnel metrics, routing that gets built, and a stack with the overlap cut",
+      "category": "revops",
+      "keywords": [
+        "playbook",
+        "revops"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/revops-foundation"
+    },
+    {
+      "name": "win-back-churned",
+      "source": "./plugins/win-back-churned",
+      "description": "Win back churned logos - The real churn theme, a save angle, and a timely, relevant re-open on the accounts worth it",
+      "category": "customer-success",
+      "keywords": [
+        "playbook",
+        "customer-success"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/win-back-churned"
+    },
+    {
+      "name": "content-engine",
+      "source": "./plugins/content-engine",
+      "description": "Run the content engine - The real language, writer-ready briefs, a growing audience, and pages an answer engine will quote",
+      "category": "marketing",
+      "keywords": [
+        "playbook",
+        "marketing"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/content-engine"
+    },
+    {
+      "name": "founder-led-sales",
+      "source": "./plugins/founder-led-sales",
+      "description": "Run founder-led sales, then hand it off - A repeatable discovery and outreach motion, and the scorecard and ramp to hand it to your first hires",
+      "category": "sales-development",
+      "keywords": [
+        "playbook",
+        "sales-development"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/founder-led-sales"
+    },
+    {
+      "name": "ep1-run-the-loop",
+      "source": "./plugins/ep1-run-the-loop",
+      "description": "Run the GTM loop on one workflow - One workflow reframed as work, a buy-vs-build call per step, and the drag split from the judgment",
+      "category": "ai-native",
+      "keywords": [
+        "playbook",
+        "ai-native"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/ep1-run-the-loop"
+    },
+    {
+      "name": "ep2-build-context-repo",
+      "source": "./plugins/ep2-build-context-repo",
+      "description": "Build your GTM context repo this week - A context pack any teammate or agent can start from, a greppable knowledge base, and a clean workspace",
+      "category": "ai-native",
+      "keywords": [
+        "playbook",
+        "ai-native"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/ep2-build-context-repo"
+    },
+    {
+      "name": "ep3-signal-to-motion",
+      "source": "./plugins/ep3-signal-to-motion",
+      "description": "Wire a signal to a booked motion - A scored signal, a timely touch, routing that lands it, and the output written back where it belongs",
+      "category": "ai-native",
+      "keywords": [
+        "playbook",
+        "ai-native"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/ep3-signal-to-motion"
+    },
+    {
+      "name": "ep4-close-the-loop",
+      "source": "./plugins/ep4-close-the-loop",
+      "description": "Close the loop so GTM compounds - A measurement model finance accepts, a QA layer that watches it, and a loop where outcomes change the next action",
+      "category": "ai-native",
+      "keywords": [
+        "playbook",
+        "ai-native"
+      ],
+      "homepage": "https://builtgtm.ai/playbooks/ep4-close-the-loop"
+    }
+  ]
+}

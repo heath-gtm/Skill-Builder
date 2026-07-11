@@ -1,0 +1,16 @@
+{
+  "name": "build-your-operator-system",
+  "version": "1.0.0",
+  "description": "Every session starts cold and nothing you learn sticks. Give your work memory and a closed loop. What you get: A context pack, a decision log, runbooks, a safe closeout, and a system that improves itself.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/build-your-operator-system",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "foundations",
+    "gtm"
+  ]
+}

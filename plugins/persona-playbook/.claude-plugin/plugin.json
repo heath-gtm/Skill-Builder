@@ -1,0 +1,16 @@
+{
+  "name": "persona-playbook",
+  "version": "1.0.0",
+  "description": "You sell to a company but people buy. Identify the personas that move deals and speak to each one. What you get: The personas that matter, who to interview, a message house per persona, and discovery that fits them.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/persona-playbook",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "strategy",
+    "gtm"
+  ]
+}

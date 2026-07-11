@@ -1,0 +1,16 @@
+{
+  "name": "ep3-signal-to-motion",
+  "version": "1.0.0",
+  "description": "Episode 3, made runnable. A signal without a motion is just a dashboard. Wire one end to end. What you get: A scored signal, a timely touch, routing that lands it, and the output written back where it belongs.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/ep3-signal-to-motion",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "ai-native",
+    "gtm"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "learn-from-every-close",
+  "version": "1.0.0",
+  "description": "You close and move on. The pattern in your wins and losses is the edge you are leaving on the table. What you get: What wins share, why losses happen, a coded pattern, and a change you can ship.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/learn-from-every-close",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "revops",
+    "gtm"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "icp-playbook",
+  "version": "1.0.0",
+  "description": "Everyone has an ICP slide. Few can act on it. Turn a fuzzy definition into a scored, worked motion. What you get: The real ICP from won-customer patterns, a fit score per account, a stack rank, and the channel to work each tier.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/icp-playbook",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "strategy",
+    "gtm"
+  ]
+}

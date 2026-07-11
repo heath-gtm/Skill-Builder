@@ -1,0 +1,16 @@
+{
+  "name": "content-engine",
+  "version": "1.0.0",
+  "description": "Content that talks to nobody ranks for nothing. Build it from real buyer language, made to be found. What you get: The real language, writer-ready briefs, a growing audience, and pages an answer engine will quote.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/content-engine",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "marketing",
+    "gtm"
+  ]
+}
