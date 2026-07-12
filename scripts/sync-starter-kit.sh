@@ -18,8 +18,9 @@ missing=""
 for sk in $KIT_SKILLS; do
   src="$SB_ROOT/skills/$sk/SKILL.md"
   if [ ! -f "$src" ]; then missing="$missing $sk"; continue; fi
-  mkdir -p "$TMP/kit/skills/$sk"
+  mkdir -p "$TMP/kit/skills/$sk" "$TMP/kit/.claude/skills/$sk"
   cp "$src" "$TMP/kit/skills/$sk/SKILL.md"
+  cp "$src" "$TMP/kit/.claude/skills/$sk/SKILL.md"
 done
 [ -n "$missing" ] && { echo "ERROR: missing source skills:$missing"; exit 1; }
 
