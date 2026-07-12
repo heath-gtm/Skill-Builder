@@ -5,7 +5,7 @@
 #   Usage: GITHUB_PAT=<token-with-Built-GTM-access> ./scripts/sync-starter-kit.sh
 set -euo pipefail
 
-KIT_SKILLS="solve-the-problem stack-the-tech cut-the-drag keep-the-judgment define-your-icp positioning-brief brand-voice-guide github-for-gtm context-pack knowledge-base workspace-organizer decision-log"
+KIT_SKILLS="solve-the-problem stack-the-tech cut-the-drag keep-the-judgment define-your-icp positioning-brief brand-voice-guide build-signal-library github-for-gtm context-pack knowledge-base workspace-organizer decision-log"
 
 : "${GITHUB_PAT:?Set GITHUB_PAT to a token with push access to Built-GTM/builtgtm-starter-kit}"
 SB_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
