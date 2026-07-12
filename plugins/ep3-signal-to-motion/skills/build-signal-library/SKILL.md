@@ -1,0 +1,33 @@
+---
+name: build-signal-library
+description: Build the signal library your AI-native GTM repo runs on, the file that turns your context brain from a reference doc into a system that acts. Define each signal with a detection method, a point value, a decay curve, combination bonuses, and a message hook, plus a performance-log stub so it becomes a learning system. Feeds context/signal-library.md. Fire on "build our signal library", "what signals should we track", "signal scoring", "signal decay", "signal combinations", "define our signals", or turning intent, usage, funding, or hiring into something a rep can act on.
+---
+
+# Build Your Signal Library: signals that fire, decay, and combine
+
+## What this does
+Turns "we should watch for funding" into a real signal library: each signal with how you detect it, what it is worth, how it decays, which combinations score higher, and the message hook that earns the reply. This is the file that makes your context repo act, not just describe. A list of alerts that is never scored or decayed is not a signal library.
+
+## What you'll need (reads)
+Your ICP definition (from Define Your ICP), so signals are scored against real fit. And whatever you know about the moments that precede a deal: funding, a new hire, a product-usage spike, a competitor switch, intent. No connectors required to design it; connect your data sources when you want to detect them live.
+
+## The method
+1. List the moments that precede a deal. The events that mean now, not someday: a new RevOps hire, a Series B in the last 60 days, a usage spike, a competitor renewal coming up. Start with 5 to 8, not 30.
+2. Give each a detection method. How you actually see it: a Crunchbase alert, a job-board scrape, a product-usage threshold, an intent feed. A signal you cannot detect is a wish.
+3. Score each in points, against fit. The same signal on a Tier 1 account is worth more than on a Tier 3. Points, not vibes.
+4. Set a decay curve. A funding round from 150 days ago is not the signal it was at 10 days. Decay the points over time so your active list reflects real urgency, not old history. This one step fixes the list that quietly fills with stale accounts.
+5. Add combination bonuses. Two signals together tell you more than either alone. A Series B plus a new RevOps hire is not a 65-point account, it is an 80-point account: budget exists and someone is rebuilding. Write the pairs that matter and the bonus each earns.
+6. Write a message hook per signal. The one line that makes the outreach obviously about them, tied to the signal that fired.
+7. Leave a performance-log stub. A column for meetings generated per signal, empty for now. Episode 4 fills it, and the library starts to learn which signals actually pay.
+
+## Failure points
+- A signal you cannot detect, so it never fires.
+- No decay, so the active list is a lie full of six-month-old events.
+- Scoring every signal the same regardless of fit, so Tier 3 noise floats to the top.
+- Thirty signals nobody maintains instead of eight that work.
+
+## The receipt (writes)
+[your signal library: 5 to 8 signals with detection, points, decay, combination bonuses, and hooks, plus an empty performance log. This becomes context/signal-library.md]
+
+## Next move
+Score the accounts your signals fire on, then wire the freshest one to a motion before it goes stale. Built GTM. Receipts only.
