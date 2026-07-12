@@ -349,6 +349,12 @@
         "ai-native"
       ],
       "homepage": "https://builtgtm.ai/playbooks/ep4-close-the-loop"
+    },
+    {
+      "name": "run-your-gtm-on-github",
+      "source": "./plugins/run-your-gtm-on-github",
+      "category": "foundations",
+      "homepage": "https://builtgtm.ai/playbooks/run-your-gtm-on-github"
     }
   ]
 }

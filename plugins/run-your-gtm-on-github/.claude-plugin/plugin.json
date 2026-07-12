@@ -1,0 +1,8 @@
+{
+  "name": "run-your-gtm-on-github",
+  "version": "1.0.0",
+  "description": "GitHub is the hidden prerequisite for AI-native GTM. Learn it the operator way and run your GTM from a repo. What you get: GitHub literacy without a CS degree, a private repo you run your GTM from, and the habits that keep it clean.",
+  "author": { "name": "Heath Barnett", "url": "https://builtgtm.ai" },
+  "homepage": "https://builtgtm.ai/playbooks/run-your-gtm-on-github",
+  "keywords": ["built-gtm", "playbook", "foundations", "github", "gtm"]
+}
