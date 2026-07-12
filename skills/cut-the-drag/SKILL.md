@@ -1,6 +1,6 @@
 ---
 name: cut-the-drag
-description: The cut half of Split, in the GTM Loop. Put AI on the repeatable execution between the steps of a workflow, and hold the line on what needs a human. Fire on "what should I automate", "put AI on this", "cut the busywork", "what can AI do here", "cut the drag", "automate the workflow", or any decision about where AI goes in a GTM workflow.
+description: Decide which steps of a GTM workflow AI should run and which stay human, then put AI on the repeatable ones. The cut move of the GTM Loop's Split, for any operator redesigning a workflow. Fire on "what should I automate", "put AI on this", "cut the busywork", "what can AI do here", "cut the drag", "automate the workflow", or any decision about where AI goes in a GTM workflow.
 ---
 
 # Cut the Drag: put AI on the reps

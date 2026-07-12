@@ -1,6 +1,6 @@
 ---
 name: keep-the-judgment
-description: The keep half of Split in the GTM Loop. Leave people the judgment and give them the threads to run the workflow: context, tooling, ownership, and rhythm. Stops a redesigned workflow from tearing again. Fire on "how do I roll this out", "who owns this", "enable my team", "make this stick", "keep the judgment", or the last step of any GTM workflow redesign.
+description: Hand a redesigned GTM workflow to a named owner with the four threads that keep it running: context, tooling, ownership, and rhythm. The keep move of the GTM Loop's Split, so the workflow does not fall apart in a month. For any operator rolling out a workflow change. Fire on "how do I roll this out", "who owns this", "enable my team", "make this stick", "keep the judgment", or the last step of any GTM workflow redesign.
 ---
 
 # Keep the Judgment: leave the calls to the people
