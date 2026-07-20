@@ -15,6 +15,18 @@ allowed-tools:
   - AskUserQuestion
 ---
 
+## Canonical reference
+
+`WRITING.md` in the Built GTM Lab repo (`Built-GTM/Built-gtm`) is the writing OS:
+the vocabulary, the voice, the hard guardrails, the locked article spine, the five
+LinkedIn pillars, and the retired list. `DESIGN.md` is its counterpart for anything
+that renders.
+
+**If this skill and WRITING.md disagree, WRITING.md wins, and this skill gets
+updated in the same session.** Two live copies of a rule is how they drift, which
+is the problem that file exists to solve.
+
+
 <!-- GENERATED from context/brand/built-gtm-brand.md. Do not edit by hand. -->
 
 
