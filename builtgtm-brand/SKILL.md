@@ -51,7 +51,7 @@ These two definitions are the foundation. Use the human definition on public sur
 
 ## The Brand in One Paragraph
 
-Built GTM is the playbook for the GTM Operator era. The operator's job is the 20%: build the right tech stack, build the right AI context, design the workflow so the system knows what good output looks like. AI does the 80%: the scalable engine of quality output. Most GTM operators have it inverted. 80% of their week goes to production work, 20% to strategy. Built GTM exists to flip that. Battle-tested, scar-approved workflows you can build this week.
+Built GTM is how sales and revenue teams put AI to work the right way, to win more, faster, and bigger. Not to replace reps, to free them. AI does the work that does not need a human (research, prep, busywork). The rep does the work only a human can (the conversation that closes). Most teams point AI at the top of the funnel and at automating people out. Built GTM points it where the money moves: conversion rate, win rate, deal size, sales cycle, retention. Heath is the Sales AI Guy. Battle-tested, scar-approved workflows you can build this week.
 
 
 ## Built GTM Properties
@@ -71,9 +71,12 @@ This doc governs voice. The show bible governs the show (format, audience, spons
 
 ## The Operator Thesis
 
+- **The position:** The Sales AI Guy. Built GTM is how sales and revenue teams put AI to work the right way. The reputation, not the logo; Built GTM stays the brand name.
+- **The Split (the central bet):** AI does the work that does not need a human, the rep does the work only a human can. Split it right and every number moves: conversion, win rate, deal size, cycle time, retention. Augment the operator, do not automate them out.
+- **Define it first:** You cannot hand qualified, a good deal, or SQL-to-Closed-Won to AI until the team has defined what they mean. The bottleneck is the definition, not the tool.
 - **The GTM Operator era:** The lanes between titles (VP Sales, VP CS, VP RevOps) have dissolved. What you do this Tuesday is six different jobs. The titles persist because the org chart hasn't caught up. The work already has.
 - **The role:** A GTM Operator is cross-functional, ships their own tools, bends tools to fit how they work. Not a title replacement. A description of what you actually do.
-- **The 20/80 bet:** The operator's job is the 20% (system design, AI context, workflow architecture). AI does the 80% (execution at scale). Most operators have this inverted. Built GTM flips it.
+- **The 20/80 bet (operator strategy):** The operator's job is the 20% (system design, AI context, workflow architecture). AI does the 80% (execution at scale). Most operators have this inverted. Built GTM flips it.
 - **The lens:** Every piece of content gets the three-read treatment: where AI helps, where AI hurts, where AI optimizes. Not balance. A position.
 
 
@@ -140,7 +143,8 @@ What's coming. What to bet on. What to ignore. Short. Strong. No hedging.
 ## Audience
 
 **Who Built GTM is for:**
-- Sitting GTM operators feeling the workflow entanglement in their real Tuesday
+- Sales, RevOps, and revenue/CS leaders who own the number: conversion, win rate, deal size, sales cycle, retention
+- Sitting GTM operators who want AI to make their reps better, not fewer
 - VPs, directors, managers, ICs whose jobs are mutating faster than their job descriptions
 - Sales leaders learning RevOps. CS leaders learning marketing. Everyone learning AI.
 - People who would rather build a working ugly thing than wait for the perfect one
@@ -154,6 +158,13 @@ What's coming. What to bet on. What to ignore. Short. Strong. No hedging.
 
 
 ## Key Brand Phrases: Use These
+- "Put AI to work in sales. The right way."
+- "The Sales AI Guy."
+- "AI does the grunt work. Reps do the selling."
+- "Augment the rep. Do not automate them out."
+- "Split the work."
+- "Move the numbers that matter: conversion, win rate, deal size, cycle time."
+- "Define what good looks like first."
 - "GTM has evolved. Time to operate accordingly."
 - "The GTM Operator era"
 - "Battle-tested, scar-approved workflows"
