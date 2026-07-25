@@ -60,13 +60,13 @@ Built GTM is the parent brand. It shows up in three places:
 
 - The newsletter and articles: Heath narrating his own builds.
 - LinkedIn: posts, comments, the daily surface.
-- **Re:Built**: the show. A Sell Better series, hosted by Heath, that puts the Built GTM thesis on camera.
+- **build better**: the show. A Sell Better series, hosted by Heath, that puts the Built GTM thesis on camera.
 
-Re:Built has its own canonical context. When generating anything about the show (landing pages, episode copy, sponsor decks, promo, guest outreach), read the show bible first:
+build better has its own canonical context. When generating anything about the show (landing pages, episode copy, sponsor decks, promo, guest outreach), read the show bible first:
 
-`get-built-gtm/show/context/01-rebuilt-show-bible.md`
+`get-built-gtm/show/context/01-show-bible.md`
 
-This doc governs voice. The show bible governs the show (format, audience, sponsor model). Do not describe Re:Built from this brand doc alone; the show has specifics that live only in its own context. On any show-specific call, the show bible wins.
+This doc governs voice. The show bible governs the show (format, audience, sponsor model). Do not describe build better from this brand doc alone; the show has specifics that live only in its own context. On any show-specific call, the show bible wins.
 
 
 ## The Operator Thesis
