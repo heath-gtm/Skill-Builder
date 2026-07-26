@@ -97,7 +97,7 @@ The persona, the difficulty, and the cert bar are yours to set. The objections a
 This runs today as a text roleplay. Here is where an operator takes it next, and none of it is science fiction.
 
 - **Voice-to-voice reps.** Wire the scenario to an ElevenLabs voice agent so the rep practices out loud, against a buyer that interrupts, stalls, and pushes back in real time. The scorecard still grades the framework; the rep just rehearses with their voice, not their keyboard.
-- **A roleplay that builds itself from last week's calls.** A small tool, vibecoded in a day, pulls every rep's recorded calls, finds the objections and the moments they lost, and generates next month's roleplay slate automatically, each scenario tuned to the exact gap that rep keeps hitting.
+- **A roleplay that builds itself from last week's calls.** A small tool, vibecoded in a day in Lovable and shipped on Vercel, pulls every rep's recorded calls from Gong, finds the objections and the moments they lost, and generates next month's roleplay slate automatically, each scenario tuned to the exact gap that rep keeps hitting.
 - **A coach that assigns the work.** Turn that into a monthly plan per rep: the tool reads the calls, writes the plan, and hands each rep an ElevenLabs agent loaded with their accounts and their weak spots, so practice is personal and on the calendar, not a generic SKO.
 
 The skill is the seed. The build is yours.
