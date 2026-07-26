@@ -1,6 +1,6 @@
 ---
 name: churn-analysis
-description: Turn churned and downgraded accounts into an early-warning system. Reads the customers who left or shrank, extracts the themes behind why, builds a warning checklist from the real causes, then reads your active book and flags which accounts look like the ones that just churned. Built for B2B retention teams, customizable to your CRM and your customer data. Trigger on "why do customers churn", "what do churned accounts have in common", "build me a churn early-warning list", "which accounts are at risk", "who looks like a recent churner", or any retention post-mortem.
+description: Turn churned and downgraded accounts into an early-warning system. Reads the customers who left or shrank, extracts the themes behind why, builds a warning checklist from the real causes, then reads your active book and flags which accounts look like the ones that just churned. Built for B2B retention teams, customizable to your CRM and your customer data. Trigger on "why do customers churn", "what do churned accounts have in common", "build me a churn early-warning list", "which accounts are at risk of churning", "who looks like a recent churner", or any retention post-mortem.
 ---
 
 # Churn Analysis

@@ -1,6 +1,6 @@
 ---
 name: cs-health-report
-description: Roll up the health of a customer book or segment into moves, not colors. At-risk accounts, renewals due, expansion candidates, and the accounts quietly going dark, each with the one move it needs. Built for B2B customer success teams, customizable to your data and your book. Trigger on "how's my book", "customer health report", "which accounts are at risk", "what's up for renewal", "who's going quiet", or any book-health diagnostic.
+description: Roll up the health of a customer book or segment into moves, not colors. At-risk accounts, renewals due, expansion candidates, and the accounts quietly going dark, each with the one move it needs. Built for B2B customer success teams, customizable to your data and your book. Trigger on "how's my book", "customer health report", "which accounts in my book need attention", "what's up for renewal", "who's going quiet", or any book-health diagnostic.
 ---
 
 # Customer Health Report

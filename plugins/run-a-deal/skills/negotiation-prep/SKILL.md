@@ -1,6 +1,6 @@
 ---
 name: negotiation-prep
-description: Walk into the negotiation with a plan, not a hope. Sets your walk-away and your target, builds the concession ladder (what you trade and what you get for it), maps their likely asks, and drafts the responses that protect price and terms. Built for B2B sales teams, customizable to your CRM and your deal process. Trigger on "prep me for this negotiation", "they want a discount", "what should I concede", "build my concession ladder", "how do I hold price", or any pre-negotiation planning.
+description: Walk into the negotiation with a plan, not a hope. Sets your walk-away and your target, builds the concession ladder (what you trade and what you get for it), maps their likely asks, and drafts the responses that protect price and terms. Built for B2B sales teams, customizable to your CRM and your deal process. Trigger on "prep me for this negotiation", "the prospect wants a discount", "what should I concede", "build my concession ladder", "hold price on a new deal", or any pre-negotiation planning.
 ---
 
 # Negotiation Prep

@@ -1,6 +1,6 @@
 ---
 name: renewal-negotiation
-description: Walk into the renewal with a plan instead of a flinch. Build the value recap, the price and term options, the concession ladder, and the answer to "we want a discount" that protects net retention. Built for B2B customer success teams, customizable to your pricing and your process. Trigger on "prep a renewal negotiation", "they want a discount", "renewal is coming up", "how do I hold price", "concession ladder", or any renewal-negotiation prep.
+description: Walk into the renewal with a plan instead of a flinch. Build the value recap, the price and term options, the concession ladder, and the answer to "we want a discount" that protects net retention. Built for B2B customer success teams, customizable to your pricing and your process. Trigger on "prep a renewal negotiation", "they want a discount on the renewal", "renewal is coming up", "how do I hold price at renewal", "concession ladder", or any renewal-negotiation prep.
 ---
 
 # Renewal Negotiation

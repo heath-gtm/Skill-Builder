@@ -1,6 +1,6 @@
 ---
 name: outbound-list-builder
-description: Turn an ICP into a scored, prioritized target list. Firmographic and signal filters, a tiering rule, the personas to reach per account, and a plain reason each account earns its spot. Built for B2B outbound teams, customizable to your ICP and your data sources. Trigger on "build me a target list", "who should I prospect", "score these accounts", "which accounts first", "add personas to this list", or any list-building or account-prioritization task.
+description: Turn an ICP into a scored, prioritized target list. Firmographic and signal filters, a tiering rule, the personas to reach per account, and a plain reason each account earns its spot. Built for B2B outbound teams, customizable to your ICP and your data sources. Trigger on "build me a target list", "who should I prospect", "build a prospect list from my ICP", "which accounts first", "add personas to this list", or any list-building or account-prioritization task.
 ---
 
 # Outbound List Builder

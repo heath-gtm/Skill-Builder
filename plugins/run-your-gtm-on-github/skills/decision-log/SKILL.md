@@ -1,6 +1,6 @@
 ---
 name: decision-log
-description: Stop re-litigating decisions you already made. Keep an ADR-style log where each entry captures the decision, the context that forced it, the options you weighed, why you chose, and when to revisit, one entry at a time, in plain greppable markdown. Trigger on "log this decision", "why did we choose X", "write an ADR", "record why we're doing this", "what did we decide about", or any moment a real call gets made and would otherwise be forgotten.
+description: Stop re-litigating decisions you already made. Keep a decision record where each entry captures the decision, the context that forced it, the options you weighed, why you chose, and when to revisit, one entry at a time, in plain searchable markdown you can grep later. Trigger on "log this decision", "why did we choose X", "write a decision record", "record why we're doing this", "what did we decide about", or any moment a real call gets made and would otherwise be forgotten.
 ---
 
 # Decision Log
