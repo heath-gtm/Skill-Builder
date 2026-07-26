@@ -27,4 +27,4 @@ One workflow with its steps and its crux named (the output of Solve the Problem)
 [the signals you stacked, the tech that carries them, and the context the workflow now runs on]
 
 ## Next move
-Hand the stacked workflow to Cut the Drag. Built GTM. Receipts only.
+Hand the stacked workflow to Split: start with Cut the Drag, then Keep the Judgment. Built GTM. Receipts only.

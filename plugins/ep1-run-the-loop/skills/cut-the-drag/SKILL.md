@@ -26,5 +26,11 @@ One workflow, stacked with the right tech and signals (the output of Stack the T
 ## The receipt
 [the non-selling drag you took off the reps, and the selling hours it gave back per week]
 
+Example (illustrative):
+- Cut: reps hand-building account research before every first call, now an auto-brief from CRM plus web, about 3 hrs/week back.
+- Cut: copy-pasting call notes into the CRM, now auto-logged from the recording, about 2 hrs/week back.
+- Kept with the rep: the discovery conversation and the qualification call.
+Selling time returned: roughly a day a week per rep.
+
 ## Next move
 Hand the cleared workflow to Keep the Judgment. Built GTM. Receipts only.

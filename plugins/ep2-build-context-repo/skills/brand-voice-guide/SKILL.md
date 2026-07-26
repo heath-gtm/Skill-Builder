@@ -26,5 +26,11 @@ A few things you have already published that sound right (a post, an email, a pa
 ## The receipt (writes)
 [your voice pillars, the do and do-not list, and 3 sample lines with their generic counterparts. This becomes the voice layer of context/positioning.md]
 
+Example (illustrative):
+- Pillars: plain over clever, receipts over adjectives, operator not vendor.
+- Do: short declaratives, name the tradeoff, one idea per line.
+- Do not: hype words, filler, "unlock / leverage / seamless", bow-tied endings.
+- Sample line: "We cut prep from a day to an hour." (yours) vs "Our seamless solution unlocks unprecedented efficiency." (generic AI).
+
 ## Next move
 Hand the voice to the Context Pack so CLAUDE.md carries it into every session. Built GTM. Receipts only.

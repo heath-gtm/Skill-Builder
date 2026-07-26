@@ -27,5 +27,11 @@ What you know about your best and worst customers: who renews and expands, who c
 ## The receipt (writes)
 [your tier definitions with explicit criteria, the anti-ICP, the must-have vs red-flag framework, and the first evolution-log entry. This becomes context/icp-definition.md]
 
+Example (illustrative):
+- Tier 1: Series B to D B2B SaaS, 50 to 500 reps, a RevOps leader in seat, on Salesforce plus an outreach tool. Trigger: a new VP of Sales in the last 90 days.
+- Anti-ICP: seed stage, no RevOps function, founder-led sales only.
+- Must-have: a dedicated RevOps owner. Red flag: no CRM of record.
+- Evolution log, 2026-07-26: tightened Tier 1 from over 25 reps to over 50 after three sub-50 deals stalled on no owner.
+
 ## Next move
 Hand the ICP to Positioning so your message speaks to exactly who you just defined. Built GTM. Receipts only.

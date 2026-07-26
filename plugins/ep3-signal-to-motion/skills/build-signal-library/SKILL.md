@@ -29,5 +29,15 @@ Your ICP definition (from Define Your ICP), so signals are scored against real f
 ## The receipt (writes)
 [your signal library: 5 to 8 signals with detection, points, decay, combination bonuses, and hooks, plus an empty performance log. This becomes context/signal-library.md]
 
+Example (illustrative):
+
+| Signal | Detection | Points | Decay | Combo | Hook |
+|---|---|---|---|---|---|
+| New RevOps hire | job-title change | +30 | 90 days | +15 with fresh funding | "Saw you just brought RevOps in-house" |
+| Pricing page revisited 3x | product or web analytics | +20 | 14 days | +20 with an active trial | "Noticed the team back on pricing" |
+| Series B raised | funding source | +25 | 120 days | +15 with headcount growth | "Congrats on the round" |
+
+Performance log: empty until outcomes come back in Episode 4.
+
 ## Next move
 Score the accounts your signals fire on, then wire the freshest one to a motion before it goes stale. Built GTM. Receipts only.
