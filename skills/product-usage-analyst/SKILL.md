@@ -86,8 +86,49 @@ advanced module and integrations. 3 new users have not activated yet, that is
 the onboarding conversation.
 ```
 
+## Example chat
+Here is the skill running on a real account, start to finish. You paste what you have; it does the read.
+
+**You:** How is acme.com using us? Here's the 12-week export.
+[pastes a CSV: one row per capability, activity counts, last-active dates, plus an _active baseline row and a fit score of 28]
+
+**Claude:** Read's done. Acme is real, and your fit score is wrong about them.
+
+```
+PRODUCT ENGAGEMENT · acme.com · 12-week window
+Capability          Adoption      Trend       Last active
+Core action         Power         Rising      today
+Automation          Established   Flat        yesterday
+Templates           Emerging      Rising      3d ago
+AI assist           Dormant       Declining   18d ago
+Advanced module     Untouched     -           -
+Integrations        Never-adopt   -           -
+```
+
+Four of six capabilities show real activity, so this is **not** ghost-active. Power on the core action, and template use is climbing. Two things stand out:
+
+- **Fit-score false negative.** The score sits at 28 (floor), but adoption is clearly real. The usage is ground truth. I'd promote Acme and stop treating it like a cold account.
+- **A quiet-quitting tell.** AI assist is Dormant *and* Declining. Not urgent yet, but that's the capability to ask about before it collapses.
+
+**You:** Who are the power users?
+
+**Claude:** Three clear the top-decile bar: j.reyes@acme.com (core action + automation, daily), m.okafor@acme.com (templates, rising fast, your reference candidate), and s.lin@acme.com (core action only). Reyes and Okafor are your expansion anchors. Want me to hand the two untouched capabilities (Advanced module and Integrations) over to the outreach skill as the onboarding-gap angle?
+
+**You:** Yes.
+
+**Claude:** Passing the named gaps to `trigger-outreach`. One sharpener for next time: this ran on a single snapshot with the fit score attached. Connect your product-analytics tool and I'll pull the live trend and each new signup's first-seen date automatically. Same read, no paste, and I can catch the AI-assist decline the week it starts.
+
 ## Where the numbers come from
 TREND_WINDOW (12 weeks), NEW_USER_WINDOW (14 days), and the power-user cutoff are defaults, not laws. They suited a mid-market SaaS product with a steady weekly rhythm. If your product is used in bursts or on a monthly cycle, widen them. The logic does not change. The thresholds are yours.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Score the whole base while you sleep.** Point a scheduled Claude task at Amplitude every night, run this read on every account, and write the product-engagement verdict and the false-negative flag straight back to Salesforce. You wake up to a scored book, not a to-do.
+- **Catch only the flips.** Have the nightly run diff against yesterday and DM the account owner in Slack just the accounts that *changed*: a capability that started collapsing, or a fit-score false negative that just proved itself. No dashboard to check; the signal comes to the rep.
+- **Close the loop to outreach.** Feed the Untouched and Never-adopted rows directly into a cold-email or trigger-outreach skill so the onboarding-gap list leaves as sent messages, not a spreadsheet nobody opens.
+
+The stack is boring on purpose: Amplitude reads it, Claude scores it, Salesforce holds the verdict, Slack delivers the one line that matters. You built the read once; now it runs itself.
 
 ## Make it yours
 Fork it. Change the capabilities, the tiers, the trend window. The point is not to run someone else's rubric. It is to see your own product's adoption story, faster. Built by an operator. Customize it, break it, make it better.
