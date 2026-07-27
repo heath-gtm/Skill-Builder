@@ -1,3 +1,0 @@
-# mixmax-leader-update-slides composition (vendored skills under ./skills/)
-leader-update-slides-runbook
-leader-update-slides-setup

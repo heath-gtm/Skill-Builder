@@ -1,3 +1,0 @@
-# mixmax-closed-won-analysis composition (vendored skills under ./skills/)
-closed-won-runbook
-closed-won-setup

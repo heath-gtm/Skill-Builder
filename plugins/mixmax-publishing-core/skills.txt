@@ -1,3 +1,0 @@
-# mixmax-publishing-core composition (vendored skills under ./skills/)
-publishing-config-reference
-publishing-config-setup

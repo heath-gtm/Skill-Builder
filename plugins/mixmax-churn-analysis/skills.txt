@@ -1,3 +1,0 @@
-# mixmax-churn-analysis composition (vendored skills under ./skills/)
-churn-analysis-runbook
-churn-analysis-setup

@@ -1,4 +1,4 @@
-> **⚠️ Superseded for account-level scoring (2026-06-05).** The canonical Mixmax composite model is now **v4** (two-stage gate→fit→intent, channel-aware), backtested on won/lost + convert cohorts. See the `mixmax-composite-scoring` skill and the published methodology: https://psychic-adventure-p3jj6y9.pages.github.io/operational/mixmax-composite-scoring-v4-methodology-2026-06-05.html . The v2 rubric below remains only as the internal reference for strike-zone Mode 2 (Sprint Planning) / Mode 3 (Scoring Audit); do not use it to rank accounts against v4.
+> **Note.** This is the internal reference rubric for strike-zone Mode 2 (Sprint Planning) and Mode 3 (Scoring Audit). To design a fresh account score for your own business, use the `account-scoring-model-builder` skill.
 
 # Multi-Source Composite Scoring — v2 Rubric
 
@@ -156,7 +156,7 @@ For the user-facing output, generate three short phrases:
 
 ## When to recalibrate weights
 
-The weights above are calibrated for Mixmax's 2026 PQA cohort. Recalibrate when:
+The weights above are illustrative defaults. Recalibrate against your own won/lost cohort when:
 - Aero ships a meaningful model update (reduce Octave weight; increase Aero weight)
 - Common Room data quality changes materially (e.g., new lead-score model deployed)
 - The cohort definition changes (e.g., moving from PQA to a new gate)

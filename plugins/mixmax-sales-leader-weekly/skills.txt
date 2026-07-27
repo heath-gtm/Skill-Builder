@@ -1,3 +1,0 @@
-# mixmax-sales-leader-weekly composition (vendored skills under ./skills/)
-sales-leader-weekly-runbook
-sales-leader-weekly-setup
