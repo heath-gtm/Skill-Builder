@@ -92,5 +92,38 @@ Fixes:
 ## Where the numbers come from
 MIN_SAMPLE (5) and the trailing-4-quarter window are defaults, not laws. They suited a mid-market SaaS cycle with steady loss volume. If you lose a small number of large deals, widen the window so the buckets are not built on three data points. The preventable-vs-structural split is always grounded in your own notes and fields, so the fix list is yours, not a benchmark's.
 
+## Example chat
+Here is the skill running on a real lost-deal export.
+
+**You:** Here's our Q2 closed-lost list, 22 deals. Why do we keep losing?
+
+**Claude:** Read's done. Your biggest bucket isn't the one your team talks about.
+```
+Bucket         Share   Lost $    Note
+No decision    41%     $290K     Status quo, no compelling event
+Competitor     23%     $180K     Lost late, after demo
+Price          18%     $140K     Clustered at entry tier
+```
+No decision is your real problem, not the competitor you keep post-morteming in deal reviews. 9 of 9 no-decision losses had no compelling event on file at any stage. That's a qualification gap, not a competitive one. One sharpener: add a loss-notes field to your CRM so the next run can tell "no decision, ghosted" apart from "no decision, picked a spreadsheet."
+
+**You:** Can you split those no-decision losses into preventable vs structural?
+
+**Claude:** Yes. Of the 9, 6 had an active champion past Stage 2, meaning the deal was alive and died anyway. That's preventable. 3 never had budget confirmed, that's structural.
+```
+Preventable: 6 of 9 (67%) - champion present, no compelling event pushed
+Structural:  3 of 9 (33%) - no budget confirmed at any stage
+```
+The fix for the preventable pile: qualify the compelling event by Stage 2 or park the deal. One sharpener: connect your meeting tool so the next run reads what the buyer actually said before going dark, instead of inferring it from stage history alone.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Run it every quarter without asking.** Point a scheduled Claude task at Salesforce closed-lost exports and drop the themes into Slack before the next deal review.
+- **Feed the fix list to the field, not just the deck.** Push the "qualify compelling event by Stage 2" rule into a Gong scorecard so reps get flagged live, not in a postmortem.
+- **Close the loop on the competitor pile.** Route every COMPETITOR loss into a competitive-battlecard update automatically, so the sheet reps wish they had actually gets built.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Change the buckets, the split rules, the sample floor. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

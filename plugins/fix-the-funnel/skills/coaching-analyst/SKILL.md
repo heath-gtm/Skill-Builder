@@ -9,12 +9,21 @@ description: Your rep gap analyst. Connect a CRM and a meeting/activity tool, th
 This skill turns rep data into per-rep coaching priorities. It reads each rep's pipeline, activity, and win history, then surfaces a specific gap for each person plus the team-level patterns underneath them. It answers "who needs help and on what?" with a named topic per rep, not a vague verdict. It watches the people, not the system.
 
 ## What you'll need
-- A CRM. The source of opportunities, stages, forecast categories, close dates, and account notes.
-- A meeting and activity tool. The source of meeting counts, transcripts, and follow-up cadence.
-- Optional: a product-usage tool and an account-scoring tool.
-- A defined sales methodology with a completeness check, and a win-rate segmentation.
+You do not need to connect anything to start. Bring your rep data and the skill runs today. Connect the tools below and it pulls it automatically and adds signals you cannot paste by hand.
 
-No CRM connected? The skill says what to connect and stops. It does not guess.
+- Works today with: per-rep open deals and activity counts, plus your qualification framework's fields. Paste or upload.
+- More powerful connected to a CRM: opportunities, stages, forecast categories, close dates, and notes, live.
+- More powerful connected to a meeting or activity tool: meeting quality from transcripts and real follow-up cadence, not just counts.
+- Sharper with product-usage and account-scoring tools.
+
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
+
+- **Bring your data**: paste or upload your list (a deal export, a stage CSV). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
 
 ## Customize this for yourself
 | Set this | What it is | Default / Example |
@@ -70,6 +79,38 @@ TEAM THEMES:
 
 ## Where the numbers come from
 Defaults to re-tune: completeness target 80%, win-rate flag 40%, multi-thread target 3+, stage-sticker rule judged per rep against their own median. Any win rate carries its n so a hot streak is not mistaken for a trend. Activity quality depends on the meeting tool; with none connected, the skill falls back to CRM activity counts and says so.
+
+## Example chat
+Here is the skill running on a real rep roster ahead of 1:1s.
+
+**You:** Who on the team needs coaching this week, and on what specifically?
+
+**Claude:** Read's done. Your top priority isn't your lowest performer, it's your busiest one.
+```
+Rep A: methodology completeness 14% (1 of 7 opps), lowest on team
+       most-missing step: decision-dynamics field (5 of 7 opps)
+Rep B: completeness 87% (highest), win rate 71% (n=7, small sample)
+```
+Rep A's gap is specific and fixable: they're skipping decision-dynamics on almost every deal, not "struggling generally." Rep B looks like your best rep by win rate, but the sample is only 7 deals, so that number could flip next quarter. One sharpener: connect your meeting tool so activity quality comes from real transcripts instead of raw call counts, which currently can't tell a good call from a long one.
+
+**You:** What's the team-level theme underneath these two?
+
+**Claude:** One pattern holds across more than one rep, which is what makes it a theme instead of a coincidence.
+```
+3 of 5 reps below 40% mid-market win rate
+Team avg methodology completeness: 56% vs 80% target
+```
+That's not an individual coaching problem, it's a segment problem. Worth a group training on mid-market messaging, not five separate 1:1 conversations repeating the same fix. One sharpener: add product-usage data so the team theme can separate "messaging is off" from "we're selling to the wrong accounts."
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Refresh the board before every 1:1, automatically.** Point a scheduled Claude task at Salesforce and Gong the morning of 1:1 day and post each rep's brief to their manager in Slack.
+- **Catch a stalling rep mid-quarter, not at the QBR.** Have the task re-run weekly and flag any rep whose completeness or win rate drops two weeks running.
+- **Turn team themes into a training calendar.** Feed recurring gaps into a content-brief skill to spin up the enablement session the data is actually asking for.
+
+You built the read once; now it runs itself.
+
 
 ## Make it yours
 Map your CRM, your methodology, your segments, and your targets, and the method runs against your numbers. Built by an operator. Customize it, break it, make it better.

@@ -95,5 +95,33 @@ Next move:
 ## Where the numbers come from
 MIN_SAMPLE (5), the trailing-4-quarter window, and the usage-decline cutoffs are defaults, not laws. They suited a subscription business with steady churn volume. If you churn a small number of large accounts, widen the window so the themes are not built on a handful of exits. Usage thresholds should match your product's natural rhythm: a weekly tool and a quarterly tool decline differently. The checklist is always built from your own churn, so it warns you about your accounts, not a benchmark's.
 
+## Example chat
+**You:** We lost 23 accounts over the last year. What do they actually have in common? Here's the export. [pastes CSV]
+
+**Claude:** Four real themes, not a grab-bag of reasons.
+```
+Theme                        Share   Revenue    Avg tenure
+Champion left, no backup     35%     $180K      14 months
+Never reached first value    26%     $130K      7 months
+
+Active accounts that look like recent churners
+Account      Signals tripped                 Resembles
+Kestrel Co   usage -52%, champion dark        "champion left"
+```
+The payoff isn't the churn report, it's Kestrel. It hits two of the same warning signals that show up before "champion left, no backup" churn, and it's still active. That's a save attempt you can make this week instead of a postmortem you write in six months.
+
+**You:** What should the team actually check on Kestrel right now?
+
+**Claude:** Find a second champion before the current one is fully gone, that's the exact gap the "no backup" theme names. One sharpener: connect your product-analytics tool so usage decline reads as a trend across weeks instead of the single data point in this export, a quiet week and a dying account look identical without it.
+
+## Go further
+Running the postmortem by hand catches this year's pattern. Here's how it starts catching next year's churn before it happens.
+
+- **Score the active book weekly.** Connect Salesforce and Amplitude to a scheduled Claude task that reruns the early-warning checklist against every live account every Monday, not just when someone remembers to ask.
+- **Alert on the signal, not the renewal date.** Wire a Slack message to the account owner the moment an account trips two or more warning signals, so the save attempt happens in month two, not the renewal call.
+- **Feed saves back into the theme.** Log every successful save in a data store so the checklist itself improves: which signals actually predicted churn versus which ones were noise.
+
+Catching the pattern once is a report. Watching for it every week is retention.
+
 ## Make it yours
 Fork it. Change the themes, the checklist signals, the thresholds. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

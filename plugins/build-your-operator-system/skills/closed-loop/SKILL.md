@@ -87,5 +87,35 @@ DO THIS FIRST
 ## Where the inputs come from
 The confidence bars are defaults, not laws. HIGH_BAR is "you said it outright"; MED_BAR is "it repeated but you never confirmed." If your work needs a stricter bar before anything touches a playbook, raise it. The separation between sure and suspected is the whole point, and it does not move.
 
+## Example chat
+**You:** Before we wrap this session, what should we actually update based on what I corrected?
+
+**Claude:** Found 3 signals in the session.
+```
+HIGH CONFIDENCE (explicit corrections)
+  1. You corrected: "route by company size, not persona."
+     Now:  "Assign owner by persona match."
+     To:   "Assign owner by company size band."
+     [ ] Apply   [ ] Skip
+
+MEDIUM CONFIDENCE (patterns, unconfirmed)
+  2. You batched the job nightly twice this week without being asked.
+     Should "nightly, not real-time" become the default in the SOP?
+```
+Nothing here is written yet, that's the whole design. The high-confidence item quotes exactly what you said, so you're approving a change you already made, not a guess about what you meant.
+
+**You:** Apply #1, leave #2 as a one-off for now.
+
+**Claude:** Applied #1 to the routing playbook, step 2. #2 stays a one-off, noted but not promoted. One sharpener: run this at the end of every session instead of just this one, a pattern that repeats a third time without being confirmed is usually the one worth turning into a rule.
+
+## Go further
+Reviewing one session by hand catches what you just corrected. Here's how the habit compounds.
+
+- **Run it automatically at session close.** Wire a scheduled Claude task to scan the day's sessions each evening and queue proposed edits for a morning approval pass, so nothing gets lost between sessions.
+- **Stage the diffs where you already work.** Connect a git repo so accepted corrections land as real pull requests against your skills and playbooks, not just text you have to paste in yourself.
+- **Track what got promoted.** Log every approved edit to a Notion or wiki changelog so the team can see which corrections became permanent rules and when.
+
+A correction made once is feedback. A correction captured every time is a system that stops repeating its own mistakes.
+
 ## Make it yours
 Fork it. Add a "retire this" pass for rules that stopped earning their place, or a monthly rollup of everything the loop learned. Cut what you do not use. The point is a system that gets better every session instead of repeating the same correction. Built by an operator. Customize it, break it, make it better.

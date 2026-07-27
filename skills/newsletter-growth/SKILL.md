@@ -93,5 +93,33 @@ Next move: connect the email tool so the plan targets your real bottleneck, not 
 ## Where the inputs come from
 The topic, audience, cadence, and offer come from you. Real opens, clicks, unsubscribes, and the growth curve come from an email or newsletter tool. Signup sources and referrers come from a web-analytics tool. Pipeline impact comes from a CRM. Every rate in the plan is illustrative until grounded in your own connected numbers, and the skill says which is which.
 
+## Example chat
+Here is the skill running on a real newsletter, start to finish.
+
+**You:** We want more subscribers. Build the growth plan for our weekly teardown newsletter.
+
+**Claude:** Offer, loops, and the metric that actually matters.
+```
+Subscribe offer: "Every Thursday, one teardown you can copy by Friday."
+
+Growth loops:
+  1. Referral: invite 3, unlock the private archive
+  2. Shareable format: each issue ends with a copy-paste checklist
+
+Metrics (north star = engaged subs):
+  Engaged (opened 2 of last 4)   track weekly
+```
+The catch worth naming: I flagged list size as the metric to ignore, not the one to chase. A newsletter can grow the raw number every week and still be dying underneath if opens are dropping, engaged subscribers is the number that tells you the truth. One sharpener: connect your email tool so opens and unsubscribes are real, right now the plan is built on your rough estimate of where you stand.
+
+## Go further
+The plan is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Watch the real numbers, not the guess.** Connect your email tool (a newsletter platform) so opens, clicks, and unsubscribes feed the plan weekly instead of a one-time estimate.
+- **Catch the leak before it compounds.** Wire a scheduled Claude task to flag the week engaged-subscriber rate drops two weeks running, so activation problems get caught before they show up in a shrinking list.
+- **Tie growth to pipeline.** Sync subscriber emails against Salesforce or HubSpot so the plan can report how many touched pipeline, not just how many opened.
+
+You built the system once, now the metrics that matter get watched every week.
+
+
 ## Make it yours
 Fork it. Change the offer, the loops, the cadence, the metric you live by. The point is not to chase a big number. It is to build an audience that opens, forwards, and eventually buys. Built by an operator. Customize it, break it, make it better.

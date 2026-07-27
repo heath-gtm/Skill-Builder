@@ -26,5 +26,28 @@ A list of where work moves between your GTM functions. No connectors. You can do
 ## The receipt
 [the one workflow you picked, and what it costs you per week today]
 
+## Example chat
+
+**You:** We're stretched thin across GTM. Feels like we need a GTM Engineer. Where should we actually start?
+
+**Claude:** Let's walk the crossings before we name a hire.
+```
+CROSSING                          COST
+Inbound lead -> sales handoff     ~6 hrs/week, hand-copied into CRM
+Trial signup -> CS onboarding     ~4 hrs/week, no owner, whoever's free
+Renewal data -> forecast roll-up  ~3 hrs/week, spreadsheet export
+```
+Inbound handoff is the most expensive and the most exposed, it is blocking pipeline, not just annoying someone. The workflow sentence: "Inbound leaks between marketing and sales." Not "we need a GTM Engineer." Key insight: naming a role is not naming a problem, it just moves the problem onto someone's job description. One sharpener: bring actual logged hours next time instead of estimates, so the ranking is real cost, not gut feel.
+
+## Go further
+Naming the workflow is step one. Here is where an operator takes it once the pick is made.
+
+- **Track the crossings automatically.** Wire a scheduled Claude task to pull weekly time-in-stage from Salesforce and flag which handoff is slipping, so the ranking updates itself instead of a quarterly guess.
+- **Catch the leak the day it happens.** Have Slack ping the workflow owner the moment a lead sits unrouted past your SLA, instead of finding it in next month's audit.
+- **Feed the pick straight into the next move.** Hand the ranked workflow to a scheduled task that drafts the signal list automatically, so Solve and Stack the Tech run back to back without re-typing the brief.
+
+Name the workflow once, and the system keeps pointing you at the next one.
+
+
 ## Next move
 Hand the workflow to Stack the Tech. Built GTM. Receipts only.

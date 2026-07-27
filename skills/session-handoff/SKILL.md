@@ -91,5 +91,41 @@ SAVE THIS?
 ## Where the inputs come from
 The sections are fixed; how the brief is saved is not. SAVE_MODE defaults to draft-only because the safe default is to write nothing. Turn on append or task-creation when you trust the flow, and it still asks every time. The discipline is the same at every level.
 
+## Example chat
+
+**You:** Wrap this session up. We spent the afternoon on the CSV importer.
+
+**Claude:** Here's the handoff.
+```
+DONE THIS SESSION
+  - Added header-mapping so the importer accepts any column order (your account, no diff connected).
+  - Fixed the duplicate-row bug on re-upload.
+
+DECISIONS
+  - Skip auto-dedupe on email alone. Too many false merges on shared inboxes.
+
+STILL OPEN -> NEXT STEP
+  - Large-file timeout -> test a 50k-row file before the next demo.
+
+WOULD BE LOST IF I WALKED AWAY
+  - The timeout only shows up past ~30k rows, and it looks like the parser,
+    not the upload. Ruled out the upload limit already, do not recheck that.
+
+SAVE THIS?
+  [ ] Append to notes   [ ] Open the 1 open item as a task
+  [ ] Commit the code    [ ] Just hand it back to me
+```
+Four sections, but the one that matters is the fragile-details one. That's the thing tomorrow-you would have re-discovered the hard way. One sharpener: connect the repo so "done this session" is grounded in the actual diff instead of your account of it.
+
+## Go further
+The handoff is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Ground every handoff in the real diff.** Connect the repo so "done this session" reads from committed changes, not memory, and the brief cannot overstate progress.
+- **Turn open items into real work automatically.** Once you approve, push the unfinished items into a task tool with the next step attached, not a restated goal.
+- **Close the loop at the start of the next session, too.** Schedule a Claude task to re-surface yesterday's fragile-details section the next time you sit down, so it never gets skipped.
+
+You write the close-out once; the system makes sure it gets read.
+
+
 ## Make it yours
 Fork it. Add a "blockers for tomorrow" line, a "who to update" line, a mood check if that helps you resume. Cut what you never use. The point is a close-out that makes tomorrow-you fast, and never surprises you by saving on its own. Built by an operator. Customize it, break it, make it better.

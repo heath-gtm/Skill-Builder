@@ -9,10 +9,21 @@ description: Turn "is this deal real?" into a deal-by-deal risk verdict. An 8-st
 Reads your open opportunities and gives each one a straight verdict: healthy, slipping, stuck, or dead. It checks whether a deal has real activity behind it, whether the rep actually qualified it, and whether they are talking to more than one person. Then it names the next move on the deals that need one.
 
 ## What you'll need
-- Required: a CRM connector (deals, stages, amounts, close dates, activity dates, contact roles).
-- Optional: a meeting or email tool, which sharpens the multi-thread and gone-dark checks.
-- Optional: a product-analytics tool, which adds usage momentum for trials.
-No CRM connected? The skill says what to connect and stops. It does not guess.
+You do not need to connect anything to get value today. Bring your deals and the skill runs now. Connect the tools below and it pulls them automatically and adds signals you cannot paste by hand.
+
+- Works today with: a list of your open deals, with stage, amount, close date, last activity date, and the contacts on each. Paste it or upload a CSV.
+- More powerful connected to a CRM: it reads all of the above automatically, across the whole pipeline.
+- Sharper with a meeting or email tool: tightens the multi-thread and gone-dark checks.
+- Sharper with a product-analytics tool: adds usage momentum on trials.
+
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
+
+- **Bring your data**: paste or upload your list (a deal export, a stage CSV). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
 
 ## Customize this for yourself
 This was built for a B2B SaaS org running a staged pipeline. Set these to your stack:
@@ -75,6 +86,32 @@ Next moves:
 
 ## Where the numbers come from
 DARK_DAYS (14), STUCK_DAYS (21), and the multi-thread cutoff (2 contacts in 30 days) are defaults, not laws. They suited a mid-market SaaS cycle. If your deals run longer, raise them. The logic does not change. The thresholds are yours.
+
+## Example chat
+Here is the skill running on a real pipeline export, start to finish.
+
+**You:** Run deal health on my pipeline, here's the export. [pastes CSV]
+
+**Claude:** Scored all 7 against the 8-state taxonomy.
+```
+Account     Stage / ARR    Risk      Days-Dark   Why
+Northwind   Eval/$112K     GHOST     47          Zero activity, all sources
+Vertex      Prop/$67K      SLIP      12          Champion went quiet
+```
+The catch: Northwind has been sitting in your Best Case column for a month with zero activity across every source. That is not a slipping deal, it is a dead one still counted in forecast.
+
+**You:** Is Vertex sandbagged or actually healthy?
+
+**Claude:** Checked the qualification-vs-stage gap: Vertex claims Proposal but the decision-dynamics field is empty, no named economic buyer. That is a real gap, not paperwork. The deal should not be this far along without it. One sharpener: connect a meeting tool so days-dark counts actual call activity, not just CRM-logged touches.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Run this before every forecast call.** Schedule a Claude task to score the full pipeline every Thursday and post the GHOST and STUCK deals to the sales leader's Slack DM.
+- **Catch commit-creep in real time.** Connect Salesforce field-history tracking so any deal moving from Commit to Best Case triggers an alert the same day, not two weeks later.
+- **Tighten the multi-thread check.** Connect Gong or your email tool so days-dark and contacts-engaged pull from real conversation data instead of manually logged activity.
+
+The read is only as good as its refresh rate. Automate the refresh.
 
 ## Make it yours
 Fork it. Change the states, the thresholds, the fields. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

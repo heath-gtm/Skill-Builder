@@ -39,5 +39,30 @@ Example (illustrative):
 
 Performance log: empty until outcomes come back in Episode 4.
 
+## Example chat
+**You:** We should be tracking signals like funding rounds and new hires. Help me build a real signal library, not just a list of alerts.
+
+**Claude:** Built the first pass, five signals with the parts that make it actually usable.
+```
+Signal              Detection          Points  Decay     Combo
+New RevOps hire      job-title change   +30     90 days   +15 with fresh funding
+Pricing page x3       product analytics +20    14 days   +20 with active trial
+Series B raised        funding source    +25    120 days  +15 with headcount growth
+```
+The part most lists skip: decay. A Series B from 150 days ago isn't the signal it was on day 10, and without decay your "hot" list quietly fills with stale accounts nobody should be prioritizing anymore.
+
+**You:** What about when two signals hit the same account?
+
+**Claude:** That's the combo bonus. A Series B plus a new RevOps hire isn't a 65-point account, it's an 80-point account, because budget exists and someone is actively rebuilding the stack. One sharpener: leave the performance log empty for now, but wire it up once outreach starts landing, that's what turns this from a static list into a system that learns which signals actually book meetings.
+
+## Go further
+Defining the signals is the design work. Here's how they start firing on their own.
+
+- **Detect them live.** Connect Clay or a Crunchbase feed for funding, a job-board scrape for hires, and Amplitude for usage spikes, so each signal fires the moment its detection method sees it instead of you checking manually.
+- **Score and decay automatically.** Run a scheduled Claude task nightly that recalculates every account's score against the decay curve, so the active list always reflects real urgency, not last month's snapshot.
+- **Close the loop with performance data.** Feed booked-meeting outcomes back from Salesforce into the performance log so the library learns which signals actually convert, and the weak ones get retired.
+
+A signal library that decays and learns is worth more than a longer list of alerts.
+
 ## Next move
 Score the accounts your signals fire on, then wire the freshest one to a motion before it goes stale. Built GTM. Receipts only.

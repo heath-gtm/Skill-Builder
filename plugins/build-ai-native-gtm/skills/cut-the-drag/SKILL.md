@@ -32,5 +32,33 @@ Example (illustrative):
 - Kept with the rep: the discovery conversation and the qualification call.
 Selling time returned: roughly a day a week per rep.
 
+## Example chat
+Here is the skill running on a real workflow, start to finish.
+
+**You:** We built out the stacked workflow for outbound prospecting. What's still eating rep time that shouldn't be?
+
+**Claude:** Walked the workflow step by step and asked the one question: does a rep have to do this to sell, or does it just have to be done before they sell?
+```
+Task                          Rep does it now    Verdict
+Score + enrich the account    Yes, ~20 min       Drag. Move before rep opens it.
+Pull last 3 touches           Yes, ~10 min       Drag. Move before rep opens it.
+Draft the outreach angle      Yes, ~15 min       Drag. First-draft it, rep edits.
+Run the actual call           Yes                Not drag. Keep with rep.
+```
+Three of four tasks are drag, and none of them require rep judgment, just execution before the rep opens the account. That is about 45 minutes back per account touched.
+
+**You:** Good. What about auto-sending the outreach once it's drafted?
+
+**Claude:** Flagging that one, not cutting it. Auto-send on a first-draft outreach to a net-new account is exactly the not-yet case: the message needs a human read before it goes out, at least until the draft quality is proven over a few weeks. Route it to a review queue instead of straight to send. One sharpener: connect the CRM so I can pull real hours-logged-per-task instead of estimates, so the receipt is measured, not guessed.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Run the drag nightly, not on demand.** Point a scheduled Claude task at the CRM overnight so every account is scored, enriched, and pre-briefed before reps log in.
+- **Watch for drag creeping back.** Have Slack ping the team lead whenever a quick manual task shows up three times in a week, before it hardens into new busywork.
+- **Wire the not-yet queue to a human gate.** Send anything flagged for review, like the auto-send case, into a Slack approval thread so a person still owns the risky sends.
+
+The cut is only real if the freed hours stay freed. That is the thing to watch.
+
 ## Next move
 Hand the cleared workflow to Keep the Judgment. Built GTM. Receipts only.

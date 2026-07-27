@@ -48,5 +48,39 @@ Transcript:
 [paste]
 ```
 
+## Example chat
+
+**You:** I need a prompt that summarizes customer calls for the product team. They haven't heard the call.
+
+**Claude:** Built it from the job backward.
+```
+You are a customer-research analyst. Summarize the call transcript below for a
+product team that has not heard the call.
+
+Output exactly these sections:
+- One-line verdict (did this account love it, like it, or struggle)
+- 3 quotes that prove the verdict, with the speaker role
+- The one feature request that came up
+- The next step the rep committed to
+
+Rules: quote the customer's own words, never paraphrase a quote. If a section
+has no evidence in the transcript, write "none stated." Do not infer sentiment
+the words do not support.
+```
+The rule against inferring sentiment is the piece doing the real work here. Without it, a model will happily invent a verdict from tone alone, and product will read a summary that sounds confident but isn't grounded in anything said.
+
+**You:** Can you make it work for GPT instead of Claude?
+
+**Claude:** Same structure, the format section and the failure-mode rules travel across models unchanged, only the framing at the top shifts slightly for how GPT tends to read instructions. Sharpener: tell me your house defaults (tone, what to always avoid, standing context like your company and audience) once, and every prompt after this one starts from that baseline instead of being rebuilt from scratch.
+
+## Go further
+One well-built prompt is a single task solved. Here's what it looks like running as infrastructure.
+
+- **Turn it into a repeatable column.** Feed the prompt into Clay as an enrichment column so every new call transcript gets summarized the same way automatically, not one at a time.
+- **Run it on a schedule.** A scheduled Claude task applies the prompt to every call logged that day and posts the summaries to Slack for the product team each morning.
+- **Version it like code.** Keep the prompt in a shared doc or repo with a changelog, so when the output drifts, you can see exactly which rule changed and roll it back.
+
+A good prompt gets the same answer twice. The system is what gets it a thousand times without you watching.
+
 ## Make it yours
 Set your target model and your defaults once. Then describe any task and get a prompt that leaves nothing to chance. Built by an operator. Customize it, break it, make it better.

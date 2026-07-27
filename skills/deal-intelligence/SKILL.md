@@ -129,5 +129,36 @@ Next moves:
 ## Where the numbers come from
 STUCK_DAYS (30), STALE_DAYS (14), and the concentration cutoffs (30% single deal, 50% single rep) are defaults, not laws. They suited a mid-market SaaS cycle. If your deals run longer, raise them. The logic does not change. The thresholds are yours.
 
+## Example chat
+Here is the skill running both modes on the same deal, start to finish.
+
+**You:** How's my forecast looking this week? Here's the export.
+
+**Claude:** Ran the numbers read first.
+```
+Forecast gap: Commit + Best Case covers 71% of the remaining target.
+Top 3 riskiest: Northwind ($112K, Commit, no named decision maker),
+Vertex ($67K, stuck 34 days), Halborn ($40K, close date already past).
+```
+Commit alone does not cover the gap, and your riskiest deal is sitting in Commit with a qualification field empty.
+
+**You:** Pull the conversation read on Northwind, I've got the meeting notes. [pastes notes]
+
+**Claude:** Mapped it to MEDDPICC.
+```
+Verdict: COMMIT_RISK. No named decision maker, next steps have no date.
+Problems EARNED, Value EARNED, Decision GAP, Champion present but junior.
+```
+The insight: this deal was scored Commit on activity volume, not qualification, and the gap that matters, the decision maker, has been open since discovery. One sharpener: connect the CRM's qualification fields so future reads pull the framework state directly instead of re-scoring from notes each time.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Run the numbers read every Monday automatically.** Schedule a Claude task against Salesforce to post the forecast-gap summary to the sales leader's channel before the pipeline review.
+- **Feed the conversation read from real calls.** Connect Gong or another transcript tool so the qualification quotes come from the actual meeting, not a typed-up recap.
+- **Turn commit-risk flags into action.** Have Slack notify the deal owner the moment a Commit deal loses a required qualification field, tied straight to the CRM field change.
+
+Know what is real before the review, not during it.
+
 ## Make it yours
 Fork it. Change the modes, the thresholds, the framework, the fields. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

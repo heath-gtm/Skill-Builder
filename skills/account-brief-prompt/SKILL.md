@@ -45,5 +45,44 @@ Material:
 [paste notes, CRM export, links]
 ```
 
+## Example chat
+**You:** I want a prompt I can reuse to turn my messy account notes into a one-page brief every time.
+
+**Claude:** Built it. Five fixed sections, a four-label verdict scale, and a hard rule against guessing.
+```
+Output exactly these sections:
+- Verdict: Reach out / Monitor / Nurture / Pass, plus one sentence why
+- Why: 3 bullets, each a fact from the material
+- People: named contacts; mark the one to reach out to first
+- Competitive flag: any competitor named, else "none found"
+- Next move: one sentence, naming the person and the angle
+
+Rules: use only what is in the material. If a section has no evidence, write "unknown."
+```
+The part that actually saves you: it writes "unknown" instead of inventing a contact when your notes are thin, so a bad brief looks bad instead of looking confident.
+
+**You:** Run it on this account. [pastes notes]
+
+**Claude:**
+```
+Verdict: Monitor. Real interest but no economic buyer named yet.
+Why: - Champion (Dana, Ops Lead) opened pricing page twice
+     - Team of 40, matches ICP size band
+     - No stated timeline in the notes
+People: Dana (Ops Lead), reach out first. Economic buyer: unknown.
+Competitive flag: none found
+Next move: Ask Dana who signs off on tools over $10K.
+```
+One sharpener: paste in your last three account briefs that felt right, and I'll tighten the verdict scale to match how you actually talk about deals, not the default four labels.
+
+## Go further
+Running the prompt by hand proves the shape works. Here's how it scales.
+
+- **Turn it into a Project.** Save the prompt as a Claude Project with your CRM notes format pinned, so every rep on the team gets the same brief shape without re-explaining the rules.
+- **Trigger it from the CRM.** Wire a Salesforce or HubSpot workflow so any account crossing a stage automatically drops its notes into the prompt and posts the brief to Slack.
+- **Batch it weekly.** Point a scheduled Claude task at your whole active pipeline every Monday morning and get one brief per account waiting before standup.
+
+One prompt, reused on every account, is worth more than one perfect brief.
+
 ## Make it yours
 Set your sections, your verdict scale, and your house rules. The skill hands you a prompt you paste once into a Project or a saved prompt and run on every account from then on. Built by an operator. Customize it, break it, make it better.

@@ -9,11 +9,21 @@ description: Your won/lost/churn pattern analyst. Connect a CRM plus a product-a
 This skill reads your closed-won, closed-lost, and churned accounts and finds the repeating patterns inside them. It runs in three modes. WON tells you what your winning deals have in common and generates a ranked list of active accounts that look like them. LOST tells you where, how, and to whom you lose, with the objections rolled up. CHURN groups your lost customers into named themes and then scans your active book for accounts that match those themes before they leave.
 
 ## What you'll need
-- A CRM, for the closed-won, closed-lost, and churn cohorts plus account fields (size, industry, stage, loss reason, competitor, deal type).
-- A product-analytics tool, for activity and engagement signals on active accounts (used by predictive churn).
-- Optional: a conversation-intelligence tool for objection and competitive-mention extraction, and a support tool for churn-ticket patterns.
+You do not need to connect anything to start. Bring your closed and churned deals and the skill runs today. Connect the tools below and it pulls the cohorts automatically and adds signals you cannot paste by hand.
 
-No CRM connected? The skill says what to connect and stops. It does not guess.
+- Works today with: exports of your closed-won, closed-lost, and churned accounts, with fields like size, industry, loss reason, and competitor. Paste or upload.
+- More powerful connected to a CRM: the three cohorts and their fields, live.
+- More powerful connected to a product-analytics tool: engagement decay, which powers the predictive-churn scan.
+- Sharper with a conversation-intelligence tool (objections, competitive mentions) and a support tool (churn-ticket patterns).
+
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
+
+- **Bring your data**: paste or upload your list (a deal export, a stage CSV). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
 
 ## Customize this for yourself
 | Set this | What it is | Default / Example |
@@ -64,6 +74,33 @@ CHURN (n=8, 12 months):
 
 ## Where the numbers come from
 Defaults to re-tune: win/loss windows 6 months trailing, churn window 12 months, pattern floor of 5 occurrences before something is named a pattern. Lookalike and churn-match scores are built from your segment fields; add or drop dimensions to fit what predicts outcomes in your data. The activity-decay threshold flags an at-risk account; tune it to your product's normal usage rhythm. Re-tune the windows and the pattern floor first.
+
+## Example chat
+
+**You:** Run the churn mode on last year's losses and tell me who in the active book looks like them.
+
+**Claude:** Grouped the churns into named themes and scanned the active book.
+```
+CHURN (n=8, 12 months):
+  Consolidation / layoff (n=3), acquisition (n=2), feature gap (n=2)
+  PREDICTIVE WATCH:
+    Account F, consolidation pattern (73%): team 22 to 14, activity -47%
+    Account G, champion-left pattern (68%): champion changed jobs 21d ago
+```
+Account G is the one worth calling today. A champion change 21 days ago is an early signal, not a lagging one, and it's a pattern we've seen precede churn twice this year.
+
+**You:** Is that confidence score reliable with only 8 churns in the sample?
+
+**Claude:** Good catch, that's below the 5-occurrence floor for calling something a firm pattern on its own, but consolidation clears it at n=3 within the theme. Champion-left only has n=1 backing Account G's match, so I'm labeling that one low-confidence rather than dropping it. Sharpener: connect a conversation-intelligence tool so champion-change signals get caught from call transcripts instead of relying on a manual note.
+
+## Go further
+Running this quarterly on an export proves the patterns hold. Here's the version that watches the active book continuously.
+
+- **Scan the book every week, not once a quarter.** A scheduled Claude task reruns the predictive-churn match against Salesforce weekly and only surfaces accounts whose risk score moved.
+- **Catch the champion-left pattern the day it happens.** Connect Gong or a similar conversation-intelligence tool so a champion mentioning a new role gets flagged automatically instead of waiting for the account owner to notice.
+- **Feed WON mode straight into prospecting.** Push the lookalike list into Clay or your outbound tool so the accounts that score closest to your winning pattern become a working list, not a slide.
+
+The patterns are only useful the week you'd actually act on them.
 
 ## Make it yours
 Map the fields, set your windows, and decide which signals predict a win and a churn in your business. Built by an operator. Customize it, break it, make it better.

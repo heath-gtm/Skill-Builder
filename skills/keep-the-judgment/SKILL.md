@@ -26,5 +26,29 @@ One workflow that has been solved, stacked, and had its drag cut. No connectors 
 ## The receipt
 [one owner, one context doc, one running automation, one recurring review, on one workflow]
 
+## Example chat
+Here is the skill running on a real handoff, start to finish.
+
+**You:** We just cut the drag on our lead-routing workflow. How do I make sure it doesn't fall apart in a month?
+
+**Claude:** Here's the handoff, the four threads named.
+```
+Context doc:  routing-rules.md (ICP, SLA timers, fallback logic)
+Tooling:      one automation, the round-robin assignment
+Owner:        RevOps lead, named, not "the team"
+Rhythm:       biweekly review, calendar hold, not a Slack channel
+```
+The failure mode this catches: you were about to keep the judgment in a Slack thread, which is exactly how drift wins. A standing review is the difference between an owner and an orphan. One sharpener: name the actual person for the rhythm review right now, before this doc goes stale waiting on a decision nobody's made.
+
+## Go further
+The handoff is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Put the rhythm on the calendar for real.** Use a scheduled Claude task to generate the biweekly review agenda from the last two weeks of routing exceptions, so the owner walks in with the drift already surfaced.
+- **Catch context rot automatically.** Flag the context doc in Slack if it hasn't been touched in 60 days, so nobody's running rules that quietly went stale.
+- **Track ownership across every workflow you've cut.** Log each workflow's owner and last-review date in a Notion or Airtable table, so "no orphan workflows" is a fact you can check, not a hope.
+
+You handed off the judgment once, now the system checks that it's still being kept.
+
+
 ## Next move
 Repeat the loop on the next most expensive workflow. Built GTM. Receipts only.

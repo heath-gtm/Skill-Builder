@@ -33,5 +33,37 @@ Example (illustrative):
 - Must-have: a dedicated RevOps owner. Red flag: no CRM of record.
 - Evolution log, 2026-07-26: tightened Tier 1 from over 25 reps to over 50 after three sub-50 deals stalled on no owner.
 
+## Example chat
+Here is the skill running on a real fuzzy ICP, start to finish.
+
+**You:** Define our ICP for real. We keep saying "Series B SaaS" but reps chase everything.
+
+**Claude:** Turned the category into a definition.
+```
+Tier 1: Series B to D B2B SaaS, 50-500 reps, a RevOps leader in seat,
+on Salesforce plus an outreach tool. Trigger: new VP of Sales in last 90 days.
+Anti-ICP: seed stage, no RevOps function, founder-led sales only.
+Must-have: a dedicated RevOps owner. Red flag: no CRM of record.
+```
+The gap this closes: "Series B SaaS" alone does not tell a rep whether to chase a company with no RevOps owner. The anti-ICP does.
+
+**You:** Log why we're tightening it. We used to take anything over 25 reps.
+
+**Claude:** Added the evolution-log entry.
+```
+Evolution log, 2026-07-26: tightened Tier 1 from over 25 reps to over 50
+after three sub-50 deals stalled on no owner.
+```
+One sharpener: connect a CRM export so the tier criteria get checked against your actual renewed and expanded accounts instead of memory.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Score every account against it automatically.** Feed the tier definitions into a composite-scoring workflow that runs against Salesforce nightly, so fit is not a one-time judgment call.
+- **Catch drift as the market shifts.** Schedule a Claude task quarterly to compare closed-won and churned accounts against the current tiers and flag when the anti-ICP needs updating.
+- **Push it downstream automatically.** Wire the ICP definition into Clay or an enrichment tool so new leads get scored against your real tiers the moment they hit the CRM.
+
+Hand the ICP to Positioning so your message speaks to exactly who you just defined. Built GTM. Receipts only.
+
 ## Next move
 Hand the ICP to Positioning so your message speaks to exactly who you just defined. Built GTM. Receipts only.

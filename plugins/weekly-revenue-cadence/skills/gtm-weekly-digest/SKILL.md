@@ -84,5 +84,30 @@ Needs attention
 ## Where the numbers come from
 The change flag (+/- 15%) and the choice of three headline numbers are defaults, not laws. They suited a weekly SaaS cadence. If your week is noisier, widen the flag. If your funnel turns on different metrics, swap the three. The logic does not change. The thresholds are yours.
 
+## Example chat
+**You:** Give me the Monday digest, here's this week's numbers vs last week.
+
+**Claude:** Here's the one screen.
+```
+New ARR       $110K wk  vs $125K plan   -12% wk/wk
+Pipeline      $210K created            +18% wk/wk
+Net retention 98%                      flat
+
+Needs attention
+  1. Sales: two deals slipped, ~$90K. Pull to a decision.
+  2. CS: Delta Co dark 30d with a renewal in 75d. Re-engage.
+```
+Pipeline is up but New ARR is down, that combination usually means deals are stuck mid-funnel, not that generation slowed. Worth a look at stage velocity before Wednesday.
+One sharpener: connect a CS platform so the retention line reflects real churn risk instead of a flat number you typed in.
+
+## Go further
+The digest works from numbers you paste each week. Here is where it stops taking someone an hour to assemble.
+
+- **Ship it every Monday without anyone building it.** A scheduled Claude task pulls Salesforce and your CS tool every Sunday night and has the digest waiting in Slack Monday morning.
+- **Route attention items to the owner directly.** Instead of a shared list, DM each flagged item to the named owner so nothing needs a second pass to get assigned.
+- **Trend the three numbers over time.** Push the weekly output into a sheet or BI tool so twelve weeks from now you can see the pattern, not just this week's snapshot.
+
+The team starts Monday already looking at the right three numbers, not digging for them.
+
 ## Make it yours
 Fork it. Change the three, the stages, the flags. The point is not to run someone else's digest. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

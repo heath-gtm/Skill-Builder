@@ -83,5 +83,26 @@ Tier actions:
 ## Where the numbers come from
 The scores, weights, and thresholds come from the inputs you paste or the tools you connect. Nothing above is a real customer number; it is illustrative. The default weights (adoption 40, relationship 20, support 15, engagement 15, commercial 10) are a starting point tuned for one SaaS book, not a law. When an input is missing, the model redistributes weight and tells you which signal would sharpen the score.
 
+## Example chat
+**You:** Build a health score for my renewal book, here's the account list with usage, support tickets, and sponsor status.
+
+**Claude:** Built it on four inputs: adoption (40%), relationship (20%), support (15%), engagement (15%), commercial (10%).
+```
+Account      Score   Tier     Up                 Down
+Account B    61      YELLOW   adoption           champion quiet
+Account D    34      RED      none material      no usage, no sponsor
+```
+Account D looks red for the obvious reason: no usage, no sponsor. Account B is the one to actually watch. Adoption is fine, the flag is a quiet champion, which usage data alone would never catch.
+One sharpener: connect a support or ticketing tool so the support input reflects real ticket sentiment instead of the raw count you gave me.
+
+## Go further
+The model works from a pasted book. Here is where the score stops being a snapshot and starts being a live signal.
+
+- **Rescore the book nightly.** A scheduled Claude task recomputes every score against live Amplitude usage and Salesforce data overnight, so a color never lags reality by more than a day.
+- **Alert only on the flips.** Have it DM the CSM in Slack just the accounts that changed tier since yesterday, not the whole book, so the signal doesn't get lost in the noise.
+- **Turn red into a tracked play.** Feed every RED tier into an escalation or save-play skill automatically, so the score doesn't just sit there, it triggers the next move.
+
+A score nobody acts on is a dashboard. A score that triggers the next move is a system.
+
 ## Make it yours
 Fork it. Change the inputs, the weights, the cutoffs, the action per tier. The point is not to run someone else's health score. It is to run one you can defend in a QBR and act on the same day. Built by an operator. Customize it, break it, make it better.

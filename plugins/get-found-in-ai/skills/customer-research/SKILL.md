@@ -91,5 +91,40 @@ Next move: connect the CRM to build the churned + near-miss slate you cannot get
 ## Where the inputs come from
 The goal and the customer picture come from you. A representative slate by segment and outcome comes from a CRM once connected. Themes, counts, and verbatim quotes come from transcripts or notes you paste. Optional quantitative confirmation comes from a survey tool. Every finding is traceable to a real quote, and the skill will not manufacture one.
 
+## Example chat
+Here is the skill running on a real positioning study.
+
+**You:** We want to know why buyers pick us over the alternatives, in their own words. Design the study.
+
+**Claude:** Study's designed, and the sample is the part most teams get wrong.
+```
+Slate (12 interviews):
+  4 recent buyers · 3 long-time customers · 3 churned · 2 near-misses
+Guide opening question:
+  "Walk me through what was going on right before you started
+  looking." (not: "why did you choose us?")
+```
+Interviewing only happy customers only teaches you why happy people are happy, the churned and near-miss voices are what actually explain the decision. The opening question is deliberately broad so the buyer tells their own story before anyone steers it toward a compliment. One sharpener: connect your CRM so the near-miss and churned slate is pulled from real accounts, not a guess at who those people even were.
+
+**You:** I ran 6 interviews. Here are the transcripts, pull the themes.
+
+**Claude:** Pulled, and one theme is stronger than your current homepage copy.
+```
+Theme              Support   Verbatim
+"manual + slow"     5/6       "I was doing it by hand every Friday"
+Trigger = new hire  3/6       "we grew and it just broke"
+```
+"Manual and slow" showing up in 5 of 6 interviews, in nearly identical language, is a strong enough pattern to lead your positioning with, not bury in a feature list. That phrase, "by hand every Friday," is more specific and more human than anything currently on the site. One sharpener: run 4 to 6 more interviews to hit full saturation, right now this reads as a strong lead, not yet a locked finding.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Build the slate without the manual pull.** Connect Salesforce so every future study auto-generates a representative sample across segment and outcome, not just whoever's easiest to reach.
+- **Turn transcripts into copy on a cadence.** Point a scheduled Claude task at your notes tool monthly and refresh the theme list as new interviews land, so messaging tracks live language instead of a study that ages out.
+- **Validate the theme at scale.** Push the top qualitative themes into a quick survey tool to confirm the pattern holds beyond 6 interviews before it becomes the homepage headline.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Change the segments, the guide, the number of interviews, the way you code themes. The point is not to run a generic study. It is to hear your customers in their own words and turn those words into positioning that lands. Built by an operator. Customize it, break it, make it better.

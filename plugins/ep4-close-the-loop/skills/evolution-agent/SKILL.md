@@ -87,5 +87,27 @@ Review first: churn prediction at 67%. Tighten it or lower its confidence.
 ## Where the numbers come from
 RETIRE_DAYS (90), the 75% accuracy floor, and the trailing-90-day window are defaults from one team's cadence, not laws. A fast-moving library wants a shorter unused window; a high-stakes one wants a higher accuracy floor. Re-tune them to how much risk you carry. The loop (read both streams, attribute honestly, propose, approve) does not change. The thresholds are yours.
 
+## Example chat
+**You:** Pull together what we've learned this month across the skill library, what should we change?
+
+**Claude:** Ran the pass. Four proposals, one of them urgent.
+```
+1. Tighten the fit rubric: STRONG_FIT converted 82%, FIT 79%. Collapse to one tier.
+2. Retire an unused skill: invoked twice in 180 days, both tests.
+3. Add a term to the tech-stack list: a new tool named in 12 calls this month.
+4. Propose a new workflow: same 3 skills fired together 17 times.
+```
+Accuracy on churn prediction dropped to 67%, below the 75% floor. That's the one to review first, not the rubric tweak, even though the rubric tweak is the easier fix to ship.
+One sharpener: connect the outcome source (your CRM) so the accuracy numbers update automatically instead of me asking you to paste last month's results.
+
+## Go further
+The manual pass proves the loop works. Here is what it looks like running continuously.
+
+- **Run the pass on a schedule.** Put this on a monthly scheduled Claude task so drift gets caught before a quarter goes by, not after.
+- **Feed it real reactions.** Connect Slack reactions and Amplitude click-through so implicit and explicit feedback both flow in without anyone logging them by hand.
+- **Ship proposals as diffs.** Wire a GitHub connection so each proposed change lands as a pull request against the SKILL.md, ready for one-click review instead of a paragraph to re-type.
+
+You still approve every merge. The pass just stops depending on someone remembering to run it.
+
 ## Make it yours
 Fork it. Change the feedback sources, the floors, the windows, the change types. The point is not to run someone else's improvement loop. It is to make your own skills compound instead of rot, with a human on every merge. Built by an operator. Customize it, break it, make it better.

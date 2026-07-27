@@ -83,5 +83,29 @@ Next: connect a web-analytics tool to confirm which section leaks most.
 ## Where the inputs come from
 The URL or page copy and the GOAL_ACTION come from you. There are no hard thresholds here, CRO is directional, so lift is always expressed as a direction, not a number. Bounce, scroll depth, and drop-off come from a connected web-analytics tool, and cross-page comparisons from a connected CMS. The priorities are yours to reorder.
 
+## Example chat
+Here is the skill running on a real page, start to finish.
+
+**You:** Audit my trial signup page. Here's the URL and the copy.
+
+**Claude:** Five fixes, ranked by effort against impact.
+```
+1. LOW -> HIGH  ^  Headline says what you do, not who it's for.
+                    Add the audience: "for RevOps teams."
+2. LOW -> HIGH  ^  CTA reads "Submit." Change to "Start free trial."
+3. MED -> HIGH  ^  Form asks for 7 fields. Cut to email + name.
+```
+The catch worth naming: your form is the highest-effort fix on the list but it's sitting at #3, because a headline rewrite and a button-text change are both LOW effort and HIGH impact, and cheap wins ship first. One sharpener: connect a web-analytics tool so I can confirm which section is actually leaking instead of ranking off the page alone.
+
+## Go further
+The audit is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Re-audit every time the page changes.** Wire a scheduled Claude task to pull the live page weekly and diff the fix list against what's shipped, so nothing regresses silently.
+- **Ground every fix in real drop-off.** Connect Amplitude or a web-analytics tool so the ranked list targets the section actually losing visitors, not just the section that looks weak.
+- **Turn the top fix into a ticket automatically.** Push the #1 ranked fix into Linear or your CMS's task queue the moment the audit runs, so it doesn't sit in a doc nobody opens.
+
+You built the worklist once, now it keeps itself current with the page.
+
+
 ## Make it yours
 Fork it. Change the four buckets, the way fixes are ranked, the proof you count. The point is not to grade a page against a rubric. It is to ship the change that gets one more visitor to say yes this week. Built by an operator. Customize it, break it, make it better.

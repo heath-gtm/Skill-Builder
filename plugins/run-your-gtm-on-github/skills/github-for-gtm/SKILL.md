@@ -50,5 +50,26 @@ A .gitignore file simply lists what git should ignore, like .env. A good starter
 ## The receipt (writes)
 [your context repo, private, cloned or created, with your first commit pushed and a .gitignore protecting your keys]
 
+## Example chat
+**You:** I want Claude to manage my context repo git for me, I don't want to touch the terminal or GitHub Desktop.
+
+**Claude:** That works. I'll edit a file, then stage, commit, and push it for you.
+```
+$ git add context/icp.md
+$ git commit -m "Add ICP tiers v2"
+$ git push
+```
+You just review the diff before I commit, same as you'd review anything else I write. The one thing that would burn you here: if a CRM export or an API key ever lands in a context file, it's in git history the moment I commit it, and that's hard to undo.
+One sharpener: add a .gitignore now, before the first real commit, so a stray .env file never gets the chance.
+
+## Go further
+Knowing the mental model is the prerequisite. Here is what running the repo looks like once it's second nature.
+
+- **Let Claude Code own the git dance entirely.** Skip GitHub Desktop altogether, have Claude stage, commit, and push on every session while you just glance at the diff.
+- **Guard the repo automatically.** Add a pre-commit check that blocks a commit containing anything that looks like an API key or a CRM export, so the rule isn't just something you have to remember.
+- **Sync teammates without a git lesson.** Point teammates at GitHub Desktop's Pull button only, so they get the latest context before a call without ever touching a terminal.
+
+The repo runs itself. You just review what changed.
+
 ## Next move
 Now build the brain. Hand off to the Context Pack to write CLAUDE.md. Built GTM. Receipts only.

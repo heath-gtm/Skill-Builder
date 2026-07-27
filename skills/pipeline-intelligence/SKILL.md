@@ -129,5 +129,30 @@ MONTHLY QUALITY · 1 flag worth the meeting
 ## Where the numbers come from
 The coverage bands (3x healthy, below 2x concerning), the Engaged window (14 days), the concentration cutoff (40% of the cohort by one rep), and the trailing baseline (3 months) are defaults, not laws. They suited a mid-market SaaS motion. If your cycle runs longer or your channels behave differently, re-tune them. The logic does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** Is this month's pipeline any good? Here's the new-opp export plus our fit scores.
+
+**Claude:** Ran the quality read and found the flag worth the meeting.
+```
+MONTHLY QUALITY · 1 flag worth the meeting
+  False negative: Northwind. Your score Low, independent verdict Strong. $62K.
+  You almost passed on a real fit. Re-open it.
+```
+That's the headline. Your own fit score and the independent verdict disagree on Northwind, and your score is the one that's wrong. It's currently sitting deprioritized at $62K.
+
+**You:** Anything else worth flagging before I bring this to the team?
+
+**Claude:** One more. Outbound is at 0.5x coverage against target, well below the 2x floor that usually means trouble, so I'd open the review with pipeline generation, not deal review. Sharpener: connect an ICP-scoring tool so every monthly read cross-checks your own score automatically instead of running on one signal, which is the only reason Northwind surfaced this time.
+
+## Go further
+This read is a once-a-month pull today. Here's what it looks like running on its own.
+
+- **Run the quality read on the first business day, automatically.** A scheduled Claude task pulls the new-opp cohort from Salesforce and rebuilds the nine-section report before the pipeline review is even scheduled.
+- **Catch the false negative same-week, not same-month.** Connect an ICP-scoring tool so every new opportunity gets cross-scored the day it's created, and disagreements DM the deal owner in Slack.
+- **Turn the daily lists into a live queue.** Push the five ranked top-10 lists into Salesforce as tasks with the engagement angle attached, so "who do I work next" is answered before the rep opens their laptop.
+
+The three questions don't change month to month. What changes is how fast you get the answer.
+
 ## Make it yours
 Fork it. Change the modes, the lists, the fit score, the thresholds. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

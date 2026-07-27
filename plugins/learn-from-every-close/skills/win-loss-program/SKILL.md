@@ -82,5 +82,28 @@ Changes:
 ## Where the numbers come from
 SAMPLE (10 to 20), PATTERN_BAR (3+ deals), and the MIX split are defaults, not laws. They suited a mid-market competitive motion. If your deal volume is lower, run smaller rounds more often and let patterns build over time. The coding logic does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** We've closed 14 deals this quarter, can you build a win-loss round?
+
+**Claude:** Built the slate and the guide.
+```
+Sample: 6 lost, 5 won, 3 no-decision, mix of segments and 2 competitors
+Themes: Product gap (integration missing) - 5 deals - FINDING
+        Message: value story unclear early - 4 deals - FINDING
+        Price stated as reason - 4 deals - probe showed it was fit, not price
+```
+Key insight: "price" showed up in 4 deals as the stated reason, but the probe questions revealed it was actually a fit mismatch dressed up as price, that is the whole reason to run structured interviews instead of trusting the CRM's closed-lost field. One sharpener: connect a call-recording tool so the coding is grounded in what buyers actually said, not a rep's summary of the call.
+
+## Go further
+The round is coded. Here is where an operator takes it once the manual version proves out.
+
+- **Pull the sample without manual CRM digging.** A scheduled Claude task pulls closed-won and closed-lost from Salesforce every quarter and proposes the interview slate automatically, mixed across segments and competitors.
+- **Mine the calls you already have.** Run past discovery and closing calls through Gong to pre-code themes before a single interview is booked, so live conversations go deeper instead of covering ground you already have.
+- **Turn findings into tracked work.** Push each finding with its owner and deadline straight into a task tool or Slack channel for PMM and product, so "the value story is unclear" does not die in a deck.
+
+The interviews find the pattern; the automation is what makes sure it turns into a shipped change.
+
+
 ## Make it yours
 Fork it. Change the themes, the sample, the owners. The point is not to run someone else's win-loss deck. It is to run yours, coded across deals and ending in a change someone actually ships. Built by an operator. Customize it, break it, make it better.

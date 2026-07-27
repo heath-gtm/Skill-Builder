@@ -89,5 +89,29 @@ Next moves:
 ## Where the inputs come from
 TIERS (3), ORCH_WINDOW (10 days), and the fit rules are defaults, not laws. They suited a mid-market ABM motion. The accounts, roles, and triggers above are examples, illustrative only, not real companies. The method does not change when your list does. Set the tiers, the channels, and the window to your motion and the play shapes itself around it.
 
+## Example chat
+**You:** I've got 12 target accounts for Q3. Can you tier them and build the play?
+
+**Claude:** Tiered. 3 accounts earned Tier 1.
+```
+Tier 1 (1:1)     3 accts   named initiative + committee mapped
+Tier 2 (1:few)   5 accts   grouped on shared pain
+Tier 3 (1:many)  4 accts   ICP program only
+```
+Acme Corp is Tier 1: new VP hired with a mandate to consolidate tooling, that's the angle. Champion is engaged, economic buyer is still dark, that's the open thread. The catch worth flagging: two of your "Tier 1" picks only had size going for them, no real trigger, so I dropped them to Tier 2 until you can name why now matters.
+
+**You:** Good catch. What about sequencing the touches?
+
+**Claude:** Air cover (committee ads plus nurture) leads Monday, rep outreach follows Wednesday while it's still warm, both carrying Acme's same angle. One sharpener: connect an intent source and I'll flag which Tier 3 accounts are already leaning in, so you're not running the same program blind to which ones are actually warm.
+
+## Go further
+The tiering and thread map prove the model works on paper. Here's the scaled version.
+
+- **Auto-tier the whole pipeline.** Connect Salesforce or HubSpot and a scheduled Claude task re-tiers the list nightly as fit fields and open opportunities change.
+- **Watch for the advance trigger.** Wire Clay or an ad platform to flag ad engagement or a target-role site visit, then message the rep in Slack the moment an account is ready to move from air cover to human.
+- **Keep the angle consistent everywhere.** Feed the tier-1 angle into your sequencer (Outreach, Salesloft) so every touch, air cover and ground game, references the same trigger instead of drifting into generic copy.
+
+Coordinated once by hand, coordinated forever by the system.
+
 ## Make it yours
 Fork it. Change the tiers, the channels, the orchestration window. The point is not to run someone else's ABM template. It is to make your best accounts feel one coordinated motion instead of noise. Built by an operator. Customize it, break it, make it better.

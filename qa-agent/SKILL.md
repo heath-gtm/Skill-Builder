@@ -1,283 +1,133 @@
 ---
 name: qa-agent
-description: The 7th analyst — the meta-analyst. Monitors every other analyst's audit log + feedback queue, surfaces scoring blind spots, CRM hygiene gaps, enrichment gaps, workflow drift, and Daily Drop engagement decline. Generates weekly QA report (HTML) + Slack digest (Sundays, DMs Heath) + improvement recommendations. First stepping stone of AI-native GTM — every override, every missing CRM field, every enrichment miss becomes a training signal. Use to ask "what's broken in the system?", "show me CRM hygiene issues", "is the Daily Drop working?", "are scoring models drifting?", "what should we coach on this week?". Trigger on "run QA", "weekly QA report", "system health check", "where are our scoring blind spots?", "show me coaching priorities from data", "audit our workflow performance", "Daily Drop engagement check", "where's the system getting things wrong?", or any system-level health / improvement / feedback-loop question. Also fires automatically Sundays 7pm CT.
+description: The analyst that watches your other analysts. It reads the trail your reports and workflows leave behind, then surfaces scoring blind spots, CRM hygiene gaps, and workflow drift, and turns every miss into a training signal. Built for GTM teams running any stack of reports, customizable to your process. Trigger on "run QA", "weekly QA report", "system health check", "where are our scoring blind spots", "what should we coach on this week", "audit our workflow performance", or any system-level health or feedback-loop question.
 ---
 
-# QA Agent — the meta-analyst
+# QA Agent (the meta-analyst)
 
-**Required:** Read access to `Revenue Reviews/` (where all the audit TSVs live).
+## What this does
+Most reporting is one-shot: produce the work, ship it, move on, and nothing learns from the misses. This skill is the feedback layer that sits on top of everything else you run. It reads the audit trail your other reports and workflows leave behind, then tells you where the system is getting things wrong and what to fix first. Every override, every empty CRM field, every workflow that quietly failed becomes a signal that compounds into a sharper system next week.
 
-**Optional:** Slack (post weekly digest to Heath's DM + critical alerts to #revops-alerts) · GitHub (verify brief manifest integrity + check published-brief health).
+## What you'll need
+You do not need to connect anything to get value today. Bring the logs and outputs your reports already produce and the skill runs now. Connect the tools below and it pulls them automatically and watches more of the system.
 
-## What this agent does
+- Works today with: any record of what your reports and workflows did. Paste or upload a log of overrides, flagged deals, workflow runs, or CRM-gap lists. A CSV of "what we scored vs what happened" is enough to start.
+- More powerful connected to a CRM: it reads field-population rates and staleness across the whole book automatically.
+- Sharper with a messaging tool: it posts the weekly digest and critical alerts where the team already works.
+- Sharper with a code or file host: it verifies published reports still render and that shared manifests have not drifted.
 
-The QA Agent is unlike the other 6 analysts. It doesn't pull data from a SaaS connector. It reads the audit trails the OTHER analysts leave behind + derives system-level patterns. Then it tells you where to invest improvement effort.
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
 
-This is the feedback layer. Without it, every analyst run is a one-shot — produce work, ship it, move on, no learning. With it, every override + every gap + every disagreement becomes a signal that compounds into a smarter system next week.
+- **Bring your data**: paste or upload your logs (overrides, workflow runs, CRM-gap exports). The skill runs the full QA pass today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the trails automatically and watches signals you cannot paste by hand (live field coverage, deploy state, message reactions). Same output, less effort, sharper.
+- **Just exploring**: no logs yet? Get the framework, the exact streams it reads, and a worked example on sample data, so you can see the shape before you feed it.
 
-## What this agent answers
+Every run ends with the one thing that would make the next run sharper, a stream to add or a tool to connect.
 
-In plain English:
+## Customize this for yourself
+This was built for a GTM team running several reports on a shared pipeline. Set these to your stack:
 
-- "What's broken in the system this week?" → Weekly QA report with scoring misfires + CRM gaps + workflow drift
-- "Where are we BS'ing ourselves on the deal review?" → Cross-rep PLAN-completeness audit + opp-vs-stage mismatches across the entire pipeline
-- "Show me CRM hygiene issues" → Per-rep audit: stale PLAN Account_Notes (>180 days), null Decision_Maker__c, opps with null LastActivityDate, accounts with low custom-field coverage
-- "Is the Daily Drop working?" → Engagement audit: claim rate (🎯 reactions) / first-touch rate (🔥) / meeting-book rate (✅) by AE + by day-of-week. Streak watch + decline detection.
-- "Are our scoring models drifting?" → Aero override hit rate over time (did our False-Negative calls turn out to be right?). ICP composite score drift vs Aero + Octave. Deal-risk classifier accuracy (did flagged AT_RISK deals actually slip?).
-- "What should we coach on this week?" → Data-driven coaching priorities: which rep has the lowest PLAN-completeness rate, which AE's deals have the most days-dark concentration, who's not using the Daily Drop, etc.
-- "Audit our workflow performance" → Per-workflow success/failure rate + connector availability + failure-mode breakdown
-- "Where is the system getting things wrong?" → Cross-analyst disagreement detection (e.g., SFDC Analyst says HEALTHY but Conversation Analyst says Champion-Drop-Off → reconcile + add to a "calibration queue")
+| Set this | What it is | Default / Example |
+|---|---|---|
+| AUDIT sources | where your reports log what they did | override logs, workflow run logs, CRM-gap exports |
+| CRM | your CRM connector | Salesforce, HubSpot, Pipedrive |
+| STALE_DAYS | notes age that means the account is neglected | 180 (re-tune to your cadence) |
+| HYGIENE fields | fields that must be filled to trust a record | decision maker, last activity date, your custom fields |
+| SCORE sources | the scores you want to check for drift | your account fit score, product-engagement score, any model |
+| DELIVERY | where the weekly digest lands | a messaging DM, a channel, email |
+| CADENCE | how often the QA pass runs | weekly (a Sunday-evening digest before the Monday review) |
 
-## The audit streams it reads
+Point it at your logs and your fields, not anyone else's. The skill checks "is the system doing what we think it is," whatever your system is.
 
+## The method
+
+### Scoring accuracy
+For every model you run, check whether its calls held up. When you overrode a score and marked an account as under-rated, did it become a real deal? Report the precision as a plain hit rate. Track score drift over a trailing window so you catch a model quietly getting looser or tighter. Where two of your reports disagree on the same account, one says healthy and another says the champion went dark, surface it to a calibration queue instead of picking a winner silently.
+
+### CRM hygiene
+Per owner, count the records that fail your trust bar: notes older than STALE_DAYS, a null decision maker, an opportunity with no last-activity date, a late-stage deal missing the fields that stage demands. Report the field-by-field fill rate, and the trend versus last week, so hygiene is a direction, not a one-time scold.
+
+### Enrichment and data gaps
+Where you fill data from providers, track the not-found rate per provider over time and the cost per verified field. Flag the records that came back empty three or more runs in a row, they need manual sourcing. Watch for patterns in what fails, a segment or region where one provider is consistently weak.
+
+### Workflow performance
+Per workflow, track success and failure rate over time, which connector was unavailable on a given run, and the failure-mode breakdown (connector missing, data not found, models disagreed, a validation check failed). Surface the top workflows by usage and by failure rate.
+
+### Engagement decline
+If your team gets a recurring drop of leads or actions to work, watch whether they act on it. Claim rate, first-touch rate, and follow-through rate, per person and per day. Watch streaks and catch a week-over-week decline before it becomes a habit.
+
+### System health
+Broken links to published reports must be zero, surface any immediately. Watch shared manifests for entry-count drift. Flag anyone writing to a single-owner file who should not be. Track deploy lag so a report is not stale by the time someone opens it.
+
+## Quality gates
+- No accuracy claim without the underlying calls that prove it. "82% precision" means naming the calls, not asserting a number.
+- Hygiene gaps surface owner by owner and field by field, named, never "incomplete."
+- Accuracy is measured over a trailing window, never a single week. Small samples lie.
+- Recommendations are surgical: a named owner, a named issue, and one next move, never "improve hygiene."
+
+## Output (example)
 ```
-Revenue Reviews/
-├── aero_feedback_queue/                  ← Ghost-Active + Aero False-Negative overrides
-│   ├── 2026-05.tsv
-│   └── sfdc_gaps.tsv                     ← SFDC custom fields not yet provisioned
-├── sfdc_analyst_audit/2026-05.tsv        ← every account analyzed + verdict + rep follow-through
-├── amplitude_analyst_audit/2026-05.tsv   ← override fires + downstream verification
-├── conversation_analyst_audit/2026-05.tsv ← Champion-Drop-Off calls + verification
-├── icp_override_queue/2026-05.tsv        ← ICP composite vs Aero/Octave disagreements
-├── enrichment_audit/2026-05.tsv          ← provider not_found rate + cost per field
-├── comms_audit/2026-05.tsv               ← every SFDC write + Slack post + verification
-├── daily_drop_audit/2026-05.tsv          ← Daily Drop emoji-reaction engagement
-└── workflow_run_log/2026-05.tsv          ← per-workflow success/failure + duration
-```
+WEEKLY QA DIGEST · Week of May 25
 
-Plus cross-cutting:
+SCORING ACCURACY
+  Override precision: 82% (19 of 23 flagged accounts became real deals)
+  Fit-score drift: +4 pts over trailing 30d (scoring tighter, expect recalibration)
+  Deal-risk classifier: 8 of 11 flagged slip-risk deals actually slipped (73%)
 
-- `mixmaxhq/GTM-account-briefs/reports.json` — manifest shape + entry-count drift
-- GitHub Pages CDN deploy state — verifies briefs render after publish
-- Slack message history — reaction counts on Daily Drop posts (counts 🎯 🔥 ✅ 🚀)
+CRM HYGIENE (top 3)
+  1. 17 of 24 cross-rep deals incomplete for current stage (71%). No change vs last week.
+  2. Rep C: 14% field-completeness (1 of 7 opps). Lowest on the team. Top coaching priority.
+  3. 12 accounts with notes older than 180 days. Refresh in the next 1:1s.
 
-## The 6 sections of the weekly QA report
+DATA GAPS
+  Provider A not-found rate jumped to 31% (baseline 12%). Investigate freshness.
 
-### 🎯 1. Scoring Accuracy
+ENGAGEMENT
+  Average claim rate 67% (above 60% target). Longest streak: Rep A, 4 days at 100%.
+  Concern: Rep D claim rate 23%. Onboarding check needed.
 
-- Aero override hit rate ("We called Aero False-Negative on 23 accounts last month; 19 became active deals = 82% precision")
-- ICP composite score drift vs Aero / Octave over the trailing 30 days
-- Deal-risk classifier accuracy (did flagged AT_RISK/SLIP_RISK opps actually slip? % accuracy)
-- Outliers: accounts where our analysts disagreed with each other (SFDC says HEALTHY, Conversation says Champion-Drop) → calibration queue
+SYSTEM HEALTH
+  Zero broken report links. Zero manifest violations. All green.
 
-### 🧠 2. CRM Hygiene
-
-- Stale PLAN per rep: accounts where `Account_Notes_Last_Updated > 180 days`
-- Null Decision_Maker__c per rep
-- Opps with PLAN incomplete for current stage (cross-pipeline)
-- SFDC custom field population rate per rep (the field-by-field % filled)
-- Trend: getting better or worse vs last week
-
-### 💧 3. Enrichment Gaps
-
-- Per-provider not_found rate trends (FullEnrich, Common Room, Octave)
-- Cost per verified field by provider
-- Contacts that have been not_found in 3+ runs (manual sourcing needed)
-- Domain types where Common Room fails most often (industry / segment / region patterns)
-
-### 📡 4. Workflow Performance
-
-- Per-workflow success rate trend (W1, W2, W3, W6, etc.)
-- Connector availability per workflow run (when did Amplitude MCP drop out, etc.)
-- Failure mode breakdown (connector missing / data not found / classifier disagreement / SFDC validation failure)
-- Top workflows by usage + top workflows by failure rate
-
-### 🔥 5. Daily Drop Engagement
-
-- Claim rate per AE per day (🎯 reactions / 10 leads)
-- First-touch rate per AE (🔥 reactions / 🎯 reactions)
-- Meeting-book rate per AE (✅ reactions / 🔥 reactions)
-- Streak watch (top reps by consecutive-day 100% action rate)
-- Week-over-week trend: is engagement rising or declining?
-
-### 🚨 6. System Health
-
-- Broken brief links count (must be zero — if not, surface immediately)
-- Manifest entry drift detection (reports.json should have ~283 entries)
-- Lock-in violations: anyone non-reconciler writing to `reports.json` (should be zero)
-- GitHub Pages CDN deploy lag
-
-## Output: the actual improvement recommendations
-
-These are the concrete asks the QA Agent generates. They're surgical + actionable:
-
-- "5 accounts in HM's book have Account_Notes > 180 days old: Blend Labs, Whip Around, Galvanize, PGA, Halborn. Schedule PLAN refresh in next 1:1."
-- "Karan's PLAN-completeness rate is 14% (1 of 7 opps). Highest-priority coaching session this week."
-- "Aero False-Negative override fired 8 times this month, 7 became active deals. Email Aero with the list — they're under-scoring Series-D B2B SaaS at 100-500 employees."
-- "FullEnrich not_found rate jumped to 31% last week (baseline 12%). Worth investigating their data freshness."
-- "Daily Drop claim rate dropped to 47% this week from 71% baseline. Karan was OOO Tuesday (claim rate 0). Adjust for OOO or pre-roster the Drop next time he's out."
-- "Isabelle is the #1 PLAN-completer (87%) but #2 by deal count. Pair her with Karan for a peer-coaching session."
-
-## The AI-native GTM flywheel this enables
-
-```
-            ┌──────────────────┐
-            │  6 Analysts run  │
-            │  → Output work   │ ────┐
-            └──────────────────┘     │
-                                     │
-       ↑ Each loop closes             ▼
-       ↑ system gets smarter         ┌──────────────────────┐
-       │                             │   QA Agent monitors  │
-       │                             │   audit logs         │
-       │                             └──────────────────────┘
-       │                                     │
-       │                                     ▼
-       │                             ┌──────────────────────┐
-       │                             │ Surfaces:            │
-       │                             │ - scoring misfires   │
-       │                             │ - CRM hygiene gaps   │
-       │                             │ - enrichment gaps    │
-       │                             │ - workflow drift     │
-       │                             └──────────────────────┘
-       │                                     │
-       │                                     ▼
-       │                             ┌──────────────────────┐
-       │                             │ Specific recs feed:  │
-       │                             │ - lock-in updates    │
-       │                             │ - scoring models     │
-       │                             │ - workflow specs     │
-       │                             │ - rep coaching       │
-       │                             └──────────────────────┘
-       │                                     │
-       └─────────────────────────────────────┘
+TOP RECOMMENDATIONS
+  1. Rep C: 1:1 on field completion, the biggest team-level coaching priority.
+  2. Send the under-scored-segment list back to your scoring owner to recalibrate.
+  3. Investigate Provider A data freshness.
 ```
 
-Every recommendation that lands means next week's analyst outputs are better. The system compounds. That's the AI-native GTM thesis — not "use AI to do stuff faster," but "use AI to build a system that learns from itself."
+## Where the numbers come from
+STALE_DAYS (180), the trailing window for drift, and the engagement targets are defaults, not laws. They suited a mid-market GTM cadence. If your cycle runs longer, raise them. The logic does not change. The thresholds are yours.
 
-## Output format example (weekly digest)
+## Example chat
 
-For Sunday-evening DM to Heath:
+**You:** Run QA on this week's numbers. Here's the override log and the CRM export.
 
+**Claude:** Ran the full pass. Two things worth your attention before the review.
 ```
-📊 Weekly QA Digest — Week of May 25
+SCORING ACCURACY
+  Override precision: 82% (19 of 23 flagged accounts became real deals)
 
-🎯 SCORING ACCURACY
-   Aero override precision: 82% (19 of 23 calls correct — strongest data point yet)
-   ICP composite drift: +4 pts vs Aero in trailing 30d (we're scoring tighter; expect Aero recalibration)
-   Deal-risk classifier: 8 of 11 flagged SLIP_RISK deals actually slipped (73%)
+CRM HYGIENE (top 3)
+  1. Rep C: 14% field-completeness. Lowest on the team. Top coaching priority.
 
-🧠 CRM HYGIENE — top 3 issues
-   1. 17 of 24 cross-rep deals have PLAN incomplete for current stage (71%). Same number as last week — NO improvement.
-   2. Karan: 14% PLAN-completeness (1 of 7 opps). Lowest on the team. Top coaching priority.
-   3. 12 customer accounts have Account_Notes > 180 days. Suggest PLAN refresh in next CSM 1:1s.
-
-💧 ENRICHMENT
-   FullEnrich not_found jumped 31% (baseline 12%). Worth investigating data freshness.
-   Octave hit rate on LinkedIn URLs holding strong at 91%.
-
-🔥 DAILY DROP ENGAGEMENT
-   Average claim rate: 67% (above 60% target).
-   Top picker: Isabelle, 4 days at 100% (longest streak this quarter).
-   Concern: Felipe's claim rate is 23%. Onboarding issue or signal something more?
-
-🚨 SYSTEM HEALTH
-   Zero broken brief links. Zero manifest violations. All systems green.
-
-🎯 TOP RECOMMENDATIONS THIS WEEK
-   1. Karan: 1:1 focused on PLAN completion — biggest team-level coaching priority
-   2. Email Aero with the Series-D B2B SaaS over-coverage data — they should recalibrate that segment
-   3. Investigate FullEnrich data freshness with their team
-   4. Felipe: schedule check-in on Daily Drop engagement + onboarding state
-
-Full report: [link to HTML]
+TOP RECOMMENDATIONS
+  1. Rep C: 1:1 on field completion.
 ```
+The catch: two of your reports disagree on the same account, one calls it healthy, the other flags the champion as dark, so instead of picking a winner I put it in a calibration queue rather than silently trusting either one.
 
-## Used by (what consumes this agent)
+**You:** Good catch. Is 82% actually good or is that just a number?
 
-- **Heath (weekly direct usage)** — Sunday digest before Monday review
-- **RevOps team** — for the SFDC gap sheet + custom-field provisioning queue
-- **The Aero team (external feedback loop)** — gets the curated False-Negative/False-Positive list monthly
-- **The system itself** — recommendations land back as lock-in amendments + scoring rubric updates
+**Claude:** On its own it's just a number, that's why the digest names the calls, 19 of 23 flagged accounts, not "most." Compare it week over week and you'll see whether the model is getting sharper or looser. Sharpener: connect your CRM directly and I'll pull field-population rates live instead of working off this week's export, so hygiene becomes a trend instead of a snapshot.
 
-## When NOT to use this agent
+## Go further
+The weekly pass proves where the system is lying to itself. Here is the scaled version.
 
-- For real-time decisions (the QA Agent runs weekly — for real-time use the underlying analysts)
-- For pulling SFDC / Amplitude / Mixmax data directly (use the read analysts)
-- For one-off questions about a single account (use SFDC + Amplitude + Conversation analysts directly)
+- **Run it every Sunday night.** Schedule this as a Claude task so the digest lands in Slack before the Monday pipeline review, not after.
+- **Watch the disagreements live.** Wire it to Salesforce and Amplitude so it flags every account where two reports disagree the moment the data updates, not once a week.
+- **Track the trendline in one place.** Log each week's digest to a Snowflake table or a sheet so drift and hygiene become a chart, not a memory.
 
-## Salesforce field reference
+The system starts grading itself instead of waiting for you to notice the drift.
 
-This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
-the single source of truth for every field name, definition, and canonical
-interpretation. Specifically, this analyst reads:
-
-- No direct SFDC reads — consumes the audit TSVs that other analysts write.
-- Reads salesforce_analyst_audit, comms_audit, etc. for drift detection.
-
-If a query needs a field not in the library, FAIL LOUD and request a library
-amendment via Evolution Agent — never invent ad-hoc field names or definitions.
-Apples-to-apples consistency across every analyst output is the goal.
-
-## Inheritance from LOCKED_DESIGN.md
-
-The QA Agent reads the audit-trail outputs of every other analyst. It doesn't have its own lock-in dependencies beyond the file-system layout. Lock-in #2 (single-writer manifest rule), #8 (Aero feedback queue), and the auditability requirements of every other lock-in are what makes this agent possible.
-
-## Make.com / API packaging
-
-**Input schema:**
-```json
-{
-  "mode": "weekly_full | spot_check | scoring_audit | engagement_audit",
-  "window_days": 7,
-  "include_recommendations": true,
-  "post_digest_to_slack": true,
-  "slack_target": "user:U07CAK8C0CW"
-}
-```
-
-**Output schema:**
-```json
-{
-  "report_url": "https://psychic-adventure-p3jj6y9.pages.github.io/qa-reports/2026-05-29.html",
-  "scoring_accuracy": {...},
-  "crm_hygiene": {...},
-  "enrichment_gaps": {...},
-  "workflow_performance": {...},
-  "daily_drop_engagement": {...},
-  "system_health": {...},
-  "top_recommendations": [{...}, ...],
-  "slack_digest_url": "https://mixmax.slack.com/..."
-}
-```
-
-**Failure modes:**
-- Audit TSVs missing: surfaces which streams couldn't be read + degrades gracefully
-- File-system access denied: returns "Connect file system to enable QA monitoring"
-
-## Shippable as
-
-**Standalone QA SaaS:** customer adds this agent to their Make.com scenario as the final-of-the-week node. Once-a-week QA digest, posted to their preferred channel. Tells them how to improve everything else.
-
-**Bundled with the analyst suite:** included free with any 2+ analyst purchase. It's the layer that makes the analysts get smarter over time.
-
-This is the first stepping stone for AI-native GTM. Without this loop, the analysts produce one-shot outputs. With this loop, the system compounds.
-
-## Scheduled run
-
-`qa-agent-weekly` — runs every Sunday at 7:00 PM CT — generates the full weekly QA + posts the digest to Heath's DM by 7:30 PM. Ready for Monday review.
-
----
-
-## Context Integrity Audit (Built GTM / Re:Built)
-
-A second meta-check beyond the scoring and CRM audits above: is the brand and show context referenced from one source, or has it forked? This is the eval gate for the AI-native context loop. "Looked good once" is not an eval. Run this before anything that uses brand or show context ships, and on the weekly QA run.
-
-**Canonical source of truth:** `get-built-gtm/context/`. Read `get-built-gtm/context/README.md` first.
-
-**Run it:**
-
-```
-bash get-built-gtm/context/sync/audit-context.sh [root-to-scan]
-```
-
-**What it checks, and why each matters:**
-
-1. **Dead session-scoped context paths.** Agents must read a stable repo path, never a `/sessions/.../memory/` scratch path. That bug left the dispatch agent with no voice file.
-2. **References to superseded sources.** No skill, page, or prompt should pull from "GTM Tactical", the GTM-Show-Series docx, or the stale GTM Building Blocks copy.
-3. **Forked brand copies.** Any file carrying the brand voice rules must be GENERATED from canon via `build-context.sh`, not hand-maintained. Hand copies drift.
-4. **Derived vs canon sync.** If canon changed but the derived artifacts (brand SKILL, system prompt, dispatch voice) were not regenerated, the deployed agents are stale.
-
-**Output:** PASS/FAIL per check, exit 1 on drift. Wire it into the build/test step so nothing referencing brand or show ships without it.
-
-**When to fire:** before publishing any Built GTM content or show surface, after any context edit, and on the weekly QA run alongside the sections above.
+## Make it yours
+Fork it. Change the streams it reads, the trust bar, the cadence. The point is not to run someone else's QA. It is to make your own system learn from itself, so next week's outputs are better than this week's. Built by an operator. Customize it, break it, make it better.

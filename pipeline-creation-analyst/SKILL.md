@@ -1,122 +1,117 @@
 ---
 name: pipeline-creation-analyst
-description: Your top-of-funnel analyst. Connect Salesforce + Amplitude — turns any "do I have enough at-bats?" question into pipeline coverage diagnosis: per-channel (Inbound / Outbound / Product) coverage, account engagement velocity per AE, hot-account ranking, Daily Drop generation, SDR coverage health, under-prospected segments. SDR Manager + VP Sales companion. Trigger on "do I have enough pipeline?", "pipeline coverage by channel", "who should we go after this week?", "run the Daily Drop", "top accounts to engage", "where are we under-prospected?", "hot accounts this week", "AE-by-AE coverage check", "pipeline gap analysis", or any account-level coverage question. Also fire when an SDR Manager preps for a pipeline review or a VP Sales asks about coverage going into the quarter.
+description: Your top-of-funnel coverage analyst. Connect a CRM and a product-analytics tool, then turn any "do I have enough at-bats?" question into a pipeline-coverage diagnosis: per-channel coverage math, account engagement velocity per rep, a hot-account ranking, a daily prioritized work plan, and under-prospected segment surfacing. Trigger on "do I have enough pipeline?", "pipeline coverage by channel", "who should we go after this week?", "run the daily drop", "top accounts to engage", "where are we under-prospected?", "hot accounts this week", "rep-by-rep coverage check", "pipeline gap analysis", or any account-level coverage question.
 ---
 
-# Pipeline-Creation Analyst — your top-of-funnel companion
+# Pipeline-Creation Analyst
 
-**Required:** Salesforce + Amplitude. **Optional:** Octave / Aero (account fit scoring overlay), Common Room (hiring intent), FullEnrich (decision-maker enrichment).
+## What this does
+This skill answers the top-of-funnel coverage question: do you have enough at-bats to hit next quarter's number, and where are the gaps? It reads your CRM and a product-analytics tool, runs forward-looking coverage math per channel and per rep, ranks the hottest accounts to work, builds a daily prioritized account drop with a named owner per account, and surfaces the segments you are under-prospecting. It is built for the person who runs the pipeline review, not the person who works a single lead.
 
-## What this analyst answers
+## What you'll need
+You do not need to connect anything to start. Bring your pipeline and the skill runs today. Connect the tools below and it pulls the data automatically and adds signals you cannot paste by hand.
 
-- "Do I have enough at-bats for next quarter?" — coverage math at channel + AE level
-- "Pipeline coverage by channel" — Inbound / Outbound / Product split + relative health
-- "Who should we go after this week?" — account-level prioritized work plan
-- "Run the Daily Drop" — daily 10-account Slack drop generation
-- "Hot accounts this week" — PQA signal + Aero score + engagement velocity
-- "AE-by-AE coverage check" — per-rep account-engagement velocity
+- Works today with: your open pipeline by channel and owner, plus the period target. Paste it or upload a CSV.
+- More powerful connected to a CRM: accounts, owners, channel attribution, and forecasted value, live.
+- More powerful connected to a product-analytics tool: powers the product channel and the new-user signal.
+- Sharper with an account-fit score and a hiring or firmographic signal source: better ranking and the "why now" line.
 
-## What it owns internally
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
 
-- **Channel-coverage math** (lock-in #11): Inbound vs Outbound vs Product splits + per-channel pipeline health
-- **Account engagement velocity scoring**: 4-source activity weighted by recency
-- **Daily Drop generation** (lock-in #25): 10 prioritized accounts per day with picker recommendations
-- **PQA detection** (lock-in #18): new-user signal at customer accounts
-- **Under-prospected segment surfacing**: ICP fit × current pipeline coverage gap
-- **Hot account ranker**: composite of recent signal + Aero score + product engagement
+- **Bring your data**: paste or upload your list (a deal export, a stage CSV). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
+
+## Customize this for yourself
+| Set this | What it is | Default / Example |
+|---|---|---|
+| CRM connector | System of record for accounts, owners, pipeline | A CRM |
+| Product-analytics connector | Source of product usage and active-user counts | A product-analytics tool |
+| Channel field | The account field that classifies channel | A "channel source" field; never the opportunity-level channel field |
+| Fit-score field | Account-level ICP fit score | An "account fit score" field, 0-100 |
+| Forecast / target field | Account-level forecasted value used in coverage math | A "forecasted value" field |
+| Channels | Your acquisition channels | Inbound, Outbound, Product |
+| Coverage targets | Per-channel pipeline target for the period | Set from your quota plan |
+| Activity sources | The signals that count as "engaged" | Calls, emails, tasks, product events, weighted by recency |
+| Daily drop size | Accounts surfaced per day | 10 |
+
+To use your own channels, replace the channel list with whatever your business runs. To use your own targets, set a per-channel pipeline number and the coverage math re-bases against it.
+
+## The method
+1. Classify every account by channel. Read the channel field and group accounts into your channels.
+2. Run forward-looking coverage math per channel. Project the pipeline needed to hit the period target using win rate and cycle time, then compare projected against needed. Output a covered-percentage and a health flag (healthy, under, over) per channel.
+3. Score account engagement velocity per rep. Count accounts engaged in a trailing window using your activity sources, weighted by recency, against book size.
+4. Rank hot accounts. A composite of recent signal, account-fit score, and product engagement.
+5. Detect the new-user signal. Flag accounts showing fresh active users as a distinct work item.
+6. Surface under-prospected segments. Cross fit score against coverage. Name the gap as segment plus channel, with target and current percentages.
+7. Build the daily drop. Top N prioritized accounts, each with a recommended owner and a one-line "why now."
+8. Compute the coverage gap. Target, current projection, dollar gap, and the math to close it. End with the single point of leverage.
 
 ## Quality gates
+- Coverage math is forward-looking. It projects pipeline needed for the next period, not just open opps.
+- The daily drop names a recommended owner, with the account fact that justifies the routing.
+- Under-prospected surfacing is segment plus channel, with target and current percentages.
+- Fail loud on missing fields. Never invent a field name or definition.
 
-**Coverage math is forward-looking.** Doesn't just count open opps — projects pipeline needed for next-quarter target based on win rate × cycle time.
-
-**Daily Drop has named recommended picker.** Not "good account" — instead, "Karan owns Acme territory but Felipe has bandwidth and Acme has 14 sales hires."
-
-**Under-prospected surfacing is segment + channel.** Names exact gaps: "Mid-market SaaS Inbound: 22% of pipeline target, 8% of pipeline current."
-
-## Output format example
-
+## Output (example)
 ```
-📡 TEAM PIPELINE COVERAGE · Q3 target $1.8M new ARR
+TEAM PIPELINE COVERAGE  ·  Period target: 1.8M new revenue
 
 Per-channel coverage:
-  INBOUND:    $890K projected vs $900K needed · 99% covered · HEALTHY
-  OUTBOUND:   $310K projected vs $720K needed · 43% covered · UNDER ★
-  PRODUCT:    $202K projected vs $180K needed · 112% covered · OVER
+  INBOUND:    890K projected vs 900K needed · 99% covered · HEALTHY
+  OUTBOUND:   310K projected vs 720K needed · 43% covered · UNDER
+  PRODUCT:    202K projected vs 180K needed · 112% covered · OVER
 
-Per-AE engagement velocity (trailing 30d):
-  Karan:     47 accounts engaged (book is 73) · 64% coverage · HEALTHY
-  Isabelle:  68 accounts engaged (book is 71) · 96% coverage · STRONG
-  Felipe:    23 accounts engaged (book is 58) · 40% coverage · LOW ⚠
-
-🔥 THE DAILY DROP — Monday, June 1
-
-  1. Acme Corp — Series D, 14 sales hires · Recommended: Karan ★
-     Aero: 87 · ICP: 91 · Signal: Hiring spike + Outreach in stack
-  2. Vortex.io — Layoff round just announced · Recommended: Felipe
-     Aero: 73 · ICP: 88 · Signal: Cost consolidation play
-  3. Datadog Trial — 3 active free users, 1 power user · Recommended: Isabelle
-     Aero: 68 · ICP: 82 · Signal: PQA threshold met
-  ... 7 more ...
+THE DAILY DROP, Monday
+  1. Account One   Recent funding + sales hiring spike   Owner: Rep A   Fit 87
+  2. Account Two   Cost-consolidation trigger            Owner: Rep C   Fit 73
+  3. Trial Account 3 active users, 1 power user          Owner: Rep B   Fit 68
 
 Under-prospected segments:
-  • Mid-market SaaS Outbound: 22% of pipeline target, 8% current coverage
-  • Series C+ B2B with Outreach in stack: 35 accounts unworked
-  • Customer accounts with new-user signups in last 30d: 12 ignored
+  - Mid-market, Outbound: 22% of target, 8% current coverage
+  - Existing accounts with new-user signups in last 30d: 12 ignored
 
 Coverage gap math:
-  Q3 needs $1.8M new ARR
-  Current projection: $1.4M (-$400K gap)
-  To close gap: 18 additional opps at avg $22K + 60% win rate = 30 more meetings
-  → Felipe + outbound segment is the leverage point
-
-Next moves (named):
-  1. Felipe — block 4 hours/day for outbound through end of June
-  2. Re-route Daily Drop heavier to Felipe for next 2 weeks
-  3. Schedule SDR Manager 1:1 on Inbound→Outbound rebalance
+  Needs 1.8M. Current projection 1.4M (gap 400K).
+  To close: 18 more opps at avg 22K + 60% win rate = 30 more meetings.
+  Leverage point: Rep C plus the outbound segment.
 ```
 
-## Used by
+## Where the numbers come from
+The coverage targets, win rate, cycle time, average deal size, and the daily-drop size are defaults. Re-tune them to your plan. The thresholds that drive healthy, under, over are defaults too. Set them where your team draws the line. The activity-source weighting is a starting point; adjust which signals count and how recency decays.
 
-- **Daily Drop** workflow (the 7am CT Slack drop)
-- **Sales-leader-weekly-report** (coverage dashboard)
-- **Strike-Zone Analyst** as upstream input (funnel-leak diagnosis builds on coverage)
-- **Daily-Sales-Assistant** workflow (leader mode pipeline section)
-- Standalone for VP Sales / SDR Manager coverage reviews
+## Example chat
 
-## When NOT to use
+**You:** Run coverage for the team against this quarter's $1.8M target.
 
-- For lead-level work assignment (use Prospecting Analyst)
-- For active deal health (use Deal-Health Analyst)
-- For funnel-stage leakage (use Strike-Zone Analyst)
+**Claude:** Here's where the gap actually is.
+```
+INBOUND:    890K projected vs 900K needed · 99% covered · HEALTHY
+OUTBOUND:   310K projected vs 720K needed · 43% covered · UNDER
+PRODUCT:    202K projected vs 180K needed · 112% covered · OVER
+```
+Outbound is the whole story here. Inbound and product are fine on their own, but averaged together they'd have hidden a 43% channel until it was too late to fix this quarter.
 
-## Salesforce field reference
+**You:** Give me the daily drop for Rep C since they own outbound.
 
-This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
-the single source of truth for every field name, definition, and canonical
-interpretation. Specifically, this analyst reads:
+**Claude:**
+```
+1. Account One   Recent funding + sales hiring spike   Fit 87
+2. Account Two   Cost-consolidation trigger            Fit 73
+```
+Both carry a named reason, so Rep C isn't guessing why these two are first. Sharpener: connect a hiring or firmographic signal source so "why now" lines like these generate automatically instead of getting written by hand each morning.
 
-- Account.Website (canonical → channel classification + Amplitude join, § 5 + § 10)
-- Account.Channel_Source__c (canonical channel attribution, § 5; `Account.LeadSource` is fallback only — never `Opportunity.Channel__c`)
-- Account.Aero_Account_Fit_Score__c + CR_Sales_Team_Hiring__c (top-of-funnel signal)
-- Account.DWH_Forecasted_ARR__c (Q-target coverage math)
-- 4-source activity check for engagement velocity per AE (§ 8)
+## Go further
+The coverage math and the daily drop prove the gap and the priority. Here's the version that runs before the rep's first coffee.
 
-If a query needs a field not in the library, FAIL LOUD and request a library
-amendment via Evolution Agent — never invent ad-hoc field names or definitions.
-Apples-to-apples consistency across every analyst output is the goal.
+- **Push the drop into the inbox automatically.** A scheduled Claude task pulls the CRM and product-analytics data every morning and delivers each rep's top-10 by 7am.
+- **Reroute the moment a channel goes under.** Connect Slack so a channel crossing below its coverage threshold posts straight to the manager, instead of surfacing at the weekly review.
+- **Score the "why now" from real signal.** Connect a hiring or funding signal source so the daily drop's reason line writes itself from live data, not a rep's memory.
 
-## Inheritance from LOCKED_DESIGN.md
+Coverage math answers "do we have enough." The daily drop is what actually closes the gap.
 
-Lock-ins #11 (channel classifier), #14 v7 (play types — ACTIVATE / CONVERT / COLD OUTBOUND), #16 v9.1 (4-source activity), #18 (new user signal), #25 (Daily Drop format), #26 (tech stack + hiring fields).
-
-## Make.com / API packaging
-
-**Input:** `{ mode: "team_coverage | daily_drop | hot_accounts | under_prospected | per_ae_velocity", channel: "Inbound | Outbound | Product | All" }`
-
-**Output:** `{ coverage_per_channel, ae_velocity, daily_drop: [{account, picker, signal}], under_prospected, hot_accounts, coverage_gap_math }`
-
-**Failure modes:** No Amplitude → product signal omitted (Outbound + Inbound still work). No Aero → ICP scoring degrades to SFDC-only signal.
-
-## Shippable as
-
-Standalone connector-gated SKU. Make.com node. The SDR Manager / VP Sales coverage companion.
+## Make it yours
+Map your connectors and fields, set your channels and targets, and this becomes your coverage companion. Built by an operator. Customize it, break it, make it better.

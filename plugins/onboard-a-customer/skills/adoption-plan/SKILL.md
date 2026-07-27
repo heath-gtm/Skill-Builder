@@ -84,5 +84,34 @@ Then, not now:
 ## Where the numbers come from
 IDLE_DAYS (30) and the tier cutoffs are defaults, not laws. They suited a product with a monthly usage rhythm. If your product is touched daily, tighten them. If it is a quarterly tool, loosen them. The logic does not change. The thresholds are yours.
 
+## Example chat
+**You:** Acme has 40 seats and 9 core features in their plan. Here's what I know they're actually touching. [pastes usage notes]
+
+**Claude:** Ran the gap. It's bigger than "low adoption."
+```
+Entitled: 40 seats, 9 core features
+In use:   26 active seats, 4 features touched
+Gap:      14 idle seats, 5 features never opened
+
+Next habit: shared templates (high value, low friction, next to what they already do)
+Target:     the ops lead + 3 Emerging users
+Show them:  one 15-min walkthrough on their own workflow
+Proof:      3+ templates saved and reused within 2 weeks
+```
+The catch: reporting looked like the obvious next push since it's the flashiest unused feature, but it needs the template habit first, so it goes on the "then, not now" list instead of competing for attention this week.
+
+**You:** What about the 14 idle seats?
+
+**Claude:** Those wait too. Re-provisioning idle seats before the ops team is actually live just resets the same problem with new names. One sharpener: connect your product-analytics tool and I'll pull the trailing-weeks trend automatically, so "adopted" means a repeated signal, not a lucky snapshot.
+
+## Go further
+The one-habit plan works by hand on one account. Here's the always-on version.
+
+- **Score the whole book nightly.** Connect Amplitude or your product-analytics tool to a scheduled Claude task and get the adoption gap recalculated for every account before the CSM team logs on.
+- **Alert on the momentum break.** Have the task watch for a feature used once and dropped, and post the flag to Slack before it shows up as churn risk three months later.
+- **Push the enablement play automatically.** Feed the "next habit" target list into HubSpot or your CRM so the named ops lead gets the walkthrough invite without a CSM having to remember.
+
+One habit at a time, run automatically across every account instead of just the one you happened to look at.
+
 ## Make it yours
 Fork it. Change the tiers, the activation event, the one-habit rule if you dare. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

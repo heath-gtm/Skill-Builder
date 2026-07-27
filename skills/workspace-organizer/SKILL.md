@@ -91,5 +91,31 @@ DO THIS FIRST
 ## Where the inputs come from
 ARCHIVE_RULE (180 days) and the naming scheme are defaults, not laws. A fast project archives sooner; a records-heavy one keeps more. The one rule that never bends is that the skill proposes and you dispose, no move happens without your yes. Change the thresholds. Keep the approval gate.
 
+## Example chat
+
+**You:** This project folder is a disaster, can you help me organize it?
+
+**Claude:** Here's the plan. Nothing moves until you approve it.
+```
+NAMING CONVENTION (proposed)
+  lower-kebab-case; logs get a YYYY-MM-DD prefix
+STRUCTURE (proposed)
+  /active  /reference  /archive  README.md
+CLEANUP PLAN (approve per batch, nothing runs yet)
+  ARCHIVE  Final_v2 NOTES.docx   (superseded, 210 days untouched)
+  KEEP     /billing               (PROTECTED, excluded from all moves)
+```
+Key insight: nothing moved yet, the plan is the deliverable. A cleanup that runs before you have seen it is how folders get worse, not better. One sharpener: connect the repo so "210 days untouched" is a real timestamp instead of an estimate from the listing.
+
+## Go further
+The plan is proposed. Here is where an operator takes it once the manual version proves out.
+
+- **Read the real tree, not a pasted listing.** Connect the actual repo or drive so file dates and sizes ground the plan instead of relying on what you remember is in there.
+- **Execute in approved batches, automatically.** Once you approve a batch, let a scheduled Claude task perform just those moves and log what changed, so approval and execution are not two separate manual steps.
+- **Keep the index current after the fact.** Wire a lightweight check that flags when a new file lands outside the proposed structure, so the README does not go stale the month after you build it.
+
+The plan makes it navigable once; the checks are what keep it that way.
+
+
 ## Make it yours
 Fork it. Change the structure to by-project or by-lifecycle, tighten or loosen the archive rule, add a "do not touch" list as long as you like. Cut what does not fit. The point is a workspace you can find things in, reorganized on your terms and never behind your back. Built by an operator. Customize it, break it, make it better.

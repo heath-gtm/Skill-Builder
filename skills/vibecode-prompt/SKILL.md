@@ -49,5 +49,28 @@ Build order: first the data model and the table with mock rows. Get that
 rendering. Then the add form. Then the computed reply rate. No auth in v1.
 ```
 
+## Example chat
+
+**You:** I want to build a tracker for my outreach experiments. Can you write me a Lovable prompt?
+
+**Claude:** Here's the build prompt.
+```
+Build a single-page web app: an outreach-experiment tracker for a salesperson.
+Data model: Experiment { name, channel, hypothesis, sent, replies, status, notes }
+Build order: first the data model and the table with mock rows. Get that
+rendering. Then the add form. Then the computed reply rate. No auth in v1.
+```
+Key insight: the build-order line is the one thing that keeps Lovable from trying to ship auth, styling, and the data model all in one pass and breaking, sequencing it is what actually gets you a working v1. One sharpener: name your target builder (Lovable vs v0 vs Bolt), the prompt format shifts slightly for each.
+
+## Go further
+The prompt is written. Here is where an operator takes it once the manual version proves out.
+
+- **Deploy the moment it builds.** Once the app builder ships a working version, push it straight to Vercel so you are testing on a real URL instead of a preview pane.
+- **Feed it real data instead of mock rows.** Wire the tracker to pull from a live sheet or Airtable base once the data model holds up, so v1 becomes the real tool, not a demo.
+- **Let a scheduled task keep it stocked.** Have a scheduled Claude task log your actual outreach sends into the tracker's data store daily, so the experiment table fills itself.
+
+The prompt gets you a working v1; the wiring is what makes it the tool you actually use.
+
+
 ## Make it yours
 Set your target builder, your stack, and your look. Then describe any tool you want and get a prompt the builder can actually execute. Built by an operator. Customize it, break it, make it better.

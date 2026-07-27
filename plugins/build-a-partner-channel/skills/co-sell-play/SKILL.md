@@ -92,5 +92,40 @@ Next moves:
 ## Where the inputs come from
 The OWNERSHIP model and the roles above are defaults and examples, illustrative only, not real people or a real deal. They suited a mid-market co-sell into a committee. The method does not change when your account does. Set the ownership split, the partner role, and the contact roles to your real motion and the play maps itself around it.
 
+## Example chat
+Here is the skill running on a real named account and partner.
+
+**You:** We're co-selling Acme Corp with our SI partner. Map it and tell me where we're exposed.
+
+**Claude:** Read's done. You have one uncovered seat that's already blocking the deal.
+```
+Role            You     Partner   Status
+Champion        Dana    -         engaged (yours)
+Econ buyer      -       CFO       engaged (partner's)
+Procurement     -       -         UNCOVERED
+```
+Procurement is uncovered by both sides, and that's usually where a joint deal stalls at signature, not at the pitch. Neither team has assumed ownership of it yet. One sharpener: confirm with the partner who their procurement contact actually is, right now it's an assumption, not a name.
+
+**You:** Set ownership across the deal so nothing falls between us.
+
+**Claude:** Done. Splitting by who already has the room.
+```
+Relationship lead   Partner (owns the CFO)
+Technical proof     You (owns Dana + Sam)
+Close/commercial    You lead, partner supports
+Procurement         UNASSIGNED, still open
+```
+The gap is real: nobody owns procurement yet. One sharpener: put a joint checkpoint on the calendar this week where both sides confirm who's closing that gap, before it becomes the reason the deal slips a quarter.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Turn the account map into a living record.** Connect Salesforce so the coverage map updates automatically as contacts and roles get added, instead of going stale after this snapshot.
+- **Catch the silent partner before the deal does.** Point a scheduled Claude task at Slack and email threads weekly and flag any owned step that's gone quiet more than 5 days.
+- **Give the partner a self-serve view.** Stand up a shared Slack canvas with the account map and ownership table so both sides see the same gaps in real time, not at the next sync.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Change the ownership model, the roles, the close steps. The point is not to run someone else's co-sell script. It is to make the partner a force in the deal instead of a lead you traded and forgot. Built by an operator. Customize it, break it, make it better.

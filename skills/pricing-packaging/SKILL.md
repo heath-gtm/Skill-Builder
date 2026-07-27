@@ -72,6 +72,32 @@ MIGRATION: grandfather existing seats 12 months, opt-in to new tiers
 
 Your price list and tiers are yours. Deal sizes, discounting, and win rates come from your CRM when connected; feature value and free-user counts come from a product-analytics tool. Every projected lift is modeled from those numbers or labeled an assumption.
 
+## Example chat
+
+**You:** Our per-seat pricing is capping us. Customers freeze hiring and our revenue freezes with them. Help me reprice.
+
+**Claude:** Here's where the model breaks and what to charge instead.
+```
+CURRENT: pure per-seat, revenue capped by customer headcount
+VALUE METRIC: shift core to seats + a usage tier for the heavy accounts
+TIERS: Starter (self-serve) / Team / Business / Enterprise, fences on volume + security
+FREE BASE: ~40% on free, add a usage ceiling + one value-gated feature
+```
+The real problem isn't the price, it's the metric. Seats bet your revenue on their headcount decisions, not on the value they're actually getting, so the heaviest users and the frozen-headcount accounts pay the same.
+
+**You:** Will this tank win rate if we push it out now?
+
+**Claude:** That's exactly the check before this ships: I labeled the deal-size lift and the win-rate hold as modeled from your own numbers where you have them, and as an assumption where you don't. A reprice that grows average deal size but drops win rate is a loss, not a win, so that's the gate before anything goes to customers. Sharpener: connect the CRM so the win-rate and deal-size projections come from your real discounting history instead of the illustrative range above.
+
+## Go further
+The plan on paper is a hypothesis. Here's how an operator tests it before it touches a real quote.
+
+- **Model the impact from real deals, not placeholders.** Connect the CRM so projected deal-size and win-rate shifts are computed from your actual discounting and close history, not an illustrative range.
+- **Watch the free base convert in real time.** Connect a product-analytics tool so the usage ceiling and value-gated feature get tuned against who's actually stuck on free, not a guess at the 40%.
+- **Pair the migration with the account list.** Feed the affected-accounts list into a business-case skill so existing customers get a grandfathering plan with names attached, not a generic policy memo.
+
+Repricing is a bet. The connectors are what turn the bet into a number you can defend before you make it.
+
 ## Make it yours
 
 Set your value metric, tiers, and fence lines in the table above. Run this before any pricing change, and pair it with a business case for the accounts a reprice affects most.

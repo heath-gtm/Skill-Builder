@@ -1,161 +1,113 @@
 ---
 name: evolution-agent
-description: The AI-native capstone. Watches QA Agent's audit + reads implicit feedback (emoji reactions, click-through, outcome attribution) + explicit feedback (👍/👎, structured reasons) — then generates pull requests to heath-gtm/Skill-Builder + LOCKED_DESIGN.md that evolve the system — tightens scoring rubrics, updates trigger phrases, amends lock-ins, proposes new workflows when usage patterns suggest them, retires unused analysts. Closes the loop QA Agent surfaces. Heath approves PR → system mutates itself. Trigger on "evolve the system", "apply this week's QA recommendations", "PR the scoring update", "amend lock-in #X", "propose a new workflow", "retire unused analysts", "what should we improve?", or any system-evolution / self-learning question. Also fires automatically after every QA Agent weekly digest.
+description: Close the loop on your own skills. Reads what your quality checks flagged plus the feedback signals coming back (thumbs up and down, click-through, what actually happened to the accounts you scored), then proposes concrete, reviewable changes: tighten a scoring rubric, update a trigger phrase, retire a skill nobody uses, add a workflow a usage pattern is begging for. You approve each change; nothing edits itself. Built for anyone running a library of AI skills, customizable to your feedback sources. Trigger on "what should we improve", "apply the QA findings", "propose the scoring update", "retire unused skills", "evolve the system", or any self-improvement question.
 ---
 
-# Evolution Agent — the AI-native capstone
+# Evolution Agent
 
-**Required:** File system access (Revenue Reviews) + GitHub (Skill-Builder write access). **Optional:** Slack (for digest engagement signal), Salesforce (for outcome attribution closing the loop).
+## What this does
+Turns the signals your system is already producing (quality-check findings, feedback reactions, and real outcomes) into a short list of concrete proposed changes to your own skills, scores, and workflows. Each one arrives as a reviewable proposal with the data behind it. You approve; the system updates. It never edits itself. This is the layer that makes a library of skills improve over time instead of drifting.
 
-## What this analyst answers
+## What you'll need
+You do not need to connect anything to get value today. Paste your findings and the skill runs now. Connect the tools below and it reads the feedback and outcome streams automatically.
 
-- "Evolve the system" — full audit + PR-generation pass
-- "Apply this week's QA recommendations" — turn QA Agent's digest into reviewable system changes
-- "PR the scoring update" — generate a Skill-Builder PR that adjusts a scoring rubric based on accuracy data
-- "Amend lock-in #X" — generate a LOCKED_DESIGN.md PR for a lock-in update
-- "Propose a new workflow" — when usage patterns suggest a bundle, draft the workflow spec
-- "Retire unused analysts" — surface analysts that haven't been called in 90 days + propose deprecation
+- Works today with: your quality-check findings and any feedback you have collected (thumbs, notes, outcomes). Paste them and the skill drafts the changes.
+- More powerful connected to your feedback log: it reads reactions, click-through, and re-asks automatically instead of you summarizing them.
+- Sharper with outcome data: cross-references what a skill predicted against what actually happened (did the AT_RISK deals slip, did the high-fit accounts convert).
+- Sharper with a version-control connector: writes each proposed change as a reviewable diff you can approve in one click.
 
-## What it owns internally — the AI-native flywheel
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the findings and feedback you paste today and gets sharper as you connect the streams it reads. It never claims an improvement it cannot show in the data, and it never merges a change on its own.
 
-```
-                   QA Agent surfaces drift
-                            ↓
-              Implicit signals collected
-              (emoji reactions, click-through,
-               re-asks, outcome attribution)
-                            ↓
-              Explicit signals collected
-              (👍/👎 + structured reasons)
-                            ↓
-              Evolution Agent reads both streams
-                            ↓
-   ┌────────────────────────┴────────────────────────┐
-   ↓                                                  ↓
-PR to heath-gtm/Skill-Builder              PR to LOCKED_DESIGN.md
-(modifies SKILL.md files)                   (amends lock-ins)
-   ↓                                                  ↓
-Heath reviews + approves                   Heath reviews + approves
-   ↓                                                  ↓
-System mutates itself                      Architecture updates
-   ↓                                                  ↓
-Next week's analyst outputs are smarter   Workflows compose differently
-```
+- **Bring your data**: paste your QA findings and feedback. The skill drafts the proposed changes today, each with its rationale. No connection required.
+- **Connect your tools**: the same skill reads the feedback log and outcome data automatically and turns proposals into ready-to-review diffs. Same output, less effort, sharper.
+- **Just exploring**: nothing collected yet? Get the framework, the four change types, and a worked example, so you can see the shape before you feed it signal.
 
-## What it owns internally — concretely
+Every run ends with the one thing to review first: the single highest-priority change, and why it matters now.
 
-- **Implicit feedback collector**: reads `Revenue Reviews/comms_audit/*.tsv`, `daily_drop_audit/*.tsv`, and Slack reaction counts to derive output-quality signals
-- **Explicit feedback collector**: reads `Revenue Reviews/feedback/*.tsv` (rep-submitted 👍/👎 + structured reasons)
-- **Outcome attribution engine**: cross-references analyst predictions to actual outcomes (did flagged AT_RISK deals slip? Did STRONG_FIT verdicts convert?)
-- **PR generator**: writes GitHub PRs to Skill-Builder + LOCKED_DESIGN.md with surgical changes + rationale
-- **Workflow pattern detector**: finds recurring analyst-call sequences in user activity + proposes them as new workflow specs
-- **Deprecation surfacer**: flags analysts with low invocation rate or persistently poor accuracy
+## Customize this for yourself
+This was built to evolve a suite of GTM skills. Set these to your stack:
+
+| Set this | What it is | Default / Example |
+|---|---|---|
+| FEEDBACK SOURCES | where signal comes from | thumbs up/down, reactions, click-through, written notes |
+| OUTCOME SOURCE | how you attribute results | CRM outcomes, win/loss, renewal result |
+| SKILL LIBRARY | what it proposes changes to | your SKILL.md files, scoring rubrics, workflow specs |
+| APPROVAL GATE | who signs off | you, always; nothing auto-merges |
+| RETIRE_DAYS | unused window before a deprecation proposal | 90 |
+| ACCURACY_FLOOR | precision below which a skill gets flagged | 75% |
+
+## The method
+
+### Read both feedback streams
+Implicit signals (reactions, click-through, re-asks, outcome attribution) and explicit signals (thumbs plus structured reasons). Neither alone is enough. A single thumbs-down is noise; the same pattern across both streams is a signal worth acting on.
+
+### Attribute outcomes honestly
+Cross-reference each skill's predictions to what actually happened, controlling for cohort confounds (window size, segment mix, sample size). Never claim a lift without accounting for what else moved. Small samples lie, and a self-improving system that believes its own inflated numbers gets worse, not better.
+
+### Propose, never merge
+Every change ships as a reviewable proposal with a diff and a rationale tied to data. Four kinds:
+- **Tighten a rubric**: when two tiers converge on the same outcome, collapse or re-cut them.
+- **Update a trigger or definition**: when language in the field has shifted (a new tool named in calls, a new phrase reps use).
+- **Propose a new workflow**: when the same sequence of skills fires together often enough to bundle.
+- **Retire a skill**: when it is unused past RETIRE_DAYS or persistently below ACCURACY_FLOOR.
+
+### Name the one thing to review first
+Every pass ends by surfacing the single highest-priority change, usually the skill whose accuracy dropped below the floor, with the specific cases to investigate.
 
 ## Quality gates
+- Every proposal has a rationale tied to data. Not "tighten this rubric" but "STRONG_FIT converted at 82% and FIT at 79%, too close to differentiate. Collapse to one tier plus an above-baseline override."
+- Nothing auto-merges. Every change is a reviewable proposal you approve before anything updates.
+- Outcome claims are honest. No "we improved win rate by 5%" without controlling for cohort confounds.
+- A skill is retired only on evidence: low invocation past the window, or precision below the floor, never a hunch.
 
-**Every PR has rationale tied to data.** Not "tighten this scoring rubric." Instead, "Tighten this scoring rubric — over the trailing 90 days, STRONG_FIT verdicts converted at 82% but FIT verdicts converted at 79% (delta too small). Recommend collapsing FIT and STRONG_FIT into single tier."
-
-**Heath approves before any merge.** The Evolution Agent NEVER auto-merges. Every change is a reviewable PR with diff + rationale.
-
-**Outcome attribution honest.** Doesn't claim "we improved win rate by 5%" without controlling for cohort confounds (window size, segment mix, etc.).
-
-## Output format example
-
+## Output (example)
 ```
-🧬 EVOLUTION AGENT WEEKLY · Week of May 25
+EVOLUTION PASS - week of May 25
+4 proposed changes ready for review
 
-PROPOSED CHANGES — 4 PRs ready for review
+1. Tighten the fit rubric
+   STRONG_FIT converted 82%, FIT 79% (too close). Collapse to one tier
+   plus an "above-baseline" override.
+2. Add a term to the tech-stack list
+   A tool showed up in 12 calls this month vs 4 last quarter.
+3. Propose a new workflow: renewal prep
+   The same 3 skills fired in the same order 17 times. Bundle them.
+4. Retire an unused skill
+   Invoked twice in 180 days, both tests. Deprecate.
 
-1. tighten-icp-composite-rubric.md (Skill-Builder PR)
-   ──────────────────────────────────────────────────
-   Rationale: Trailing 90d outcome attribution shows STRONG_FIT (82% conv)
-   and FIT (79% conv) too close to differentiate. Collapse to single tier
-   "FIT" + add explicit override flag for "ABOVE_BASELINE_SIGNAL".
-   Affects: icp-analyst/SKILL.md (composite score breakdown section)
-   PR diff: 23 lines changed
-   Outcome math:
-     • Pre-change: 2-tier classifier, 82% / 79% conversion
-     • Post-change: 1-tier + override, projected 85% precision
-   → Review: github.com/heath-gtm/Skill-Builder/pull/47
+Accuracy (trailing 90 days):
+  Fit scoring     82%
+  Deal health     78%
+  Churn predict   67%   <- below the 75% floor
 
-2. amend-lock-in-26-add-Cursor-to-stack.md (LOCKED_DESIGN PR)
-   ──────────────────────────────────────────────────
-   Rationale: Trailing 30d Mixmax transcripts mention "Cursor" in
-   12 calls (vs 4 last quarter). Add Cursor to Sales_Acceleration_Tool__c
-   enumeration + the 26-field tech-stack-as-displacement scoring.
-   Affects: LOCKED_DESIGN.md lock-in #26
-   → Review: github.com/heath-gtm/Skill-Builder/pull/48
-
-3. propose-new-workflow-customer-renewal-prep.md
-   ──────────────────────────────────────────────────
-   Rationale: Last 8 weeks, "renewal prep for {account}" requests
-   triggered Renewal-Health → Conversation → Comms in that order
-   17 times. Pattern detected. Propose new workflow spec
-   "W7: Customer Renewal Prep" that bundles them.
-   Affects: new file at Revenue Reviews/specs/workflows/W7_renewal_prep.md
-   → Review: github.com/heath-gtm/Skill-Builder/pull/49
-
-4. retire-deepline:workflow-hello-world.md
-   ──────────────────────────────────────────────────
-   Rationale: Analyst invoked 2x in last 180 days. Both invocations
-   were user-test, not real use. Recommend deprecation.
-   Affects: deepline plugin manifest
-   → Review: github.com/heath-gtm/Skill-Builder/pull/50
-
-ACCURACY SCORES (trailing 90d):
-  ICP Analyst:        82% precision on STRONG_FIT
-  Deal-Health:        78% precision on AT_RISK (deals actually slipped)
-  Renewal-Health:     91% precision on RENEW verdicts
-  Pattern Analyst:    67% precision on predictive churn (low — investigate)
-
-THE ONE THING TO REVIEW FIRST:
-  Pattern Analyst predictive churn at 67% precision is below 75% threshold.
-  Either tighten the model or surface lower-confidence claims more cautiously.
-  → Investigate the 8 false-positive churn flags from last quarter.
-
-Next pass: Sunday 2026-06-06 (after next QA Agent digest)
+Review first: churn prediction at 67%. Tighten it or lower its confidence.
 ```
 
-## Used by
+## Where the numbers come from
+RETIRE_DAYS (90), the 75% accuracy floor, and the trailing-90-day window are defaults from one team's cadence, not laws. A fast-moving library wants a shorter unused window; a high-stakes one wants a higher accuracy floor. Re-tune them to how much risk you carry. The loop (read both streams, attribute honestly, propose, approve) does not change. The thresholds are yours.
 
-- **Weekly system maintenance** (scheduled Sundays after QA Agent)
-- **Quarterly architecture review** (deep pattern detection over 90-day windows)
-- **Heath manual ad-hoc** ("what should we improve?")
-- Standalone — this is the system's self-improvement engine
+## Example chat
+**You:** Pull together what we've learned this month across the skill library, what should we change?
 
-## When NOT to use
+**Claude:** Ran the pass. Four proposals, one of them urgent.
+```
+1. Tighten the fit rubric: STRONG_FIT converted 82%, FIT 79%. Collapse to one tier.
+2. Retire an unused skill: invoked twice in 180 days, both tests.
+3. Add a term to the tech-stack list: a new tool named in 12 calls this month.
+4. Propose a new workflow: same 3 skills fired together 17 times.
+```
+Accuracy on churn prediction dropped to 67%, below the 75% floor. That's the one to review first, not the rubric tweak, even though the rubric tweak is the easier fix to ship.
+One sharpener: connect the outcome source (your CRM) so the accuracy numbers update automatically instead of me asking you to paste last month's results.
 
-- For real-time decision-making (Evolution Agent runs weekly + on-demand for retrospective improvement)
-- For pulling data from connectors (uses other analysts as upstream — never queries directly)
-- For autonomous decisions — every change requires Heath's PR approval
+## Go further
+The manual pass proves the loop works. Here is what it looks like running continuously.
 
-## Salesforce field reference
+- **Run the pass on a schedule.** Put this on a monthly scheduled Claude task so drift gets caught before a quarter goes by, not after.
+- **Feed it real reactions.** Connect Slack reactions and Amplitude click-through so implicit and explicit feedback both flow in without anyone logging them by hand.
+- **Ship proposals as diffs.** Wire a GitHub connection so each proposed change lands as a pull request against the SKILL.md, ready for one-click review instead of a paragraph to re-type.
 
-This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
-the single source of truth for every field name, definition, and canonical
-interpretation. Specifically, this analyst reads:
+You still approve every merge. The pass just stops depending on someone remembering to run it.
 
-- No direct SFDC reads — consumes audit logs from other analysts + outcome attribution data.
-- Generates GitHub PRs that may amend this library file when field changes are needed.
-
-If a query needs a field not in the library, FAIL LOUD and request a library
-amendment via Evolution Agent — never invent ad-hoc field names or definitions.
-Apples-to-apples consistency across every analyst output is the goal.
-
-## Inheritance from LOCKED_DESIGN.md
-
-Lock-in #33 (QA Agent — Evolution is the next layer on top). This skill's existence locks-in #34 (the AI-native flywheel). All lock-ins and SKILL.md files are downstream targets for Evolution Agent PRs.
-
-## Make.com / API packaging
-
-**Input:** `{ mode: "full_evolution_pass | proposed_PRs_only | accuracy_audit | deprecation_surfacer", trailing_days: 90 }`
-
-**Output:** `{ proposed_PRs: [...], accuracy_scores, top_priority, next_pass_date }`
-
-**Failure modes:** No GitHub write access → cannot generate PRs (falls back to "proposed changes report"). No audit logs → returns "no signal to evolve from."
-
-## Shippable as
-
-Standalone — the meta-meta-layer that turns a productized analyst suite into a self-improving system. Pairs naturally with QA Agent (which surfaces issues) — Evolution Agent generates the change-control actions.
-
-This is the AI-native capstone. Without it, the system is a productized SaaS that improves manually. With it, the system compounds.
+## Make it yours
+Fork it. Change the feedback sources, the floors, the windows, the change types. The point is not to run someone else's improvement loop. It is to make your own skills compound instead of rot, with a human on every merge. Built by an operator. Customize it, break it, make it better.

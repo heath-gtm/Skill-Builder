@@ -9,16 +9,23 @@ description: A funnel and account-scoring diagnostic engine for any sales org. C
 This is your diagnostic partner for understanding a sales funnel: why it is converting or not, which accounts to work next, and where the scoring model is letting you down. A scoring dashboard tells you what is happening. This skill helps you understand why, what to do about it, and which accounts deserve the next sprint. It works across three modes that share one six-gate funnel framework, one multi-source signal stack, and the same cohort-anchored math.
 
 ## What you'll need
-- A CRM. Cohort anchor dates, fit scores, opportunity history, contacts, owner. Required.
-- A product-analytics tool. Real product engagement and event-based usage signals. Required for the Product channel.
-- An ICP-qualification tool. Independent fit qualification (optional).
-- A community or intent tool. Community signals and extra buying-committee contacts (optional).
-- An enrichment tool. Phone numbers and verified emails on the top tier of accounts (optional).
-- A meeting tool. Meeting history and sequence attribution (optional).
+You do not need to connect anything to start. Bring your funnel numbers and the skill runs today. Connect the tools below and it pulls them automatically and adds signals you cannot paste by hand.
 
-You also need a defined channel taxonomy, a stage model in your CRM, and a cohort anchor date per channel (the date an account enters the funnel).
+- Works today with: your funnel counts by stage and channel, with a cohort entry date per channel, plus your fit scores if you have them. Paste or upload.
+- More powerful connected to a CRM: cohort dates, stages, scores, contacts, and owners, live.
+- More powerful connected to a product-analytics tool: real product engagement for the Product channel.
+- Sharper with ICP-qualification, community or intent, enrichment, and meeting tools.
 
-No CRM connected? The skill says what to connect and stops. It does not guess.
+You still need a defined channel taxonomy, a stage model, and a cohort anchor date per channel. Bring them, or map them from your CRM.
+
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
+
+- **Bring your data**: paste or upload your list (a deal export, a stage CSV). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
 
 ## Customize this for yourself
 | Set this | What it is | Default / Example |
@@ -118,6 +125,29 @@ Use generic placeholder names (Acme, Vertex, Northwind) and "Rep" in your own ou
 
 ## Where the numbers come from
 The benchmarks, target rates, the ASP, and the floor score in the example are defaults. Re-tune them to your own data. Set each gate's target from your channel's trailing baseline. Replace the ASP with your current average deal size before dollarizing. Pick a cohort window old enough that the cohort has had time to convert, and report sample size when it is young.
+
+## Example chat
+
+**You:** Outbound felt slow this quarter, can you diagnose the funnel?
+
+**Claude:** Pulled the trailing 90-day cohort.
+```
+OUTBOUND COHORT (trailing 90 days)
+  Meeting Set: 52  ->  to SQL: 19 (37%, below 55% target)
+  to SQO: 11 (58%, strong)  ->  Closed Won: 5 (45%, strong)
+  Leaky gate: MEETING to SQL
+```
+Every gate past SQL is healthy, the leak is entirely in qualification, meetings are happening but not converting into real SQLs. Key insight: this is a meeting-quality problem, not a top-of-funnel problem, so adding more outbound volume would have made the wrong number worse. One sharpener: connect the product-analytics tool so Product-channel meetings get graded on real usage instead of self-reported fit.
+
+## Go further
+The diagnosis runs once, by hand. Here is where an operator takes it once the manual version proves out.
+
+- **Run the diagnosis every Monday, not just when it's asked.** A scheduled Claude task pulls the trailing-90 cohort from Salesforce weekly and flags the gate that moved past tolerance.
+- **Catch the leak while the rep can still fix it.** Wire a Slack alert the moment a meeting-to-SQL rate on a live cohort drops below target, so coaching happens mid-quarter, not in the QBR.
+- **Turn Sprint Planning into a standing queue.** Feed qualified accounts through Clay for buying-committee enrichment automatically, so the ranked backlog refreshes without a manual sprint kickoff.
+
+The framework finds the gate; the automation keeps watching it after you look away.
+
 
 ## Make it yours
 Fork it, plug in your connectors and thresholds, and break it against your own funnel until it tells you something true. Built by an operator. Customize it, break it, make it better.

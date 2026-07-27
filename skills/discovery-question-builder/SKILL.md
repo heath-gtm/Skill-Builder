@@ -85,5 +85,32 @@ Pass 3 - Next step (fills: Decision Process, Champion)
 ## Where the inputs come from
 PERSONA, PROBLEM, and FRAMEWORK are yours to set; the three-pass order and the 2-to-3-per-stage depth are defaults that suited a 30-minute first call, not laws. A longer discovery can go deeper per pass. The order holds. The inputs are yours.
 
+## Example chat
+Here is the skill running on a real persona, start to finish.
+
+**You:** Build me discovery questions for a VP Ops persona, I think their problem is manual reporting eating their team's time.
+
+**Claude:** Sequenced it problem to impact to next step, mapped to MEDDPICC.
+```
+Pass 1 - Problem: "How is [process] handled today, start to finish?"
+  follow-up: "Where does it break most often?"
+Pass 2 - Impact: "When it breaks, what does that cost, roughly, per quarter?"
+Pass 3 - Next step: "Worth a working session with [role] next week to map it?"
+```
+The catch: every question is tagged to a framework field, so a good call also fills your qualification framework instead of you backfilling it from memory after.
+
+**You:** I've only got 15 minutes, not a full call.
+
+**Claude:** Cut to one question per pass instead of two to three, kept the impact-quantification question since a pain with no number does not survive a deal review even in a short call. One sharpener: connect the CRM so I only ask what is still missing on this deal instead of re-asking fields you have already filled.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Skip what's already known.** Connect Salesforce so the question set reads the open opportunity's qualification fields first and only asks what is still blank.
+- **Write answers back after the call.** Connect a meeting tool so post-call, the answers map straight back to the framework fields on the deal record.
+- **Build the persona context automatically.** Connect Clay or an enrichment tool so questions land in the prospect's actual role and situation, not a generic persona template.
+
+A good call should fill the framework while you talk, not after.
+
 ## Make it yours
 Fork it. Change the persona, the framework, the depth, the next step you aim for. The point is not to run someone else's qualification. It is to run yours, and fill it while you talk. Built by an operator. Customize it, break it, make it better.

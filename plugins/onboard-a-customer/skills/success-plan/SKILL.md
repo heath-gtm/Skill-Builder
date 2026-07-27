@@ -82,5 +82,31 @@ Biggest risk: single-threaded on one champion.
 ## Where the numbers come from
 The day targets, seat counts, and indicators come from the data you paste or the tools you connect. Nothing above is a real customer number; it is illustrative. When the skill cannot measure a milestone, it marks it a checkpoint and names the input that would make it measured.
 
+## Example chat
+
+**You:** New account just signed. Here's the sales-to-CS handoff notes, build the success plan.
+
+**Claude:** Here's the plan, built off the stated goals.
+```
+MILESTONE               TARGET   YOUR OWNER  THEIR OWNER  INDICATOR
+Kickoff + goals agreed  Day 3    CSM         Sponsor      plan signed
+First workflow live     Day 30   CSM         Champion     1 team active
+Full team adopted       Day 75   CSM         Champion     7/8 seats weekly
+
+Renewal thesis: renews if the second team adopts by day 120.
+Biggest risk: single-threaded on one champion, no second contact named yet.
+```
+Key insight: the handoff notes never named a customer-side owner for "full team adopted," that's the milestone most likely to slip since nobody but the CSM is accountable for it. One sharpener: connect product analytics so "1 team active" is a measured event instead of a checkbox the CSM self-reports.
+
+## Go further
+The plan is drafted. Here is where an operator takes it once the manual version proves out.
+
+- **Turn milestones into measured events.** Wire product analytics (Amplitude) so "first workflow live" fires automatically off real usage, and the plan updates itself instead of waiting on a CSM check-in.
+- **Watch the renewal thesis, not just the renewal date.** A scheduled Claude task re-reads the leading indicators weekly and flags the account in Salesforce the moment the sponsor goes quiet.
+- **Route the risk to a human before it's a save.** If the single-threaded flag trips, have Slack DM the CSM's manager automatically, so the second-contact gap gets worked while there's still runway.
+
+The plan predicts the renewal; the automation is what keeps the prediction honest.
+
+
 ## Make it yours
 Fork it. Change the milestones, the time-to-value target, the indicators you trust. The point is not to run someone else's onboarding. It is to run yours, and to see the renewal coming a year out. Built by an operator. Customize it, break it, make it better.

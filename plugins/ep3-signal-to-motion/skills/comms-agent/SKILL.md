@@ -87,5 +87,44 @@ Audit: 1 row appended
 ## Where the numbers come from
 There are no thresholds here, only defaults you control: draft-first is on until you opt a workflow into autosend, and the audit log goes wherever you point it. The one rule that does not move is that nothing sends silently and nothing fakes success. Everything else is yours.
 
+## Example chat
+Here is the skill running on the output of an account read.
+
+**You:** Take that Acme account verdict and draft the CRM update plus a Slack post for the team.
+
+**Claude:** Both drafted, nothing sent yet.
+```
+CRM WRITE-BACK (DRAFT) · Acme Corp
+Field: Fit_Score__c   28 -> 61 (false negative, promote)
+Field: Stage_Note__c  "4 of 6 capabilities active, reclassify"
+
+CHANNEL POST (DRAFT) · #gtm-pipeline
+"Acme flipped from cold to active. Fit score was stale, real
+usage says otherwise. Owner: reassign to expansion queue."
+```
+Both are drafts because draft-first is the default here, autosend is never assumed. The CRM write includes the before and after value so nothing overwrites silently. One sharpener: connect Salesforce directly so this becomes a real field write with an audit row instead of copy-paste text.
+
+**You:** Send the CRM update, but hold the Slack post for me to review.
+
+**Claude:** Understood, only the CRM field goes now.
+```
+CRM WRITE-BACK COMPLETE · Acme Corp
+Field: Fit_Score__c 28 -> 61, written
+Audit: 1 row appended (timestamp, before/after, workflow source)
+
+Slack post: still in draft, awaiting your send
+```
+Since only the CRM connector is wired in, the write went through and logged an audit row; the Slack post stays a draft because that tool isn't connected yet, not because of a silent skip. One sharpener: connect your channel tool so approved posts go out the same run instead of needing a manual copy-paste.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Let every analysis skill hand off automatically.** Chain this after closed-lost-analysis or coaching-analyst so every read ends in a real CRM write or Slack post, not a doc nobody acts on.
+- **Autosend the low-risk operations only.** Opt in field updates and internal Slack posts to autosend while keeping outbound email drafts human-reviewed, so the risky sends still get eyes.
+- **Give the audit trail a home.** Point the audit log at a Snowflake table so every write across every workflow is queryable in one place.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Add operation types, change the draft-first rule, point the audit log at your own store. The point is not to run someone else's write layer. It is to ship your own work, reviewed and logged, faster. Built by an operator. Customize it, break it, make it better.

@@ -83,5 +83,27 @@ Estimated expansion: ~55% of current ARR (illustrative, confirm seat price).
 ## Where the numbers come from
 The seat counts, sizes, and percentages come from the data you paste or the tools you connect. Nothing above is a real customer number; it is illustrative. When the skill cannot size an expansion, it marks it an estimate and names the input, a seat price or an org map, that would make it real.
 
+## Example chat
+**You:** Is Acme ready for an upsell? They've been a customer for a year.
+
+**Claude:** Checked the signals. Yes, on seats.
+```
+READY SIGNALS                          PLAY
+9/9 seats active, 2 waitlisted         +5 seats
+Hitting the reporting ceiling monthly  tier upgrade
+New ops team appearing in usage        land the ops team
+```
+Primary play: +5 seats, pitched off the fact the current team is fully adopted and turning people away. I didn't stack the tier upgrade on top of it, one clear ask beats a menu.
+One sharpener: connect an enrichment tool so I can size how many people are actually on that new ops team instead of guessing at five.
+
+## Go further
+The read works from what you already know about the account. Here is where it starts finding the expansion before you go looking.
+
+- **Watch for the signal, not the calendar.** Wire a scheduled Claude task against product-usage data (Amplitude) so it flags an account the day it crosses the seat ceiling, instead of waiting for the QBR.
+- **Size the whitespace automatically.** Connect Clay or a similar enrichment tool to map headcount by department, so the pitch names a real number instead of an estimate.
+- **Route the pitch to the owner.** Have the play post straight to the account owner in Slack with the pitch drafted, so the moment doesn't sit in a dashboard nobody opens.
+
+The account was always going to grow. This just gets there before someone else notices.
+
 ## Make it yours
 Fork it. Change the ready signals, the plays, the way you size and time the ask. The point is not to run someone else's upsell script. It is to grow the accounts you already earned, on outcomes they already feel. Built by an operator. Customize it, break it, make it better.

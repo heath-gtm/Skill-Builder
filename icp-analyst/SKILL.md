@@ -1,166 +1,127 @@
 ---
 name: icp-analyst
-description: Your ICP qualifier. Connect Salesforce + a scoring system (Aero, Octave, or any account scoring vendor) — turns any "is this account real ICP?" question into a stacked verdict: composite score from every signal, breakdown by source, override flags when scoring systems are wrong, channel classification, written rationale. Use when a rep is starting prospecting, a marketer is scoring inbound, RevOps is building a TAM model, or a sales manager is vetting an outbound list. Trigger on "is {account} a real ICP fit?", "score this list against our ICP", "find lookalikes to {winning customer}", "why is Aero wrong about {account}?", "validate this prospect list", "what's our ICP coverage in {segment}?", "is this PQA worth pursuing?", "find accounts that match our top customers", "qualify these leads", or any account / list / segment qualification. Also fire when a leader is debating whether to invest a rep cycle on an account vs pass.
+description: Turn "is this account a real fit?" into a stacked verdict. A composite 0-100 fit score built from every signal you have, a breakdown by source, override flags for when a scoring tool is wrong, a channel classification, and a written rationale. Built for reps, marketers, and RevOps, customizable to your CRM and whatever scoring you use. Trigger on "is {account} a real fit?", "score this list against our profile", "find lookalikes to our best customers", "why is the score wrong on {account}?", "validate this prospect list", "what's our coverage in {segment}?", or any account or list qualification.
 ---
 
-# ICP Analyst — your fit qualifier
+# ICP Analyst
 
-**Required connectors:** Salesforce + at least one scoring source (Aero, Octave, or any account-scoring vendor).
+## What this does
+Takes an account, or a whole list, and tells you whether it actually fits your ideal customer profile. It rolls every signal you have, firmographics, product usage, hiring intent, tech stack, into one 0-100 score, shows you which source drove it, and flags the accounts where a scoring tool is plain wrong. Then it tags each verdict with the channel it belongs to, so the play is obvious.
 
-**Optional connectors:** Common Room (for hiring intent + employee count) · Amplitude (for product-side ICP signal via PQA detection) · FullEnrich (for technographic confirmation).
+## What you'll need
+You do not need to connect anything to get value today. Bring your accounts and the skill runs now. Connect the tools below and it pulls them automatically and adds signals you cannot paste by hand.
 
-## What this analyst answers
+- Works today with: a list of accounts, with domain, employee count, industry, and any signal you know (funding stage, hiring, tools they use). Paste it or upload a CSV.
+- More powerful connected to a CRM: it reads firmographics and any existing scores automatically across your book.
+- Sharper with an account fit score or scoring vendor: it folds that score in as one input and tells you when to trust it.
+- Sharper with a product-analytics tool: it adds a product-side fit signal from real usage.
+- Sharper with an enrichment tool: it confirms employee count, hiring, and technographic stack.
 
-In plain English, the ICP Analyst answers questions like:
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
 
-- "Is acme.com a real ICP fit?" → Composite 0-100 score with source breakdown
-- "Score this list of 50 prospects against our ICP" → Per-row verdict with rationale, sortable by score
-- "Find lookalikes to Datadog and Vortex" — our two highest-ARR customers" → Search for accounts matching their technographic + employee count + industry + funding-stage profile
-- "Why is Aero scoring this 30 when the hiring signal is screaming?" → Override detection: surface accounts where Aero's score conflicts with leading-indicator signals (hiring 14 sales reps + uses Outreach = displacement target Aero missed)
-- "What's our Q2 ICP coverage in mid-market SaaS?" → Pipeline pull filtered by segment + scored against ICP, surface coverage gaps
-- "Validate this prospect list from the SDR team" → Run the full ICP analyzer over a CSV / pasted list, flag duplicates, surface mis-targeted accounts
-- "Is this PQA worth Karan's cycles?" → Single-account qualifier with explicit "yes / no / nurture" verdict + reasoning
+- **Bring your data**: paste or upload your account list. The skill scores every row today on your real data. No connection required.
+- **Connect your tools**: the same skill pulls firmographics, scores, usage, and enrichment automatically, and folds each into the composite. Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact inputs it reads, and a worked example on sample data, so you can see the shape before you feed it.
 
-## What it owns internally
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
 
-The ICP Analyst is the product layer over these atomic skills:
+## Customize this for yourself
+This was built for a B2B team scoring accounts against a defined profile. Set these to your stack:
 
-- **Multi-source ICP scoring** — Aero Account Fit Score + Octave Fit + Common Room enrichment + PLAN-completeness signal
-- **A4 — Channel Classifier** (lock-in #11) — Inbound / Product / Outbound
-- **Override detection** for Aero False-Negative and Aero False-Positive (lock-in #14 v7 + product-engagement-story skill)
-- **Tech-stack-as-displacement-target scoring** (lock-in #26) — accounts using Outreach + Gong + Apollo are 3-tool consolidation candidates
-- **Hiring intent scoring** — `CR_Sales_Team_Hiring__c >= 3` is a top-of-funnel ICP signal
+| Set this | What it is | Default / Example |
+|---|---|---|
+| CRM | your CRM connector | Salesforce, HubSpot, Pipedrive |
+| FIT score | your account fit score or vendor score | any account-scoring source |
+| PROFILE | what "good" looks like | your ICP definition (size, industry, stage, region) |
+| SIGNAL sources | hiring, funding, product usage | an enrichment tool, a product-analytics tool |
+| DISPLACEMENT stack | competitor tools worth a switch play | the tools you replace |
+| WEIGHTS | how much each input counts | see The method (re-tune) |
 
-## The quality gates this analyst guarantees
+Run any profile you like. The skill scores "does this account match the profile you defined," so point it at your criteria, not anyone else's.
 
-**No single-source ICP claims.** When the analyst outputs an ICP score, it MUST show the breakdown by source — Aero contribution, Octave contribution, Common Room contribution, signal contribution. If a source is unavailable, the analyst declares it ("Octave not connected — score derived from Aero + Common Room + signals only").
+## The method
 
-**Override visibility.** When the analyst's composite verdict disagrees with Aero or Octave, it explicitly says so and logs the disagreement to `Revenue Reviews/icp_override_queue/{YYYY-MM}.tsv` for the scoring-vendor team to review. This is how we feed back into the Aero feedback loop.
+### Composite fit score (0-100)
+One headline number, built from weighted inputs. A starting split that you re-tune:
+- 35% account fit: employees, industry, funding stage, region.
+- 25% product-side signal: real usage or a product-engagement score, if connected.
+- 20% hiring and intent: recent hiring, funding, growth signals.
+- 15% tech-stack displacement: accounts running tools you replace are switch candidates.
+- 5% qualification completeness: a bonus if a rep has already done the homework.
 
-**Channel-tagged outputs.** Every ICP verdict comes with a channel classification — is this account being qualified for Inbound (came to us), Product (self-served signup), or Outbound (we go to them)? The play type and outreach strategy differs by channel.
+Penalties subtract from the total: too small or off-profile, an already-saturated customer, recently churned inside a cooling-off window, or already worked by another rep (avoid the double-tap).
 
-## Composite ICP score breakdown
+### Source breakdown, never a single number
+Every score shows its parts. If a source is missing, the skill says so ("no product-analytics connected, score is from fit, hiring, and stack only") instead of hiding the gap.
 
+### Override detection
+When the composite disagrees with a scoring tool, it says so out loud. An account a tool scored low while hiring 14 reps and running a stack you displace is a false negative the tool missed. An account a tool scored high with none of the real signals is a false positive. Both get flagged with the reason.
+
+### Channel classification
+Every verdict is tagged Inbound (they came to you), Product (they self-served a signup), or Outbound (you go to them). The play and the outreach differ by channel, so the tag ships with the score.
+
+### Lookalike search
+Anchor on your highest-value customers and find accounts matching their profile, employee count, industry, funding stage, and technographic stack.
+
+## Quality gates
+- No single-source fit claim. The breakdown by source ships with every score, and missing sources are declared.
+- Override visibility. When the composite disagrees with a scoring tool, it says so and names why.
+- Channel-tagged outputs. Every verdict carries Inbound, Product, or Outbound, because the play changes with the channel.
+
+## Output (example)
 ```
-Composite ICP Score 0-100 (the headline number)
-  = 35% × Account Fit (employees + industry + funding + region)
-  + 25% × Product-side signal (Amplitude PQA + Aero PES if connected)
-  + 20% × Hiring + intent signals (Common Room hiring + recent funding + LinkedIn growth)
-  + 15% × Tech-stack-displacement signal (Outreach, Gong, Apollo, SalesLoft, Yesware in their stack)
-  + 5% × PLAN-completeness (proxy for rep-confirmed qualification — bonus if a rep has already done the homework)
-
-Penalties (subtract from total):
-  - Sub-50 founder-led (-30 unless overridden by other signals)
-  - Already a customer at full saturation (-100)
-  - Recently churned cooling-off period (-40 if churned within 90 days)
-  - In an active deal cycle by another rep (-25 to avoid double-tap)
-```
-
-## Output format example
-
-For "Is acme.com a real ICP fit?":
-
-```
-🎯 ACME CORP — ICP Score: 87 / 100 · STRONG FIT
+ACME CORP · Fit Score 87 / 100 · STRONG FIT
 
 Source breakdown:
-  Aero Account Fit Score:        78 / 100  (B+ score, marketing approved)
-  Octave Fit:                    "GOOD FIT" (qualified)
-  Common Room enrichment:        805 employees, 22 sales reps, 14 hiring
-  Tech stack displacement:       3 tools — Outreach + Gong + Apollo
-  PLAN completeness:             4/4 — rep has done the homework
-  Channel classification:        Outbound + Product (hybrid)
+  Account fit score:        78 / 100  (strong, approved)
+  Product-side signal:      real usage detected
+  Enrichment:               805 employees, 22 reps, 14 hiring
+  Tech-stack displacement:  3 tools you replace
+  Qualification:            complete, homework done
+  Channel:                  Outbound + Product (hybrid)
 
-Composite signals:
-  ✅ Account fit: SaaS + 500+ employees + Series D + N. America
-  ✅ Hiring 14 sales reps = top-of-funnel ICP scream
-  ✅ Tech stack consolidation play: 3-tool displacement = strong messaging hook
-  ✅ Karan has built the full PLAN already — qualification confirmed
+Signals:
+  Account fit: SaaS, 500+ employees, late stage, target region
+  Hiring 14 reps is a top-of-funnel scream
+  3-tool consolidation is a strong messaging hook
+  A rep has already qualified it
 
-Verdict: STRONG FIT — pursue with full outbound investment. Channel suggests
-hybrid play: cold sequence into RevOps role (typical entry point) + watch
-for any signups from acme.com that would trigger inbound handoff.
+Verdict: STRONG FIT. Pursue with full outbound. The hybrid channel means a
+cold sequence into the usual entry role, plus a watch for any signup from
+this domain that would trigger an inbound handoff.
 
-Recommended play: COLD OUTBOUND — Aero is correct that this is ICP. The
-hiring intent + tech stack consolidation make it Karan's top-3 worth-the-time
-outbound target this week.
-
-[Open in CRM ↗]
+Override: none. The fit score and the composite agree.
 ```
 
-## Used by (workflows that compose this analyst)
+## Where the numbers come from
+The weights (35/25/20/15/5) and the penalties are a starting point, not a law. They suited one B2B motion. If product usage matters more to you than hiring, shift the weight. The scoring logic does not change, the weights are yours.
 
-- **W1 Per-Account Brief Pipeline** — every brief reports the ICP composite verdict
-- **W2 Leader Brief Generator** — Top Leads section uses ICP score as primary sort
-- **W3 Daily Drop** — daily hot-lead ranking uses ICP composite
-- **W6 Customer Interview Prioritizer** — uses ICP score as a signal for "should this customer be in our reference roster?"
-- **W7 Reference Customer Finder** — anchors lookalike search on ICP-validated customers
-- **W11 Lost-Deal Reopener** — surfaces deals that scored high ICP but lost, with re-qualification
+## Example chat
+Here is the skill running on a real account, start to finish.
 
-## When NOT to use this analyst
+**You:** Is acme.com a real fit? Score it against our profile, and tell me if the vendor score is right.
 
-- For deal-stage analysis (use Salesforce Analyst — deal-risk classifier lives there)
-- For "have they used the product" questions (use Amplitude Analyst)
-- For pure CRUD of ICP scores in SFDC (use the Salesforce MCP directly)
-
-## Salesforce field reference
-
-This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
-the single source of truth for every field name, definition, and canonical
-interpretation. Specifically, this analyst reads:
-
-- Account.* (Aero scoring, CR_* enrichment, tech-stack-as-displacement fields per § 1)
-- Account.Channel_Source__c (canonical channel attribution, § 5; `Account.LeadSource` is fallback only — never `Opportunity.Channel__c`)
-- Writes to icp_override_queue audit when composite disagrees with Aero/Octave
-
-If a query needs a field not in the library, FAIL LOUD and request a library
-amendment via Evolution Agent — never invent ad-hoc field names or definitions.
-Apples-to-apples consistency across every analyst output is the goal.
-
-## Inheritance from LOCKED_DESIGN.md
-
-This analyst inherits lock-ins #11 (channel classifier), #14 v7 (play type taxonomy + Aero override contract), #18 (new user signal), #26 (tech stack + hiring fields), and the Aero False-Negative override logic from the `product-engagement-story` skill. Read `Account Brief Pipeline/LOCKED_DESIGN.md` before any invocation.
-
-## Make.com / API packaging
-
-**Input schema:**
-```json
-{
-  "mode": "single | batch",
-  "account_id": "string (when mode=single)",
-  "account_list": [{"id": "string", "domain": "string"}] (when mode=batch),
-  "include_override_log": true,
-  "channel_hint": "Inbound | Product | Outbound | null"
-}
+**Claude:** Composite lands at 87, strong fit, and it overrides your vendor tool.
 ```
-
-**Output schema:**
-```json
-{
-  "verdict": "STRONG_FIT | FIT | NEUTRAL | WEAK_FIT | NOT_ICP",
-  "composite_score": 0-100,
-  "breakdown": {
-    "account_fit": 0-100,
-    "product_signal": 0-100,
-    "hiring_intent": 0-100,
-    "tech_stack_displacement": 0-100,
-    "plan_completeness": 0-100
-  },
-  "penalties_applied": [...],
-  "channel_classification": "Inbound | Product | Outbound | Hybrid",
-  "override_flag": "AERO_FALSE_NEGATIVE | AERO_FALSE_POSITIVE | null",
-  "recommended_play": "ACTIVATE | CONVERT | EXPANSION | RECOVERY | RENEWAL_DEFENCE | COLD_OUTBOUND | NURTURE | PASS",
-  "rationale": "string"
-}
+Source breakdown:
+  Account fit score:   78/100  (approved)
+  Product-side signal: real usage detected
+  Enrichment:           805 employees, 14 hiring
+  Tech-stack:           3 tools you replace
+  Channel:              Outbound + Product (hybrid)
 ```
+The override is the finding: your vendor score said 78 and called it borderline, but 14 open sales reqs plus a 3-tool displacement opportunity are the kind of signal a firmographic-only score can't see. That's the false negative this skill exists to catch. One sharpener: connect a product-analytics tool so the usage signal comes from real data instead of "detected," which right now is the softest part of the read.
 
-**Failure modes:**
-- No SFDC connected: "Connect Salesforce to enable ICP scoring."
-- No scoring source connected: "Connect at least one scoring source (Aero, Octave, or vendor) to enable ICP scoring."
-- Account not found in SFDC: returns null verdict + "Account not in CRM — enrich first via Enrichment Analyst, then re-score."
+## Go further
+The verdict is step one. Here is where an operator takes it once the manual version proves out.
 
-## Shippable as
+- **Score the whole book overnight.** Point a scheduled Claude task at Salesforce and your enrichment tool nightly, and write the composite and the override flag back to the account record.
+- **Catch only the disagreements.** Post to Slack just the accounts where the composite and the vendor score diverge by more than 20 points, so a human only looks at the interesting ones.
+- **Turn the strong fits into a list.** Feed every STRONG FIT verdict into Clay or a sequencer so the outbound list builds itself from the accounts that actually clear the bar.
 
-**Standalone connector-gated SKU:** customer connects Salesforce + one scoring vendor → ICP Analyst becomes available. The override-detection logic is what's unique — most ICP tools just report their own score; this one tells you when the score is wrong + why.
+You built the override once, now it runs against every account, every night.
 
-**Make.com sub-agent module:** ships as a discrete node — input is account_id or account_list, output is structured ICP verdict JSON. Chains naturally with Enrichment Analyst (enrich-then-score pipeline) and Comms Analyst (score-then-notify-rep).
+
+## Make it yours
+Fork it. Change the weights, the penalties, the sources. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

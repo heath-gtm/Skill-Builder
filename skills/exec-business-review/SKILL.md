@@ -90,5 +90,30 @@ Pre-empt: they will ask about the competitor's new feature. Answer ready.
 ## Where the numbers come from
 The value metrics and ROI inputs are yours to define. The example figures are illustrative, not benchmarks. Real math comes from your baseline and your price, sourced from the account. The structure does not change. The numbers are yours.
 
+## Example chat
+**You:** I've got a QBR with the VP of Ops next week for a renewal, help me make it an EBR instead.
+
+**Claude:** Reworked it. Their stated goal this year is cutting manual ops time 20%.
+```
+Value narrative
+  Goal:     reduce manual handling across ops
+  Proof:    the team automated the workflow eating their week
+  Outcome:  ~30% fewer manual steps (illustrative)
+
+ROI: baseline ~X hrs/wk manual, now ~Y hrs/wk, payback well under a year
+The one ask: two-year renewal for an exec-sponsored roadmap review
+```
+I cut three usage stats that were true but belonged in a QBR, not this room. None of them ladder to her stated goal.
+One sharpener: connect product analytics so the ROI math uses real adoption numbers instead of the estimate you gave me.
+
+## Go further
+The narrative works from what you describe. Here is where it gets grounded in real numbers.
+
+- **Pull the ROI inputs live.** Connect Amplitude or your product-analytics tool so baseline and current-state numbers refresh automatically instead of you re-pulling a report each quarter.
+- **Track the ask across accounts.** Log every EBR's single ask and outcome in Salesforce so you can see which asks actually land and stop repeating the ones that don't.
+- **Pre-empt with real intel.** Point a scheduled Claude task at Gong to surface what this exec has pushed back on in past calls, so the objection pre-empt is grounded in what they actually said, not a hunch.
+
+Walk into the next one already knowing what they'll say.
+
 ## Make it yours
 Fork it. Change the goal framework, the value metrics, the ask. The point is not to run someone else's playbook. It is to run yours, faster, in the room that decides the renewal. Built by an operator. Customize it, break it, make it better.

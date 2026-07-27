@@ -91,5 +91,42 @@ Next step
 ## Where the inputs come from
 The price, the payback, and the value figures above are examples, illustrative only, not a claim about your numbers. The problem recap and the buyer's words come from what you paste or from a connected meeting or email tool. The pricing and terms come from what you enter or from a connected quoting record. The skill states what it is given and asks for what it is missing; it does not manufacture a number to fill a gap.
 
+## Example chat
+
+**You:** Turn this into a proposal. Acme Corp, they told us reps burn a day a week rebuilding account research by hand. We're proposing the automated research workflow, $60K/year, 12-month, net-30, want signature by the 30th.
+
+**Claude:** Drafted and ready to send.
+```
+PROPOSAL · Acme Corp (illustrative)
+
+The problem you described
+  Reps rebuild the same account research by hand before every call,
+  costing the team roughly a day a week each.
+
+Investment
+  $60K / year. Against ~1 day/week/rep returned to selling, this
+  pays back inside the first quarter (illustrative figure).
+
+Terms
+  12-month term, starts on signature, net-30. No usage caps.
+
+Next step
+  Sign by the 30th and we run kickoff the first week of next month.
+```
+Caught one thing: you gave me a price but no payback claim, so I framed the return off the day/week figure you gave me instead of inventing an ROI number. That is the gate this skill holds, price gets tied to a value metric you actually stated, never a bare number.
+
+**You:** Good. Can you tighten the terms section, legal always finds something in there.
+
+**Claude:** Tightened, nothing buried. Term, start, payment, and usage are now four flat lines with no conditional clauses hiding underneath. A term the buyer discovers late is a term that stalls in legal, so this version has nothing left for them to find. Sharpener: connect your quoting tool and I will pull the real line items instead of the flat number you typed.
+
+## Go further
+The manual version proves the shape works. Here is the scaled version once it does.
+
+- **Draft on stage change.** Trigger this in Salesforce or HubSpot the moment a deal hits Proposal stage, so the draft is waiting before the AE opens it.
+- **Pull the buyer's words automatically.** Connect Gong or your email tool so the problem recap comes from the call transcript, not a rep's paraphrase.
+- **Route straight to send.** Wire the finished draft into your e-signature tool via a scheduled Claude task, so the AE reviews and sends instead of building from scratch.
+
+The proposal still needs a human signature on the strategy. This just gets it to their desk faster.
+
 ## Make it yours
 Fork it. Change the sections, the pricing frame, the value metric, the send format. The point is not to send someone else's template. It is to send yours, faster, grounded in what the buyer actually told you. Built by an operator. Customize it, break it, make it better.

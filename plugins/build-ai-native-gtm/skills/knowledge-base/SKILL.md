@@ -86,5 +86,33 @@ INDEX UPDATE
 ## Where the inputs come from
 ENTRY_TYPES and REVIEW_CADENCE are defaults, not laws. Some operators add a "glossary" type or a "vendors" type; some review monthly, some on change only. The four types are the starting set because they are what an operator forgets most. Reshape the categories. Keep it plain and greppable.
 
+## Example chat
+Here is the skill running on a real capture, start to finish.
+
+**You:** Start a knowledge base from this thread. We keep re-explaining how EU signups get routed.
+
+**Claude:** Sorted into three entries, one flagged unresolved.
+```
+FACT · trial-length.md
+  The standard trial is 14 days. Owner: you. Last checked: today.
+
+PLAYBOOK · new-signup-routing.md
+  How a signup gets routed to an owner (5 steps).
+
+STAKEHOLDER · eu-signups-owner.md
+  UNRESOLVED. No named owner for EU signups yet. Flagged, not invented.
+```
+The catch worth naming: I didn't invent an owner for EU signups just to fill the slot. That's the entry most likely to rot into a wrong answer if I'd guessed, so it stays blank until you name someone. One sharpener: connect a repo so these live as files you can grep and diff, instead of living in this one chat.
+
+## Go further
+The capture is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Catch facts the second time you look them up.** Wire a scheduled Claude task to scan your Slack search history weekly for repeated questions, and draft a KB entry for anything asked twice.
+- **Keep the index honest.** Run a monthly freshness check against the last-checked date on every entry, and post the overdue list to Slack for the named owner.
+- **Make it queryable by the whole team.** Sync the base into Notion or a wiki tool so any AI agent your team runs (a support bot, a sales assistant) reads from the same source of truth instead of guessing.
+
+You built the base once, now it stays the place people actually check first.
+
+
 ## Make it yours
 Fork it. Add types, change the naming, wire the freshness check to a reminder. Cut what your work never needs. The point is that the second time you look something up, you find it instead of re-deriving it. Built by an operator. Customize it, break it, make it better.

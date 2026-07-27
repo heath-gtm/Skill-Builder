@@ -1,191 +1,136 @@
 ---
 name: daily-sales-assistant
-description: Your daily companion workflow. Composes Deal-Health + Pipeline-Creation + Coaching + Conversation Analysts into one morning brief — rep mode (your accounts today — deal-risk flags, hot leads, follow-up drafts, today's priorities) OR leader mode (your team today — coaching priorities, must-win deal status, rep-by-rep PLAN gaps). Connect Salesforce + Mixmax + Amplitude (full functionality) or any subset (degraded brief). Trigger on "morning brief", "what should I work on today?", "daily sales assistant", "today's priorities", "run my morning", "team morning brief", "leader morning brief", "what does my team need today?", "pre-1:1 brief", "daily companion", or any rep/leader morning-priorities request. Auto-fires 7am CT daily for Heath + opted-in users. Posts to user's DM or to designated channel.
+description: Compose deal risk, pipeline, coaching, and conversation reads into one morning brief that names today's priorities. Runs in rep mode (your accounts today: risk flags, hot leads, follow-up drafts) or leader mode (your team today: coaching priorities, must-win status, per-rep gaps). Built for GTM teams, customizable to your stack and your cadence. Trigger on "morning brief", "what should I work on today", "today's priorities", "run my morning", "team morning brief", "pre-1:1 brief", or any rep or leader morning-priorities request.
 ---
 
-# Daily-Sales-Assistant — your daily companion workflow
+# Daily-Sales-Assistant
 
-**This is a workflow, not an analyst.** It composes other agents (Deal-Health, Pipeline-Creation, Renewal-Health, Coaching, Conversation, Prospecting) into one morning brief — different output per persona.
+## What this does
+This is a workflow, not a single check. It composes the reads you would otherwise run one by one, deal risk, pipeline health, coaching signals, and conversation follow-ups, into one brief that opens your day. Rep mode answers "what are my three priorities today" and drafts the follow-ups. Leader mode answers "what does my team need today" with named coaching priorities and must-win deal status. One workflow, a different brief per role.
 
-**Required connectors:** depends on mode (see below).
+## What you'll need
+You do not need to connect anything to get value today. Bring your book and the skill runs now. Connect the tools below and it composes the brief automatically each morning.
 
-## Two modes, one workflow
+- Works today with: your open deals and today's meetings. Paste or upload a list with stage, amount, close date, last activity, and the contacts. A CSV is enough to produce a brief.
+- More powerful connected to a CRM: it reads your whole book and pipeline coverage automatically.
+- Sharper with a meeting or email tool: it adds today's meetings, prep links, and follow-up drafts.
+- Sharper with a product-analytics tool: it adds usage signal to the hot-leads and expansion reads.
 
-### REP MODE — "your accounts today"
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
 
-**Audience:** AE / SDR / CSM
+- **Bring your data**: paste or upload your book (a deal export, today's calendar). The skill composes the full brief today on your real numbers. No connection required.
+- **Connect your tools**: the same workflow pulls deals, meetings, and drafts automatically and fires each morning without you asking. Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the sections each mode produces, and a worked example on sample data, so you can see the shape before you feed it.
 
-**Connectors needed:** Salesforce + Mixmax. Optional: Amplitude.
+Every run ends with the one thing that would make the next brief sharper, a field to add or a tool to connect.
 
-**Composition:**
-- **Prospecting Analyst** → today's hot leads + cold re-engagement candidates
-- **Deal-Health Analyst** → at-risk opps + multi-thread gaps in your book
-- **Conversation Analyst** → meetings today + people you haven't followed up with
-- **Comms Analyst** → drafts follow-ups for highest-priority gaps
+## Customize this for yourself
+This was built for a B2B GTM team running a rep-and-leader cadence. Set these to your stack:
 
-**Output sections:**
-1. 🎯 Top 3 priorities today (specific actions, named)
-2. 🔥 Hot leads (Prospecting Analyst pulls)
-3. ⚠ At-risk deals (Deal-Health flags)
-4. 📅 Meetings today + prep links
-5. 📝 Drafted follow-ups (one-click send)
-6. 🎁 Bonus: account that needs attention this week
+| Set this | What it is | Default / Example |
+|---|---|---|
+| MODE | which brief you get | rep (your accounts) or leader (your team) |
+| CRM | your CRM connector | Salesforce, HubSpot, Pipedrive |
+| MEETING source | where today's meetings and threads live | your calendar, a meeting or email tool |
+| FIRE_TIME | when the brief lands | 07:00 local, adjustable per user |
+| DELIVERY | where it goes | a messaging DM or a channel |
+| INCLUDE_DRAFTS | auto-draft follow-ups (rep mode) | true, drafts land for review, never auto-sent |
+| PRIORITY_COUNT | how many top priorities to name | 3 |
 
-### LEADER MODE — "your team today"
+Point it at your book and your calendar, not anyone else's. The workflow composes whatever reads you have wired up.
 
-**Audience:** Sales Manager / VP Sales / CS Leader / CRO
+## The method
 
-**Connectors needed:** Salesforce + Mixmax. Optional: Amplitude (multi-product expansion signal).
+### Rep mode: your accounts today
+Compose the reads that decide your day and rank them into three named priorities.
+- **Hot leads**: who engaged or replied recently and has no follow-up yet.
+- **At-risk deals**: the opps in your book that are slipping, stuck, or gone dark, with the multi-thread gaps.
+- **Meetings today**: what is on the calendar and the prep link for each.
+- **Drafted follow-ups**: the highest-priority gaps, drafted and dropped in your drafts folder for review.
+- **Bonus**: one account that needs attention this week before it becomes a problem.
 
-**Composition:**
-- **Coaching Analyst** → today's coaching priorities + 1:1 prep
-- **Deal-Health Analyst** → must-win deal status across team
-- **Pipeline-Creation Analyst** → coverage health
-- **Book-of-Business Analyst** (CS leaders) → portfolio at-risk
-- **Renewal-Health Analyst** (CS leaders) → renewals this week
+### Leader mode: your team today
+Compose the reads that decide where your attention goes.
+- **Coaching priorities**: named rep, named issue, tied to today's 1:1s.
+- **Must-win deals**: status and flags across the team.
+- **Pipeline coverage**: which channel is the gap and who owns closing it.
+- **1:1s today**: each with a pre-1:1 brief.
+- **Escalation**: anything that needs leadership today, honestly "none" when it is none.
 
-**Output sections:**
-1. 🎯 Top 3 things to know today
-2. 🧠 Coaching priorities (named rep + named issue)
-3. 💰 Must-win deals — status + flags
-4. 📡 Pipeline coverage health
-5. 📅 1:1s today + pre-1:1 briefs
-6. 🚨 Anything that needs leadership escalation
-
-## Configuration
-
-```yaml
-# In your scheduled task config
-
-DAILY_SALES_ASSISTANT_CONFIG:
-  mode:              "rep | leader"
-  audience:          "{user_email}"
-  fire_time:         "07:00 CT"  # adjustable per user
-  delivery_channel:  "dm | channel"
-  channel_id:        "{slack_channel_id if delivery_channel=channel}"
-  include_drafts:    true   # rep mode only — auto-draft follow-ups
-  include_meetings:  true   # require Mixmax connector
-```
+### Prioritization is forecast-aware
+The brief knows when today is the forecast call and leads with the deals that decide it. Priority is not the loudest item, it is the one that moves the number.
 
 ## Quality gates
+- Drafts are review-first. Follow-up drafts land in a drafts folder, never auto-sent, unless the user explicitly opted in.
+- Empty days surface honestly. Nothing critical means "nothing critical today, here is where to invest instead," never invented urgency.
+- Every priority names the specific action and the specific account or rep, never "follow up on deals."
+- Leader mode names the rep and the issue together, never a standings table with no next move.
 
-**Prioritization is forecast-aware.** Knows today is forecast call → "press on these 3 deals first."
-
-**Drafts are review-first.** Follow-up drafts go to user's drafts folder, not auto-sent (unless user explicitly opted-in to autosend per workflow).
-
-**Empty days surface honestly.** If user has nothing critical → "No critical items today, focus on Top 5 from Prospecting Analyst."
-
-## Output format example (REP MODE)
-
+## Output (example)
 ```
-☀️ KARAN — Monday June 1, 2026
+REP MODE · Monday June 1
 
-🎯 TOP 3 PRIORITIES TODAY:
-  1. Reply to Sarah Chen (Acme) — replied "yes interested" 2d ago, every day = -23% reply rate
-  2. Prep for Mike Rodriguez (Vortex) — meeting at 2pm, deal at $67K SLIP risk
-  3. Unstick Blend Labs — Day 30 + 0 sequences sent, your customer + Day 30 milestone missed
+TOP 3 PRIORITIES TODAY
+  1. Reply to the Acme contact who said "interested" 2 days ago. Every day cools the reply.
+  2. Prep the 2pm with Vortex, a $67K deal now at slip risk.
+  3. Unstick Blend Labs: day 30, no touch sent, milestone missed.
 
-🔥 HOT LEADS (5):
-  Sarah Chen @ Acme — replied 2d ago, no follow-up
-  Mike Rodriguez @ Vortex — booked meeting yesterday  
-  Jim Coulon @ Datadog — opened 4 emails in last 3d
-  Petra Lovric @ Blend — clicked pricing yesterday
-  Linda Park @ PGA — replied "send more info" 5d ago
+HOT LEADS (5)
+  Acme, replied 2d ago, no follow-up · Vortex, booked yesterday · Globex,
+  opened 4 emails in 3d · Blend, clicked pricing yesterday · PGA, asked for info 5d ago
 
-⚠ AT-RISK DEALS IN YOUR BOOK (3):
-  Vortex.io — SLIP, champion went dark (today's meeting is the test)
-  Blend Labs — STUCK, no PLAN Next Steps + onboarding issue
-  Datadog Trial — GHOST, 47 days zero activity (declare lost?)
+AT-RISK DEALS (3)
+  Vortex, slip, champion dark (today's meeting is the test)
+  Blend Labs, stuck, no next step set
+  Globex trial, ghost, 47 days no activity (declare lost?)
 
-📅 MEETINGS TODAY:
-  10:00 AM — Internal pipeline review (Gabrielle)
-  2:00 PM — Vortex.io (Mike Rodriguez) — prep link: [Brief]
-  4:30 PM — Blend Labs CSM intro (HM joining)
+MEETINGS TODAY
+  10:00 pipeline review · 2:00 Vortex (prep link) · 4:30 Blend Labs intro
 
-📝 DRAFTED FOLLOW-UPS (in your drafts folder, review + send):
-  • To Sarah Chen — "Quick demo this week?" (2 lines)
-  • To Linda Park — "Sending the resources I mentioned" (1-pager attached)
-  • To Tim Lee — re-engagement "Saw the layoff news, hope you're well"
+DRAFTED FOLLOW-UPS (in your drafts, review and send)
+  To Acme: "Quick demo this week?" · To PGA: "Sending the resources"
 
-🎁 BONUS — account that needs you this week:
-  Halborn — champion just changed jobs at LinkedIn. Need re-thread or risk
-  the renewal in November. Suggest reaching out to backup contact this week.
+BONUS
+  Halborn: champion just changed jobs. Re-thread the backup contact this week
+  or risk the renewal.
 ```
 
-## Output format example (LEADER MODE)
+## Where the numbers come from
+The three-priority cap, the 07:00 fire time, and the review-first draft rule are defaults, not laws. They suited a daily seller-and-leader rhythm. If your day starts earlier or you want five priorities, change them. The logic does not change. The settings are yours.
 
+## Example chat
+Here is the skill running rep mode, start to finish.
+
+**You:** Run my morning brief. Here's my open deal list and today's calendar. [pastes CSV]
+
+**Claude:** Composed the reads and ranked into three.
 ```
-☀️ TEAM MORNING — Monday June 1 · Karan + Isabelle + Felipe
-
-🎯 TOP 3 THINGS TO KNOW:
-  1. Karan needs PLAN-completion coaching this week (14% — lowest on team)
-  2. Felipe has 2 deals quietly slid Commit → Best Case (commit creep)
-  3. Pipeline coverage is at 78% for Q3 — Outbound is the gap
-
-🧠 COACHING PRIORITIES THIS WEEK:
-  Karan      — PLAN completeness + multi-thread (1:1 Tue 11am)
-  Isabelle   — pipeline strategy (working hard but math gap, 1:1 Wed 2pm)
-  Felipe     — top-of-funnel coverage (1:1 Mon 4pm — TODAY)
-
-💰 MUST-WIN DEALS · 5 named:
-  Acme Corp (Karan, $187K, HEALTHY, multi-thread good)
-  Vortex.io (Karan, $67K, SLIP, champion gone — today's meeting is test)
-  Datadog (Isabelle, $112K, MOMENTUM, ready for proposal)
-  Stripe POC (Felipe, $89K, AT_RISK, single-thread)
-  Brex Expansion (HM/Karan, $48K, HEALTHY)
-
-📡 PIPELINE COVERAGE:
-  Inbound:    99% covered (HEALTHY)
-  Outbound:   43% covered (UNDER ★ — this is the lever)
-  Product:    112% covered (OVER)
-  Action: Felipe owns Outbound gap closing this week
-
-📅 YOUR 1:1S TODAY:
-  4:00 PM — Felipe — pre-brief: pipeline coverage + commit creep
-
-🚨 LEADERSHIP ESCALATION:
-  None today. Forecast call is Thursday — Karan/Vortex needs ground-truthing.
+TOP 3 PRIORITIES TODAY
+  1. Reply to the Acme contact, "interested" 2 days ago, cooling.
+  2. Prep the 2pm with Vortex, $67K, now at slip risk.
+  3. Unstick Blend Labs: day 30, no touch, missed milestone.
 ```
+The real find: Vortex moved from healthy to slip risk since yesterday because the champion went quiet. That is the one the forecast call will ask about.
 
-## Used by
+**You:** Draft the follow-up to Acme so I can just review and send.
 
-- Standalone for daily morning briefs (this is the primary use)
-- Slack-triggered ("morning brief" command)
-- Scheduled task `daily-sales-assistant-rep-{user}` + `daily-sales-assistant-leader-{user}`
+**Claude:** Dropped it in your drafts folder, not sent.
+```
+To: Acme contact
+"Following up, saw you mentioned interest last week, want to grab 15 min
+this week to walk through it?"
+```
+It stays review-first, drafts never auto-send. One sharpener: connect your meeting tool so tomorrow's brief pulls the Vortex call transcript directly instead of me asking what happened.
 
-## When NOT to use
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
 
-- For deep deal review (use Deal-Health Analyst directly)
-- For book-wide CSM review (use Book-of-Business Analyst)
-- For weekly retrospective (use Sales-Leader-Weekly or CS-Leader-Weekly reports)
+- **Fire it every morning automatically.** Set FIRE_TIME in a scheduled Claude task so the brief lands in Slack at 7am without anyone asking.
+- **Pull straight from the CRM.** Connect Salesforce or HubSpot so hot leads and at-risk deals refresh from your real book instead of a pasted CSV.
+- **Give leaders the team version.** Run leader mode nightly ahead of 1:1s, pushed to a manager's DM with named coaching priorities per rep.
 
-## Salesforce field reference
+Set it up once and the brief is just there every morning, already ranked.
 
-This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
-the single source of truth for every field name, definition, and canonical
-interpretation. Specifically, this analyst reads:
-
-- Composes other analysts — does not query SFDC directly.
-- Inherits field consistency through the agents it calls.
-
-If a query needs a field not in the library, FAIL LOUD and request a library
-amendment via Evolution Agent — never invent ad-hoc field names or definitions.
-Apples-to-apples consistency across every analyst output is the goal.
-
-## Inheritance from LOCKED_DESIGN.md
-
-This workflow is locked-in #35 (proposed). Composes Deal-Health, Pipeline-Creation, Prospecting, Coaching, Renewal-Health, Book-of-Business, Conversation, and Comms Analysts. Reads all relevant lock-ins through them.
-
-## Make.com / API packaging
-
-This is a workflow — Make.com scenario chains the constituent analysts. The Daily-Sales-Assistant node accepts:
-
-**Input:** `{ user_email: string, mode: "rep | leader", delivery: "dm | channel | inline" }`
-
-**Output:** `{ brief_url: string, top_priorities: [...], sections: {...} }` — also delivers to Slack/email per delivery setting.
-
-## Shippable as
-
-Standalone connector-gated SKU bundling the underlying analysts. The flagship customer-facing product that demonstrates the analyst suite working together. Per-seat pricing tied to which connectors are wired up.
-
-The Daily-Sales-Assistant is the first true compose-multiple-analysts workflow. It's the demo that sells the suite.
+## Make it yours
+Fork it. Change the modes, the sections, the delivery, the fire time. The point is not to run someone else's morning. It is to open yours with the next three moves already named. Built by an operator. Customize it, break it, make it better.

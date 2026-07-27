@@ -99,5 +99,41 @@ Next: connect a search console to replace assumed questions with real ones.
 ## Where the inputs come from
 The TOPIC, AUDIENCE, and GOAL come from you. WORD_TARGET (1200) is a default, not a law, set it by intent, not by quota. Related questions and current rankings come from a connected search console, best-performing pages from a connected web-analytics tool, and real internal-link URLs from a connected CMS. The thresholds are yours to move.
 
+## Example chat
+Here is the skill running on a real topic handoff to a writer.
+
+**You:** Brief an article on cold email deliverability for founders. Goal is newsletter signups.
+
+**Claude:** Brief's built, and the intent is narrower than the topic sounds.
+```
+Intent:  fix (they have a problem now, not browsing)
+Angle:   Not "deliverability 101." The 5 settings founders miss
+         before they blame the copy.
+Must-cover: What triggers a spam filter? How long does warming
+take? How many sends/day is safe on a new domain?
+```
+"Deliverability" reads like a "learn" topic but the real reader is mid-crisis, their emails are already landing in spam. That's why the angle leads with settings to check today, not background theory. One sharpener: connect a search console so the must-cover questions come from what people actually type, not the topic guessed at.
+
+**You:** Add two internal links and lock the CTA.
+
+**Claude:** Done, matched to the fix intent, one ask only.
+```
+Internal links:
+  -> /guide/domain-setup    anchor: "authenticate your domain"
+  -> /guide/inbox-warming   anchor: "warm the inbox" (placeholder, no CMS connected)
+CTA: "Get the pre-send checklist" -> newsletter subscribe
+```
+One CTA, matched to a "fix" reader who wants a tool to use today, not a demo pitch. The second link is marked placeholder since no CMS is connected yet, so the writer knows to swap it for a real URL before publishing. One sharpener: connect your CMS so internal links point at real, live pages instead of a labeled guess.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Turn your content calendar into a brief queue.** Point a scheduled Claude task at your keyword list weekly and drop a ready brief into each writer's queue before the sprint starts.
+- **Ground every angle in what's already ranking.** Connect a search console so the must-cover questions and the angle update as real query data shifts, not a one-time guess.
+- **Close the loop from brief to published post.** Chain this into builtgtm-article-writer so the brief becomes a draft automatically, then route the draft to Slack for review.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Change the outline shape, the question depth, the CTA logic. The point is not to fill a template. It is to hand a writer something they can start from without a meeting. Built by an operator. Customize it, break it, make it better.

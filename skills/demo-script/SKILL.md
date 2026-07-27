@@ -80,5 +80,34 @@ Open on moment 1. It is their loudest pain. Do not lead with the tour.
 ## Where the inputs come from
 The one-problem-per-moment rule and the cut list are the defaults that keep a demo from becoming a tour. The demo length, the feature areas, and the proof assets are yours. If you have 15 minutes, the mapping matters more, not less. The discipline is the same. The script is yours.
 
+## Example chat
+Here is the skill running on a real discovery-to-demo handoff, start to finish.
+
+**You:** Build a demo script, here's my discovery notes and the features I was going to show. [pastes notes]
+
+**Claude:** Mapped every feature to a stated problem and cut what did not.
+```
+1  "Reps lose hours building lists" -> Prospecting view -> Gives back ~6 hrs/wk/rep
+2  "We can't tell what's working"   -> Sequence analytics -> Kills the cadence guesswork
+
+Cut list:
+  - Admin settings deep-dive. No stated problem. Feature dump.
+  - Reporting API. Not raised. Save for a technical follow-up.
+```
+The catch: two of the five features you planned to show never came up in discovery. Showing them would have buried the two moments that actually map to what the buyer said hurts.
+
+**You:** Order it for a 20-minute slot, I only have 20 minutes now, not 30.
+
+**Claude:** Cut to the two highest-stakes mapped moments and opened on the loudest pain, list-building, since attention is fullest at the start. One sharpener: connect your meeting tool so next time the mapping pulls the buyer's exact quote instead of your paraphrase of the notes.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Pull discovery quotes automatically.** Connect Gong or another transcript tool so each mapped feature carries the buyer's exact words, not a typed recap.
+- **Order around the real decision criteria.** Connect the CRM's qualification fields so the script sequences by what the deal record says matters most, not a default order.
+- **Catch feature-dump before the call.** Wire this as a pre-demo check in Slack: a rep pastes their planned agenda and gets the cut list back before they open the screen share.
+
+Show only what they told you hurts. Cut the rest before the call, not during it.
+
 ## Make it yours
 Fork it. Change the mapping, the "so what" prompts, the order logic. The point is not to run someone else's demo. It is to show this buyer only what they told you hurts, and to cut the rest. Built by an operator. Customize it, break it, make it better.

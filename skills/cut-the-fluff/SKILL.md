@@ -105,5 +105,35 @@ sidebar numbers move.
 ```
 Cut list: deleted the purpose paragraph and the methodology line, cut "quite interesting" plus the restatement, rewrote the hedged close as a concrete principle, turned rates into frequencies.
 
+## Example chat
+Here is the skill running on a real draft, start to finish.
+
+**You:** Cut this down: [pastes a 3-paragraph exec summary with three buried stats and a hedged close]
+
+**Claude:** Found the verdict in paragraph 3 and moved it to sentence 1, then stripped the naked percentages into frequencies.
+```
+Before (130 words): "...usage patterns indicate that the dashboard experience
+sees significant engagement at 73%, while the editor interface shows
+moderate adoption at 34%, and the sidebar navigation..."
+
+After (80 words): "Dashboard-first is confirmed. Nearly 3 of every 4
+interactions happen there. The editor sees about 1 in 3 users weekly.
+The sidebar, barely 1 in 8, needs a discoverability fix, not more onboarding."
+```
+Cut list: deleted the methodology paragraph, killed "significant" and "moderate" (vague magnitude), turned three raw percentages into human frequencies, moved the verdict to sentence one.
+
+**You:** Now do the same for the strategic plan attached. We've got six initiatives listed.
+
+**Claude:** Ran the thrash filter: six initiatives responding to six different problems means the plan is reactive. Cut to the two whose math actually moves the pipeline number this quarter, and moved the other four to an appendix as "considered, not funded." The insight this catches every time: a document that gives six things equal weight is hiding the fact that nobody picked. One sharpener: tell me your kill list once, the words you never want to see, and I will apply it automatically on every future cut instead of you flagging them each time.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Run it before anything ships.** Wire cut-the-fluff as a pre-send check in Slack, so no doc over 300 words posts to a channel without a verdict-first pass.
+- **Catch drift automatically.** Point a scheduled Claude task at your Notion or Google Docs folder weekly to flag any doc whose lead paragraph still buries the verdict.
+- **Feed it real numbers, not snapshots.** Connect Amplitude or your CRM so the figures you are humanizing pull from live data instead of a pasted export that goes stale.
+
+Set your voice and your kill list once, then let the pre-send check do the rest.
+
 ## Make it yours
 Set your voice, your audience, and what counts as a receipt. Edit the kill list and the verb table until the output reads like you. Run a real document through it and see what it cuts. Built by an operator. Customize it, break it, make it better.

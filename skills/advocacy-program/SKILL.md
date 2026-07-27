@@ -88,5 +88,34 @@ Nurture
 ## Where the numbers come from
 The ask ladder and the one-heavy-ask-per-period rule are defaults, not laws. They suited a mid-market customer marketing motion. If your advocates are enterprise and rare, slow the cadence. The logic does not change. The thresholds are yours.
 
+## Example chat
+**You:** I need 2 case studies and 3 reference calls this quarter. Who in my book can actually carry that?
+
+**Claude:** Ran your book against the ask ladder.
+```
+Ready to ask
+  Account A  champion strong, deeply adopted, renewed 2x
+             -> heavy ask: named case study. Exchange: conference speaking slot.
+  Account B  champion strong, high survey score
+             -> medium ask: reference call. Exchange: early roadmap access.
+
+Not yet
+  Account D  results good but no named champion. Build the relationship first.
+```
+The thing worth flagging: Account C looked like your best case-study candidate on paper (biggest logo, great results), but they already carried a heavy ask last quarter, so asking again this soon burns them instead of earning the story.
+
+**You:** Good catch, I forgot about that. What do I do with Account D?
+
+**Claude:** Hold it. No named champion means no one owns carrying your ask internally, so it's not ready for any ask yet, light or heavy. One sharpener: connect your CRM's health field and I'll re-rank the whole "ready to ask" list automatically as accounts renew or expand instead of you re-checking it by memory each quarter.
+
+## Go further
+Picking asks by hand works for one quarter's list. Here's how an operator keeps the pipeline running.
+
+- **Track the bench automatically.** Wire Salesforce or HubSpot health and renewal fields into a scheduled Claude task that refreshes the ask ladder every Monday, so no advocate gets a second heavy ask before their rotation is up.
+- **Catch the goodwill signal live.** Connect Gong or your survey tool so a glowing call or a high NPS score drops the account straight into "ready to ask" instead of waiting for someone to remember.
+- **Close the loop into content.** Feed a completed case study into your content-repurposing skill so one advocacy win becomes a LinkedIn post, a nurture email, and a sales one-pager automatically.
+
+Advocacy stops being a fire drill once the pipeline runs itself.
+
 ## Make it yours
 Fork it. Change the ask ladder, the value exchange, the stages. The point is not to run someone else's playbook. It is to run yours, faster, so advocacy stops being a fire drill and becomes a pipeline. Built by an operator. Customize it, break it, make it better.

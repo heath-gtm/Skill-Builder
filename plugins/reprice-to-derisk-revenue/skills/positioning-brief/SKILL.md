@@ -89,5 +89,36 @@ Next: pillar 3 has no proof. Pull one renewal story to close it.
 ## Where the inputs come from
 The three answers (what you do, who it is for, why you win) come from you. PILLAR_COUNT (3) and the two-to-four range are defaults, not laws. Proof points come from your quotes, product facts, and outcomes, or from a connected CRM and call tool. Objections come from your team's memory today and from lost-reason data once a tool is connected. The thresholds are yours to move.
 
+## Example chat
+
+**You:** Help me position our product for RevOps leads. We're a pipeline-automation layer, main alternative is spreadsheets and reminders.
+
+**Claude:** Here's the statement and the pillars, with proof status called out.
+```
+Statement:
+For RevOps leads drowning in manual pipeline hygiene, [Product] is the
+pipeline-automation layer that keeps every deal current without a single
+manual update, unlike the spreadsheets and reminders they use today.
+
+Pillars:
+  1. Always-current pipeline   proof: quote, "we stopped Friday cleanup"
+  2. Zero rep data entry       proof: product fact, auto-capture
+  3. Trustworthy forecast      proof: UNPROVEN (get a customer outcome)
+```
+Pillar 3 is the one to flag before this goes anywhere near a deck. It's a real claim with no proof behind it yet, and shipping it unproven is how a message house loses credibility with the first skeptical buyer who asks for a receipt.
+
+**You:** How do we get proof for pillar 3?
+
+**Claude:** Pull a renewal story where the forecast held and the customer says so in their own words, that's the fastest path to a real proof point instead of a fabricated stat. Sharpener: connect a CRM or call tool so objection and win-reason language comes from what buyers actually say, instead of the team's memory of what they usually hear.
+
+## Go further
+One statement for one audience proves the frame lands. Here's what running this across every buyer and every objection looks like at scale.
+
+- **Ground the pillars in what buyers actually say.** Connect Gong or a similar call tool so the proof points and objection reframes are pulled from real transcripts, not team memory.
+- **Rebuild it per audience automatically.** Run the brief again for each named buyer (RevOps lead, Head of Support, CFO) and keep a message house per audience instead of one statement stretched to cover all of them.
+- **Pressure-test it against real traffic.** Connect a web-analytics tool so the pillars that get attention on your site inform which claims to lead with, instead of guessing which one lands first.
+
+One good sentence proves the frame. The system is what keeps every rep saying it the same way.
+
 ## Make it yours
 Fork it. Change the category, the pillar count, the reframes. The point is not to sound like a positioning textbook. It is to say your story the same way twice, everywhere, this quarter. Built by an operator. Customize it, break it, make it better.

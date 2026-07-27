@@ -49,5 +49,32 @@ then refresh. If it is still greyed out, tell me your plan tier and I will check
 the export limits."
 ```
 
+## Example chat
+
+**You:** I want to set up a Claude Project for first-pass support replies. Can you write the system prompt?
+
+**Claude:** Here's the standing brief.
+```
+You are a first-pass support assistant for a B2B software product. You draft
+replies for a human to review and send. You do not send anything yourself.
+
+Knowledge: treat the linked product docs as ground truth. If an answer is not
+in the docs, say so and draft your best guess clearly labeled as unconfirmed.
+
+Boundaries: never promise a refund, a timeline, or a feature. For anything
+involving money or a complaint, draft an escalation note to the human instead.
+```
+Key insight: the boundaries section is the part most people skip, and it's the one that keeps the assistant from making a promise nobody authorized. One sharpener: add a second worked example that shows how it declines an out-of-scope request, right now it only shows the happy path.
+
+## Go further
+The prompt is written. Here is where an operator takes it once the manual version proves out.
+
+- **Keep the assistant current without a rewrite.** Point the knowledge section at a live doc (Notion) instead of pasted text, so ground truth updates without touching the prompt.
+- **Test it before it goes live.** Run the finished prompt through a small eval, a dozen realistic requests, and check it holds the boundaries before the team starts relying on it.
+- **Give it a place to escalate to.** Wire the refusal line to open a Slack thread with a human instead of just declining, so an out-of-scope request does not dead-end.
+
+The prompt sets who it is once; the connections keep it accurate after that.
+
+
 ## Make it yours
 Set the assistant's job, its reference material, and its hard rules. Then any AI you stand up starts every conversation already knowing who it is. Built by an operator. Customize it, break it, make it better.

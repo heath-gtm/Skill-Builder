@@ -91,5 +91,27 @@ Top risks:
 ## Where the numbers come from
 The deal size, win rate, and BET_LIMIT here are illustrative, not benchmarks. The capacity formula is real and the one thing you should not skip: target divided by deal size, divided by win rate, gives the opps you need, checked against ramped heads. Feed it your own rates. The framework does not change. The plan is yours.
 
+## Example chat
+**You:** Build the Q3 plan, target is $4M new ARR, here's our team and historical rates.
+
+**Claude:** Verdict: REACHABLE_IF, short about 1.5 ramped reps or 8 points of win rate.
+```
+$4.0M / $40K deal = 100 deals
+100 deals / 25% win = 400 qualified opps needed
+Current ramped capacity covers ~330 opps
+Gap: ~70 opps
+```
+Three bets: mid-market outbound ($2.0M), install-base expansion ($1.4M), partner-sourced ($0.6M). The gap sits entirely in outbound capacity, not the other two bets, so that's where the hiring conversation actually needs to happen.
+One sharpener: connect your CRM so win rate and deal size come from your actual trailing quarter instead of the estimate you gave me.
+
+## Go further
+The plan works from the numbers you paste in. Here is where it stops going stale the week after you present it.
+
+- **Recompute the gap as the quarter moves.** A scheduled Claude task reruns the capacity math weekly against live Salesforce pipeline, so the verdict updates before the QBR instead of at it.
+- **Ground the rates in real history.** Connect Snowflake or your warehouse so win rate and cycle length pull from actual closed-won data by motion, not a single quarter's estimate.
+- **Watch the named risk signals.** Wire Slack alerts to the specific signals named in each risk (new-hire ramp, base usage trend, first sourced partner opp) so a slipping bet surfaces in week 4, not at quarter-end.
+
+The plan stops being a slide and starts being a number you can watch move.
+
 ## Make it yours
 Fork it. Change the bets, the rates, the risk list. The point is not to present someone else's plan. It is to defend yours, verdict-first, so the room argues about the gap instead of the format. Built by an operator. Customize it, break it, make it better.

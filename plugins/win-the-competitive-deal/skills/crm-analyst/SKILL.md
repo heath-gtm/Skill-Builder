@@ -90,5 +90,40 @@ Next move: the meeting today. Late stage means commercial close is the gate.
 ## Where the numbers come from
 DARK_DAYS (14) and STUCK_DAYS (21) are defaults, not laws. They suited a mid-market SaaS cycle. If your deals run longer, raise them. The multi-source activity rule is not a threshold, it is the correct way to read a CRM, and it does not change. The thresholds are yours.
 
+## Example chat
+Here is the skill running on a real account before a rep walks into a meeting.
+
+**You:** Give me the read on Acme Corp before my call in an hour.
+
+**Claude:** Read's done, and the fit score on this account is wrong.
+```
+Verdict: REACH_OUT (renewal-defence read)
+  Last activity: TODAY (account level), 6 email replies + meeting in 1h
+  Fit-score check: score looks low, but real usage present ->
+  false negative
+```
+The fit score was pulling from a single stale field, but checking activity across every source, account, opp, tasks, and events, shows this account is very much alive. That's the classic bug where an opp-level date sits blank because reps log the real activity elsewhere, so a live deal gets falsely flagged as dead. One sharpener: connect a meeting tool so the last-touch and champion checks tighten beyond what's logged in the CRM.
+
+**You:** Check qualification against the stage it claims.
+
+**Claude:** Ran it. 4 of 4 fields complete, this one's not being sandbagged.
+```
+PROBLEMS: inbox plateau, no signal on adoption depth
+LEVERAGE: multi-team rollout across Sales, RevOps, CS
+DECISION DYNAMICS: CFO signs, RevOps lead champions
+NEXT STEPS: finalize commercial terms by the 15th
+```
+Late stage and full qualification agree here, which is the opposite of what usually triggers a flag. The gap check exists to catch the deal that claims Stage 4 with an empty decision-dynamics field, this one earns its stage. One sharpener: connect an enrichment tool so the tech-stack and hiring-signal context refreshes automatically instead of going stale between calls.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Run the read on the whole pipeline, not one account.** Point a scheduled Claude task at Salesforce nightly and flag every deal that just moved from HEALTHY to AT_RISK or STUCK.
+- **Kill sandbagging before the forecast call.** Post any qualification-vs-stage gap straight to the manager's Slack the moment a rep advances a stage without the fields to back it.
+- **Feed the false-negative catch upstream.** Wire the fit-score correction back into your scoring model's exception list so the same account doesn't get mis-scored again next cycle.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Change the states, the thresholds, the qualification fields. The point is not to run someone else's playbook. It is to read your own pipeline the way you actually sell, faster. Built by an operator. Customize it, break it, make it better.

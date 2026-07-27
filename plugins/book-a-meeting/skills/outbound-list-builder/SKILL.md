@@ -88,5 +88,31 @@ Work order:
 ## Where the inputs come from
 The tier cutoffs, the fit weights, and the signal window (recent means the last 30 to 60 days) are defaults, not laws. They suited a mid-market outbound motion. If your cycle runs longer or your ICP is narrower, retune them. The logic does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** Build me a target list from our ICP. Mid-market, US, sales-led. Here's 40 accounts to score. [pastes CSV]
+
+**Claude:** Ran the gates and scored what cleared them.
+```
+Account       Fit   Signal              Tier   Personas
+Northwind     92    Series B, 30d ago    A      VP Sales, RevOps Lead, SDR Mgr
+Acme Corp     88    Hiring 4 AEs         A      CRO, Sales Ops, AE
+Vertex        81    none                 B      VP Sales, Enablement
+```
+9 accounts failed the hard gate on headcount and got dropped before scoring, so they never made it into the tiers. That's the piece worth noticing: a strong signal can't rescue a failed gate.
+
+**You:** Why is Northwind above Acme if they're close in fit?
+
+**Claude:** Northwind's signal is fresher (30 days) and it's a funding event, which tends to unlock new budget faster than a hiring signal. Acme's still Tier A, just second in the work order. One sharpener: connect a signal source so funding, hiring, and news triggers refresh automatically instead of you re-pasting a signal column every week.
+
+## Go further
+Scoring one batch by hand proves the logic. Here's the version that keeps the list current without you rebuilding it.
+
+- **Refresh the list on a schedule.** A scheduled Claude task pulls your CRM nightly, drops accounts with open deals, and rescoring only touches what changed.
+- **Let signals trigger the reorder.** Connect Clay or a similar enrichment tool so a funding round or hiring spike automatically bumps an account into Tier A the day it happens.
+- **Hand the work order to the rep where they live.** Push the daily top-10 into a Slack channel or straight into Salesforce as a task queue, so the list becomes work instead of a spreadsheet someone has to open.
+
+Build the gates once, and let the connectors keep the ranking honest.
+
 ## Make it yours
 Fork it. Change the gates, the weights, the tiers, the personas. The point is not to run someone else's ICP. It is to run yours, faster, so the list you work is a list you built. Built by an operator. Customize it, break it, make it better.

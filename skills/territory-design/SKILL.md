@@ -81,5 +81,28 @@ Rules set:
 ## Where the numbers come from
 TOLERANCE (10 to 15 percent), MAX_ACCOUNTS (40 to 80), and the balance metric are defaults, not laws. They suited a mid-market field team. If your reps carry fewer, larger accounts, tighten the ceiling and widen the tolerance. The fairness logic does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** We're carving territories for next quarter. Here's the account list with employee counts and regions.
+
+**Claude:** Carved it and ran the balance check.
+```
+Rep      Accounts  Potential idx  vs mean  Flag
+North    52        104            +4%      ok
+East     61        131            +31%     over, rebalance
+West     39        71             -29%     thin, add accounts
+```
+East is 31% over the mean, that's not a headcount problem, it's a potential problem, moving accounts by count alone would have left East still overloaded. Key insight: balance has to run on potential, not account count, or a rep with 60 dead accounts looks equal to a rep with 60 strong ones. One sharpener: connect the CRM for open pipeline so the rebalance does not accidentally move a deal mid-cycle.
+
+## Go further
+The carve is set. Here is where an operator takes it once the manual version proves out.
+
+- **Rebalance live instead of once a year.** A scheduled Claude task recomputes potential-per-rep monthly against Salesforce and flags any book that has drifted outside tolerance.
+- **Route inbound without a human deciding.** Wire the inbound rule (domain match, then territory) directly into your lead-routing tool so a new lead never sits waiting for someone to claim it.
+- **Settle disputes with a paper trail.** Log first-meaningful-activity timestamps automatically in Salesforce, so the tie-breaker rule has real evidence behind it instead of two reps' word against each other.
+
+The carve is fair on day one; the automation is what keeps it fair in month six.
+
+
 ## Make it yours
 Fork it. Change the axis, the balance metric, the rules. The point is not to run someone else's territory map. It is to carve yours, balanced on potential and settled before the disputes start. Built by an operator. Customize it, break it, make it better.

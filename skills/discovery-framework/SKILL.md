@@ -83,5 +83,33 @@ Top gaps to close next call:
 ## Where the inputs come from
 The three states (EARNED, ASSUMED, MISSING) and the champion test (one unprompted action) are the defaults that keep reps honest. The framework fields are yours to swap. If you run BANT, score BANT. The discipline does not change: earn the field or flag it. The fields are yours.
 
+## Example chat
+Here is the skill running on a real call, start to finish.
+
+**You:** I just got off a discovery call, here are my notes, tell me what I'm missing.
+
+**Claude:** Scored the call against MEDDPICC.
+```
+Field              State     What we have
+Metrics (pain)     EARNED    ~6 hrs/wk/rep on manual prospecting
+Economic Buyer     ASSUMED   VP Sales named, not yet met
+Decision Process   MISSING   No steps, no timeline captured
+Champion           ASSUMED   Enthusiastic, no action taken yet
+```
+The catch: you have got real pain and real decision criteria, but two fields you would probably call fine are actually ASSUMED, not earned, meaning nobody has confirmed them yet, and Champion has not taken a single unprompted action.
+
+**You:** What's the one question that would move this the most next call?
+
+**Claude:** Get the actual decision process, steps and dates to signature. That is the only MISSING field, and it is the one that determines whether Commit means anything. One sharpener: connect a meeting tool so the scorecard pulls your buyer's exact words next time instead of relying on your notes to be complete.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Score every call automatically.** Connect Gong or another transcript tool so this runs the moment a discovery call ends, no copy-paste required.
+- **Write straight back to the deal.** Connect Salesforce so EARNED fields populate the opportunity record automatically, and gaps show up in the pipeline report as real risk.
+- **Catch the pattern across reps.** Schedule a Claude task weekly to roll up gap types across the team, so a manager sees "champion is ASSUMED on 40% of deals" instead of one call at a time.
+
+Earn the field or flag it. Do that at scale and coaching gets specific instead of generic.
+
 ## Make it yours
 Fork it. Change the framework, the fields, the champion test. The point is not to run someone else's methodology. It is to run yours, and to stop scoring pain you never heard. Built by an operator. Customize it, break it, make it better.

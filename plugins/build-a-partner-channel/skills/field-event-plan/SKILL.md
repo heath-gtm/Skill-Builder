@@ -97,5 +97,27 @@ Next moves:
 ## Where the inputs come from
 CAPACITY (14), the FOLLOWUP window (2 days), and the goal are defaults, not laws. They suited a field-dinner motion against open pipeline. The guests, accounts, and results above are examples, illustrative only, not real people or a real event. The method does not change when your event does. Set the format, the guest source, and the goal to your motion and the plan shapes itself around it.
 
+## Example chat
+**You:** We're doing a customer dinner in 3 weeks, 14 seats, help me build the plan.
+
+**Claude:** Built the list off your open pipeline and target accounts, not a generic invite blast.
+```
+Guest / account   Why the seat                 Owner
+Acme (VP)         stuck deal, needs econ buyer  Rep A
+Vertex (Dir)      target acct, no meeting yet   Rep B
+Blend (Champion)  expansion candidate           CSM
+```
+Draw is a peer roundtable, not a pitch. Follow-up is drafted now for all 14 guests, ready to personalize with whatever actually gets said at the table, so it can go out within 2 days instead of a week later.
+One sharpener: connect your CRM so I can confirm which of these deals actually need this push versus ones that already have a next step scheduled.
+
+## Go further
+The plan works from a pasted brief. Here is where the follow-up stops depending on someone remembering to write it the next morning.
+
+- **Draft follow-up live, on-site.** Have a rep type a one-line note per guest into a shared doc during the dinner, and a scheduled Claude task turns it into the personalized follow-up that same night.
+- **Track pipeline back to the seat.** Tag every guest in Salesforce so pipeline created or advanced in the following 60 days ties back to who was actually in the room.
+- **Build the next list from this one's results.** Feed the meetings-booked outcome into Clay or your CRM so the next event's guest list is built from what actually converted, not a fresh guess.
+
+The dinner ends. The plan for the next one starts building itself.
+
 ## Make it yours
 Fork it. Change the format, the capacity, the follow-up window. The point is not to run someone else's event checklist. It is to make the event produce pipeline instead of badges and a bar tab. Built by an operator. Customize it, break it, make it better.

@@ -9,13 +9,21 @@ description: Your data-fill agent. Connect a contact-enrichment tool (contact-le
 This is your data-fill agent. Give it a name and a company, and it finds the email, phone, LinkedIn URL, and title. Give it a domain, and it returns headcount, funding, a technographic profile, and hiring intent. It works one contact at a time or across a whole list, tries the cheapest provider first, and tags every value it returns with how confident it is. It never invents a value it could not find.
 
 ## What you'll need
-- A contact-enrichment tool (contact-level: email, phone, LinkedIn, title). Drives the contact waterfall.
-- A company-enrichment tool (company-level: headcount, funding, hiring signals, technographic profile).
-- Either one alone works at reduced quality. Both connected run the full waterfall.
-- Optional: a people-search tool for LinkedIn URL identity validation, and a CRM to read records as input or write enriched values back.
+You do not need to connect anything to start. Bring your list and the skill runs today. Connect the tools below and it fills the gaps automatically at higher match rates than any single source.
 
-No enrichment tool connected? The skill says what to connect and stops. It does not guess.
+- Works today with: your list of names and companies, or domains. Paste or upload a CSV. The skill structures it, flags what is missing, and tells you exactly which source would fill each field.
+- More powerful connected to a contact-enrichment tool: emails, phones, LinkedIn URLs, and titles, run as a waterfall.
+- More powerful connected to a company-enrichment tool: headcount, funding, hiring signals, and technographic profile. Either source alone works at reduced coverage; both run the full waterfall.
+- Sharper with a people-search tool (LinkedIn identity validation) and a CRM (read records in, write enriched values back).
 
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
+
+- **Bring your data**: paste or upload what you have (a CSV or an export). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
 ## Customize this for yourself
 | Set this | What it is | Default / Example |
 | --- | --- | --- |
@@ -65,6 +73,28 @@ Audit:
 
 ## Where the numbers come from
 By default the waterfall tries providers cheapest-first and stops at the first confident hit, so the same field is never paid for twice. Confidence tags come from the providers: two independent sources is verified_2, one is verified_1, a pattern-derived guess is inferred, and a value no provider could confirm is not_found. Cost figures are the per-provider credit prices of the tools you connect. To change the economics, reorder the waterfall, swap in a cheaper provider, or lower the maximum spend.
+
+## Example chat
+**You:** Enrich this list of 20 target contacts, I only have name and company.
+
+**Claude:** Ran the waterfall. Here is where it landed.
+```
+Field       Verified_2   Verified_1   Inferred   Not_found
+Email       9            6            3          2
+Phone       4            5            2          9
+LinkedIn    14           4            0          2
+```
+Two LinkedIn URLs failed identity validation (wrong company on the profile), so I dropped them instead of returning a guess. Total spend stayed under half the run cap.
+One sharpener: connect a CRM so I can write these fields back instead of handing you a CSV to re-upload.
+
+## Go further
+The manual run proves the waterfall works. Here is where it goes once you trust it.
+
+- **Enrich on intake, not in batches.** Wire a scheduled Claude task to run the waterfall the moment a new lead lands in Salesforce or HubSpot, so reps never work a blank record.
+- **Build the waterfall natively.** Chain the same cheapest-first provider order inside Clay, so the enrichment runs where your list already lives.
+- **Alert on the misses.** Have a scheduled task post the not_found rows to Slack each morning so someone can source them by hand before they go stale.
+
+The list stops being a spreadsheet and starts being a living record.
 
 ## Make it yours
 Set your two connector roles, your waterfall order, and your confidence floor, then run a small list to confirm the costs and tags read the way you expect. Built by an operator. Customize it, break it, make it better.

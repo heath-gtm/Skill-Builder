@@ -104,5 +104,38 @@ Recommended order:
 ## Where the numbers come from
 HOT_DAYS (7) and COLD_DAYS (30) are defaults, not laws. They suited a fast outbound motion. If your cycle runs slower, raise them. The status logic does not change, the thresholds are yours.
 
+## Example chat
+
+**You:** Here's my lead export, 47 leads, mix of never-touched and stuff I ran a sequence on a while back. Who do I work today?
+
+**Claude:** Sorted all 47. Five are hot and none have a follow-up logged yet.
+```
+LEAD WORK PLAN · 47 leads, ranked by priority
+
+HOT · work today (5)
+  1. Contact @ Acme Corp     replied "interested" 2d ago, no follow-up
+  2. Contact @ Vertex        booked a meeting 1d ago, prep it
+
+RE-ENGAGE · work this week (12 ranked)
+  1. Contact @ Summit        warm reply last quarter, role change is a fresh trigger
+
+Most expensive miss this week:
+  Acme Corp (#1) replied 2 days ago. Every day of delay costs reply rate.
+```
+Worth flagging: Acme replied in your outreach tool, but their CRM record still shows no activity. Reading only the CRM would have put them in Cold. That two-source check is why they landed in Hot instead.
+
+**You:** Why is Summit worth re-engaging and not just "follow up sometime"?
+
+**Claude:** Because there's a trigger: Summit replied warmly last quarter, went dark, and just had a role change on the account. That's a real reason to reopen the conversation now, not a guess. Sharpener: connect your fit score and I'll rank the never-touched pile (22 of your 47) by who's worth working first instead of alphabetically.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Score every lead nightly.** Run this as a scheduled Claude task against your sequencer and CRM so the work plan is waiting before the morning stand-up.
+- **Alert on the expensive miss.** DM the rep in Slack the moment a hot reply crosses 24 hours with no follow-up, instead of waiting for the next manual pull.
+- **Feed the never-touched list to enrichment.** Route the fit-ranked never-touched pile into Clay so outreach starts with the right contact info already filled in.
+
+You built the ranking once; now it watches the clock for you.
+
 ## Make it yours
 Fork it. Change the states, the thresholds, the fields. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

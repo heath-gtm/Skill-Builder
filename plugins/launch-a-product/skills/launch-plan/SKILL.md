@@ -93,5 +93,31 @@ Next: connect a CRM to size the power-user segment for real.
 ## Where the inputs come from
 WHAT, the audiences, and the target date come from you. TIER is recommended by the skill and confirmed by you. LEAD_TIME (14) is a default, not a law, tune it to the tier. Segment sizes come from a connected CRM or marketing tool, and metric baselines from a connected web-analytics tool. The thresholds and the tier are yours to move.
 
+## Example chat
+Here is the skill running on a real launch, start to finish.
+
+**You:** We're shipping a bulk-export feature in three weeks. Build the launch plan.
+
+**Claude:** Tiered it T2, timeline backward-planned from launch day.
+```
+Channels -> assets -> owner -> due:
+  Email   release note to power users   PMM   L-2
+  Blog    how-to with screenshots       PMM   L-3
+  In-app  tooltip on export button      PM    L-1
+
+Win metrics: feature adoption among power users (set a baseline)
+```
+The catch worth naming: I tiered this T2, not T1, because a bulk-export feature reaching existing power users doesn't need a press push, and a T3 would starve it of the sales one-pager it actually needs to field support questions. Getting the tier wrong either burns the team on a small feature or leaves a real one under-resourced. One sharpener: connect a web-analytics tool so the adoption metric has a real baseline instead of "set a baseline" sitting there as a placeholder.
+
+## Go further
+The plan is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Track every asset to done, automatically.** Sync the owner-and-due list into Linear or Asana so L-2 and L-3 deadlines show up where the team already works, not just in this doc.
+- **Pull real segment sizes.** Connect Salesforce or HubSpot so "existing power users" becomes an actual count instead of a named-but-unsized audience.
+- **Grade the launch after the fact.** Run a scheduled Claude task at L+14 that pulls the win metrics from Amplitude and reports whether the launch actually hit, so the next tier call is calibrated on results, not gut feel.
+
+You built the plan once, now the system tracks whether it worked.
+
+
 ## Make it yours
 Fork it. Change the tiers, the channels, the lead time, the win metrics. The point is not to run a launch by the book. It is to ship the thing with the assets done, the owners named, and a clear read on whether it worked. Built by an operator. Customize it, break it, make it better.

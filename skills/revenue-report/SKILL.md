@@ -81,5 +81,37 @@ Next moves
 ## Where the numbers come from
 The variance flag (+/- 10%) and the trailing-period window are defaults, not laws. They suited a monthly SaaS cadence. If your business is lumpier, widen the flag. If you report weekly, shorten the window. The logic does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** Write this month's revenue report. Here's the CSV, $420K against a $500K plan.
+
+**Claude:** Written. You're behind on the headline, but the pacing math says it's not as bad as the raw percentage looks.
+```
+REVENUE REPORT · Month to date
+Headline      New ARR $420K vs $500K plan  ·  84%, behind
+Pacing        On track for ~$465K at current run rate
+Moved         +18% vs last month, carried by expansion ($140K)
+
+Risks
+  1. Two deals worth ~$90K slipped past the close date. Period-defining.
+
+Next moves
+  1. Sales lead: pull the two slipped deals into a same-week decision.
+```
+Worth naming: I didn't call this a "miss" outright, because the period isn't over. Pacing says you land near $465K at the current run rate, that's a different conversation than 84% sounds like.
+
+**You:** Why did you call out expansion specifically instead of just "revenue grew"?
+
+**Claude:** Because "revenue grew" doesn't tell your lead what to do next. Expansion carried the month while new business stayed flat, that's a different set of next moves, protect the expansion motion, go fix new-business pipeline, than if new business had carried it. Sharpener: connect your CRM and I'll pull the two slipped deals by name instead of just the dollar total, so the next move has an owner attached.
+
+## Go further
+The recap earns a read. Here is the version that writes itself every period.
+
+- **Run it every Monday morning automatically.** Schedule a Claude task against your BI export so the report is in your leader's inbox before the pipeline review starts.
+- **Name the slipped deals, not just the total.** Connect Salesforce so the risks section lists the actual opportunities and owners instead of a dollar figure.
+- **Post it where the team already looks.** Send the finished report to Slack instead of a doc nobody opens until the next meeting.
+
+The report shows up with the next move attached before anyone has to ask for it.
+
 ## Make it yours
 Fork it. Change the metric, the segments, the cadence. The point is not to run someone else's report. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

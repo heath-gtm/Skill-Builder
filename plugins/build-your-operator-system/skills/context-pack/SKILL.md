@@ -96,5 +96,41 @@ NEXT MOVE
 ## Where the inputs come from
 DECISION_WINDOW (90 days) and STALE_FLAG (14 days) are defaults, not laws. A slow-moving account can reach back further; a fast build should refresh sooner. The five questions are fixed. The windows are yours.
 
+## Example chat
+Here is the skill running on a real cold start.
+
+**You:** I'm handing the Northwind onboarding automation off to a teammate. Build the context pack.
+
+**Claude:** Pack's built, and it surfaced one unassigned item before your teammate would have found it the hard way.
+```
+DECISIONS SO FAR
+  - Route by company size, not persona. Personas were too noisy.
+  - Nightly, not real-time. Real-time tripled the API cost for no lift.
+
+OPEN ITEMS
+  - Owner for EU signups undecided. Owner: unassigned (flagged).
+```
+That EU signups gap would have sat silent until someone asked "wait, who owns this," probably at a worse time than now. Naming it unassigned up front means your teammate inherits a known gap, not a hidden one. One sharpener: connect your notes tool so decisions get pulled straight from the record instead of from what you can recall today.
+
+**You:** Good catch. What's the single next move you'd put at the top?
+
+**Claude:** One move, not a list.
+```
+NEXT MOVE
+  Write the dedupe rule spec so the last manual step can be
+  automated.
+```
+That's the one thing blocking the automation from running fully hands-off, everything else on the open-items list can wait a week. One sharpener: connect your task tool so open items carry a real owner and due date instead of "you" by default.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Keep the pack alive, not a snapshot.** Point a scheduled Claude task at your repo and notes tool weekly and regenerate the pack so it never goes stale past the flag window.
+- **Make it the standard hand-off ritual.** Require a fresh pack before any account or project changes owners, posted to Slack so the new owner starts oriented on day one.
+- **Chain it into onboarding.** Feed the pack straight into your new-hire or new-teammate onboarding flow so context transfer stops depending on a meeting that may not happen.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Add a "risks" section, a "who to ask" section, a glossary. Cut what you never read. The point is not a template someone else loves. It is the pack that gets your next session productive in one paste. Built by an operator. Customize it, break it, make it better.

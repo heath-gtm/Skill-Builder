@@ -1,240 +1,153 @@
 ---
 name: strike-zone-analyst
-description: >-
-  Mixmax's funnel + PQA diagnostic engine and funnel-leak analyst. Connect Salesforce + Amplitude (+ optional Octave, Common Room, FullEnrich, Mixmax). Three modes: (1) FUNNEL DIAGNOSIS finds leaky conversion gates by channel (Inbound/Outbound/Product) with per-stage leakage, dollarized leverage points, and cohort velocity; (2) SPRINT PLANNING multi-source-enriches PQAs into a ranked backlog with verified buying committees; (3) SCORING AUDIT finds where Aero is failing. Trigger on 'strike zone math', 'funnel diagnosis', 'diagnose the funnel', 'where are we leaking', 'why is [channel] underperforming', 'conversion by channel', 'show rate is dropping', 'meeting-to-SQL conversion', 'should we reallocate budget', "what's our funnel velocity", 'PQA sprint planning', 'score our PQAs', 'is Aero missing accounts', 'find missed ICPs', 'audit the scoring model', or any channel-level cohort-conversion, PQA prioritization, or scoring-gap question. Also fire after the Aero dashboard when the user asks 'now what'.
+description: A funnel and account-scoring diagnostic engine for any sales org. Connect a CRM and a product-analytics tool (plus optional enrichment, community, and meeting tools). Three modes. (1) FUNNEL DIAGNOSIS finds leaky conversion gates by channel with per-stage leakage, dollarized leverage points, and cohort velocity. (2) SPRINT PLANNING enriches qualified accounts into a ranked backlog with verified buying committees. (3) SCORING AUDIT finds where your scoring model is missing real ICPs. Trigger on 'funnel diagnosis', 'diagnose the funnel', 'where are we leaking', 'why is [channel] underperforming', 'conversion by channel', 'sprint planning', 'score these accounts', 'find missed ICPs', 'audit the scoring model', or any channel-level cohort-conversion, account-prioritization, or scoring-gap question.
 ---
 
-# Strike-Zone Analyst — Diagnostic + Sprint Planning + Scoring Audit
+# Strike-Zone Analyst: Diagnostic + Sprint Planning + Scoring Audit
 
-**Required:** Salesforce + Amplitude. **Optional:** Octave (independent ICP), Common Room (community/buying-committee), FullEnrich (verified contacts), Mixmax (sequence-stage attribution), Aero (channel-fit scoring).
+## What this does
+This is your diagnostic partner for understanding a sales funnel: why it is converting or not, which accounts to work next, and where the scoring model is letting you down. A scoring dashboard tells you what is happening. This skill helps you understand why, what to do about it, and which accounts deserve the next sprint. It works across three modes that share one six-gate funnel framework, one multi-source signal stack, and the same cohort-anchored math.
 
-## What this skill does
+## What you'll need
+You do not need to connect anything to start. Bring your funnel numbers and the skill runs today. Connect the tools below and it pulls them automatically and adds signals you cannot paste by hand.
 
-You are the user's diagnostic partner for understanding Mixmax's funnel — why it's
-converting or not, which accounts to work next, and where the scoring model is
-letting them down. The Aero dashboard tells you *what* is happening. This skill
-helps you understand *why*, *what to do about it*, and *which accounts deserve the
-next sprint*. (This is the productized, connector-gated version of the original
-strike-zone-math skill; it absorbs that skill in full.)
+- Works today with: your funnel counts by stage and channel, with a cohort entry date per channel, plus your fit scores if you have them. Paste or upload.
+- More powerful connected to a CRM: cohort dates, stages, scores, contacts, and owners, live.
+- More powerful connected to a product-analytics tool: real product engagement for the Product channel.
+- Sharper with ICP-qualification, community or intent, enrichment, and meeting tools.
 
-| Mode | Question it answers | Output |
+You still need a defined channel taxonomy, a stage model, and a cohort anchor date per channel. Bring them, or map them from your CRM.
+
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
+
+- **Bring your data**: paste or upload your list (a deal export, a stage CSV). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
+
+## Customize this for yourself
+| Set this | What it is | Default / Example |
 |---|---|---|
-| **Funnel Diagnosis** | Where is the funnel leaking, why, and what do I do? | A diagnostic with named leaky gate + recommended action |
-| **Sprint Planning** | Which of our PQAs are worth working this sprint? | A ranked xlsx with composite scores + verified buying committees |
-| **Scoring Audit** | Where is Aero (or our scoring model) missing real ICPs? | A list of false-negatives + missed ICPs with named accounts |
+| CRM connector | Where cohort dates, stages, scores, contacts live | Your CRM |
+| Product-analytics connector | Where product-usage events live | Your product-analytics tool |
+| ICP-qualification connector | Independent fit qualifier (optional) | Your ICP tool |
+| Community/intent connector | Community + buying-committee signals (optional) | Your community tool |
+| Enrichment connector | Verified contact data on top-tier accounts (optional) | Your enrichment tool |
+| Channels | Your funnel entry channels | Inbound / Outbound / Product |
+| Cohort anchor field per channel | The date field that marks funnel entry | A "qualified date" field per channel |
+| Qualification stage | The CRM stage that equals SQL | Your "Qualification" stage |
+| Discovery stage | The CRM stage that equals SQO | Your "Discovery" stage |
+| New-business filter | The opportunity-type filter that excludes renewals | Opportunity type = New Business |
+| Fit-score field | The model score you are auditing | Your scoring model's fit score |
+| Score floor value | The value your engagement score collapses to when usage is sparse | Your model's floor score |
+| Conversion benchmarks | Per-gate target conversion rates | Your trailing baseline |
+| Average deal size | Used to dollarize leverage points | Your current ASP |
 
-All three modes use the same six-gate funnel framework, the same multi-source signal stack, and the same cohort-anchored math.
+Swap in your own scoring model, your own selling methodology, and your own channel and stage names. The method below is written against placeholders so it does not assume any one vendor or taxonomy.
 
-## The six funnel gates
+## The method
 
-Strike zone is the sequence of conversion gates from a new lead to closed revenue. For each cohort × channel, six gates matter:
-
-1. Cohort created (MQA / OQA / PQA fires) → Meeting booked
-2. Meeting booked → Meeting completed (show rate)
-3. Meeting completed → SQL (`StageName = '0 - Qualification'`)
-4. SQL → SQO (`StageName = '1 - Discovery'`)
-5. SQO → Closed Won
-6. Closed Won → Average deal size + cycle time
+### The six funnel gates
+Strike zone is the sequence of conversion gates from a new lead to closed revenue. For each cohort and channel, six gates matter:
+1. Cohort created (a qualified-account date fires) to Meeting booked.
+2. Meeting booked to Meeting completed (show rate).
+3. Meeting completed to SQL (your Qualification stage).
+4. SQL to SQO (your Discovery stage).
+5. SQO to Closed Won.
+6. Closed Won to average deal size and cycle time.
 
 Each gate has a different failure mode and a different intervention. Misdiagnosing the gate wastes weeks fixing the wrong thing.
 
-## Mode 1: Funnel Diagnosis
+### Mode 1: Funnel Diagnosis
+Default mode is conversational. Work interactively. Do not dump a full report unprompted.
+1. Anchor on a channel and a cohort window. Ask what they want to diagnose.
+2. Pull live data from the CRM. Always run queries. Do not analyze from memory.
+3. Find the leaky gate. Compare each gate to the channel's trailing baseline and to the other channels. The leaky gate has the largest negative gap.
+4. Diagnose with the pattern framework. Each leaky gate has two to four known failure modes. Identify which fits.
+5. Recommend a specific action. Named: a person, a list of accounts, a process change, a target.
+6. Offer the written write-up only if asked.
 
-**Triggers:** "where are we losing meetings", "why is [channel] underperforming", "show rate is dropping", "diagnose the funnel", "review the strike zone", "what's working".
+### Mode 2: Sprint Planning
+Converts the funnel from a diagnostic into an execution backlog.
+1. Define the cohort. Default: all accounts whose qualified-account date falls in the target window.
+2. Multi-source enrich every account in parallel: CRM firmographics and stage, ICP-tool fit, product-analytics engagement, community signals, and enrichment contacts on the top tier only (the paid step, check credits first).
+3. Compute composite scores. Tier into Hot, Warm, Watch, Disqualify.
+4. Build the spreadsheet: Sprint Ranking, Top Buying Committee, Scoring Rubric, Cohort Summary, Scoring Gaps.
+5. Hand off. Reps work the buying-committee tab top-down.
 
-**Default mode is conversational.** Work interactively — don't dump a full report unprompted:
+Cost guardrails. The enrichment tool is the only paid source. Cap spend per run unless approved.
 
-1. **Anchor on a channel + cohort window.** Ask what they want to diagnose. Don't assume.
-2. **Pull live data via Salesforce MCP.** Use `references/soql_templates.md`. Always run queries — don't analyze from memory.
-3. **Find the leaky gate.** Compare each gate's conversion to the channel's trailing baseline and to the other two channels. The leaky gate has the largest negative gap.
-4. **Diagnose with the pattern framework.** See `references/diagnostic_patterns.md` — each leaky gate has 2-4 known failure modes; identify which fits.
-5. **Recommend specific action.** Named — a person, a list of accounts, a process change, a target.
-6. **Offer the HTML write-up only if asked.** When the user says "write this up", switch to HTML mode.
+### Mode 3: Scoring Audit
+When the independent qualifier, product analytics, community signals, and CRM disagree with your scoring model, the disagreement is the finding.
+- Model False-Negatives: the engagement score sits at its floor value, but product analytics show real sustained team adoption.
+- Model-Missed ICPs: an independent qualifier scores a strong fit, but the model's account-fit score is low or null. A firmographic miss, not an engagement miss.
 
-Conversational-first matters because strike-zone math is judgment-heavy. Surface hypotheses, let the user confirm, then act.
+Common scoring failure modes: score-floor collapse, "no score" read as low fit, no buying-title weighting, no trend velocity, no ICP penetration ratio.
 
-## Mode 2: Sprint Planning (multi-source PQA prioritization)
+### Action format (all modes)
+Every recommendation needs three parts: Who (named person or role), What (a specific change), By when (a date or sprint). If you cannot fill all three, diagnose deeper.
 
-**Triggers:** "PQA sprint planning", "score our PQAs", "build a PQA backlog", "which accounts should we work this sprint", "rank our PQA cohort", "give me a sprint list".
+## Quality gates
+- Use your own selling methodology consistently. Do not introduce a framework the team does not run.
+- Lead with conversion, not volume.
+- Cohort math, not snapshot math. Anchor the cohort by entry date and trace it forward.
+- Honest caveats. If a cohort is too young or a field is not groupable, say so.
+- Use the audience's own taxonomy. Keep expansion as its own motion, not a funnel channel.
+- If a channel-source field is a formula field, filter on it but do not group by it.
+- Filter renewals out of new-business math.
+- If a query needs a field you cannot confirm exists, fail loud and ask. Never invent field names.
 
-Converts the funnel from a diagnostic into an execution backlog. Output is an xlsx that becomes the rep's sprint queue.
-
-1. **Define the cohort.** Default: all accounts with `Sales_PQA_Date_Account__c` (or MQA / OQA equivalent) in the target window. Confirm with the user.
-2. **Multi-source enrich every account in parallel** (see `references/sprint_planning_workflow.md`):
-   - **Salesforce** — firmographics, Aero scores, GTM stage, owner, contacts
-   - **Octave** (`mcp__012b2f88-c19c-41ca-a2e8-18c61394ad53__qualify_company`) — independent ICP qualification
-   - **Amplitude** — Product Engagement Story via the 11-event framework (see `product-engagement-story`)
-   - **Common Room** (`mcp__32d1a164-1bd3-41cb-a019-b2c320f13201__commonroom_list_objects`) — community signals + buying-committee depth
-   - **FullEnrich** (`mcp__63157928-2125-4a53-b8f6-c0881c12ac2e__*`) — phones + verified emails on top tier (credit-gated — check `get_credits` first)
-3. **Compute composite scores** per `references/multi_source_scoring.md`. Tier into Hot / Warm / Watch / Disqualify.
-4. **Build the xlsx** with five tabs: Sprint Ranking, Top Buying Committee (FullEnriched contacts), Scoring Rubric, Cohort Summary, Aero Scoring Gaps.
-5. **Hand off.** Reps work Tab 2 top-down; managers use Tabs 1 and 5.
-
-**Cost guardrails.** FullEnrich is the only paid source (~8.7 credits per contact for work email + mobile). Cap spend per run unless approved — 5 contacts × top 50 = 250 × 8.7 ≈ 2,200 credits/run. Use `get_credits` first; warn if balance is tight.
-
-## Mode 3: Scoring Audit (find missed ICPs)
-
-**Triggers:** "is Aero missing accounts", "find missed ICPs", "audit the scoring model", "where is Aero wrong", "are our PQAs actually good", "cross-reference scoring".
-
-When Octave, Amplitude, Common Room, and Salesforce disagree with Aero, the disagreement IS the finding (see `references/scoring_audit_methodology.md`). Two patterns surface most:
-
-- **Aero False-Negatives** — Aero PES at floor (28.04 in the current model) but Amplitude shows real sustained team adoption. Flag: `aero_false_negative`.
-- **Aero-Missed ICPs** — an independent qualifier (Octave) scores ≥7 (strong fit) but Aero Account Fit is <40 or null. Firmographic miss, not engagement. Flag: `aero_missed`.
-
-In Mixmax's 2026 PQA cohort this audit found **34 Aero False-Negatives and 9 Aero-Missed ICPs out of 261 accounts (16%)** — accounts reps would have de-prioritized had they trusted Aero alone.
-
-### Documented Aero failure modes
-1. **PES floor at 28.04** — most "low-engagement" PQAs share this exact score; loses distinction.
-2. **"No Score" silence ≠ "low fit"** — sparse usage → no score, but reps read it as low fit. No firmographic-only fallback.
-3. **No buying-title weighting** on the PQA-triggering user — a VP of Sales reads identical to an IC.
-4. **No trend velocity** — 700→50 events scores the same as flat 50.
-5. **No ICP penetration ratio** — 2 active / 21 mapped (9.5%) reads identical to 2 active / 3 mapped (67%).
-
-Detailed in `references/diagnostic_patterns.md` ("Gate 1 failure modes") and `references/scoring_audit_methodology.md`.
-
-## Audience awareness
-
-Default to **leader mode** unless told otherwise.
-
-- **Leader mode** (RevOps, GTM leadership): strategic recommendations — change targets, reallocate reps, kill/reinvest in channels, change the qualification rubric or playbook. Never recommend "have reps do better outreach" — the leader-mode equivalent is structural and ownable ("the Outbound playbook needs a touchpoint-cadence rewrite; data shows 14+ touches before a meeting on accounts that book, vs team baseline of 9").
-- **Rep mode** (fired when the user says "drill into [name]" or names a rep): tactical — these accounts to call, these objections, this messaging. Pull the rep's cohort via `Account.OwnerId` / `Opportunity.OwnerId`, compare to team baseline, identify their specific leak.
-
-## Action format (all modes)
-
-Every recommendation needs three parts: **Who** (named person/role), **What** (a specific change), **By when** (a date or sprint). If you can't fill all three, diagnose deeper.
-
-## Data sources
-
-| Source | MCP / tool | What it adds |
-|---|---|---|
-| Salesforce | `mcp__d50c041d-378a-4fbe-b287-5541902dd1b9__*` | Cohort anchor dates, Aero scores, opp history, contacts, owner |
-| Amplitude | `mcp__21ac7e4d-f1d6-44a3-81b3-242377655978__*` | Real product engagement, the 11-event PES framework |
-| Octave | `mcp__012b2f88-c19c-41ca-a2e8-18c61394ad53__*` | Independent ICP qualification + playbook match + hard disqualifiers |
-| Common Room | `mcp__32d1a164-1bd3-41cb-a019-b2c320f13201__*` | Community/intent signals, extra buying-committee contacts |
-| FullEnrich | `mcp__63157928-2125-4a53-b8f6-c0881c12ac2e__*` | Phone numbers + verified emails (credit-gated, top tier only) |
-| Mixmax | `mcp__229af089-f88a-40ac-ae96-42d07e09ff31__*` | Meeting history + sequence performance |
-
-## Caveats the team cares about
-
-- **Use CHAMP + SPRINT + PLAN, not MEDDPICC.** Mixmax doesn't run MEDDPICC.
-- **Lead with conversion, not volume.**
-- **Cohort math, not snapshot math.** Anchor the cohort by entry date (MQA / OQA / PQA) and trace forward — never compute "this month's win rate" from opps that closed this month.
-- **Honest caveats.** If a cohort is too young, a field isn't groupable, or you're inferring — say so.
-- **Audience's own taxonomy.** Inbound / Outbound / Product are the channels. Expansion is its own motion, not a channel in strike-zone math.
-- **No MQL_Date__c.** The Inbound cohort anchor is `Account.MQA_Date_2024__c`; legacy `MQA_Date__c` is retired.
-- **`Channel_Source__c` is a formula field** — non-groupable in SOQL; filter on it, don't GROUP BY.
-- **Filter renewals out of new-business math:** `Opportunity.Type IN ('New Business', 'Convert SS to DS')`.
-
-## Output format example
-
+## Output (example)
 ```
-🎯 STRIKE-ZONE FUNNEL DIAGNOSIS · Trailing 90 days
-
-INBOUND COHORT
-  Meeting Set:     127
-  → SQL:           94  (74% — strong, above 65% benchmark)
-  → SQO:           58  (62% — slight decline from Q1's 71%)
-  → Closed Won:    23  (40% — at expected range)
-  Velocity: avg 38 days meeting → close
-  Diagnosis: Healthy. Slight SQL→SQO decline worth watching.
+STRIKE-ZONE FUNNEL DIAGNOSIS  ·  Trailing 90 days
 
 OUTBOUND COHORT
-  Meeting Set:     47
-  → SQL:           16  (34% — BELOW 55% target ★)
-  → SQO:            9  (56% — strong)
-  → Closed Won:     4  (44% — strong)
-  Velocity: avg 82 days meeting → close
-  Diagnosis: ★ LEAKAGE AT MEETING → SQL. We're getting meetings,
-             not qualifying them in.
-
-PRODUCT COHORT (PQA)
-  PQAs Generated:   83
-  → Meeting Set:   24  (29% — strong for cold)
-  → SQL:           19  (79% — best on team)
-  → SQO:           13  (68%)
-  → Closed Won:     6  (46%)
-  Velocity: avg 24 days PQA → close (fastest channel)
-  Diagnosis: Healthiest funnel. Worth scaling investment.
+  Meeting Set:  47
+  to SQL:       16  (34%, BELOW 55% target)
+  to SQO:        9  (56%, strong)
+  to Closed Won: 4  (44%, strong)
+  Velocity: avg 82 days meeting to close
+  Diagnosis: Leakage at MEETING to SQL. Getting meetings, not qualifying them in.
 
 LEVERAGE POINT (dollarized):
-  Outbound meeting → SQL improvement of 10% = 5 additional SQLs/Q
-  At current ASP ($22K), that's +$110K pipeline + 2 additional Closed Won
-  = +$44K ARR/Q assuming current win rate
+  Outbound meeting-to-SQL +10% = 5 more SQLs per quarter
+  At ASP $22K that is +$110K pipeline + 2 more Closed Won
+  = +$44K ARR per quarter at current win rate
 
 WHAT MOVES THE NUMBER:
-  Diagnosis: Outbound meetings are reaching the right people but the
-             qualification conversation isn't landing.
-  Root cause hypothesis (verify with sample):
-    • Are we treating Outbound meetings as discovery instead of qualification?
-    • Are we missing PLAN fields by SQL stage?
-    • Is the pre-meeting research deep enough?
-  Recommended actions:
-    1. Listen to 5 outbound meeting recordings + identify qualification gaps
-    2. Test: PLAN-first meeting structure on next 10 outbound meetings
-    3. Compare conversion rate of Inbound vs Outbound at SQL stage to find delta
-
-BUDGET REALLOCATION CONSIDERATION:
-  Product channel has best unit economics ($22K won per PQA-generated meeting).
-  Outbound has highest leak. Recommend:
-    • Increase PQA-source investment (Amplitude tooling, signal generation)
-    • Pause outbound headcount expansion until SQL conversion improves
+  1. Listen to 5 outbound meeting recordings, find the qualification gap
+  2. Test a qualification-first meeting structure on the next 10 outbound meetings
+  3. Compare Inbound vs Outbound conversion at the SQL stage to find the delta
 ```
+Use generic placeholder names (Acme, Vertex, Northwind) and "Rep" in your own outputs. Never carry real account or person names into a shared artifact.
 
-## Used by
+## Where the numbers come from
+The benchmarks, target rates, the ASP, and the floor score in the example are defaults. Re-tune them to your own data. Set each gate's target from your channel's trailing baseline. Replace the ASP with your current average deal size before dollarizing. Pick a cohort window old enough that the cohort has had time to convert, and report sample size when it is young.
 
-- **Sales-leader-weekly-report** (funnel diagnosis section, optional deep dive)
-- **Monthly + Quarterly revenue reports** (channel-cohort math)
-- **Pipeline-Creation Analyst** as downstream signal source ("you have coverage but you're leaking at SQL → that's where to focus")
-- Standalone for RevOps / VP Sales / CEO funnel diagnosis
+## Example chat
 
-## When NOT to use
+**You:** Outbound felt slow this quarter, can you diagnose the funnel?
 
-- For account-level pipeline coverage (use Pipeline-Creation Analyst)
-- For per-deal diagnosis (use Deal-Health Analyst)
-- For building the Aero dashboard itself (use the Aero prompt file)
+**Claude:** Pulled the trailing 90-day cohort.
+```
+OUTBOUND COHORT (trailing 90 days)
+  Meeting Set: 52  ->  to SQL: 19 (37%, below 55% target)
+  to SQO: 11 (58%, strong)  ->  Closed Won: 5 (45%, strong)
+  Leaky gate: MEETING to SQL
+```
+Every gate past SQL is healthy, the leak is entirely in qualification, meetings are happening but not converting into real SQLs. Key insight: this is a meeting-quality problem, not a top-of-funnel problem, so adding more outbound volume would have made the wrong number worse. One sharpener: connect the product-analytics tool so Product-channel meetings get graded on real usage instead of self-reported fit.
 
-## Salesforce field reference
+## Go further
+The diagnosis runs once, by hand. Here is where an operator takes it once the manual version proves out.
 
-This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
-the single source of truth for every field name, definition, and canonical
-interpretation. Specifically, this analyst reads:
+- **Run the diagnosis every Monday, not just when it's asked.** A scheduled Claude task pulls the trailing-90 cohort from Salesforce weekly and flags the gate that moved past tolerance.
+- **Catch the leak while the rep can still fix it.** Wire a Slack alert the moment a meeting-to-SQL rate on a live cohort drops below target, so coaching happens mid-quarter, not in the QBR.
+- **Turn Sprint Planning into a standing queue.** Feed qualified accounts through Clay for buying-committee enrichment automatically, so the ranked backlog refreshes without a manual sprint kickoff.
 
-- Account.Channel_Source__c (canonical channel attribution, § 5; `Account.LeadSource` is fallback only — never `Opportunity.Channel__c`)
-- Opportunity.StageName, CloseDate, IsClosed, IsWon (cohort conversion math)
-- Opportunity.Amount (dollarization of leverage points)
-- Account.Website (Amplitude join for Product channel cohort, § 10)
+The framework finds the gate; the automation keeps watching it after you look away.
 
-If a query needs a field not in the library, FAIL LOUD and request a library
-amendment via Evolution Agent — never invent ad-hoc field names or definitions.
-Apples-to-apples consistency across every analyst output is the goal.
 
-## Inheritance from LOCKED_DESIGN.md
-
-Lock-ins #11 (channel classifier), #18 (PQA detection). This skill is the canonical strike-zone engine (absorbed the former strike-zone-math).
-
-## Make.com / API packaging
-
-**Input:** `{ mode: "full_diagnosis | single_channel | compare_channels | leverage_point", channel: string, window_days: number }`
-
-**Output:** `{ cohorts_per_channel, conversion_rates, leakage_points, leverage_point_dollarized, velocity, recommended_actions }`
-
-**Failure modes:** No Amplitude → Product channel cannot be analyzed. Insufficient sample size → analyst surfaces "low confidence" and reports sample size in output.
-
-## Shippable as
-
-Standalone connector-gated SKU. Make.com node. The RevOps + VP Sales funnel-leak diagnostic. Different audience from Pipeline-Creation — strikes at "where" not "how much."
-
-## Related skills
-
-- `product-engagement-story` — the 11-event Amplitude PES analysis on a single account. This skill calls into that framework for Modes 2 and 3.
-- `customer-strategy-brief` — 60-second brief on a single account. After this skill produces the sprint backlog, the brief runs on the top accounts.
-- `customer-strategy-suite` — brief + deep dive + battle plan in one pass. Use after Mode 2 picks the top sprint targets.
-- `pipeline-intelligence` — adjacent skill; account prioritization, pipeline coverage, and monthly ICP-quality without the funnel diagnostic.
-
-## Reference files
-
-- `references/soql_templates.md` — Ready-to-run SOQL for every strike-zone metric, field names verified against the live Mixmax SFDC org.
-- `references/diagnostic_patterns.md` — For each leaky gate: known failure modes, disambiguating queries, typical interventions.
-- `references/multi_source_scoring.md` — The v2 composite scoring rubric: weights, sub-score logic, tier thresholds, signal-richness bonus, flag definitions.
-- `references/sprint_planning_workflow.md` — The staged enrichment workflow for Mode 2: which sources, in what order, with guardrails and cost caps.
-- `references/scoring_audit_methodology.md` — The Mode 3 method: cross-referencing signals to find Aero false-negatives and missed ICPs.
+## Make it yours
+Fork it, plug in your connectors and thresholds, and break it against your own funnel until it tells you something true. Built by an operator. Customize it, break it, make it better.

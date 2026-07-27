@@ -86,5 +86,31 @@ Open with: list price, framed on the outcome, not the number.
 ## Where the inputs come from
 PRICE_FLOOR, TARGET, and WALK_AWAY are yours to set. The 15% floor and the ladder rungs above are examples, illustrative only, not a recommendation for your business. The method does not change when your numbers do. Set the floor to your real economics and the ladder plans itself around it.
 
+## Example chat
+Here is the skill running on a real deal, start to finish.
+
+**You:** Prospect wants 20% off. What's my plan going into this call?
+
+**Claude:** Ladder built, holds drafted, floor set at 15%.
+```
+Concession ladder (trade, do not give):
+  1. Flexible start date  -> ask: signature this week
+  2. 10% off list         -> ask: 24-month term
+
+They will likely ask:
+  "Can you do 20% off?"  -> Hold. Offer the term-for-rate trade instead.
+```
+The catch worth naming: the plan holds 20% by offering a different trade, not by just saying no. A flat no invites another ask; a hold-with-an-alternative gives them something to react to instead of push against. That's the difference between protecting the floor and losing the room. One sharpener: connect your CRM so the walk-away is anchored to this deal's real discount floor instead of the 15% default I used.
+
+## Go further
+The plan is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Ground the floor in real deal history.** Pull closed-won discount data from Salesforce so the walk-away reflects what actually got approved on similar deals, not a round number.
+- **Rehearse the holds before the call.** Run the likely-asks list through a scheduled Claude task that role-plays the buyer's pushback, so the responses are practiced, not improvised live.
+- **Log what actually got traded.** After the call, write the real concession ladder used back to the opportunity record, so the next negotiation prep learns from what worked, not just what was planned.
+
+You built the ladder once, now the next deal starts from what actually happened, not a blank page.
+
+
 ## Make it yours
 Fork it. Change the levers, the floor, the order of the ladder. The point is not to run someone else's give-and-take. It is to walk in with yours already decided. Built by an operator. Customize it, break it, make it better.

@@ -75,5 +75,33 @@ Savings:    ~73% fewer tokens vs a full rebuild
 ## Where the numbers come from
 SKIP_DAYS (7), FULL_DAYS (30), and the fit-score delta threshold are defaults from one team's cadence, not laws. A weekly artifact and a quarterly one want different windows. If your work changes slowly, widen the windows; if it moves daily, tighten them. The four-verdict logic does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** Do we need to fully regenerate the acme.com account brief, or can we skip it? Last one ran 4 days ago.
+
+**Claude:** Checked it against the source. Partial rebuild, not full.
+```
+REFRESH PLAN - account brief for acme.com
+Verdict: PARTIAL   (artifact 4 days old)
+Reuse:      company research, buying committee, tech stack, history
+Rebuild:    days-dark, deal health, top wins
+Evidence:   source last-modified 2 days ago; 2 new meetings; usage trend flat
+Savings:    ~73% fewer tokens vs a full rebuild
+```
+The catch worth knowing: I don't call this fresh just because it's recent. I call it PARTIAL because I can point to exactly what changed, 2 new meetings, source modified 2 days ago, and what didn't. If I couldn't see that evidence, the default flips to FULL, because shipping stale work costs more than the tokens.
+
+**You:** What would push this to a full rebuild instead?
+
+**Claude:** Any identity-level signal, an acquisition, a segment shift, a recategorization, forces FULL no matter how fresh the artifact looks. Age alone doesn't do it, the account changing who it is does. Sharpener: connect your CRM's last-modified timestamps directly and I'll prove every verdict against real dates instead of the note you pasted.
+
+## Go further
+The manual check proves the gate is worth running. Here is the version that runs itself.
+
+- **Gate every report behind this first.** Wire it in front of your weekly revenue report or account-brief generator so nothing regenerates until this verdict says so.
+- **Watch for identity triggers automatically.** Connect Salesforce so an acquisition or segment-shift field change forces FULL the moment it's logged, not at the next scheduled run.
+- **Track the savings over a quarter.** Log every verdict and its token estimate to a sheet so you can show finance what the gate is actually worth.
+
+The gate pays for itself the first week it stops a rebuild nobody needed.
+
 ## Make it yours
 Fork it. Change the artifact types, the static/dynamic split, the windows. The point is not to run someone else's freshness rules. It is to stop paying to rebuild things that did not move. Built by an operator. Customize it, break it, make it better.

@@ -1,159 +1,106 @@
 ---
 name: pattern-analyst
-description: Your won/lost/churn pattern analyst. Connect Salesforce + Amplitude — turns retrospective data into forward-looking action. Three modes — (1) WON — win pattern recognition, feeds ICP Analyst's lookalike search. (2) LOST — loss pattern + competitive intel, feeds messaging refresh. (3) CHURN — churn theme extraction + predictive (which active accounts look like recent churners?). Leadership quarterly cadence. Trigger on "why are we winning?", "why are we losing?", "closed-lost autopsy", "churn patterns", "competitive intel rollup", "who do we lose to most?", "win pattern analysis", "show me lookalike candidates to {winning customer}", "predictive churn", "which active accounts look like churners?", or any portfolio-level pattern recognition. Also fire quarterly before a leadership planning session.
+description: Your won/lost/churn pattern analyst. Connect a CRM plus a product-analytics tool, then turn retrospective data into forward-looking action. Three modes. (1) WON, win pattern recognition that feeds your ICP and lookalike search. (2) LOST, loss pattern plus competitive intel that feeds a messaging refresh. (3) CHURN, churn theme extraction plus predictive scoring (which active accounts look like recent churners?). Trigger on "why are we winning?", "why are we losing?", "closed-lost autopsy", "churn patterns", "competitive intel rollup", "who do we lose to most?", "show me lookalike candidates to {winning customer}", "predictive churn", "which active accounts look like churners?", or any portfolio-level pattern recognition.
 ---
 
-# Pattern Analyst — your retrospective intelligence companion
+# Pattern Analyst
 
-**Required:** Salesforce + Amplitude. **Optional:** Mixmax (conversation pattern extraction), Octave (competitive mention extraction from transcripts), Intercom (churn-ticket pattern).
+## What this does
+This skill reads your closed-won, closed-lost, and churned accounts and finds the repeating patterns inside them. It runs in three modes. WON tells you what your winning deals have in common and generates a ranked list of active accounts that look like them. LOST tells you where, how, and to whom you lose, with the objections rolled up. CHURN groups your lost customers into named themes and then scans your active book for accounts that match those themes before they leave.
 
-## What this analyst answers
+## What you'll need
+You do not need to connect anything to start. Bring your closed and churned deals and the skill runs today. Connect the tools below and it pulls the cohorts automatically and adds signals you cannot paste by hand.
 
-- "Why are we winning?" → win pattern recognition, lookalike candidate generation
-- "Why are we losing?" → loss pattern + competitive intel + objection theme rollup
-- "What's our churn pattern?" → churn theme extraction + predictive (which active accounts look like recent churners?)
-- "Who do we lose to most?" → competitive head-to-head matrix
-- "Show me lookalikes to {winning customer}" → ICP refinement input
-- "Predictive churn watch" → active accounts matching churner pattern
+- Works today with: exports of your closed-won, closed-lost, and churned accounts, with fields like size, industry, loss reason, and competitor. Paste or upload.
+- More powerful connected to a CRM: the three cohorts and their fields, live.
+- More powerful connected to a product-analytics tool: engagement decay, which powers the predictive-churn scan.
+- Sharper with a conversation-intelligence tool (objections, competitive mentions) and a support tool (churn-ticket patterns).
 
-## What it owns internally — three modes
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
 
-### 1. WON MODE — win pattern recognition
+- **Bring your data**: paste or upload your list (a deal export, a stage CSV). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
 
-- Cohort: trailing 6 months of Closed Won
-- Pattern extraction: buying committee shape, velocity, primary entry point, dominant signals
-- Lookalike generation: feeds ICP Analyst for prospect refinement
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
 
-### 2. LOST MODE — loss pattern + competitive intel
+## Customize this for yourself
+| Set this | What it is | Default / Example |
+| --- | --- | --- |
+| CRM connector | Where your won/lost/churn cohorts live | Any CRM |
+| Won/lost stage field | The field that marks a deal won or lost | Stage = Closed Won / Closed Lost |
+| Loss reason field | Reason a deal was lost | A loss-reason field |
+| Competitor field | Named competitor a deal was lost to | A competitor field |
+| Churn signal | How you mark a lost customer vs a lost new deal | Type = Renewal AND Stage = Closed Lost |
+| Segment fields | Account fields used for lookalike matching | Employee count, industry, tech stack, channel, primary signal |
+| Activity signal | The product-analytics metric for engagement decay | 30-day active-user trend |
 
-- Cohort: trailing 6 months of Closed Lost
-- Competitive head-to-head: who we lose to, by stage, by deal size
-- Objection theme rollup: extracted from Mixmax transcripts
-- Stage-of-loss distribution: where in the funnel are we losing
+Map each row to the actual field name in your system. If a pattern depends on a field you do not have, the skill runs the modes it can and tells you which one it skipped and why.
 
-### 3. CHURN MODE — churn theme + predictive
-
-- Cohort: trailing 12 months of Closed Lost — Churn (or Churn deals from CS pipeline)
-- Theme extraction: consolidation / layoff / vendor switch / product gap / champion left
-- Predictive: scan active accounts for matching patterns + surface
+## The method
+### WON mode
+Cohort: trailing 6 months of closed-won. Extract buying-committee shape, deal velocity, primary entry point, dominant signals, tech-stack overlap. Score active accounts against the winning pattern and rank the closest matches.
+### LOST mode
+Cohort: trailing 6 months of closed-lost. Competitive head-to-head by stage and deal size. Objection theme rollup from transcripts. Stage-of-loss distribution.
+### CHURN mode
+Cohort: trailing 12 months of churned customers. Group churns into named causes (consolidation, layoff, vendor switch, product gap, champion left, acquisition). Scan active accounts for matches to each theme and surface them with a confidence tag, ranked by risk.
 
 ## Quality gates
+- Pattern extraction is statistically meaningful. The skill requires at least 5 occurrences before it calls something a pattern. Below that it returns "insufficient data, expand the window."
+- Lookalike candidates are similarity-scored, with the named dimensions behind the score.
+- Predictive churn calls are confidence-tagged with the evidence behind them. A low-confidence match is labeled low, not dropped.
 
-**Pattern extraction is statistically meaningful.** Doesn't surface "1 of our 12 wins came from outbound" as a pattern — requires n >=5 occurrences before naming a pattern.
-
-**Lookalike candidates are similarity-scored.** "Acme matches your winning Vortex pattern at 87% on these 4 dimensions: company size, stack, signal, channel."
-
-**Predictive churn calls are confidence-tagged.** "Halborn matches the consolidation-churn pattern at 73% confidence" — never bare claims.
-
-## Output format example
-
+## Output (example)
 ```
-🔍 PATTERN ANALYSIS · Q2 Lookback
+PATTERN ANALYSIS  ·  Q2 Lookback
 
-═══ WON MODE — what's working ═══
+WON (n=14):
+  Channel: Product 57% / Inbound 29% / Outbound 14%
+  Dominant signal: sales-team hiring (78% of wins)
+  Top lookalikes: Account A 91%, Account B 88%, Account C 87%
 
-Win pattern (n=14 Closed Won):
-  Channel:                  Product 57% / Inbound 29% / Outbound 14%
-  Avg deal cycle:           38 days
-  Avg deal size:            $34K
-  Buying committee shape:   2-3 contacts, RevOps + VP Sales primary
-  Dominant signal:          Sales-team hiring (78% of wins had it)
-  Tech stack pattern:       3-tool consolidation play (Outreach + Gong + Apollo)
+LOST (n=21):
+  Stage-of-loss: Solution Validation 52%
+  Top reason: "no compelling differentiation vs incumbent" (n=9)
+  Lost to Competitor 1: 5 (at Proposal, "team already trained")
 
-Top 5 lookalike candidates (87%+ match to winning pattern):
-  1. Stripe — 91% match (size + stack + hiring signal)
-  2. Brex — 88% match
-  3. Mercury — 87% match
-  4. Ramp — 87% match
-  5. Pleo — 87% match
-
-═══ LOST MODE — what's killing us ═══
-
-Loss pattern (n=21 Closed Lost):
-  Stage-of-loss:   Solution Validation 52% / Discovery 24% / Proposal 24%
-  Avg lost deal size: $28K (smaller than won avg)
-  Top loss reasons:
-    1. "Didn't see compelling differentiation vs incumbent" (n=9)
-    2. "Budget cycle slipped" (n=6)
-    3. "Internal champion left" (n=4)
-
-Competitive head-to-head (where we lost to a named competitor, n=11):
-  vs Outreach:         5 losses (lost at Proposal, "team already trained")
-  vs Apollo:           3 losses (lost at Solution Validation, "price")
-  vs Yesware:          2 losses (lost at Discovery, "good enough")
-  vs SalesLoft:        1 loss
-
-Objection theme rollup (from 11 transcripts):
-  • "Already invested in {competitor}, switching cost too high" (most common)
-  • "Calendar features aren't priority right now"
-  • "AI Compose seems gimmicky"
-
-═══ CHURN MODE — what's losing customers ═══
-
-Churn pattern (n=8 last 12 months):
-  1. Sales team consolidation / layoff (n=3) — accounts shrank to <5 reps
-  2. Acquired by larger company (n=2) — moved to acquirer's stack
-  3. Product feature gap (n=2) — switched to Outreach for X feature
-  4. Champion left + no relationship transition (n=1)
-
-PREDICTIVE CHURN WATCH (current active accounts matching pattern):
-  1. Whip Around — matches consolidation pattern (73% confidence)
-     • Sales team reduced 22 → 14 in last 90d (per Common Room)
-     • Activity declining 47% in last 30d
-     • Champion last engaged 14d ago
-     → Run save-play now
-
-  2. Halborn — matches champion-left pattern (68% confidence)
-     • LinkedIn: champion (Sarah) changed jobs 21 days ago
-     • Backup contact has not engaged since
-     → Re-thread or accept churn risk
-
-  3. Galvanize — matches feature-gap pattern (54% confidence, low)
-     • Intercom: 4 tickets in last 60d requesting feature we don't have
-     → Engineering escalation worth considering
+CHURN (n=8, 12 months):
+  Consolidation / layoff (n=3), acquisition (n=2), feature gap (n=2)
+  PREDICTIVE WATCH:
+    Account F, consolidation pattern (73%): team 22 to 14, activity -47%
+    Account G, champion-left pattern (68%): champion changed jobs 21d ago
 ```
 
-## Used by
+## Where the numbers come from
+Defaults to re-tune: win/loss windows 6 months trailing, churn window 12 months, pattern floor of 5 occurrences before something is named a pattern. Lookalike and churn-match scores are built from your segment fields; add or drop dimensions to fit what predicts outcomes in your data. The activity-decay threshold flags an at-risk account; tune it to your product's normal usage rhythm. Re-tune the windows and the pattern floor first.
 
-- **Quarterly revenue report** workflow (Quarter Pattern section)
-- **Annual planning** workflow (refines ICP + messaging for next year)
-- **ICP Analyst** as upstream input (won pattern → lookalike search)
-- **Comms Analyst** as upstream input (loss objection → messaging refresh)
-- Standalone for CEO / VP Sales / VP Marketing quarterly planning
+## Example chat
 
-## When NOT to use
+**You:** Run the churn mode on last year's losses and tell me who in the active book looks like them.
 
-- For per-deal autopsy (use Deal-Health Analyst directly)
-- For per-account predictive churn analysis (use Renewal-Health or Book-of-Business)
-- For real-time competitive intel during a call (use Conversation Analyst)
+**Claude:** Grouped the churns into named themes and scanned the active book.
+```
+CHURN (n=8, 12 months):
+  Consolidation / layoff (n=3), acquisition (n=2), feature gap (n=2)
+  PREDICTIVE WATCH:
+    Account F, consolidation pattern (73%): team 22 to 14, activity -47%
+    Account G, champion-left pattern (68%): champion changed jobs 21d ago
+```
+Account G is the one worth calling today. A champion change 21 days ago is an early signal, not a lagging one, and it's a pattern we've seen precede churn twice this year.
 
-## Salesforce field reference
+**You:** Is that confidence score reliable with only 8 churns in the sample?
 
-This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
-the single source of truth for every field name, definition, and canonical
-interpretation. Specifically, this analyst reads:
+**Claude:** Good catch, that's below the 5-occurrence floor for calling something a firm pattern on its own, but consolidation clears it at n=3 within the theme. Champion-left only has n=1 backing Account G's match, so I'm labeling that one low-confidence rather than dropping it. Sharpener: connect a conversation-intelligence tool so champion-change signals get caught from call transcripts instead of relying on a manual note.
 
-- Closed-Won cohort per § 9 snippet G (12-month trailing)
-- Closed-Lost cohort per § 9 snippet H (6-month trailing) including Loss_Reason__c + Competitor__c
-- Churn cohort per § 9 snippet I (12-month trailing, Type='Renewal', Closed Lost — Churn)
-- Account-level signals on each cohort: CR_Number_of_Employees__c, Email_Provider__c, CRM__c, Sales_Acceleration_Tool__c, Industry, Type
+## Go further
+Running this quarterly on an export proves the patterns hold. Here's the version that watches the active book continuously.
 
-If a query needs a field not in the library, FAIL LOUD and request a library
-amendment via Evolution Agent — never invent ad-hoc field names or definitions.
-Apples-to-apples consistency across every analyst output is the goal.
+- **Scan the book every week, not once a quarter.** A scheduled Claude task reruns the predictive-churn match against Salesforce weekly and only surfaces accounts whose risk score moved.
+- **Catch the champion-left pattern the day it happens.** Connect Gong or a similar conversation-intelligence tool so a champion mentioning a new role gets flagged automatically instead of waiting for the account owner to notice.
+- **Feed WON mode straight into prospecting.** Push the lookalike list into Clay or your outbound tool so the accounts that score closest to your winning pattern become a working list, not a slide.
 
-## Inheritance from LOCKED_DESIGN.md
+The patterns are only useful the week you'd actually act on them.
 
-Lock-ins #11 (channel classifier), #14 v7 (play type taxonomy), #26 (tech stack signal fields).
-
-## Make.com / API packaging
-
-**Input:** `{ mode: "won | lost | churn | all", window_months: number, min_pattern_n: number }`
-
-**Output:** `{ won_pattern, lookalike_candidates, lost_pattern, competitive_head_to_head, churn_themes, predictive_churn_watch }`
-
-**Failure modes:** Cohort size below `min_pattern_n` → returns "insufficient data, expand window."
-
-## Shippable as
-
-Standalone connector-gated SKU. Make.com node. The quarterly leadership planning companion. Different from other analysts — runs retrospectively + feeds forward into refined targeting, messaging, and product roadmap signals.
+## Make it yours
+Map the fields, set your windows, and decide which signals predict a win and a churn in your business. Built by an operator. Customize it, break it, make it better.

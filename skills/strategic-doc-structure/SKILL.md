@@ -89,5 +89,26 @@ WHAT WINNING LOOKS LIKE
 ```
 No individual names, no tool versions, no charts, no third move. Everything deeper lives in the companion.
 
+## Example chat
+
+**You:** I have a 12-page strategic plan draft for the board, can you tighten it?
+
+**Claude:** Triaged it as a Strategic Plan. Reader's question: "What are we committing to?" Here's the cut.
+```
+Cut: the 4-page diagnosis section, the tooling appendix, the 3rd bet.
+Kept: commit banner, 2 bets (Pipeline Engine, Retention Motion), 5-block cards each.
+```
+The draft had three bets and a diagnosis section eating the first four pages, so the reader never actually reached the commitment. Key insight: the vocabulary lock caught "optimize the funnel" in a headline, that's a process word doing a verb's job, swapped it for "fix the routing." One sharpener: name the department owner for each of the 2 moves under each bet. Right now the doc just says "the team," and that's not an owner.
+
+## Go further
+The structure is set. Here is where an operator takes it once the manual pass proves out.
+
+- **Triage every doc before it's written.** Wire a scheduled Claude task to classify drafts as they land in a shared doc tool (Notion, Google Docs) and flag the wrong template before someone writes 12 pages in the wrong shape.
+- **Enforce the vocabulary lock automatically.** A lightweight script scans for banned words ("work streams," "optimize," "pillars") on save and flags the line, the same discipline a human editor would apply, just faster.
+- **Route the closing to where it actually gets read.** Push the finished commit banner into Slack as its own message the day the doc ships, so the 30-second version reaches people who will never open the doc.
+
+The structure does the work once; the checks keep it from drifting back.
+
+
 ## Make it yours
 Change the doc types to what your team ships. Set your own vocabulary lock. Decide whether your culture names departments or individuals. Keep the spine: triage the type first, lead with the verdict, name the owner, cap the bets, push depth to a companion. Built by an operator. Customize it, break it, make it better.

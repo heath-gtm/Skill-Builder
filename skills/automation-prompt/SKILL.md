@@ -49,5 +49,36 @@ Test: submit one form with a known email and one with a new email. Confirm one
 updates and one creates.
 ```
 
+## Example chat
+**You:** When a lead fills out our form, I want them added to the CRM and pinged in Slack. Build me the automation prompt.
+
+**Claude:** Here's the build prompt for n8n.
+```
+Trigger: webhook, fires when the website form is submitted.
+Steps:
+1. Look up the email in the CRM (search by email).
+2. Branch:
+   - If found: update the record, append the message to notes.
+   - If not found: create a new lead with the form fields.
+3. Post to Slack #leads: "New lead: {name} at {company}. {message}"
+
+Error handling: if the CRM step fails, post to Slack #alerts with the error
+and the raw payload. Do not drop the lead silently.
+```
+The detail that saves you a debugging session later: the error handling branch. Without it, a CRM hiccup just eats the lead and nobody notices until someone asks why a form fill never showed up.
+
+**You:** What should I test before I trust it?
+
+**Claude:** One form with a known email (should update) and one with a new email (should create). If both branches fire clean, you're live. One sharpener: tell me what happens if the same email submits twice in five minutes, that's the edge case most people forget to branch for.
+
+## Go further
+Hand-building one automation proves the shape. Here's the operator version.
+
+- **Wire it straight into n8n or Make.** Paste the build prompt into the platform's AI workflow builder so the trigger, branches, and error handling assemble themselves instead of you clicking through nodes one by one.
+- **Version the prompt, not just the workflow.** Keep the build prompt in a doc alongside the live automation, so when it breaks in six months you have the spec to rebuild from instead of reverse-engineering a tangle of nodes.
+- **Chain automations off each other.** Once this one posts to Slack, add a second automation prompt that watches that channel and books a follow-up task in your CRM automatically.
+
+The prompt is the blueprint. The platform just needs it spelled out once.
+
 ## Make it yours
 Set your platform, your apps, and your error policy. Then describe any "when X, do Y" and get a build prompt with the data flow and the failure cases already mapped. Built by an operator. Customize it, break it, make it better.

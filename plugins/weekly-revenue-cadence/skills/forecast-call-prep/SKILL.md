@@ -87,5 +87,26 @@ Walk in with:
 ## Where the numbers come from
 THIN_DAYS (10) and the "more than one contact engaged" cutoff are defaults, not laws. They suited a mid-market SaaS cycle with a weekly call. If your deals run longer or your call is monthly, raise them. The buckets do not change. The thresholds are yours.
 
+## Example chat
+**You:** Forecast call is in an hour, here's my pipeline export. [pastes CSV]
+
+**Claude:** Sorted all 6 deals against the evidence, not the category the rep set.
+```
+Account     Category   Evidence     Risk               Press on
+Vertex      Commit     Best-case    Single-thread      Who else has said yes?
+Northwind   Commit     Pipeline     Close slipped 2x    Why is this month real?
+```
+Rep-committed number is $224K, evidence-supported is $73K. The whole gap sits on two deals. That's the real story for the call, not a recap of all six.
+One sharpener: connect your CRM so I can pull category-change history and see exactly when Vertex got downgraded and re-upgraded.
+
+## Go further
+The prep works from a pasted export the morning of the call. Here is where it stops being a scramble.
+
+- **Run it before every call, automatically.** A scheduled Claude task pulls the pipeline export from Salesforce every Monday morning and has this prep waiting before the call starts.
+- **Flag the drift as it happens.** Connect Slack so a deal that slips from Commit to Best-case mid-week posts to the deal channel the moment it happens, not at the next call.
+- **Score the pressing question's answer.** Log the rep's answer back into the CRM against the flagged risk, so next quarter you can see which risks actually predicted a miss.
+
+The call stops being a status update and starts being where the number gets defended.
+
 ## Make it yours
 Fork it. Change the buckets, the thresholds, the questions. The point is not to run someone else's forecast discipline. It is to run yours, faster, so the number you say out loud is the number you can defend. Built by an operator. Customize it, break it, make it better.

@@ -85,5 +85,33 @@ not these placeholders.
 ## Where the inputs come from
 The goal, budget, audiences, and offers come from you or your marketing plan. Spend, impressions, clicks, and cost per result come from an ad platform once connected. Click-to-signup and click-to-pipeline come from a web-analytics tool and a CRM. Every target in the plan is illustrative until it is grounded in your own connected numbers, and the skill says which is which.
 
+## Example chat
+
+**You:** We've got $18K a month for a demo push in Q3. Build me a plan. Selling to RevOps leads at mid-market SaaS.
+
+**Claude:** Here's the split, with a kill rule built in before a dollar spends.
+```
+Audience          Offer              Angles                 Split   Win metric
+Cold, paid social Teardown guide     Pain / Outcome / Proof  40%    CPL under target
+Retargeting       Book a demo        Proof / Urgency         20%    Demo booked
+Test reserve      rotating           new angles              10%    signal only
+
+Kill rule: any line past 10 days and 1.5x target CPL with >$500 spend gets cut.
+```
+The thing to notice: cold traffic gets the low-friction offer (a guide) and retargeting gets the direct ask. Same audience, same offer would have wasted the cold budget on people who aren't ready to book.
+
+**You:** What's our actual CPL target? I don't have a number.
+
+**Claude:** You don't have one yet, and I flagged that as illustrative rather than guessing a benchmark. Once the ad platform is connected I can pull your real cost-per-result and set the target from your own history instead of an industry number that may not fit your funnel. Sharpener: connect the ad platform so the split and the kill rule start from your actual spend, not a placeholder.
+
+## Go further
+A plan on paper is the easy half. Here's where it becomes a system that spends the budget for you, inside guardrails you set.
+
+- **Feed it live numbers, not a paste.** Connect the ad platform so cost-per-result updates the plan automatically, and the win metric stops being a guess.
+- **Close the loop to revenue.** Wire in a web-analytics tool and the CRM so cost per lead becomes cost per qualified pipeline dollar, the number that actually matters to a buyer of this plan.
+- **Let the kill rule fire itself.** A scheduled Claude task checks every line against the guardrail daily and posts to Slack the moment a line crosses 1.5x target CPL, instead of waiting for the weekly review to notice.
+
+Plan the campaign once. Let the connectors keep it honest every day after.
+
 ## Make it yours
 Fork it. Change the audiences, the split logic, the kill window, the metric that counts. The point is not to run a generic media plan. It is to run yours, with a stop-loss you wrote on purpose. Built by an operator. Customize it, break it, make it better.

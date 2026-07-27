@@ -94,5 +94,34 @@ a weighted competency.
 ## Where the numbers come from
 The RAMP_WINDOW, the 3x pipeline target, and the 1-4 scale are examples for illustration, not benchmarks. They suited a mid-market SaaS AE. Set outcomes to your own ramp and quota, and pick a scale your interviewers will actually use. The framework does not change. The bar is yours.
 
+## Example chat
+Here is the skill running on a real req, start to finish.
+
+**You:** I'm opening a Mid-Market AE req. Build me the scorecard before I post it.
+
+**Claude:** Here's the outcomes-first scorecard, ramp window set to 180 days.
+```
+Outcomes:
+  1. Self-sourced pipeline at 3x quota by day 120
+  2. First closed-won by day 90
+  3. Forecast within 15% by second full quarter
+
+Competencies (weighted):
+  Prospecting rigor   -> outcome 1   (owner: SDR manager)
+  Discovery depth     -> outcome 2   (owner: hiring manager)
+  Forecasting honesty -> outcome 3   (owner: sales leader)
+```
+The competency I'd watch hardest is forecasting honesty. It's the one outcome nobody screens for in a resume, and it's the one that burns a manager six months in. One sharpener: connect your CRM and I'll pull what your current top AE actually did in their first 180 days, so outcome 1 is grounded in your real ramp instead of a 3x rule of thumb.
+
+## Go further
+The scorecard is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Score every candidate the same way, automatically.** Feed interview notes from Gong or a meeting tool into a scheduled Claude task that scores each competency against the rubric and writes it to Greenhouse or Lever.
+- **Catch drift before the debrief.** DM the hiring manager in Slack the moment two interviewers score the same competency more than one point apart.
+- **Close the loop with real performance.** Pull 90-day and 180-day actuals from Salesforce and compare them to the outcomes you wrote, so next quarter's scorecard is calibrated on your own hires, not a guess.
+
+You built the bar once, now every interview gets held to it.
+
+
 ## Make it yours
 Fork it. Change the outcomes, the competency weights, the questions. The point is not to interview against someone else's idea of the role. It is to hire against yours, consistently, so the debrief is about evidence instead of who liked the candidate most. Built by an operator. Customize it, break it, make it better.

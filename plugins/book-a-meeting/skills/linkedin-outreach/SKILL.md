@@ -86,5 +86,28 @@ sending the odd useful thing?"
 ## Where the inputs come from
 PERSONA, OFFER, and STATE are yours to set; the 300-character note ceiling and the three-state model are defaults that suited a relationship-first social motion, not laws. A higher-volume motion can simplify the states. The structure holds. The inputs are yours.
 
+## Example chat
+Here is the skill running on a real prospect, start to finish.
+
+**You:** They liked two of my posts but I've never messaged them. What do I send?
+
+**Claude:** State is "engaged," so the note references the real interaction.
+```
+"Thanks for the connect, and for reading. Since [topic] is on your
+radar, here is a short teardown of how a few teams handle it: [link].
+Curious if any of it maps to your world."
+```
+The catch worth naming: I didn't write a generic follow-up. This person is in the "engaged" state, so the message leads with the thing they already showed interest in, not a cold pitch dressed as a warm one. Sending the cold-state note to an engaged prospect is the most common miss here. One sharpener: connect your CRM so the state comes from real touch history instead of you having to remember and paste it.
+
+## Go further
+The message is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Fold it into a real cadence.** Push the connection note and follow-ups into a sequencer alongside your email steps, so LinkedIn and email touches land in the right order automatically.
+- **Track state changes without watching manually.** Wire a scheduled Claude task to check engagement (likes, views, replies) daily and flag the prospects who just moved from cold to engaged.
+- **Log every touch back to the account.** Write the sent message and its state into Salesforce or HubSpot, so the next rep who opens this account sees exactly what's already been said.
+
+You built the message once, now the state tracking keeps it honest.
+
+
 ## Make it yours
 Fork it. Change the persona, the states you track, the value you lead with, the voice. The point is not to spray someone else's templates. It is to run a thread that sounds like you. Built by an operator. Customize it, break it, make it better.

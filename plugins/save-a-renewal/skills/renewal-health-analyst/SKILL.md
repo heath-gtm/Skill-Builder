@@ -9,13 +9,21 @@ description: Your per-renewal analyst. Connect a CRM plus a product-analytics to
 This skill reads one customer and returns a renewal verdict you can act on. It combines product adoption, champion stability, support sentiment, and any competitive signals into a single per-deal call: will this renew, at what value, and under what conditions. It then hands you the pitch material: the adoption story, the commercial levers you can pull, and the checklist of things that must happen before the renewal call. It is built for depth on one renewal at a time, not portfolio rollups.
 
 ## What you'll need
-- A CRM (required). The account, renewal dates and value, contacts, and the renewal opportunity.
-- A product-analytics tool (required). Which features the customer actually uses, and how often.
-- A meeting tool (optional). Champion-conversation depth and recent engagement.
-- A support tool (optional). A support-sentiment pulse.
+You do not need to connect anything to start. Bring your renewals and the skill runs today. Connect the tools below and it pulls the data automatically and adds usage signals you cannot paste by hand.
 
-No CRM and product-analytics tool connected? The skill says what to connect and stops. It does not guess.
+- Works today with: your upcoming renewals (account, renewal date, value, contract terms, the champion and key contacts), plus whatever usage notes you have. Paste or upload.
+- More powerful connected to a CRM: accounts, renewal dates and value, contacts, and the renewal opportunity, live.
+- More powerful connected to a product-analytics tool: which features the customer actually uses and how often, the signal that predicts a renewal best and is hardest to paste by hand.
+- Sharper with a meeting tool (champion-conversation depth) and a support tool (support-sentiment pulse).
 
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
+
+- **Bring your data**: paste or upload what you have (a CSV or an export). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
 ## Customize this for yourself
 | Set this | What it is | Default / Example |
 | --- | --- | --- |
@@ -72,6 +80,38 @@ Save-play prerequisites:
 
 ## Where the numbers come from
 The thresholds are defaults, not laws. The renew threshold (70%) is the confidence floor for calling a renewal likely. The champion-stale threshold (90 days) is the silence window that downgrades a verdict. The engagement floor defaults to your own customer median, so it self-calibrates once you have enough accounts. Re-tune all three after you watch a few renewals land against the verdicts the skill gave you.
+
+## Example chat
+
+**You:** Will Example Co renew? Closes August 15th. Here's what I know about their usage and the champion situation.
+
+**Claude:** Read it. Renew, with a real expansion angle, but there's a single-thread risk you should close first.
+```
+EXAMPLE CO RENEWAL  ·  Closes 2026-08-15
+VERDICT: RENEW + EXPANSION POSSIBLE  ·  Confidence 78%
+
+Champion stability:
+  - Champion still at the company, engaged 6 of last 12 weeks
+  - Second-thread contact left in March, single-thread risk
+
+Adoption story (for the pitch):
+  Deeply used: Sequencing, Smart Send
+  Untouched:   Calendar features, Auto Follow-ups
+```
+The gate that mattered here: I don't hand back a renewal verdict without checking the champion first. If they'd gone quiet past 90 days I'd have downgraded the confidence automatically instead of letting the usage numbers carry the call.
+
+**You:** What's the save-play checklist look like given the single-thread risk?
+
+**Claude:** Re-thread to a second champion first, then run the calendar demo, then pre-position the multi-year offer 30 days out, in that order. Sharpener: connect your product-analytics tool and I'll pull the real weekly usage instead of working off the notes you pasted, so the adoption story is exact.
+
+## Go further
+The single-account read proves the model works. Here is the version that runs it on every renewal.
+
+- **Run this the day a renewal enters the window.** Schedule a Claude task off your CRM's renewal-date field so every account gets a verdict 90 days out automatically, not when a CSM remembers to ask.
+- **Watch champion silence live.** Connect Gong or your email tool so a champion going quiet past 90 days downgrades the verdict the moment it happens.
+- **Push the save-play checklist to the CSM's task list.** Wire the sequenced prerequisites into Salesforce tasks so "re-thread to a second champion" shows up as an assigned to-do, not a line in a doc.
+
+The verdict stops being a snapshot and starts updating itself as the signals move.
 
 ## Make it yours
 Map the roles to your stack, set your thresholds, and name your features the way your customers do. Built by an operator. Customize it, break it, make it better.

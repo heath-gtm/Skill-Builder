@@ -81,5 +81,30 @@ Flags:
 ## Where the inputs come from
 The owner-and-date rule, the exit-criteria discipline, and the backward-from-signature build are the defaults that keep a close plan honest. The milestone set and the buffer are yours. If your process has more gates, add them. The discipline does not change: every line owned, every line dated, every line with a definition of done. The plan is yours.
 
+## Example chat
+Here is the skill running on a real deal, start to finish.
+
+**You:** Build the MAP for Acme. Target close is end of quarter, and we're heading into security review next.
+
+**Claude:** Backward-planned from the sign date, buyer-owned steps flagged.
+```
+2  Business case to committee    Champion     day 5    On the committee agenda
+3  Security review               IT / vendor  day 12   Signed off, no open items
+
+Flags:
+  - Milestone 2 owner is the champion. If they won't take it, the deal isn't real.
+```
+The catch worth naming: milestone 2 is the test, not a formality. It's the first buyer-owned step, and it's early on purpose, if the champion won't commit to a dated action this soon, that's a live signal the deal is softer than the stage says, weeks before it would show up in a forecast call. One sharpener: connect your CRM so the close date and stage come from the real opportunity instead of the number you typed in.
+
+## Go further
+The plan is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Send it and track opens.** Drop the MAP into a doc or email tool that reports when the champion opens and edits it, so you know if it's being used or ignored.
+- **Flag slipping milestones automatically.** Wire a scheduled Claude task to check each dated milestone against today and post to Slack the moment one goes overdue.
+- **Roll the pattern up across the pipeline.** Pull every open MAP from Salesforce and report which champions are missing their buyer-owned steps this week, so a sales leader sees the soft deals before the forecast call.
+
+You built the plan once, now the slippage gets caught in real time.
+
+
 ## Make it yours
 Fork it. Change the milestones, the roles, the buffer. The point is not to send someone else's close plan. It is to build a dated path to signature that your champion will actually co-own, and to find the blank line before it costs you the quarter. Built by an operator. Customize it, break it, make it better.

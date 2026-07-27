@@ -87,5 +87,35 @@ Next: connect a search console to target queries you already rank near.
 ## Where the inputs come from
 The URL or page text and the TARGET_QUESTION come from you. FRESHNESS_DAYS (180) is a default, not a law, tune it to how fast your topic moves. Positions and impressions come from a connected search console, traffic from a connected web-analytics tool, and schema and link checks from the page itself or a connected CMS. The thresholds are yours to move.
 
+## Example chat
+
+**You:** Audit this page for both SEO and AI answer visibility. Here's the URL, target question is "how do I export to CSV."
+
+**Claude:** Audited both tracks. The gap between them is the story.
+```
+SEO + AEO AUDIT · page: /guide/csv-export · question: "how do I export to CSV"
+Classic search:   66 / 100
+Answer-engine:    41 / 100   (the gap is why you are not quoted)
+
+Top fixes (effort -> impact):
+  1. LOW  -> HIGH   Add a 2-sentence direct answer above the fold.
+                    Right now the answer starts in paragraph 5.
+  2. LOW  -> HIGH   Add HowTo schema to the numbered steps.
+```
+The insight worth sitting with: the page ranks fine, 66/100, but scores far lower on answer-engine visibility, 41/100, because the actual answer is buried in paragraph five. Classic search tolerates that. An answer engine won't lift a quote from paragraph five.
+
+**You:** Why is the orphan-page fix ranked medium effort instead of low?
+
+**Claude:** Because fixing it means editing three other pages to add the links, not just this one, that's more surface area than a one-page schema tweak, even though the impact is just as high. Sharpener: connect a search console and I'll target the fixes at queries you're already ranking near instead of the one question you told me to check.
+
+## Go further
+The one-page audit proves the gap is real. Here is the version that watches the whole site.
+
+- **Audit the whole site on a schedule.** Run this as a scheduled Claude task across your CMS templates so every page gets re-scored monthly instead of one at a time by request.
+- **Target fixes at winnable queries.** Connect Google Search Console so the fix list points at questions you're already close to ranking for, not guesses.
+- **Track the AEO score over time.** Log each run's score to a sheet or Amplitude so you can see whether the gap between classic and answer-engine visibility is closing.
+
+The fix list gets sharper every run instead of starting from scratch each time.
+
 ## Make it yours
 Fork it. Change the schema types, the freshness window, the way fixes are ranked. The point is not to chase a checklist. It is to get the page quoted and clicked for the one question it should own. Built by an operator. Customize it, break it, make it better.

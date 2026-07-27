@@ -91,5 +91,29 @@ Next move: connect the event platform so follow-up splits by who actually showed
 ## Where the inputs come from
 The topic, audience, date, and presenters come from you or your marketing calendar. Open and click rates on promo come from an email tool. Registration and attendance come from a webinar or event platform. Account routing comes from a CRM. Every rate in the plan is illustrative until it is grounded in your own connected numbers, and the skill says which is which.
 
+## Example chat
+
+**You:** We want to run a webinar next month on cutting onboarding time. Can you build the plan?
+
+**Claude:** Here's the shape.
+```
+Topic: "How 3 teams cut onboarding time in half"
+Promo: T-21 announce, T-14 proof, T-7 urgency, T-1 reminder, day-of nudges
+Run of show (45 min): hook (0-2), teach + demo (2-25), live Q&A (25-38), ask (38-42)
+Follow-up: attendees -> recording + next step, no-shows -> recording + best moment,
+engaged -> routed to sales
+```
+Key insight: your original topic, "the future of onboarding," was broad enough that no promo sequence would have saved it, narrowing it to "3 teams, cut in half" is what makes the T-14 proof email actually land. One sharpener: connect the email tool so the reminder cadence can be scheduled now instead of built by hand closer to the date.
+
+## Go further
+The plan is set. Here is where an operator takes it once the manual version proves out.
+
+- **Draft and schedule the whole sequence at once.** Wire the promo emails into your sequencer (or HubSpot) now, so T-21 through day-of fire without anyone remembering to hit send.
+- **Route the hot leads while attention is still high.** Pull registration and attendance from your webinar platform straight into Salesforce, and auto-flag anyone who asked a question for same-day sales follow-up.
+- **Watch the show-up rate, not just registrations.** A scheduled Claude task checks registration-to-attendance the day before and triggers an extra reminder if it is trending low.
+
+The plan gets people in the room; the wiring is what turns the room into pipeline.
+
+
 ## Make it yours
 Fork it. Change the format, the promo window, the run-of-show, the one ask. The point is not to run a generic webinar. It is to run one that fills a room and moves pipeline, then do it again better. Built by an operator. Customize it, break it, make it better.

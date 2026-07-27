@@ -105,5 +105,33 @@ Next moves:
 ## Where the numbers come from
 The Day-30 / 60 / 90 checkpoints and the two-week kickoff window are defaults, not laws. They suited a product with a fast time-to-value. If your product takes longer to land, stretch the windows. The milestone logic does not change, the thresholds are yours.
 
+## Example chat
+
+**You:** Beacon is 90 days in and our fit score has them flagged low. Worth a save call or should we let it go quiet?
+
+**Claude:** Pulled the first-90-day read on Beacon. Don't let this one go quiet.
+```
+DAY 90 CHECK
+  Beacon   power usage on two capabilities, fit score still LOW
+
+Early false-negative:
+  Beacon   fit score floored at signup, adopted 4 capabilities in 30 days
+           should have moved to expansion pipeline back on Day 30
+```
+The fit score never caught up to what Beacon was actually doing. That's a 60-day-old false negative sitting in the wrong bucket.
+
+**You:** How do we stop missing this on the next cohort?
+
+**Claude:** Two fixes. First, re-run the false-negative check at Day 30, not just Day 90, so you catch it while it's still fresh. Second, add Beacon to the expansion pipeline today with the adoption evidence attached so the AE isn't starting from zero. One sharpener: connect your product-analytics tool so activation dates come from real usage instead of the self-reported milestones you pasted in.
+
+## Go further
+The read above is a one-time pull. Here's what an operator wires up once the manual version proves the false-negative catch is real.
+
+- **Run it every Monday, not when you remember.** A scheduled Claude task pulls the new-customer list from Salesforce and flags Day-30/60/90 misses before the CSM has to ask.
+- **Catch the false negative the day it happens.** Connect a product-analytics tool so the moment a low-fit account crosses the adoption threshold, it lands in a Slack DM to the account owner instead of waiting for a quarterly review.
+- **Close the loop into expansion.** Route confirmed false negatives straight into the expansion pipeline in Salesforce with the adoption evidence attached, so the AE opens the conversation with proof, not a guess.
+
+The diagnostic is the easy part. Wiring it to run without you is what actually saves the account.
+
 ## Make it yours
 Fork it. Change the milestones, the windows, the capabilities. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

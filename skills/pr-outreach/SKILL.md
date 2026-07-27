@@ -85,5 +85,40 @@ Next move: connect the email tool so the pitch and follow-ups draft and track in
 ## Where the inputs come from
 The news, the angle, and any known targets come from you. Fresh reporter research (who covers the beat, what they wrote lately) comes from a web-research step. Drafting and open or reply tracking come from an email tool. Contact history comes from a CRM. Every name is verified or supplied, never invented, and the skill flags anything it could not confirm.
 
+## Example chat
+
+**You:** We just shipped a usage-data report showing a shift in how teams do outreach. Worth pitching press?
+
+**Claude:** Ran it through the "is this a story" test first.
+```
+Angle: "Teams are quietly changing how they do X" backed by first-party data.
+
+Targets by beat:
+Tier   Beat fit                        Why this reporter          Status
+T1     Covers the category weekly       Wrote a piece on X in June  not sent
+T2     Trade outlet, deep on workflows  Recurring column on this    not sent
+```
+It passes. The angle is the trend the data proves, not the fact that you shipped a report, that distinction is what makes a journalist read past the subject line.
+
+**You:** Write the pitch for the T1 reporter.
+
+**Claude:**
+```
+Subject: [the data point itself]
+3 sentences: the trend, your data, the ask.
+Offer: exclusive first look for 48 hours.
+Follow-up: +4 business days with one new stat, then +4 with a deadline, then stop.
+```
+Sharpener: connect a web-research step so the "why this reporter" line comes from what they actually published last month, not a guess at their beat, which is the difference between a pitch that reads personal and one that reads like a mail-merge.
+
+## Go further
+One pitch to one reporter proves the angle holds. Here's the version that keeps a real beat list current and the follow-ups on schedule.
+
+- **Keep the beat list current automatically.** Run a web-research step weekly so the target list reflects who's covering the topic this month, not a list built once and left stale.
+- **Draft and track from where you already work.** Connect an email tool so pitches and follow-ups draft as ready-to-review messages and open/reply status updates without a separate spreadsheet.
+- **Never miss the follow-up window.** A scheduled Claude task checks FOLLOWUP_WINDOW against send date and queues the next touch with a new data point attached, capped at MAX_TOUCHES automatically.
+
+The pitch earns the placement. The cadence is what keeps the relationship alive for the next one.
+
 ## Make it yours
 Fork it. Change the beats, the tiers, the follow-up window, the definition of a story. The point is not to blast a press list. It is to earn a few real placements from people who actually cover your space. Built by an operator. Customize it, break it, make it better.

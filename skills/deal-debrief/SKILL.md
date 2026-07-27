@@ -92,5 +92,32 @@ Captured to: team deal wiki, tagged "mid-market, legal stall"
 ## Where the inputs come from
 The dates, the amount, and the account above are examples, illustrative only, not a real deal. The timeline and the turning points come from what you paste or from a connected CRM, meeting, or email tool. The lesson is yours to write; the skill forces it down to one and asks for the record behind it. It does not invent an event to make the story cleaner.
 
+## Example chat
+Here is the skill running on a real closed deal, start to finish.
+
+**You:** Debrief the Acme deal. We just closed it and I want to know what actually worked before I forget.
+
+**Claude:** Rebuilt the timeline from the CRM stage history and your recap.
+```
+DEAL DEBRIEF · Acme Corp · CLOSED WON · $60K (illustrative)
+What actually moved it: the champion sold it internally while we were out
+of the room; the exec call broke a 3-week legal stall.
+What nearly killed it: the legal stall. No second thread until day 55.
+```
+The one repeatable lesson: line up the exec sponsor before legal, not after the stall.
+
+**You:** Capture that so the team actually sees it.
+
+**Claude:** Wrote it to the deal wiki, tagged "mid-market, legal stall," so the next rep hitting a legal stall finds this before repeating it. One sharpener: connect the meeting tool so next debrief pulls the actual exec-call quote instead of your recollection of what got said.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Trigger a debrief on every closed deal automatically.** Wire a scheduled Claude task to fire whenever an opportunity flips to Closed Won or Closed Lost in Salesforce.
+- **Surface past lessons before the next deal starts.** Connect the deal wiki to your CRM so a rep entering a similar deal sees prior lessons tagged to that situation.
+- **Pull the turning-point quotes automatically.** Connect Gong so the near-death moment gets the actual transcript excerpt instead of a paraphrase.
+
+One deal's cost, captured once, becomes the whole team's edge.
+
 ## Make it yours
 Fork it. Change the structure, the loss categories, where the lesson gets captured. The point is not to fill in someone else's win/loss form. It is to make sure the next deal is run better than this one. Built by an operator. Customize it, break it, make it better.

@@ -89,5 +89,40 @@ FAILURE POINTS
 ## Where the inputs come from
 COST_UNIT and CHECK_STYLE are defaults, not laws. Some processes are measured in minutes, some in dollars, some in API calls; some checks are a row count, some a human confirmation. The 5W2H frame is the standard because each question is one a stranger will ask mid-run. Change how you measure. Keep every question answered.
 
+## Example chat
+
+**You:** I do the nightly signup enrichment and routing by hand every night. Turn it into a runbook someone else could run.
+
+**Claude:** Walked through it and built the full 5W2H. One gap needs your input before this is handoff-ready.
+```
+RUNBOOK · Nightly signup enrichment + routing · v1 (draft)
+WHO      the RevOps on-call role (not a named person)
+WHEN     nightly, 2am, after the raw signups sync lands
+
+HOW (steps)
+  1. Confirm the raw sync landed.   CHECK: row count > 0 in "signups-raw"
+  2. Run enrichment on new rows.    CHECK: email fill rate reported
+
+FAILURE POINTS
+  - Step 2 times out over ~5k rows. If so, batch in chunks of 2k.
+  - Step 3 leaves EU signups unrouted (no owner rule yet). Flag, do not drop.
+
+(draft, not saved. approve to store in the runbooks home)
+```
+Worth flagging: I wrote WHO as "the RevOps on-call role," not your name, on purpose. A runbook that depends on one person by name breaks the first time that person is out.
+
+**You:** What happens with the EU signups that don't have an owner rule yet?
+
+**Claude:** Right now that's a named failure point, not a hidden one. Step 3 flags them instead of silently dropping them, so whoever runs it knows to route those manually until you set the rule. Sharpener: connect your task tool and this becomes a checklist someone can actually claim and get credit for running, not just a doc they read.
+
+## Go further
+The draft proves the process can leave your head. Here is the version that survives without you.
+
+- **Store it where the on-call role already looks.** Push the approved runbook into your team's git repo or notes tool so it's linked, versioned, and findable at 2am.
+- **Turn recurring runs into assigned checklists.** Connect a task tool so each nightly run creates a trackable checklist instead of a static doc nobody checks off.
+- **Alert on the named failure points automatically.** Wire step 2's row-count check to Slack so a timeout gets flagged the moment it happens, not the next morning.
+
+The next person who runs this doesn't need to call you to find out what step 3 means.
+
 ## Make it yours
 Fork it. Add a rollback section, an escalation path, a "last run" log. Cut what your process does not need. The point is a runbook that lets you hand the task off and trust it runs without you. Built by an operator. Customize it, break it, make it better.

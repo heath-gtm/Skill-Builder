@@ -83,5 +83,35 @@ Illustrative figures. Your run reports your real counts.
 ## Where the numbers come from
 STALE_DAYS (90 for accounts, 30 for open deals) and the DEDUPE keys are defaults, not laws. They suited a mid-market SaaS base. If your sales cycle runs longer or your data model keys on something else, change them. The logic does not move. The thresholds and keys are yours.
 
+## Example chat
+Here is the skill running on a real export, start to finish.
+
+**You:** Audit this CRM export, something's off with our segment reporting. [uploads CSV]
+
+**Claude:** Ran the missing-field scan first, since that is usually the loudest problem.
+```
+Finding                     Scope        Severity   Detail
+Segment field empty         38% of accts HIGH       1,566 accts drop out of segment reports
+No-owner accounts           212 accts    HIGH       Invisible to every rep roll-up
+```
+The catch: your segment report is not wrong, it is just silently missing over a third of the base. That is why the numbers looked low.
+
+**You:** What about duplicates? We merged two lists last quarter.
+
+**Claude:** Found 96 likely clusters matched on domain, each with a suggested survivor (most complete, most recent activity), so the merge decision is already half made.
+```
+Cluster: "Acme Corp" x3 -> survivor: record with most fields filled, most recent activity
+```
+One sharpener: connect the CRM directly so I can check every account, not just the 4,120 in this export. Dedupe only catches what is in front of it.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Run the audit weekly, automatically.** Point a scheduled Claude task at Salesforce every Monday and post the top 5 findings to the RevOps Slack channel.
+- **Block bad data at the source.** Wire required-field validation into Salesforce so segment cannot go blank on a new account instead of catching it after the fact.
+- **Cross-check against the warehouse.** Connect Snowflake as a source of truth so fields that silently drifted between systems get flagged, not just fields that are empty.
+
+Catching it once is a cleanup. Catching it weekly is hygiene.
+
 ## Make it yours
 Fork it. Change the required fields, the stale windows, the dedupe keys, the priority weighting. The point is not to run someone else's rulebook. It is to run yours, on your data, so the numbers your team trusts are actually true. Built by an operator. Customize it, break it, make it better.

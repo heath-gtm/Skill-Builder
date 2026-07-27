@@ -90,5 +90,30 @@ Prevent-a-repeat: add a monitor on the workflow that failed silently.
 ## Where the numbers come from
 The cadences (hourly, daily) and the post-mortem SLA (5 days) are defaults, not laws. They suited a mid-market SaaS support model. If your customers expect tighter or looser contact, change them. The logic does not change. The thresholds are yours.
 
+## Example chat
+**You:** Acme's integration broke for their whole team an hour ago, they're furious in the shared Slack channel. What do I do?
+
+**Claude:** Graded it SEV1: core workflow down, top-20 account, renewal in 60 days.
+```
+Owners
+  Drive fix:      Eng on-call
+  Customer comms: You (the CSM)
+  Decision:       Support lead
+  Informed:       Exec sponsor
+
+Cadence: customer update every hour, internal sync every 30 min
+```
+Draft customer message is ready to send, and a post-mortem is scheduled for 5 business days out so this doesn't quietly repeat. The real risk here isn't the outage, it's the renewal clock running while the account is mad.
+One sharpener: connect your CRM so the severity call pulls the actual ARR and renewal date instead of me asking you for them.
+
+## Go further
+The runbook works from what you paste in the moment. Here is the version that catches the fire before you open a laptop.
+
+- **Auto-triage from the alert.** Wire a scheduled Claude task to a PagerDuty or Slack alert so severity, owners, and the first customer message draft exist before anyone joins the call.
+- **Pull the stakes automatically.** Connect Salesforce so every escalation opens with real ARR and renewal date, not a guess at how much this account matters.
+- **Close the loop in writing.** Have the post-mortem write itself into a shared doc tagged to the account, so the next escalation on the same account starts with the last one's lesson already loaded.
+
+A fire you learn from is the only kind worth having.
+
 ## Make it yours
 Fork it. Change the severity model, the roles, the cadence. The point is not to run someone else's playbook. It is to run yours, faster, when the account is on fire and there is no time to think. Built by an operator. Customize it, break it, make it better.

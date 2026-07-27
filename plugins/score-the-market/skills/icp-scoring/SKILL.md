@@ -80,5 +80,28 @@ Work first (>=90 strike band):
 ## Where the numbers come from
 The weights, the +6 / +12 escalator bands, and the tier cutoffs (Hot / Warm / Watch / DQ) are defaults from one team's win/loss backtest, not laws. They fit that team's motion. If your ICP is different, re-fit them on your own closed cohort. The layering logic (gate, renormalize over filled, add bounded boosts) is the part that carries over; the exact numbers are yours to earn.
 
+## Example chat
+Here is the skill running on a real list, start to finish.
+
+**You:** Score this list of 8 accounts and give me a stack rank I can work top-down.
+
+**Claude:** Ranked, gated, and every row has its reasoning.
+```
+Account      Score  Tier    Why
+Acme Corp    92     Hot     CRM in stack + hiring 3 sales roles + demo CTA; 12 weekly users
+Northwind    38     DQ      Disqualifier cap: not our motion
+```
+The thing worth catching: Blend Labs scored 64 on 2 of 6 signals filled, which is the coverage cap doing its job, a thin account never gets to hide next to a fully-enriched one at the same score. One sharpener: connect an enrichment tool so accounts like Blend Labs get scored on their real signals instead of getting capped by what's missing.
+
+## Go further
+The rank is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Rescore the pipeline nightly.** Point a scheduled Claude task at Salesforce and your enrichment stack, and write the score, tier, and reasoning back to each account record every night.
+- **Alert on the strike band only.** Send a Slack DM to the account owner the moment an account crosses the >=90 strike threshold, so the hottest accounts get worked same-day.
+- **Backtest the weights on a real cohort.** Pull closed-won and closed-lost from Snowflake or Salesforce quarterly and re-fit the escalator bands against what actually converted, instead of leaving them frozen at launch defaults.
+
+You built the rank once, now it stays current without anyone re-running it by hand.
+
+
 ## Make it yours
 Fork it. Change the signals, the weights, the escalators, the tiers. The point is not to run someone else's scoring model. It is to run yours, faster, with the reasoning attached so a rep trusts the rank. Built by an operator. Customize it, break it, make it better.

@@ -74,6 +74,36 @@ Rollback: revert to 9f8e7d6
 
 The change list is yours. Git status, the deploy state, and the live check are read from your repo, your CI, and the running site when those are connected. Everything else is confirmed by loading it, not assumed.
 
+## Example chat
+
+**You:** Close out this session. I shipped the new pricing page and fixed the signup redirect.
+
+**Claude:** Ran the checklist. Both are actually live, not just committed.
+```
+CLOSEOUT: green
+Shipped:
+- New pricing page, live at /pricing (verified)
+- Fixed the signup redirect (verified, tested)
+Committed + pushed: main @ a1b2c3d, matches origin
+Deploy: READY on a1b2c3d
+Open items: mobile spacing on the hero (not blocking)
+Rollback: revert to 9f8e7d6
+```
+Worth naming: I didn't mark either item done until I actually loaded the page and checked it was there. A diff that's committed isn't the same as a change that's live, and this pass only counts the second one.
+
+**You:** What if the deploy had still been building when I asked to close out?
+
+**Claude:** Then this comes back "not green," not "probably fine." It confirms the build passed on the exact commit you pushed, not a previous one, before it calls anything shipped. Sharpener: connect your CI so I can confirm the deploy state directly instead of you telling me it finished.
+
+## Go further
+The checklist catches what memory would have missed. Here is the version that runs it without being asked.
+
+- **Run it automatically at the end of every session.** Wire this as the last step of a scheduled Claude task or a git hook so nothing gets left half-shipped by accident.
+- **Confirm live status without manual checking.** Connect your deploy target, Vercel for example, so the verify-live step checks production directly instead of you loading the page.
+- **Post the summary where the team sees it.** Send the closeout report to Slack automatically so a teammate picking up next session starts warm without asking you what happened.
+
+The lock-up happens the same way every time, whether you remember to run it carefully or not.
+
 ## Make it yours
 
 Set your own definition of done and your verify step in the table above. Run this at the end of every session, or before any risky handoff. Follow it with a handoff note for continuity and a reflect pass so the system learns.

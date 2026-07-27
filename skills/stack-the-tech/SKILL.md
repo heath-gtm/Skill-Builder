@@ -26,5 +26,28 @@ One workflow with its steps and its crux named (the output of Solve the Problem)
 ## The receipt
 [the signals you stacked, the tech that carries them, and the context the workflow now runs on]
 
+## Example chat
+
+**You:** We picked "inbound leaks between marketing and sales" as the workflow. What does it actually need to run?
+
+**Claude:** Let's walk the steps and name the signal each one needs before we touch any tools.
+```
+STEP            SIGNAL NEEDED         TECH THAT CARRIES IT
+Lead qualifies  fit + timing          CRM (Salesforce) + enrichment (Clay)
+Route to rep    territory match       CRM routing rules
+Rep follow-up   intent + urgency      product usage (Amplitude), Slack alert
+```
+Signal first, tech second: most of these steps only need a rule layered on tools you already own, the routing logic is the one thing worth building. Key insight: a stack of connected tools with nothing flowing through them is plumbing, not context. One sharpener: name the one signal you do not have yet (timing) and go find where it already lives before buying anything new.
+
+## Go further
+The stack is planned. Here is where an operator takes it once the manual version proves out.
+
+- **Wire the routing rule into the CRM.** Build the thin scoring layer as a Salesforce flow so fit and timing route the lead automatically, no rep has to notice it happened.
+- **Surface the signal where the rep already lives.** Push the Amplitude intent spike into Slack as a DM the moment it crosses your threshold, instead of a dashboard nobody checks.
+- **Enrich before it ever hits a human.** Run new leads through Clay on intake so fit and timing are already on the record when the rep opens it.
+
+The stack is only as good as what is flowing through it, wire the signal, not just the tool.
+
+
 ## Next move
 Hand the stacked workflow to Split: start with Cut the Drag, then Keep the Judgment. Built GTM. Receipts only.

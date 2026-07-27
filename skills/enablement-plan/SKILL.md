@@ -92,5 +92,31 @@ Early warnings:
 ## Where the numbers come from
 The 30/60/90 gates, the meeting counts, and the 2x pipeline target are illustrative, not benchmarks. They suited a mid-market outbound AE. A longer sales cycle or an enterprise seat needs longer gates and different milestones. Set the finish line and the counts to your own motion. The framework does not change. The ramp is yours.
 
+## Example chat
+Here is the skill running on a real new hire, start to finish.
+
+**You:** Build an onboarding plan for a new mid-market AE starting outbound, they start in two weeks.
+
+**Claude:** Built the 30/60/90 with a theme per gate and a cert bar before full load.
+```
+DAY 30 LEARN: pitch cert (live, rubric-graded), ICP quiz, CRM hygiene checklist
+DAY 60 DO WITH SUPPORT: 15 self-sourced meetings, discovery cert, first 3 opps
+DAY 90 OWN: demo + objection cert -> solo, pipeline at 2x ramp-quota
+```
+The catch: fully ramped is defined up front as full quota, self-sourcing, forecasting their own deals, so day 90 is not a vibe check, it is a checkable finish line.
+
+**You:** What happens if they miss the day-30 cert?
+
+**Claude:** Named the early-warning response: pitch cert not passed by day 30 triggers extra reps and a re-cert on day 37, not a quiet pass-through to day 60 unready. One sharpener: connect the CRM so milestone tracking, meetings booked, opps created, is measured against real activity instead of self-reported.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Track milestones against real activity.** Connect Salesforce so meeting counts, opp creation, and pipeline targets check themselves against the plan instead of a manual tally.
+- **Grade the cert bar with real calls.** Connect Gong or another call tool so discovery and demo certs are graded against actual recorded calls, not a role-play.
+- **Flag a slipping ramp automatically.** Schedule a Claude task to compare each new hire's activity to the milestone curve weekly and Slack the manager the moment someone falls behind.
+
+Catch the slow ramp in week three, while there is still time to fix it.
+
 ## Make it yours
 Fork it. Change the gates, the milestones, the cert bar. The point is not to ramp a rep against someone else's onboarding. It is to run yours, so a slow start is caught in week three and a strong rep is carrying load sooner. Built by an operator. Customize it, break it, make it better.

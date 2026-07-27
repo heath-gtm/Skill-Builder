@@ -83,5 +83,35 @@ Fix options:
 ## Where the numbers come from
 RAMP_MONTHS (3 to 9), ATTAINMENT (70 to 90 percent), and ATTRITION (10 to 20 percent) are defaults, not laws. They suited a mid-market SaaS team. If your onboarding is faster or your reps carry longer cycles, move them. The model logic does not change. The assumptions are yours.
 
+## Example chat
+**You:** Can we actually hit $13M this year with our current team plus planned hires?
+
+**Claude:** Ran the model. The honest answer is no, not without a change.
+```
+CAPACITY MODEL · full year · illustrative
+Ramped reps (10)       $9.0M       median attainment 80%
+H1 hires (4)           $2.2M       ramp-discounted, started Q1-Q2
+H2 hires (3)           $0.7M       mostly still ramping at year end
+Attrition backfill     -$0.6M      2 reps lost, re-ramping
+
+Modeled capacity       $11.3M
+Target                 $13.0M
+Gap                    -$1.7M      opens in Q3, ~2 ramped heads short
+```
+The number that matters isn't the $1.7M gap, it's that it opens in Q3. That's five months of runway to fix it before anyone discovers it in a missed board number.
+
+**You:** What are the actual options?
+
+**Claude:** Three, in order of how fast they close the gap: pull 2 H2 reqs into Q1 so they're ramped before Q3, reset the target to $11.3M and say so now, or hold the target and plan the shortfall story. One sharpener: connect your CRM's real historical productivity by rep, this run used the median attainment as a placeholder, your actual ramp curve might be faster or slower than 3 to 9 months.
+
+## Go further
+Running the model once tells you where the gap opens. Here's how to keep watching it as the year moves.
+
+- **Recompute monthly against actuals.** Connect Salesforce to a scheduled Claude task that reruns the model against real attainment and real hire start dates each month, so the gap forecast tightens instead of staying a January guess.
+- **Pull real start dates, not planned ones.** Connect your ATS or HRIS so req-to-ramped lead time reflects actual hiring speed, not the optimistic timeline in the plan.
+- **Flag the gap in the board update automatically.** Feed the modeled shortfall straight into your board-update skill so the risk section never has to be reconstructed from memory the week before the meeting.
+
+Catching the gap in month one beats explaining it in month nine.
+
 ## Make it yours
 Fork it. Change the ramp curve, the attainment, the hire schedule. The point is not to run someone else's capacity math. It is to model yours, with the ramp honest and the gap named early. Built by an operator. Customize it, break it, make it better.

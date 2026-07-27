@@ -99,5 +99,38 @@ BONUS
 ## Where the numbers come from
 The three-priority cap, the 07:00 fire time, and the review-first draft rule are defaults, not laws. They suited a daily seller-and-leader rhythm. If your day starts earlier or you want five priorities, change them. The logic does not change. The settings are yours.
 
+## Example chat
+Here is the skill running rep mode, start to finish.
+
+**You:** Run my morning brief. Here's my open deal list and today's calendar. [pastes CSV]
+
+**Claude:** Composed the reads and ranked into three.
+```
+TOP 3 PRIORITIES TODAY
+  1. Reply to the Acme contact, "interested" 2 days ago, cooling.
+  2. Prep the 2pm with Vortex, $67K, now at slip risk.
+  3. Unstick Blend Labs: day 30, no touch, missed milestone.
+```
+The real find: Vortex moved from healthy to slip risk since yesterday because the champion went quiet. That is the one the forecast call will ask about.
+
+**You:** Draft the follow-up to Acme so I can just review and send.
+
+**Claude:** Dropped it in your drafts folder, not sent.
+```
+To: Acme contact
+"Following up, saw you mentioned interest last week, want to grab 15 min
+this week to walk through it?"
+```
+It stays review-first, drafts never auto-send. One sharpener: connect your meeting tool so tomorrow's brief pulls the Vortex call transcript directly instead of me asking what happened.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Fire it every morning automatically.** Set FIRE_TIME in a scheduled Claude task so the brief lands in Slack at 7am without anyone asking.
+- **Pull straight from the CRM.** Connect Salesforce or HubSpot so hot leads and at-risk deals refresh from your real book instead of a pasted CSV.
+- **Give leaders the team version.** Run leader mode nightly ahead of 1:1s, pushed to a manager's DM with named coaching priorities per rep.
+
+Set it up once and the brief is just there every morning, already ranked.
+
 ## Make it yours
 Fork it. Change the modes, the sections, the delivery, the fire time. The point is not to run someone else's morning. It is to open yours with the next three moves already named. Built by an operator. Customize it, break it, make it better.

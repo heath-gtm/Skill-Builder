@@ -97,5 +97,31 @@ Override: none. The fit score and the composite agree.
 ## Where the numbers come from
 The weights (35/25/20/15/5) and the penalties are a starting point, not a law. They suited one B2B motion. If product usage matters more to you than hiring, shift the weight. The scoring logic does not change, the weights are yours.
 
+## Example chat
+Here is the skill running on a real account, start to finish.
+
+**You:** Is acme.com a real fit? Score it against our profile, and tell me if the vendor score is right.
+
+**Claude:** Composite lands at 87, strong fit, and it overrides your vendor tool.
+```
+Source breakdown:
+  Account fit score:   78/100  (approved)
+  Product-side signal: real usage detected
+  Enrichment:           805 employees, 14 hiring
+  Tech-stack:           3 tools you replace
+  Channel:              Outbound + Product (hybrid)
+```
+The override is the finding: your vendor score said 78 and called it borderline, but 14 open sales reqs plus a 3-tool displacement opportunity are the kind of signal a firmographic-only score can't see. That's the false negative this skill exists to catch. One sharpener: connect a product-analytics tool so the usage signal comes from real data instead of "detected," which right now is the softest part of the read.
+
+## Go further
+The verdict is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Score the whole book overnight.** Point a scheduled Claude task at Salesforce and your enrichment tool nightly, and write the composite and the override flag back to the account record.
+- **Catch only the disagreements.** Post to Slack just the accounts where the composite and the vendor score diverge by more than 20 points, so a human only looks at the interesting ones.
+- **Turn the strong fits into a list.** Feed every STRONG FIT verdict into Clay or a sequencer so the outbound list builds itself from the accounts that actually clear the bar.
+
+You built the override once, now it runs against every account, every night.
+
+
 ## Make it yours
 Fork it. Change the weights, the penalties, the sources. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

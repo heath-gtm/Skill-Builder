@@ -1,169 +1,164 @@
 ---
 name: deal-intelligence
-description: >-
-  Analyze active deals, deal risk, forecast quality, and deal-review readiness for Mixmax GTM. Two modes: (1) DEAL MANAGEMENT — forecast-category distribution, stuck/stalled deals, stage velocity, concentration risk, close-date accuracy, deal-level and rep-level summaries from the AE Forecast + Rep Summary tabs; (2) DEAL REVIEW PREP — synthesize Mixmax meeting transcripts and action items into a brief on Mixmax's PLAN Selling framework (Problems, Leverage Alignment, Address Decision Dynamics, Next Steps — NEVER MEDDIC), with PLAN-vs-stage gap detection, decision-maker/champion signals, and risk flags. Trigger on deals, deal risk, forecast categories, stuck deals, deal velocity, AE forecast, rep pipeline, deal concentration, close dates, deal stages, 'how are deals looking', 'deal review', 'forecast review', "what's closing", deal health, account brief, 'what do we know about [account]', the AE Forecast tab, or the Rep Summary Deals by Forecast Category section.
+description: Walk into any deal review knowing what is actually known about the deal. Two modes: a numbers read that scores forecast quality, deal risk, velocity, and close-date accuracy, and a conversation read that turns a deal's meeting history into a deal-review brief on your qualification framework, with a qualification-vs-stage gap check that catches sandbagging. Built for B2B sales teams, customizable to your CRM and your sales process. Trigger on "how are my deals looking", "deal review", "forecast review", "what's closing", "is this deal real", "prep me for the deal review", or any single-deal or forecast diagnostic.
 ---
 
 # Deal Intelligence
 
-The unified engine for active-deal analysis at Mixmax, consolidating the former
-`deal-management` (sheet-based forecast/risk analysis) and `deal-review-prep`
-(meeting-based deal-review briefs) into one skill with two modes.
+## What this does
+Reads a deal, or your whole forecast, and tells you what is actually known versus what is being assumed. It runs in two modes. The numbers read scores forecast quality, deal risk, stage velocity, and close-date accuracy, and flags the deals that are quietly slipping. The conversation read takes a deal's meeting history and builds a deal-review brief on your qualification framework, then checks whether the deal is qualified for the stage it claims. Together they answer one question: is this deal real, and what do we do next.
 
-| Mode | Question it answers | Source |
+## What you'll need
+You do not need to connect anything to get value today. Bring your deal, or a pasted list of open deals, and the skill runs now. Connect the tools below and it pulls them automatically and adds signals you cannot paste by hand.
+
+- Works today with: a pasted list or CSV of open deals, with stage, amount, close date, forecast category, last activity date, and the contacts on each. For the conversation read, paste the meeting notes or transcript for a single deal.
+- More powerful connected to a CRM: it reads all of the above automatically, across the whole pipeline, plus your qualification fields.
+- Sharper with a meeting or transcript tool: it pulls the deal's actual meeting history so the conversation read quotes what was said, not what was typed into a field.
+- Sharper with a product-analytics tool: adds usage momentum on trials and evaluations.
+
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
+
+- **Bring your data**: paste or upload your deal list, or paste one deal's meeting notes. The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the forecast and the meeting history automatically and adds signals you cannot paste by hand (live activity, product usage, transcript quotes). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
+
+## Customize this for yourself
+This was built for a B2B SaaS org running a staged pipeline. Set these to your stack:
+
+| Set this | What it is | Default / Example |
 |---|---|---|
-| **A · Deal Management** | How healthy is the forecast? Which deals are at risk? | AE Forecast + Rep Summary tabs (Gen 1 sheet) |
-| **B · Deal Review Prep** | What do we actually know about this deal, from the conversations? | Mixmax meeting transcripts, summaries, action items |
+| CRM | your CRM connector | Salesforce, HubSpot, Pipedrive |
+| STAGE field | the opportunity stage | Qualification through Closed |
+| FORECAST field | commit / best-case category | Commit, Best Case, Pipeline, Omit |
+| QUALIFICATION framework | your methodology and its fields | MEDDIC, MEDDPICC, BANT, or your own |
+| MEETING source | where the deal's conversations live | a meeting or transcript tool |
+| STUCK_DAYS | days in one stage that mean stuck | 30 (re-tune to your cycle) |
+| STALE_DAYS | no-meeting days that mean stale | 14 (re-tune) |
+| CONCENTRATION cutoffs | single-deal and single-rep limits | 30% of pipeline, 50% per rep |
 
-Mode A is the numbers read for forecast/pipeline reviews. Mode B is the
-conversation read for deal reviews. They compose: run A to find the risky deals,
-then B to understand why and what to do.
+Run any methodology you like. The skill checks "is this deal qualified for the stage it claims," so point it at your qualification fields, not anyone else's.
 
----
+## The method
 
-## Shared reference
+The two modes compose. Run the numbers read to find the risky deals, then the conversation read to understand why and what to do.
 
-### Deal stage definitions
-- **0 - Qualification** — initial discovery
-- **1 - Discovery** — deeper exploration of needs
-- **2 - Scoping/Demo(s)** — defining solution scope
-- **3 - Proposal/Negotiation** — formal proposal presented
-- **4 - Closed Won** — deal completed
-- **5 - Closed Lost** — deal lost
+### Mode A: the numbers read (is the forecast real?)
+Score forecast quality and deal risk from a deal list.
 
-### AE forecast categories
-- **Commit** — AE is confident this closes in the period
-- **Best Case** — high probability, not guaranteed
-- **Pipeline** — active but not yet committed
-- **Omit** — excluded from forecast (early stage or pushed)
-- **Out** — not expected to close
+**1. Forecast category distribution.** How much pipeline sits in Commit vs Best Case vs Pipeline vs Omit? Is Commit enough to cover the remaining target gap? Is Best Case realistic or inflated?
 
-### Salesforce links
-Every deal/account must link to Salesforce:
-`https://mixmax.lightning.force.com/lightning/r/Account/{AccountID}/view`
-Account IDs appear in the AE Forecast and Rep Summary tabs.
-
----
-
-## Mode A — Deal Management
-
-### Data sources
-- **Rev Ops AE Forecast - This Year tab** (GID: 1450719288) — individual deal records: Stage (0-5), Close Date, Amount, Forecast Category (Commit / Best Case / Pipeline / Omit / Out), Next Step, Account info with Account ID
-- **Rep Summary tab** (GID: 1461552329) — "Deals by Forecast Category" section: all active deals grouped by rep, Opportunity Owner, Stage, AE Forecast Category, Next Step, deal amounts, Account ID
-
-### Analysis framework
-
-**1. Forecast category distribution.** How much pipeline sits in Commit vs Best Case vs Pipeline vs Omit? Is Commit sufficient to cover the remaining target gap? Is Best Case realistic or inflated?
-
-**2. Stage velocity & stuck deals.**
-- Flag deals in Stage 0 (Qualification) or Stage 1 (Discovery) with close dates this month — at risk of not closing in time.
-- Flag deals with no Next Step documented — likely stalled.
-- Flag deals in the same stage for more than 30 days.
+**2. Stage velocity and stuck deals.**
+- Flag early-stage deals with close dates this period, at risk of not closing in time.
+- Flag deals with no next step documented, likely stalled.
+- Flag deals in the same stage past STUCK_DAYS.
 
 **3. Concentration risk.**
-- Any single deal > 30% of remaining pipeline → flag.
-- Any single rep holding > 50% of total pipeline → flag.
-- More than 60% of pipeline in early stages (0-1) → flag the stage mix.
+- Any single deal over 30% of remaining pipeline, flag it.
+- Any single rep holding over 50% of total pipeline, flag it.
+- More than 60% of pipeline in early stages, flag the stage mix.
 
-**4. Close date accuracy.**
-- Deals with close dates in the past that are still open → flag.
-- Deals with close dates moved more than once → flag.
+**4. Close-date accuracy.**
+- Close dates in the past on deals still open, flag them.
+- Close dates that have moved more than once, flag them.
 
-**5. Deal-level detail table (GTM Leadership report).** Columns: Account Name (Salesforce link), Opportunity Owner, Stage, Close Date, Amount, AE Forecast Category, Next Step, Risk flags (color-coded).
-- **Red:** Commit/Best Case stuck in early stages, past-due close dates, no next step
-- **Yellow:** Pipeline deals closing this month, large deals with no recent activity
-- **Green:** Commit deals in Stage 3+ with clear next steps
+**5. Deal-level detail table.** Account, owner, stage, close date, amount, forecast category, next step, and a risk flag. Red for commit or best-case stuck in early stages, past-due close dates, or no next step. Yellow for pipeline deals closing this period or large deals with no recent activity. Green for commit deals late-stage with a clear next step.
 
-**6. Rep-level pipeline summary.** Per rep: total pipeline value, pipeline by forecast category, number of deals, average deal size, largest deal (concentration check).
+**6. Rep-level summary.** Per rep: total pipeline, pipeline by forecast category, deal count, average deal size, and largest deal as a concentration check.
 
-### Output guidelines (Mode A)
-- Always lead with the forecast gap: how much Commit + Best Case covers vs remaining target.
-- Flag the top 3 riskiest deals with specific reasons.
-- **TL;DR report:** forecast category totals + number of flagged deals only (no individual deal names).
-- **GTM Leadership report:** full deal-level detail with Salesforce links and risk flags.
-- Currency `$X,XXX`, color coding as above.
+Lead with the forecast gap: how much Commit plus Best Case covers versus the remaining target. Then name the top three riskiest deals with a specific reason each.
 
----
+### Mode B: the conversation read (what do we actually know?)
+Turn a deal's meeting history into a brief a rep or manager can walk into a review with, fully prepared, with evidence from actual conversations.
 
-## Mode B — Deal Review Prep (PLAN Selling from Mixmax)
+Structure every brief against your qualification framework (MEDDIC, MEDDPICC, or your own). For each element of your framework, pull evidence directly from the conversations and bind it to the matching field. Where a field is empty in the conversation, that is a qualification gap, not a formatting choice. Call it out and name the field.
 
-You are a deal review analyst. Pull meeting intelligence from Mixmax and
-synthesize it into a structured brief a rep or manager can walk into a deal
-review with — fully prepared, with evidence from actual conversations.
+A general spine, adapt to your framework:
+- **Problems / pain.** What specific, ideally quantified problems has the buyer named (revenue, cost, time, headcount, tooling pain)? Quote it and the meeting it came from. If absent, flag it.
+- **Value alignment.** Has your value been tied explicitly to those problems, a business case or ROI the buyer agreed with? If you have demoed features but not aligned them to a problem, that is a gap.
+- **Decision dynamics.** Who decides, on what criteria, through what process (procurement, legal, security, pilot, committee), and by when? Is the named decision maker identified and engaged? An absent or unengaged decision maker past discovery is a significant risk.
+- **Champion.** Is someone internally advocating? Look for forward-looking questions ("how would we roll this out?") and volunteered intros. No champion is high risk.
+- **Next steps.** Are there mutually agreed next steps with real dates? "Sometime next quarter" is a gap.
 
-**Framework: PLAN Selling — Mixmax's own methodology. NEVER MEDDIC / MEDDPICC.**
-PLAN is the qualification spine and it maps 1:1 to the canonical Salesforce PLAN
-fields (see `sfdc-field-library`). Structure every brief against these four:
-
-| PLAN letter | What you're looking for in the conversations | SFDC field | Required by stage |
-|---|---|---|---|
-| **P — Problems** | The prospect's specific, ideally quantified problems/pains | `Problems_Account__c` | Discovery |
-| **L — Leverage Alignment** | How Mixmax's value is aligned to those problems — the business case / where we create leverage | `Leverage_Alignment__c` | Solution Validation |
-| **A — Address Decision Dynamics** | The decision process, criteria, stakeholders, approvals, timeline, and the named decision maker | `Address_Decision_Dynamics__c` (+ `Decision_Maker__c`) | Proposal |
-| **N — Next Steps** | Mutually agreed next steps with dates | `Next_Steps_Account__c` | Negotiation + Commit |
-
-### Critical: always use Mixmax for meeting data
-When retrieving meeting data, transcripts, summaries, or action items, ALWAYS use
-the Mixmax MCP server tools. Do NOT pull meeting content from Google Calendar,
-Notion, email, or any other source. A calendar event tells you a meeting
-happened — Mixmax tells you what was said, decided, and what needs to happen next.
-
-### Step 1 — Clarify scope
-- **Which account(s)?** Single deep-dive or a portfolio review across deals?
-- **What time range?** Default to last 30 days if unspecified.
-- **Who's the audience?** Their own deal review, or briefing a manager/VP?
-
-### Step 2 — Pull meeting data from Mixmax
-Retrieve all meetings for the account(s) and range — transcripts, summaries, action items, participant lists. With many meetings, prioritize the most recent but scan all for themes.
-
-### Step 3 — Structure the brief on PLAN
-For each PLAN element, pull evidence directly from the transcripts and bind it to the SFDC field. Where a field is empty in conversation, that is a qualification gap, not a formatting choice — call it out.
-
-- **P — Problems.** What specific, quantified problems has the prospect named (revenue, cost/time, headcount, tooling pain)? Quote it and the meeting. If absent → flag "No quantified Problems captured" (P gap).
-- **L — Leverage Alignment.** Has Mixmax's value been explicitly tied to those problems — a business case or ROI the prospect agreed with? If we've demoed features but not aligned them to a problem, that's an L gap.
-- **A — Address Decision Dynamics.** Who decides, on what criteria, through what process (procurement, legal, security, pilot, committee, board), by when — and is the **named decision maker** identified and engaged? An absent/unengaged decision maker past Discovery is a significant risk. Map to `Decision_Maker__c` / `Decision_Maker_Title__c`.
-- **N — Next Steps.** Are there mutually agreed next steps with real dates? "Sometime next quarter" is an N gap.
-- **Champion (CHAMP).** Mixmax also runs CHAMP — is someone internally advocating? Look for forward-looking questions ("how would we roll this out?"), volunteering intros. No champion = high risk.
-
-### Step 4 — PLAN-vs-stage gap check (the BS detector)
-Compare PLAN coverage to the deal's current stage and name any missing field — never just "PLAN incomplete":
+**Qualification-vs-stage gap check (the sandbagging catcher).** Compare framework coverage to the deal's current stage and name any missing field, never just "incomplete."
 
 ```
-Stage = 'Discovery'           and Problems_Account__c          empty → PLAN_GAP (P)
-Stage = 'Solution Validation' and Leverage_Alignment__c        empty → PLAN_GAP (L)
-Stage = 'Proposal'            and Address_Decision_Dynamics__c empty → PLAN_GAP (A)
-Stage = 'Negotiation'         and Next_Steps_Account__c        empty → PLAN_GAP (N)
-ForecastCategory = 'Commit'   and ANY of the 4 PLAN fields empty → COMMIT_RISK
+Stage claims Discovery      and the pain/problem field is empty      -> GAP (name it)
+Stage claims Validation     and the value-alignment field is empty   -> GAP (name it)
+Stage claims Proposal       and decision dynamics are unmapped       -> GAP (name it)
+Stage claims Negotiation    and next steps have no date              -> GAP (name it)
+Forecast = Commit           and ANY required field is empty          -> COMMIT_RISK
 ```
 
-### Step 5 — Surface deal-risk signals
-- PLAN gap for the current stage (name the field)
-- COMMIT_RISK (a Commit deal missing any PLAN field)
-- Decision maker not identified/engaged past Discovery
-- Stale deal (no meetings 2+ weeks, no clear next step)
-- Competitor mentioned (quote it + which meeting)
-- Vague or dateless Next Steps
-- Single-threaded (one contact; if they leave, the deal dies)
-- Action items overdue
+**Risk signals to surface.** Qualification gap for the current stage (name the field), a Commit deal missing any required field, a decision maker not identified or engaged past discovery, a stale deal (no meetings past STALE_DAYS with no clear next step), a competitor mentioned (quote it and the meeting), vague or dateless next steps, single-threading, and overdue action items.
 
-### Step 6 — Suggest next steps
-2-3 specific, prescriptive moves tied to the PLAN gaps, e.g.:
-- "Problems aren't quantified — book a discovery follow-up to attach a number to [pain]."
-- "No named decision maker — get [champion] to map the approval process and introduce the economic buyer."
-- "Prospect is evaluating [competitor] on [date] — prep a comparison on [their stated criteria]."
+**Next steps.** Close with two or three specific, prescriptive moves tied to the gaps. Example: "Problems are not quantified, book a follow-up to attach a number to the stated pain." "No named decision maker, get the champion to map the approval process and introduce the economic buyer."
 
-### Output format (Mode B)
-Clear headers per PLAN element. Use direct transcript quotes to keep the brief credible. Open with a 2-3 sentence executive summary: current state, biggest PLAN gap / risk, recommended next action.
+Open the brief with a two-to-three-sentence executive summary: current state, biggest gap or risk, recommended next action. Use direct quotes from the conversations to keep it credible.
 
-### Adapting for portfolio reviews
-When a manager wants a review across deals: a shorter summary per account (exec summary + top PLAN gap + next step), a portfolio-level view (healthy / at-risk / stalled), and patterns across the portfolio (common objections, competitive threats, recurring PLAN gaps that signal a coaching opportunity).
+For a portfolio review across deals, give a shorter summary per account (exec summary, top gap, next step), a portfolio view (healthy / at-risk / stalled), and the patterns across the set (common objections, recurring gaps that signal a coaching opportunity).
 
+## Quality gates
+- No stale or dead verdict without showing the activity or meeting dates that prove it.
+- Qualification gaps surface field by field, named, never "incomplete."
+- Forecast accuracy is trailing-quarter, never trailing-week. Small samples lie.
+- Every quoted claim in the conversation read is tied to the meeting it came from.
 
----
+## Output (example)
+```
+DEAL REVIEW · Northwind · Proposal / $112K · Commit
 
-## When NOT to use this skill
-- Top-of-funnel coverage / account prioritization → `pipeline-intelligence`
-- Monthly pipeline ICP-quality → `pipeline-intelligence` (Mode C)
-- Single-account strategic deep dive → `customer-strategy-deep-dive`
-- Closed-lost autopsy → `closed-lost-runbook`
-- Channel-level funnel-leak math → `strike-zone-analyst`
+Verdict: COMMIT_RISK. Committed for this period, but no named decision maker
+and next steps have no date. This is a slip waiting to happen.
+
+What we know (from the conversations):
+  Problems   Strong. VP named a quantified pain in the last call.
+  Value      Aligned. Buyer agreed the business case in the demo recap.
+  Decision   GAP. No economic buyer identified. Champion is a manager.
+  Champion   Present but junior. Asked "how would we roll this out?"
+  Next steps GAP. "Circle back next month." No date, no owner.
+
+Next moves:
+  1. Get the champion to map the approval process and introduce the buyer.
+  2. Set a dated next step before this deal stays in Commit.
+  3. Pull it from Commit until the decision maker is engaged.
+```
+
+## Where the numbers come from
+STUCK_DAYS (30), STALE_DAYS (14), and the concentration cutoffs (30% single deal, 50% single rep) are defaults, not laws. They suited a mid-market SaaS cycle. If your deals run longer, raise them. The logic does not change. The thresholds are yours.
+
+## Example chat
+Here is the skill running both modes on the same deal, start to finish.
+
+**You:** How's my forecast looking this week? Here's the export.
+
+**Claude:** Ran the numbers read first.
+```
+Forecast gap: Commit + Best Case covers 71% of the remaining target.
+Top 3 riskiest: Northwind ($112K, Commit, no named decision maker),
+Vertex ($67K, stuck 34 days), Halborn ($40K, close date already past).
+```
+Commit alone does not cover the gap, and your riskiest deal is sitting in Commit with a qualification field empty.
+
+**You:** Pull the conversation read on Northwind, I've got the meeting notes. [pastes notes]
+
+**Claude:** Mapped it to MEDDPICC.
+```
+Verdict: COMMIT_RISK. No named decision maker, next steps have no date.
+Problems EARNED, Value EARNED, Decision GAP, Champion present but junior.
+```
+The insight: this deal was scored Commit on activity volume, not qualification, and the gap that matters, the decision maker, has been open since discovery. One sharpener: connect the CRM's qualification fields so future reads pull the framework state directly instead of re-scoring from notes each time.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Run the numbers read every Monday automatically.** Schedule a Claude task against Salesforce to post the forecast-gap summary to the sales leader's channel before the pipeline review.
+- **Feed the conversation read from real calls.** Connect Gong or another transcript tool so the qualification quotes come from the actual meeting, not a typed-up recap.
+- **Turn commit-risk flags into action.** Have Slack notify the deal owner the moment a Commit deal loses a required qualification field, tied straight to the CRM field change.
+
+Know what is real before the review, not during it.
+
+## Make it yours
+Fork it. Change the modes, the thresholds, the framework, the fields. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

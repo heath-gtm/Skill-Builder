@@ -1,149 +1,100 @@
 ---
 name: enrichment-analyst
-description: Your data-fill agent. Connect FullEnrich (contact-level) or Common Room (company-level) — or both for full waterfall — fills gaps on any list. Given name + company, find email + phone + LinkedIn + title. Given a domain, find headcount + funding + technographic profile + hiring intent. Use when a rep builds a target list, an SDR needs phone numbers, a CSM needs decision-maker identity, or RevOps hygienizes CRM data. Trigger on "enrich these contacts with emails", "find LinkedIn URLs for {list}", "get phone numbers for {contacts}", "who are the decision makers at {company}?", "complete this prospect list", "find personal emails for {list}", "enrich this CSV", "get the technographic stack for {company}", "fill in missing data on {list}", or any data-completion / list-enrichment / contact-lookup question. Also fire inside any workflow needing richer contact data than CRM has.
+description: Your data-fill agent. Connect a contact-enrichment tool (contact-level) or a company-enrichment tool (company-level), or both for the full waterfall, to fill gaps on any list. Given a name plus a company, find email, phone, LinkedIn, and title. Given a domain, find headcount, funding, technographic profile, and hiring intent. Trigger on "enrich these contacts with emails", "find LinkedIn URLs for {list}", "get phone numbers for {contacts}", "who are the decision makers at {company}", "complete this prospect list", "enrich this CSV", "get the technographic stack for {company}", "fill in missing data on {list}", or any data-completion, list-enrichment, or contact-lookup question.
 ---
 
-# Enrichment Analyst — your data-fill agent
+# Enrichment Analyst
 
-**Required connector:** FullEnrich OR Common Room. Either alone works at reduced quality; both together unlock the full waterfall pattern.
+## What this does
+This is your data-fill agent. Give it a name and a company, and it finds the email, phone, LinkedIn URL, and title. Give it a domain, and it returns headcount, funding, a technographic profile, and hiring intent. It works one contact at a time or across a whole list, tries the cheapest provider first, and tags every value it returns with how confident it is. It never invents a value it could not find.
 
-**Optional connectors:** Octave (for `find_person` + `qualify_person` + LinkedIn URL identity validation) · Apollo / Lusha / ZoomInfo (additional providers in the waterfall) · LinkedIn scraper (for profile data beyond URL).
+## What you'll need
+You do not need to connect anything to start. Bring your list and the skill runs today. Connect the tools below and it fills the gaps automatically at higher match rates than any single source.
 
-## What this analyst answers
+- Works today with: your list of names and companies, or domains. Paste or upload a CSV. The skill structures it, flags what is missing, and tells you exactly which source would fill each field.
+- More powerful connected to a contact-enrichment tool: emails, phones, LinkedIn URLs, and titles, run as a waterfall.
+- More powerful connected to a company-enrichment tool: headcount, funding, hiring signals, and technographic profile. Either source alone works at reduced coverage; both run the full waterfall.
+- Sharper with a people-search tool (LinkedIn identity validation) and a CRM (read records in, write enriched values back).
 
-In plain English, the Enrichment Analyst answers questions like:
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
 
-- "Enrich these 50 contacts with email + phone" → Per-row enriched data with source-confidence tags
-- "Find LinkedIn URLs for {list of names + companies}" → URL resolution with strict identity validation (no false positives)
-- "Get the technographic stack for {company}" → Software-in-use profile (CRM, sales tools, conversational intelligence, data enrichment vendor)
-- "Who are the decision makers at acme.com?" → Buying committee discovery — typical 5-7 senior roles per account with confidence-tagged identifiers
-- "Complete this prospect list — half of them are missing emails" → Bulk waterfall with cost-per-credit awareness (cheapest provider first)
-- "Find personal emails for these {list}" → Personal-email enrichment (work emails the system already has)
-- "Get the CFO at {company}" → Single-role + company lookup
-- "Fill in the missing phone numbers for these enrolled contacts" → Mid-sequence enrichment so callable contacts get a call task
+- **Bring your data**: paste or upload what you have (a CSV or an export). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
 
-## What it owns internally
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
+## Customize this for yourself
+| Set this | What it is | Default / Example |
+| --- | --- | --- |
+| Contact-enrichment tool | Resolves email, phone, LinkedIn, title from a name plus company | Any contact-waterfall provider |
+| Company-enrichment tool | Returns headcount, funding, hiring intent, tech profile from a domain | Any company-data provider |
+| Identity-validation tool | Cross-checks a returned LinkedIn URL against the input name plus company | Optional people-search tool |
+| CRM | System of record you read from and write enriched fields back to | Optional |
+| Waterfall order | The sequence providers are tried in for the same field | Cheapest provider first |
+| Confidence tags | The labels attached to every returned value | verified_2_source, verified_1_source, inferred, not_found |
+| Minimum confidence | The lowest confidence you accept for a given use | verified_1 for dialing, inferred for research |
+| Maximum spend | A per-run cost cap that stops the waterfall when reached | Set a dollar ceiling per run |
 
-The Enrichment Analyst is the product layer over these atomic skills:
+To swap a provider, point the contact or company role at a different tool. The method does not change. Only the connector behind the role changes.
 
-- **D5 — Common Room Enrichment** — company-level signals (CR_Number_of_Employees, CR_of_Sales_Team, CR_Sales_Team_Hiring, technographic profile)
-- **D6 — FullEnrich Contact Waterfall** — 11-provider waterfall for email + mobile + LinkedIn + title with `verified_2_source` / `verified_1_source` / `inferred` / `not_found` confidence per field
-- **D7 — Octave Research** — `find_person`, `qualify_person`, LinkedIn URL identity validation (the strict-validation pattern that prevents false positives)
-- The LinkedIn URL lookup pattern from the `deepline:linkedin-url-lookup` skill (when DeepLine is connected)
+## The method
+The core pattern is a cost-aware waterfall. For any field, try providers in order, cheapest first, and stop the moment you get a confident answer.
+1. Read the input. For each row you need a name plus a company (contact mode) or a domain (company mode). Note fields already present so they are not re-bought.
+2. Run the contact waterfall. For email, phone, LinkedIn, and title, try providers in order. Take the first confident hit. Tag each field with its confidence.
+3. Run the company pass. For a domain, return headcount, funding, hiring signals, and the technographic profile.
+4. Discover the buying committee. For a "who are the decision makers" request, return the senior roles per account, each with confidence-tagged identifiers.
+5. Validate every LinkedIn URL. Cross-check the name and company on the profile against the input. If they do not match, do not return the URL.
+6. Track spend. Log credits per provider. If the run hits the cap, stop and return partial results with a note.
+7. Return confidence-tagged rows plus an audit of providers used, the confidence breakdown, and total cost.
 
-## The quality gates this analyst guarantees
+## Quality gates
+- Confidence-tagged outputs. Every enriched field comes back with its source confidence, never a bare value.
+- Identity validation on LinkedIn URLs before they ship. This blocks returning the wrong person.
+- Cost-aware waterfall. The cheapest provider is tried first. Per-provider credit use is logged.
+- Honest "not found." If a value cannot be found, return null plus not_found rather than guessing.
 
-**Confidence-tagged outputs.** Every enriched field is returned with its source confidence — never bare values. Reps can filter by confidence in their workflow ("only use verified_2_source for personal emails I'm about to dial").
-
-**Identity validation on LinkedIn URLs.** When the analyst returns a LinkedIn URL for a name + company, it has cross-checked the name + company on the profile against the input — preventing the classic false positive of returning a different person's profile with a similar name. This is the strict-validation rule from the `linkedin-url-lookup` skill in the DeepLine plugin.
-
-**Cost-aware waterfall.** When multiple providers can answer the same question, the analyst tries cheapest-first by default. Credit consumption per provider is logged so you can audit + optimize spend over time.
-
-**Honest "not found"** — never fabricates. If a contact's email cannot be found across the entire waterfall, the analyst returns `null` + `not_found` rather than guessing.
-
-## Output format example
-
-For "Enrich these 5 prospects":
-
+## Output (example)
 ```
-✅ Enrichment Complete · 5 contacts processed
+Enrichment Complete  ·  5 contacts processed
 
-┌────────────────┬──────────────────────────────┬────────────────┬──────────────────────────┬─────────────────────┐
-│ Name           │ Email                        │ Phone          │ LinkedIn                 │ Title               │
-├────────────────┼──────────────────────────────┼────────────────┼──────────────────────────┼─────────────────────┤
-│ Sarah Chen     │ sarah@acme.co (✓ verified_2) │ +1503-555-1234 │ linkedin.com/in/sarahc   │ VP Sales (✓ verif)  │
-│ Mike Rodriguez │ mike@acme.co (✓ verified_1)  │ — (not_found)  │ linkedin.com/in/miker    │ CRO (inferred)      │
-│ Jim Coulon     │ jcoulon@acme.co (✓ verified_2)│ +1503-555-5678 │ linkedin.com/in/jimcoulon│ CFO (✓ verif)       │
-│ Petra Lovric   │ petra@vortex.io (✓ verified_2)│ +44-20-7946-1111│ linkedin.com/in/petralovic│ CS Manager (✓ verif)│
-│ Linda Park     │ — (not_found)                │ — (not_found)  │ linkedin.com/in/lindap   │ — (not_found)       │
-└────────────────┴──────────────────────────────┴────────────────┴──────────────────────────┴─────────────────────┘
+Name       | Email                     | Phone        | Title
+-----------|---------------------------|--------------|-------------------
+Contact A  | a@example.co (verified_2) | +1-555-0101  | VP Sales (verified)
+Contact B  | b@example.co (verified_1) | not_found    | CRO (inferred)
+Contact C  | c@example.co (verified_2) | +1-555-0102  | CFO (verified)
+Contact E  | not_found                 | not_found    | not_found
 
 Audit:
-  Provider credits used: FullEnrich × 4, Octave × 1
   Confidence breakdown: 8 verified_2, 4 verified_1, 1 inferred, 3 not_found
-  Total cost: $1.12 (4× FullEnrich @ $0.25 + 1× Octave @ $0.12)
-
-Recommended next action: Pass the 12 enriched contacts to Comms Analyst for SFDC write-back (lock-in #13). Skip Linda Park — manually source her LinkedIn before reaching out.
+  Total cost: within run cap
+  Skip Contact E: source the LinkedIn URL manually before reaching out.
 ```
 
-## Used by (workflows that compose this analyst)
+## Where the numbers come from
+By default the waterfall tries providers cheapest-first and stops at the first confident hit, so the same field is never paid for twice. Confidence tags come from the providers: two independent sources is verified_2, one is verified_1, a pattern-derived guess is inferred, and a value no provider could confirm is not_found. Cost figures are the per-provider credit prices of the tools you connect. To change the economics, reorder the waterfall, swap in a cheaper provider, or lower the maximum spend.
 
-- **W1 Per-Account Brief Pipeline** — every brief's buying committee is enriched
-- **W6 Customer Interview Prioritizer** — used to find decision makers if PLAN Decision_Maker field is empty
-- **W7 Reference Customer Finder** — used to identify the right contact at each reference candidate
-- **W11 Lost-Deal Reopener** — used to find new champions if old champion has left the company
-- **W12 Champion Migration Tracker** — used to track champions' new companies via LinkedIn lookup
-- Used by Make.com scenarios as a standalone enrichment node
+## Example chat
+**You:** Enrich this list of 20 target contacts, I only have name and company.
 
-## When NOT to use this analyst
-
-- For pure CRUD against your CRM (use Salesforce Analyst or the Salesforce MCP)
-- For scoring whether a contact is worth enriching (use ICP Analyst first to triage, then enrich the qualifying subset)
-- For mass list builds from scratch (use a TAM build tool — Apollo, ZoomInfo, etc. directly — the Enrichment Analyst optimizes per-contact, not whole-population)
-
-## Salesforce field reference
-
-This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
-the single source of truth for every field name, definition, and canonical
-interpretation. Specifically, this analyst reads:
-
-- Account.Website (for company-level enrichment)
-- Contact.Email + Name + Account.Name (for contact-level enrichment join)
-- Writes back: Contact.MobilePhone, Contact.LinkedIn (via Comms Analyst — lock-in #13)
-
-If a query needs a field not in the library, FAIL LOUD and request a library
-amendment via Evolution Agent — never invent ad-hoc field names or definitions.
-Apples-to-apples consistency across every analyst output is the goal.
-
-## Inheritance from LOCKED_DESIGN.md
-
-This analyst inherits lock-in #13 (SFDC Contact write-back contract — FullEnrich beats stale CRM for `MobilePhone`, never overwrites `Email` unless explicitly told to) + the FullEnrich waterfall rules from `spec-inproduct.md` + the LinkedIn identity-validation rules from the `linkedin-url-lookup` skill.
-
-## Make.com / API packaging
-
-**Input schema:**
-```json
-{
-  "mode": "contact_enrich | company_enrich | role_lookup | list_complete",
-  "contacts": [{"name": "string", "company": "string", "existing_email": "string | null"}],
-  "company": "string (when mode=company_enrich or role_lookup)",
-  "role": "string (when mode=role_lookup, e.g. 'CFO' or 'VP Sales')",
-  "fields_required": ["email", "phone", "linkedin", "title"],
-  "max_cost_usd": 5.00,
-  "min_confidence": "verified_1 | inferred"
-}
+**Claude:** Ran the waterfall. Here is where it landed.
 ```
-
-**Output schema:**
-```json
-{
-  "enriched": [
-    {
-      "name": "string",
-      "company": "string",
-      "email": {"value": "string | null", "confidence": "verified_2 | verified_1 | inferred | not_found"},
-      "phone": {...},
-      "linkedin": {...},
-      "title": {...}
-    }
-  ],
-  "audit": {
-    "providers_used": {"FullEnrich": 4, "Octave": 1},
-    "total_cost_usd": 1.12,
-    "confidence_breakdown": {"verified_2": 8, "verified_1": 4, "inferred": 1, "not_found": 3}
-  }
-}
+Field       Verified_2   Verified_1   Inferred   Not_found
+Email       9            6            3          2
+Phone       4            5            2          9
+LinkedIn    14           4            0          2
 ```
+Two LinkedIn URLs failed identity validation (wrong company on the profile), so I dropped them instead of returning a guess. Total spend stayed under half the run cap.
+One sharpener: connect a CRM so I can write these fields back instead of handing you a CSV to re-upload.
 
-**Failure modes:**
-- No enrichment provider connected: "Connect FullEnrich or Common Room to enable enrichment."
-- Cost cap exceeded mid-run: returns partial results + flag "Cost cap reached at $5.00 — 23 of 50 contacts enriched. Increase max_cost_usd or retry remainder."
-- All providers return not_found: returns `null` for the field + confidence `not_found` rather than guessing.
+## Go further
+The manual run proves the waterfall works. Here is where it goes once you trust it.
 
-## Shippable as
+- **Enrich on intake, not in batches.** Wire a scheduled Claude task to run the waterfall the moment a new lead lands in Salesforce or HubSpot, so reps never work a blank record.
+- **Build the waterfall natively.** Chain the same cheapest-first provider order inside Clay, so the enrichment runs where your list already lives.
+- **Alert on the misses.** Have a scheduled task post the not_found rows to Slack each morning so someone can source them by hand before they go stale.
 
-**Standalone connector-gated SKU:** customer connects FullEnrich → contact-level enrichment. Connects Common Room → company-level enrichment. Connects both → full waterfall.
+The list stops being a spreadsheet and starts being a living record.
 
-**Make.com sub-agent module:** discrete node, input is contacts array, output is enriched array. Chains naturally with ICP Analyst (qualify list → enrich qualifying) and Comms Analyst (enrich → SFDC writeback).
-
-**Standalone API endpoint:** could be packaged as a per-enriched-contact pricing model — `$X.XX per verified_2 email, $Y.YY per verified phone` — much cleaner unit economics than monthly seat-based pricing.
+## Make it yours
+Set your two connector roles, your waterfall order, and your confidence floor, then run a small list to confirm the costs and tags read the way you expect. Built by an operator. Customize it, break it, make it better.

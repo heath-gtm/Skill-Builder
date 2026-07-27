@@ -81,5 +81,30 @@ Illustrative figures. Your run reports your real touches.
 ## Where the numbers come from
 The lookback window (90 days) and the linear split for multi-touch are defaults, not laws. They suited a mid-market SaaS journey. If your cycle is longer or your touches sparser, widen the window or simplify the model. The model choice and credit basis are yours, and they decide what the numbers mean.
 
+## Example chat
+**You:** Which channels are actually driving our pipeline? Here's our touch export for the last two quarters. [pastes CSV]
+
+**Claude:** Built it under last touch, credited on closed-won revenue, since that's the question you asked (what closes deals, not what starts them).
+```
+Channel        Credited revenue   Share   Note
+Outbound       $1.20M             38%     closes deals, first-touch share is lower
+Events         $0.55M             17%     under-credited here, strong on first touch
+Referral       $0.48M             15%
+```
+Blind spot to know before you present this: under first touch, Events jumps to 26%. That's not a contradiction, it means Events starts deals that outbound closes, and last touch alone would make you cut a channel that's actually doing real top-of-funnel work.
+
+**You:** So which model do I actually report to the board?
+
+**Claude:** Report both lines, not one. "Last touch says outbound closes 38%, first touch says events starts 26% of that same pipeline" is a more honest sentence than picking the flattering model. One sharpener: connect your CRM so the touches come from campaign membership directly, this run leaned on your CSV so anything you didn't export (like a webinar touch nobody logged) is invisible to both models.
+
+## Go further
+Running one model by hand shows the shape. Here's the version that keeps both reads current.
+
+- **Automate the dual-model refresh.** Connect Salesforce or HubSpot campaign data to a scheduled Claude task that recomputes first touch and last touch every week and flags any channel where the two models disagree by more than 10 points.
+- **Stitch the full journey.** Pull web, ad, and CRM touches into Snowflake or your warehouse so multi-touch stops being a proxy and becomes a real stitched journey.
+- **Push it to a dashboard everyone reads the same way.** Send the channel-contribution read into your BI tool so marketing and sales stop arguing over two different spreadsheets.
+
+The model choice stays a decision you make. The refresh doesn't have to be.
+
 ## Make it yours
 Fork it. Change the model, the channel taxonomy, the credit basis, the window. The point is not to run someone else's attribution. It is to run yours, with the blind spots named, so the channel read is honest instead of flattering. Built by an operator. Customize it, break it, make it better.

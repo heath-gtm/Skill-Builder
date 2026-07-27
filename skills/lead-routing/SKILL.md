@@ -86,5 +86,31 @@ Illustrative structure. Your run reflects your real team and rules.
 ## Where the numbers come from
 The SLA timers (5 minutes hot, 1 business day standard) and the size cutoffs are defaults, not laws. They suited a mid-market SaaS inbound motion. If your buyers move slower or your segments split elsewhere, change them. The precedence logic holds. The thresholds are yours.
 
+## Example chat
+Here is the skill running on a real team, start to finish.
+
+**You:** Leads are falling through. Design the routing model for our 3-segment team.
+
+**Claude:** Here's the precedence, SLA, and fallback spec.
+```
+Precedence:
+  1. Existing account owner -> that owner (skip all below)
+  2. Enterprise -> Ent pool, round-robin, weighted by ramp
+  3. No match / missing fields -> holding queue (owner: RevOps lead)
+
+SLA: Hot inbound 5 min first touch, breach -> notify rep + manager
+```
+The catch worth naming: rule 5, the fallback, is the line that actually stops leads from disappearing. Most routing models define the happy path and leave "no match" undefined, which is exactly where leads go quiet. Every path here terminates at a named human. One sharpener: connect your CRM so "existing account owner" checks live ownership instead of the sample list you pasted.
+
+## Go further
+The spec is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Build it, don't just spec it.** Hand the ordered rule list to whoever configures Salesforce or HubSpot routing (native rules or a tool like LeanData), so the spec becomes the live config, not a doc that sits next to it.
+- **Watch the SLA clock in real time.** Wire a scheduled Claude task to check first-touch time against the timer and post a breach alert to Slack the moment a lead crosses it.
+- **Audit the fallback queue weekly.** Pull everything that landed in the holding queue from the CRM and report why (missing field, no territory match), so the enrichment gaps causing fallbacks actually get fixed.
+
+You built the model once, now the leaks get caught as they happen.
+
+
 ## Make it yours
 Fork it. Change the routing model, the pools, the timers, the fallbacks. The point is not to run someone else's routing. It is to run yours, written clearly enough that it gets built and no lead falls through. Built by an operator. Customize it, break it, make it better.

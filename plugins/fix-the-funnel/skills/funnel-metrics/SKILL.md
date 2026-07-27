@@ -82,5 +82,27 @@ Illustrative figures. Your run reports your real numbers.
 ## Where the numbers come from
 The cohort window, the trailing win-rate window, and the median-over-mean choice are defaults, not laws. They suited a mid-market SaaS cycle. If your deals run longer or your volume is thinner, widen the windows. The definitions are the point, and they are yours to set.
 
+## Example chat
+**You:** Where's the leak in our funnel? Here's our stage export for the quarter.
+
+**Claude:** Ran the full funnel with the denominators pinned.
+```
+Transition            Conversion   Median days
+Lead -> Qualified     44%          9
+Demo -> Proposal      52%          14   <- biggest leak
+Proposal -> Won       61%          11
+```
+Half of demoed deals never make it to a proposal. That's the transition worth fixing, not the stage with the lowest raw count. Win rate over the trailing 2 quarters is 34%, no-decisions counted separately so they don't quietly inflate it.
+One sharpener: connect your CRM so time-in-stage uses real stage-entry timestamps instead of the two stages I had to infer from close date.
+
+## Go further
+The read works from a pasted export. Here is where the leak gets caught while it's still small.
+
+- **Watch the leak in real time.** A scheduled Claude task rebuilds this funnel weekly from Salesforce and posts to Slack the moment the Demo-to-Proposal rate drops below its trailing average.
+- **Cut it by segment automatically.** Connect a BI tool so the same pinned definitions run per segment, source, and owner without rebuilding the query each time.
+- **Turn the leak into a fix.** Feed the worst transition into a coaching or deal-review skill so reps get a specific drill on the stage that's actually bleeding deals.
+
+Once the definitions are pinned, the leak stops being an argument and starts being a fix.
+
 ## Make it yours
 Fork it. Change the stages, the win definition, the denominators, the segments you cut by. The point is not to run someone else's funnel. It is to run yours with the definitions pinned, so the number survives the meeting. Built by an operator. Customize it, break it, make it better.

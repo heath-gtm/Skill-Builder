@@ -88,5 +88,39 @@ Deck outline: 9 slides. Value story leads, ask on slide 8, next steps close.
 ## Where the numbers come from
 The adoption counts, the time-saved figures, and any percentage come from the data you paste or the tools you connect. Nothing in the example above is a real customer number; it is illustrative. When the skill cannot see a number, it marks it an estimate and tells you which input would make it real.
 
+## Example chat
+
+**You:** Build the QBR for this account. Renewal's in 74 days. They wanted faster onboarding, standardized outreach, and pipeline reporting. Onboarding's about 30% faster, outreach is live on one team, reporting never started.
+
+**Claude:** Built it. The reporting goal is the thing you need to name before they do.
+```
+QBR · sample account · renewal in 74 days
+GOAL (stated)            RESULT              ADOPTION
+Cut onboarding time      ~30% faster (est)   6/9 seats weekly
+Standardize outreach     Live, 1 team        1 of 3 teams
+Report on pipeline       Not started         0 seats
+
+Open risks:
+  1. Champion quiet 26 days. Single-threaded.
+  2. Reporting goal untouched; renewal talks to reference it.
+
+Expansion ask:
+  One team proved the outreach win. The other two teams are not on it yet.
+```
+I put the reporting miss in the risks section instead of leaving it out. A QBR with zero risks reads as a QBR that stopped looking, and the buyer will bring it up if you don't.
+
+**You:** Should the expansion ask lead with the reporting gap or the outreach win?
+
+**Claude:** The outreach win, it's proven value they already believe. Leading with the gap turns the ask into an apology. Sharpener: connect your product-analytics tool and I'll pull the actual weekly-active count instead of the "6/9 seats" estimate, so the adoption story is exact, not rounded.
+
+## Go further
+The manual read earns the room. Here is the version that keeps earning it every quarter.
+
+- **Auto-build the deck a week before every renewal.** Point a scheduled Claude task at Salesforce renewal dates so the outline is ready before the CSM has to ask for it.
+- **Pull adoption live, not from memory.** Connect Amplitude so the adoption-vs-goals table updates itself instead of a CSM estimating "about 30% faster."
+- **Push the risk list to the account owner automatically.** Send the open-risks section to Slack the moment it's built, so the exec sponsor sees it before the call, not during it.
+
+The QBR argues itself before you ever open the deck.
+
 ## Make it yours
 Fork it. Change the sections, the value metrics, the order of the deck. The point is not to run someone else's business review. It is to run yours, faster, and walk in with the renewal already half-closed. Built by an operator. Customize it, break it, make it better.

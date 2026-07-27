@@ -1,112 +1,141 @@
 ---
 name: prospecting-analyst
-description: Your lead-level analyst. Connect Salesforce + Mixmax — turns any "which leads should I work?" question into a lead-by-lead work plan: per-lead status (never-touched / engaged-not-replied / gone-cold / hot), days-dark per lead, last-touch quality, re-engagement candidate ranking, recommended next action per lead. Different from Pipeline-Creation (account-level coverage) — this is lead-by-lead work assignment. SDR-facing. Trigger on "which leads should I work?", "who haven't I touched?", "show me cold leads", "hot leads to follow up on", "who's gone dark?", "re-engagement candidates", "lead status check", "next action per lead", "who replied but I didn't follow up?", or any lead-level work-assignment question. Also fire when an SDR opens Monday morning unsure what to work.
+description: Turn "which leads should I work?" into a lead-by-lead work plan. Per-lead status (never-touched, engaged-not-replied, gone-cold, hot), days-dark per lead, last-touch quality, a re-engagement ranker, and a recommended next action for every lead. Built for SDRs and full-cycle reps, customizable to your CRM and your outreach tool. Trigger on "which leads should I work?", "who haven't I touched?", "show me cold leads", "hot leads to follow up on", "who's gone dark?", "re-engagement candidates", or any lead-level work-assignment question.
 ---
 
-# Prospecting Analyst — your lead-level companion
+# Prospecting Analyst
 
-**Required:** Salesforce + Mixmax. **Optional:** Octave (Aero score per lead), Common Room (signal overlay).
+## What this does
+Reads your leads and hands you a ranked work plan for the day. It sorts every lead into a clear status, hot, cold, never-touched, or replied-but-dropped, tells you how many days each one has been dark, and names the next move for each. The point is to open your list and know exactly what to work first, not to guess.
 
-## What this analyst answers
+## What you'll need
+You do not need to connect anything to get value today. Bring your leads and the skill runs now. Connect the tools below and it pulls them automatically and adds signals you cannot paste by hand.
 
-- "Which leads should I work right now?" — prioritized lead-by-lead work plan
-- "Who haven't I touched?" — never-touched leads ranked by ICP score
-- "Show me cold leads" — engaged historically, gone dark, re-engagement candidates
-- "Hot leads to follow up on" — replied / clicked / opened in last 7 days
-- "Who replied but I didn't follow up?" — the most expensive miss surface
-- "Next action per lead" — specific recommended motion for each lead
+- Works today with: a list of your leads, with name, company, last activity date, and any engagement you know about (opens, clicks, replies). Paste it or upload a CSV.
+- More powerful connected to a CRM: it reads status and last-touch automatically across your whole book.
+- Sharper with an email or sequencing tool: it sees opens, clicks, replies, and enrollment, so hot-vs-cold is real, not a guess.
+- Sharper with an account fit score: it ranks never-touched leads by fit instead of alphabetically.
 
-## What it owns internally
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a signal it cannot see. A gap is a prompt, not a guess.
 
-- **Per-lead status classifier**: never-touched / engaged-not-replied / gone-cold / hot
-- **Days-dark per lead** + last-touch quality scoring (email open + click + reply weights)
-- **Re-engagement ranker**: cold leads scored by ICP × time-since-last-touch × prior-engagement-depth
-- **Hot lead surfacer**: replies in last 7d + clicks in last 14d + meeting-asks in last 30d
-- **Next-action recommender**: per-lead recommended motion (cold sequence / reply / direct outreach / book meeting)
+- **Bring your data**: paste or upload your lead list. The skill runs the full analysis today on your real leads. No connection required.
+- **Connect your tools**: the same skill pulls status, last-touch, and engagement automatically, so hot-vs-cold reflects reality across both your CRM and your outreach tool. Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
+
+## Customize this for yourself
+This was built for a rep working a lead list against a CRM and an outreach tool. Set these to your stack:
+
+| Set this | What it is | Default / Example |
+|---|---|---|
+| CRM | your CRM connector | Salesforce, HubSpot, Pipedrive |
+| OUTREACH tool | where opens, clicks, replies live | your email or sequencing tool |
+| STATUS field | lead or contact status | Lead.Status, a custom stage |
+| ACTIVITY field | where last-touch lives | LastActivityDate, task and event dates |
+| FIT score | how you rank a fresh lead | your account fit score, or blank |
+| HOT_DAYS | recent-reply window that means work now | 7 (re-tune) |
+| COLD_DAYS | no-touch days that mean gone cold | 30 (re-tune) |
+
+Run any status model you like. The skill classifies "where is this lead in my motion," so point it at your fields, not anyone else's.
+
+## The method
+
+### Per-lead status (4 states)
+Every lead gets exactly one: HOT, ENGAGED, COLD, NEVER_TOUCHED.
+- HOT: replied, clicked, or asked for a meeting inside HOT_DAYS. Work today.
+- ENGAGED: in an active sequence or touched recently, but no reply yet.
+- COLD: engaged historically, now dark past COLD_DAYS. A re-engagement candidate.
+- NEVER_TOUCHED: no outreach yet. Start fresh, ranked by fit.
+
+### Two-source status, never one
+A lead that replied in your outreach tool but shows a stale last-touch in the CRM is HOT, not COLD. Status reads both sources and takes the freshest signal. If only one source is connected, it says so and works from what it has.
+
+### Re-engagement ranker
+Cold leads are scored by fit, time since last touch, and how deeply they engaged before going dark. A lead who replied warmly and then went quiet outranks one who only ever opened an email.
+
+### Re-engagement candidates name the trigger
+Not "follow up with this lead." Instead, "replied positively earlier this quarter, no contact since, a recent role change or funding round is a fresh reason to reopen." The trigger is the reason to reach out now.
+
+### Next-action recommender
+Every lead carries a specific motion: reply now, book the meeting, run a re-engage touch, or start a fresh sequence. Hot leads decay, so the list sorts by urgency, a reply from six days ago is more urgent than one from two days ago.
 
 ## Quality gates
+- No HOT or COLD call from a single source when two are connected. The freshest signal wins.
+- Re-engagement candidates name the trigger, never just "follow up."
+- Hot leads are sorted by decay, oldest reply first, because reply rates fall every day you wait.
+- The most expensive miss, a reply you never followed up, is surfaced first.
 
-**Status classification uses Mixmax + SFDC, never one source.** A lead that replied in Mixmax but has stale SFDC last-touch is HOT, not COLD.
-
-**Re-engagement candidates name the trigger.** Not "follow up with Sarah." Instead, "Sarah replied positively in March, no contact since — recent layoff round at her company could reopen the conversation."
-
-**Hot leads decay.** A reply from 6 days ago is more urgent than a reply from 2 days ago — the analyst sorts by urgency.
-
-## Output format example
-
+## Output (example)
 ```
-🎯 KARAN'S LEAD WORK PLAN · 47 leads, ranked by priority
+LEAD WORK PLAN · 47 leads, ranked by priority
 
-🔥 HOT — work today (5)
-  1. Sarah Chen @ Acme — replied "yes interested" 2d ago, no follow-up
-  2. Mike Rodriguez @ Vortex — booked meeting via Calendly 1d ago, prep
-  3. Jim Coulon @ Datadog — opened 4 emails in last 3d, no reply yet
-  4. Petra Lovric @ Blend — clicked pricing page yesterday
-  5. Linda Park @ PGA — replied "send more info" 5d ago, no follow-up
+HOT · work today (5)
+  1. Contact @ Acme Corp     replied "interested" 2d ago, no follow-up
+  2. Contact @ Vertex        booked a meeting 1d ago, prep it
+  3. Contact @ Blend Labs    opened 4 emails in 3d, no reply yet
+  4. Contact @ Northwind     clicked pricing yesterday
+  5. Contact @ Halo Freight  replied "send more info" 5d ago, no follow-up
 
-♻️ RE-ENGAGE — work this week (12 candidates ranked)
-  1. Tim Lee @ Halborn — last reply March, layoff round announced, fresh trigger
-  2. Anna Kim @ Whip Around — engaged Q4, switched roles to VP RevOps
+RE-ENGAGE · work this week (12 ranked)
+  1. Contact @ Summit        warm reply last quarter, role change is a fresh trigger
+  2. Contact @ Meridian      engaged, then went dark, new funding round
   ...
 
-🥶 COLD — work when hot queue is clear (8 candidates)
+COLD · when the hot queue is clear (8)
   ...
 
-❄️ NEVER TOUCHED — start fresh sequences (22)
-  Sorted by ICP composite score:
-  1. Adam Bell @ Stripe (ICP: 91, signal: 14 sales hires)
-  2. Maria Gonzalez @ Brex (ICP: 88, signal: Series E)
+NEVER TOUCHED · start fresh (22), sorted by fit
+  1. Contact @ Anvil (fit 91, signal: hiring 14 reps)
+  2. Contact @ Beacon (fit 88, signal: recent raise)
   ...
 
-📊 The most expensive miss this week:
-  Sarah Chen (#1 above) replied 2 days ago. Every day she waits is -23% reply rate.
+Most expensive miss this week:
+  Acme Corp (#1) replied 2 days ago. Every day of delay costs reply rate.
 
 Recommended order:
-  1. Reply to Sarah Chen NOW (under 2 minutes)
-  2. Prep for Mike Rodriguez tomorrow (15 min)
-  3. Run the re-engage sequence for Tim Lee + Anna Kim
-  4. Start 5 new sequences from "never touched" top of list
+  1. Reply to Acme now (under 2 minutes)
+  2. Prep the Vertex meeting
+  3. Run the re-engage touch for Summit and Meridian
+  4. Start 5 fresh sequences from the top of never-touched
 ```
 
-## Used by
+## Where the numbers come from
+HOT_DAYS (7) and COLD_DAYS (30) are defaults, not laws. They suited a fast outbound motion. If your cycle runs slower, raise them. The status logic does not change, the thresholds are yours.
 
-- **Daily Drop** workflow (the daily 10-lead Slack message)
-- **Daily-Sales-Assistant** workflow (rep mode)
-- **AE-pipeline-analysis** (top-of-funnel section)
-- Standalone for SDR / AE Monday-morning planning
+## Example chat
 
-## When NOT to use
+**You:** Here's my lead export, 47 leads, mix of never-touched and stuff I ran a sequence on a while back. Who do I work today?
 
-- For account-level coverage (use Pipeline-Creation Analyst)
-- For active deals already in pipeline (use Deal-Health Analyst)
-- For pre-funnel ICP qualification (use ICP Analyst first)
+**Claude:** Sorted all 47. Five are hot and none have a follow-up logged yet.
+```
+LEAD WORK PLAN · 47 leads, ranked by priority
 
-## Salesforce field reference
+HOT · work today (5)
+  1. Contact @ Acme Corp     replied "interested" 2d ago, no follow-up
+  2. Contact @ Vertex        booked a meeting 1d ago, prep it
 
-This analyst inherits from `Revenue Reviews/specs/SFDC_FIELD_LIBRARY.md` —
-the single source of truth for every field name, definition, and canonical
-interpretation. Specifically, this analyst reads:
+RE-ENGAGE · work this week (12 ranked)
+  1. Contact @ Summit        warm reply last quarter, role change is a fresh trigger
 
-- Contact.Email, LeadSource, LastActivityDate (lead-level status classifier)
-- Account.Aero_Account_Fit_Score__c (hot lead ranking)
-- Mixmax sequence enrollment via mixmax_query_sequence_enrollment (cross-system)
+Most expensive miss this week:
+  Acme Corp (#1) replied 2 days ago. Every day of delay costs reply rate.
+```
+Worth flagging: Acme replied in your outreach tool, but their CRM record still shows no activity. Reading only the CRM would have put them in Cold. That two-source check is why they landed in Hot instead.
 
-If a query needs a field not in the library, FAIL LOUD and request a library
-amendment via Evolution Agent — never invent ad-hoc field names or definitions.
-Apples-to-apples consistency across every analyst output is the goal.
+**You:** Why is Summit worth re-engaging and not just "follow up sometime"?
 
-## Inheritance from LOCKED_DESIGN.md
+**Claude:** Because there's a trigger: Summit replied warmly last quarter, went dark, and just had a role change on the account. That's a real reason to reopen the conversation now, not a guess. Sharpener: connect your fit score and I'll rank the never-touched pile (22 of your 47) by who's worth working first instead of alphabetically.
 
-Lock-ins #11 (channel classifier), #16 v9.1 (4-source activity), #25 (Daily Drop format).
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
 
-## Make.com / API packaging
+- **Score every lead nightly.** Run this as a scheduled Claude task against your sequencer and CRM so the work plan is waiting before the morning stand-up.
+- **Alert on the expensive miss.** DM the rep in Slack the moment a hot reply crosses 24 hours with no follow-up, instead of waiting for the next manual pull.
+- **Feed the never-touched list to enrichment.** Route the fit-ranked never-touched pile into Clay so outreach starts with the right contact info already filled in.
 
-**Input:** `{ rep_email: string, mode: "full | hot_only | re_engage | never_touched | next_action", limit: number }`
+You built the ranking once; now it watches the clock for you.
 
-**Output:** `{ hot: [...], re_engage: [...], cold: [...], never_touched: [...], next_action_per_lead: [...], expensive_misses: [...] }`
-
-**Failure modes:** No Mixmax → status classification is SFDC-only, hot/cold detection degraded. No SFDC → cannot proceed.
-
-## Shippable as
-
-Standalone connector-gated SKU. Make.com node. The SDR's Monday morning companion.
+## Make it yours
+Fork it. Change the states, the thresholds, the fields. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

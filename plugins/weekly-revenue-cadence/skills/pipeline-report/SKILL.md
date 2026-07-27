@@ -81,5 +81,36 @@ Decide this week
 ## Where the numbers come from
 The coverage ratio (3x), the aging basis (30 days), and the creation goal are defaults, not laws. They suited a mid-market SaaS cycle with a roughly one-in-three win rate. If yours differs, re-tune the multiple to your close rate. The logic does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** Build the pipeline report for this week's review. Target's $600K. [pastes deal export]
+
+**Claude:** Here's the read, four questions in order.
+```
+Coverage      $1.8M open vs $600K target  ·  3.0x, at bar
+Creation      $210K created vs $250K goal  ·  84%, behind
+Movement      4 advanced, 2 slipped a stage, 3 pushed close date
+Aging         5 deals over 30 days in stage, 2 of them dark 14+ days
+```
+Coverage looks fine at 3.0x, but creation is quietly behind at 84%. That's the leading indicator, and it's the one a coverage number alone would hide until next quarter.
+
+**You:** Give me the short list to actually act on.
+
+**Claude:**
+```
+1. Vertex ($67K, close Thu): champion quiet 12 days. Re-engage or slip it.
+2. Northwind ($112K, dark 21d): last outreach or mark it lost.
+```
+Every entry gets a move, not just a flag. Sharpener: connect a meeting or email tool so "champion quiet 12 days" comes from real activity data instead of the last-activity field you pasted in, which tends to lag.
+
+## Go further
+The weekly pull proves the four questions are the right ones. Here's the version that's ready before the review starts.
+
+- **Generate it the morning of the review.** A scheduled Claude task pulls the CRM Monday at 6am and has the report waiting before the meeting, no manual export.
+- **Catch the aging deals as they cross the line.** Connect Slack so a deal crossing 30 days in stage posts to the owner the day it happens, instead of surfacing a week later in the report.
+- **Tighten the dark-deal read.** Connect a meeting or email tool so "champion quiet" reflects real last-touch data across email and calls, not just the CRM activity field.
+
+Four questions, asked the same way every week, is what makes the review fast.
+
 ## Make it yours
 Fork it. Change the ratio, the aging window, the fields. The point is not to run someone else's report. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

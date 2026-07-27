@@ -94,5 +94,34 @@ Next move: connect the CRM so these rates stop being assumptions.
 ## Where the inputs come from
 The target, ICP, deal size, and cycle come from you or your GTM plan. Real lead-to-opportunity and opportunity-to-won rates come from a CRM. Channel and content performance come from a web-analytics tool, an ad platform, and an email tool. Every rate not read from a connected tool is flagged as an assumption, and every dollar figure is illustrative until grounded.
 
+## Example chat
+Here is the skill running on a real target, start to finish.
+
+**You:** Build a demand gen plan, we need $2M sourced pipeline this quarter.
+
+**Claude:** Built the plan and ran the backward math first.
+```
+$2M / $25K = 80 deals needed -> ~320 opps -> ~2,130 SQLs -> ~5,300 MQLs.
+Current run rate: ~3,900 MQLs. Gap: 26%.
+```
+The catch: the channel mix on paper looks fine, but the math underneath it is 26% short at current conversion rates. The plan as written does not hit the number.
+
+**You:** What closes the gap, more budget or better conversion?
+
+**Claude:** Two options: raise paid spend to buy the extra volume, or confirm whether the assumed 15% SQL-to-opp rate is actually running higher, since that one assumption is doing a lot of work in this math.
+```
+If SQL-to-opp is really 18%, not 15%: gap drops from 26% to 9%.
+```
+One sharpener: connect the CRM so these rates stop being assumptions and the plan gets rebuilt on your real history.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Ground every rate in real data.** Connect Salesforce so lead-to-opportunity and opportunity-to-won rates pull from your actual pipeline history instead of an estimate.
+- **Watch the gap close or widen in real time.** Schedule a Claude task monthly to rerun the backward math against current pipeline and alert the team if the gap grows.
+- **Tie content to what's actually converting.** Connect Amplitude or your web analytics so the content plan leans on the channels and pieces already driving signups, not a guess.
+
+A plan that does not close the math is a hope. Ground it before you commit the budget.
+
 ## Make it yours
 Fork it. Change the stages, the rates, the channel weights, the definition of a win. The point is not to run a generic funnel. It is to run yours and know, before the quarter starts, whether the math can hit the number. Built by an operator. Customize it, break it, make it better.

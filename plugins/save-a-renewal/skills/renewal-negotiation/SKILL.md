@@ -93,5 +93,43 @@ Concession ladder (in order)
 ## Where the numbers come from
 The floor, the term options, and the ladder order are yours to set, tied to your net retention target. The example figures are illustrative, not benchmarks. Real levers come from your pricing and your margin. The structure does not change. The numbers are yours.
 
+## Example chat
+
+**You:** They're asking for a discount on the renewal. Current is 1-year at list, 45 days out. Help me prep.
+
+**Claude:** Built the prep. Lead with value, not the number.
+```
+RENEWAL NEGOTIATION, prep
+Value recap (lead here)
+  Deeply adopted across the team, key workflow now runs on the product.
+
+Options to present
+  A) Flat 1-year renewal at list.
+  B) 2-year at a modest rate improvement.   <- steer here
+  C) Expanded seats at a volume rate.
+
+Concession ladder (in order)
+  1. Better rate ONLY in exchange for a 2-year term.
+  Floor: the NRR-protecting minimum. Do not cross it.
+
+"We want a discount" answer
+  "Understood. Given the value your team is getting, I can improve the rate
+   on a two-year commitment. Want me to put that shape together?"
+```
+The rule this enforces: no concession without something traded back. If you'd asked me to just build "the discount," I'd have pushed back and built the ladder instead, because a free discount trains them to ask again next year.
+
+**You:** What if they push past option B and still want a flat discount, no term trade?
+
+**Claude:** Then you move to rung two, a small credit only in exchange for a case study or reference, still a trade, never free. If they push past that, you're near the floor, and the floor is where you stop, not where you improvise. Sharpener: connect your product-analytics tool and I'll swap the "deeply adopted" claim for the real adoption numbers, so the value recap is exact instead of a description.
+
+## Go further
+The prep gets you into the room calm. Here is the version that keeps you calm every renewal, not just this one.
+
+- **Trigger prep automatically at 45 days out.** Schedule a Claude task off your CRM's renewal-date field so the negotiation plan is built before the customer brings up price.
+- **Ground the value recap in real usage.** Connect Amplitude so the adoption story pulls actual numbers instead of a CSM's memory of how the account is doing.
+- **Log every concession given.** Write each trade back to Salesforce so next year's negotiation starts knowing exactly what was already given away.
+
+You walk in with the ladder already built instead of improvising it live.
+
 ## Make it yours
 Fork it. Change the ladder, the options, the floor. The point is not to run someone else's playbook. It is to run yours, faster, so you walk into the renewal calm and walk out with the number protected. Built by an operator. Customize it, break it, make it better.

@@ -84,5 +84,37 @@ Asks:
 ## Where the numbers come from
 The one-screen ceiling, the two-to-three theme cap, and the verdict-first line are defaults, not laws. They suit a board that wants signal over story. If your board reads deeper, add an appendix, but keep the front page short. The structure does not change. The length is yours.
 
+## Example chat
+**You:** Q3 came in at $8.2M against a $9M plan. Write the board update.
+
+**Claude:** Verdict first, no burying it.
+```
+HEADLINE: $8.2M new ARR vs $9.0M plan. RED, 91% of plan.
+
+What mattered:
+  1. Enterprise slipped. 3 deals ($1.4M) pushed to Q4 on procurement, not loss.
+  2. Mid-market held. Win rate up, coverage healthy into Q4.
+
+Risks:
+  - Q4 rests on the 3 slipped deals closing. Exposure $1.4M. MAPs in place, dates set.
+
+Asks:
+  1. Approve pulling 2 Q4 reqs into now to close the ramp gap.
+```
+The line that matters most here isn't the miss, it's that the risk section names the exact exposure ($1.4M) instead of "some headwinds." A board that gets a number can judge it; a board that gets a vibe starts asking harder questions.
+
+**You:** Should I add the rep ramp issue too?
+
+**Claude:** Yes, that's your third theme, and it's already tied to the ask (pulling 2 reqs forward). One sharpener: connect your CRM so next quarter's headline number pulls straight from the pipeline instead of a manual paste, that's usually where a stale number sneaks into a board deck.
+
+## Go further
+Writing the update by hand each quarter works. Here's how it stops depending on someone remembering to draft it.
+
+- **Pull the headline number live.** Connect Salesforce or HubSpot so bookings and pipeline feed the first line automatically instead of a manual export the week before the board meeting.
+- **Schedule the draft.** Set a scheduled Claude task to generate a draft update the Monday before every board meeting, so the leader edits instead of starting from a blank page.
+- **Reconcile against finance first.** Pull the number through Snowflake or your warehouse so the board sees one number that already matches finance, not two versions that need explaining.
+
+A board that trusts the number trusts the plan that follows it.
+
 ## Make it yours
 Fork it. Change the headline metric, the theme count, the format. The point is not to run someone else's update template. It is to write yours, verdict first and honest, so the board trusts the next one too. Built by an operator. Customize it, break it, make it better.

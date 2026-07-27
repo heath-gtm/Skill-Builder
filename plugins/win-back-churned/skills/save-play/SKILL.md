@@ -88,5 +88,39 @@ Exit criteria: saved = signed plan + renewal. Not savable = no sponsor engages b
 ## Where the numbers come from
 The usage drops, day counts, and any figure come from the data you paste or the tools you connect. Nothing above is a real customer number; it is illustrative. When the skill cannot see whether usage actually fell, it marks the diagnosis provisional and names the input, a usage export or ticket history, that would confirm it.
 
+## Example chat
+
+**You:** This account says we're too expensive and they're not renewing. Build the save play. Here's what I know: champion left two months ago, usage has been dropping.
+
+**Claude:** Built it, but the stated reason isn't the real one.
+```
+SAVE PLAY · sample account · renewal in 52 days
+Stated reason:   "too expensive"
+Real reason:     adoption fell after the champion left; usage down sharply
+Evidence:        weekly seats dropped by half, sponsor quiet 40 days
+
+Levers:
+  Non-commercial (first): new exec sponsor intro, re-onboard the team
+  Commercial (last):      right-size seats to actual usage, hold the rate
+
+Save sequence (52-day window):
+  1. Day 0   CSM      acknowledge, book a working session
+  5. Day 45  CSM      commercial conversation, right-size to usage
+```
+Caught the trap: "too expensive" almost always shows up when adoption drops, not the other way around. If I'd taken it at face value, the play would've opened with a discount and lost the account and the margin both.
+
+**You:** What tells us this account isn't actually savable, versus just needs work?
+
+**Claude:** The exit criteria in the plan: if no sponsor engages by day 20, that's the "not savable" line, not a vibe call, a dated checkpoint. Sharpener: connect your product-analytics tool and I'll confirm the usage drop is real instead of working from the note you pasted, so the diagnosis stops being provisional.
+
+## Go further
+The diagnosis proves the account is worth the effort. Here is the version that catches it earlier and runs itself.
+
+- **Flag the risk signal automatically.** Connect your product-analytics tool so a usage drop past a set threshold opens a save play in Salesforce before the customer says a word.
+- **Route the sequence to real owners with real dates.** Push the multi-touch plan into Salesforce tasks so "Day 5, resolve the open escalation" shows up as an assignment, not a line in a doc.
+- **Watch the exit criteria, not just the start.** Schedule a Claude task to check the day-20 checkpoint and alert the CSM lead the moment an account crosses from savable to not.
+
+The account gets diagnosed correctly before anyone reaches for the discount.
+
 ## Make it yours
 Fork it. Change the risk signals, the levers, the sequence, the save window. The point is not to run someone else's retention script. It is to save the accounts worth saving, for the right reason, and to walk away fast from the ones that are gone. Built by an operator. Customize it, break it, make it better.

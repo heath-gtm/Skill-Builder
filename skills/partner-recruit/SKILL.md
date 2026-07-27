@@ -92,5 +92,39 @@ Next moves:
 ## Where the inputs come from
 The FIT traits and the ACTIVATION window (90 days) are defaults, not laws. They suited a mid-market channel program. The partner, overlap, and figures above are examples, illustrative only, not a real company. The method does not change when your program does. Set the traits, the first motion, and the window to your program and the plan shapes itself around it.
 
+## Example chat
+
+**You:** Northstar Consulting reached out about partnering. Worth pursuing?
+
+**Claude:** Scored the fit before writing anything.
+```
+Fit score
+  Sells to ICP     yes    serves the same mid-market buyer
+  Reach            high   ~40 accounts in our ICP
+  Motivation       yes    gap in their stack we fill
+  Capacity         medium small team, needs light enablement
+  Verdict          RECRUIT (tech + referral)
+```
+Reach is high, but the piece that actually matters here is motivation: they have a real gap we fill, not just a nice logo willing to sign. A partner with reach and no motivation signs and goes quiet.
+
+**You:** Draft the pitch and the first move.
+
+**Claude:** Here's the pitch, led with their gain first.
+```
+For them: new revenue line + stickier customers
+Evidence: 11 shared ICP accounts, 2 already our customers
+First motion (90 days): co-sell on 3 overlap accounts, joint webinar to their list
+```
+Sharpener: connect the CRM so the 11-account overlap comes from real shared-account matching instead of a manual pull, and so the activation checkpoint at Day 90 gets tracked instead of relying on someone remembering to check.
+
+## Go further
+The scoring and the pitch prove the fit. Here's the version that catches the stall a signed partnership usually hits after the kickoff.
+
+- **Track the checkpoint automatically.** A scheduled Claude task checks Salesforce at Day 90 for a registered deal or a shipped co-marketing asset, and flags a stalled partner before it reaches a QBR.
+- **Find the overlap without the manual pull.** Connect the CRM so shared-account matching runs live, and the mutual-value pitch is always grounded in the current book, not a stale export.
+- **Route the enablement where the partner rep actually works.** Drop the one-pager and demo path into a shared Slack channel with the partner instead of a document they have to go dig up.
+
+Recruiting the partner is the pitch. Activating them is the part that needs the follow-through built in.
+
 ## Make it yours
 Fork it. Change the fit traits, the first motion, the activation window. The point is not to run someone else's partner program. It is to make sure the partners you sign actually produce instead of going dark after the kickoff. Built by an operator. Customize it, break it, make it better.

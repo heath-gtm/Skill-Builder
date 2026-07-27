@@ -99,5 +99,35 @@ TOP RECOMMENDATIONS
 ## Where the numbers come from
 STALE_DAYS (180), the trailing window for drift, and the engagement targets are defaults, not laws. They suited a mid-market GTM cadence. If your cycle runs longer, raise them. The logic does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** Run QA on this week's numbers. Here's the override log and the CRM export.
+
+**Claude:** Ran the full pass. Two things worth your attention before the review.
+```
+SCORING ACCURACY
+  Override precision: 82% (19 of 23 flagged accounts became real deals)
+
+CRM HYGIENE (top 3)
+  1. Rep C: 14% field-completeness. Lowest on the team. Top coaching priority.
+
+TOP RECOMMENDATIONS
+  1. Rep C: 1:1 on field completion.
+```
+The catch: two of your reports disagree on the same account, one calls it healthy, the other flags the champion as dark, so instead of picking a winner I put it in a calibration queue rather than silently trusting either one.
+
+**You:** Good catch. Is 82% actually good or is that just a number?
+
+**Claude:** On its own it's just a number, that's why the digest names the calls, 19 of 23 flagged accounts, not "most." Compare it week over week and you'll see whether the model is getting sharper or looser. Sharpener: connect your CRM directly and I'll pull field-population rates live instead of working off this week's export, so hygiene becomes a trend instead of a snapshot.
+
+## Go further
+The weekly pass proves where the system is lying to itself. Here is the scaled version.
+
+- **Run it every Sunday night.** Schedule this as a Claude task so the digest lands in Slack before the Monday pipeline review, not after.
+- **Watch the disagreements live.** Wire it to Salesforce and Amplitude so it flags every account where two reports disagree the moment the data updates, not once a week.
+- **Track the trendline in one place.** Log each week's digest to a Snowflake table or a sheet so drift and hygiene become a chart, not a memory.
+
+The system starts grading itself instead of waiting for you to notice the drift.
+
 ## Make it yours
 Fork it. Change the streams it reads, the trust bar, the cadence. The point is not to run someone else's QA. It is to make your own system learn from itself, so next week's outputs are better than this week's. Built by an operator. Customize it, break it, make it better.

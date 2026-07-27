@@ -9,12 +9,21 @@ description: Your top-of-funnel coverage analyst. Connect a CRM and a product-an
 This skill answers the top-of-funnel coverage question: do you have enough at-bats to hit next quarter's number, and where are the gaps? It reads your CRM and a product-analytics tool, runs forward-looking coverage math per channel and per rep, ranks the hottest accounts to work, builds a daily prioritized account drop with a named owner per account, and surfaces the segments you are under-prospecting. It is built for the person who runs the pipeline review, not the person who works a single lead.
 
 ## What you'll need
-- A CRM. The system of record for accounts, owners, channel attribution, and forecasted value.
-- A product-analytics tool. The source of product-usage and active-user signal. Optional, but it powers the product channel and the new-user signal.
-- An account-fit score (optional overlay). Any model that ranks accounts by ICP fit.
-- A hiring-intent or firmographic-signal source (optional). Powers the "why now" line.
+You do not need to connect anything to start. Bring your pipeline and the skill runs today. Connect the tools below and it pulls the data automatically and adds signals you cannot paste by hand.
 
-No CRM connected? The skill says what to connect and stops. It does not guess.
+- Works today with: your open pipeline by channel and owner, plus the period target. Paste it or upload a CSV.
+- More powerful connected to a CRM: accounts, owners, channel attribution, and forecasted value, live.
+- More powerful connected to a product-analytics tool: powers the product channel and the new-user signal.
+- Sharper with an account-fit score and a hiring or firmographic signal source: better ranking and the "why now" line.
+
+## How this runs at your connection level
+This skill is never reliant on a connector. It runs on the data you give it today and gets more powerful as you connect tools. It never invents a number it cannot see. A gap is a prompt, not a guess.
+
+- **Bring your data**: paste or upload your list (a deal export, a stage CSV). The skill runs the full analysis today on your real numbers. No connection required.
+- **Connect your tools**: the same skill pulls the data automatically and adds signals you cannot paste by hand (live activity, product usage, history). Same output, less effort, sharper.
+- **Just exploring**: no data yet? Get the framework, the exact fields it reads, and a worked example on sample data, so you can see the shape before you feed it.
+
+Every run ends with the one thing that would make the next run sharper, a field to add or a tool to connect.
 
 ## Customize this for yourself
 | Set this | What it is | Default / Example |
@@ -73,6 +82,36 @@ Coverage gap math:
 
 ## Where the numbers come from
 The coverage targets, win rate, cycle time, average deal size, and the daily-drop size are defaults. Re-tune them to your plan. The thresholds that drive healthy, under, over are defaults too. Set them where your team draws the line. The activity-source weighting is a starting point; adjust which signals count and how recency decays.
+
+## Example chat
+
+**You:** Run coverage for the team against this quarter's $1.8M target.
+
+**Claude:** Here's where the gap actually is.
+```
+INBOUND:    890K projected vs 900K needed · 99% covered · HEALTHY
+OUTBOUND:   310K projected vs 720K needed · 43% covered · UNDER
+PRODUCT:    202K projected vs 180K needed · 112% covered · OVER
+```
+Outbound is the whole story here. Inbound and product are fine on their own, but averaged together they'd have hidden a 43% channel until it was too late to fix this quarter.
+
+**You:** Give me the daily drop for Rep C since they own outbound.
+
+**Claude:**
+```
+1. Account One   Recent funding + sales hiring spike   Fit 87
+2. Account Two   Cost-consolidation trigger            Fit 73
+```
+Both carry a named reason, so Rep C isn't guessing why these two are first. Sharpener: connect a hiring or firmographic signal source so "why now" lines like these generate automatically instead of getting written by hand each morning.
+
+## Go further
+The coverage math and the daily drop prove the gap and the priority. Here's the version that runs before the rep's first coffee.
+
+- **Push the drop into the inbox automatically.** A scheduled Claude task pulls the CRM and product-analytics data every morning and delivers each rep's top-10 by 7am.
+- **Reroute the moment a channel goes under.** Connect Slack so a channel crossing below its coverage threshold posts straight to the manager, instead of surfacing at the weekly review.
+- **Score the "why now" from real signal.** Connect a hiring or funding signal source so the daily drop's reason line writes itself from live data, not a rep's memory.
+
+Coverage math answers "do we have enough." The daily drop is what actually closes the gap.
 
 ## Make it yours
 Map your connectors and fields, set your channels and targets, and this becomes your coverage companion. Built by an operator. Customize it, break it, make it better.

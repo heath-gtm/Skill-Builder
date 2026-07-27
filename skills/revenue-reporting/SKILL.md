@@ -98,5 +98,36 @@ ACTION LAYER
 ## Where the numbers come from
 The 10% variance flag (yellow at 5-10%) and the monthly cadence are defaults, not laws. They suited a mid-market SaaS reporting rhythm. If your business runs tighter or looser, move them. The logic does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** Run the wrap-up. Here's the ARR summary sheet, as of April 30th.
+
+**Claude:** Verified the period first, then ran it. Direct Sales is where the gap is coming from, self-serve is fine.
+```
+REVENUE WRAP-UP · as of Apr 30 · period: April · cadence: Monthly
+Metric        Current   Target    Variance ($)   Variance (%)
+Total ARR     $8.50M    $8.94M    -$440K         -4.9%   (yellow)
+DS ARR        $4.54M    $5.00M    -$460K         -9.2%   (yellow)
+SS ARR        $3.96M    $3.93M    +$30K          +0.6%   (green)
+
+ACTION LAYER
+  Hot leads: 3 accounts replied or engaged this week, no follow-up yet.
+  Deals to work: 2 slip-risk deals the forecast depends on.
+```
+Caught one thing before I ran the numbers: I checked the "as of" date on the sheet against what you asked for. They matched, so I didn't stop. If they hadn't, I'd have flagged it instead of reporting a number from the wrong period.
+
+**You:** Is the forecast in here your math or the sheet's?
+
+**Claude:** The sheet's. This skill never runs its own pacing math on top of a number the source already calculated, it reads the forecast the sheet computes and reports it straight. Sharpener: connect your CRM and the action layer will name the two slip-risk deals by account instead of just counting them.
+
+## Go further
+The wrap-up proves the rhythm is worth keeping. Here is the version that keeps the rhythm without you touching it.
+
+- **Run this every Monday without touching it.** Schedule a Claude task against your BI export so the wrap-up is written and posted before the pipeline review starts.
+- **Name the hot leads and slip-risk deals live.** Connect Salesforce so the action layer lists real accounts and owners instead of a count.
+- **Flag variance the moment it crosses the line.** Wire the yellow and red thresholds to a Slack alert so a channel gap gets noticed the day it happens, not at the next report.
+
+The number shows up with its own explanation attached, every time, on the same schedule.
+
 ## Make it yours
 Fork it. Change the metrics, the channels, the flags, the cadence. The point is not to run someone else's report. It is to run yours, so the number arrives with the next move already attached. Built by an operator. Customize it, break it, make it better.

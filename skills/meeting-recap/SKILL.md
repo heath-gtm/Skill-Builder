@@ -89,5 +89,34 @@ Follow-up note (ready to send)
 ## Where the numbers come from
 The due default (before the next meeting) and the follow-up tone are defaults, not laws. They suited a fast B2B sales cycle. If your process runs on hard dates, set them explicitly. If your tone is more formal, change it. The logic does not change. The defaults are yours.
 
+## Example chat
+Here is the skill running on a real call, start to finish.
+
+**You:** Recap this discovery call and give me a follow-up I can send now. [pastes transcript]
+
+**Claude:** Decisions, owners, and a send-ready note.
+```
+Decisions
+  - Move to a 2-week trial on the two priority use cases.
+
+Action items
+  - Send trial plan and success criteria   owner: you   by Wed
+  - Loop in security for the review        owner: Acme (Priya)  by Fri
+
+Open questions
+  - Who signs off on procurement? (waiting on Priya)
+```
+The catch worth naming: "security review runs in parallel" got discussed but I didn't log it as a separate decision, it's folded into the trial decision because that's what the notes actually show was agreed, not two settled things. Manufacturing an extra decision would make the recap look more settled than the room actually was. One sharpener: connect a meeting tool so the transcript comes in automatically and nothing gets lost in the copy-paste.
+
+## Go further
+The recap is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Draft the follow-up the second the call ends.** Wire a scheduled Claude task to a meeting tool so the recap and send-ready email generate automatically within minutes of the call finishing.
+- **Log action items where they get worked.** Push owners and due dates into Salesforce or a task tool tied to the deal, so "send trial plan by Wed" shows up as a real task, not just a line in a doc.
+- **Chase the open questions automatically.** Have a scheduled Claude task check unresolved open questions against the next meeting's notes and flag anything still open after two calls.
+
+You built the recap once, now the follow-through gets tracked too.
+
+
 ## Make it yours
 Fork it. Change the structure, the tone, the fields it logs. The point is not to run someone else's recap. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

@@ -87,6 +87,28 @@ Now I sit and listen longer than feels comfortable. I ask people what's broken
 before I tell them what I think is broken. It feels slower. It isn't.
 ```
 
+## Example chat
+Here is the skill running on a real draft, start to finish.
+
+**You:** Humanize this for me: "Leadership serves as an enduring testament to the transformative potential of culture, marking a pivotal moment in the evolution of modern teams."
+
+**Claude:** Found four tells in one sentence: significance inflation, copula avoidance ("serves as"), and a "not just X, it's Y" cousin waiting to happen. Rewritten against your voice block:
+```
+I used to come in as the fixer. Three weeks into a new role, I'd be
+reorganizing the team. It almost never worked.
+```
+The real catch here wasn't the words, it was that the original made a claim (a "pivotal moment") with nothing under it. Stripping the tell forced me to replace it with an actual memory, which is the only thing that reads as human. One sharpener: fill in your banned-words list. Right now I'm guessing at what you hate; a real list catches the ones I'd otherwise let through.
+
+## Go further
+The audit is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Run it on everything before it ships.** Wire a scheduled Claude task to scan every draft in your content queue (Notion, Google Docs) and flag AI tells before a human ever reads it.
+- **Catch it at the source.** Add the voice check as a Slack bot step so anyone on the team can paste a draft and get the humanized version back in the channel.
+- **Track what keeps slipping through.** Log every caught pattern to a sheet (Airtable or Snowflake) so you know which of the 30 tells your team's drafting habit actually produces, and fix the habit instead of the symptom.
+
+You built the ear once, now every draft gets it before it goes out.
+
+
 ## Make it yours
 The 30-pattern catalog is fixed. The voice is yours. Fill in the Customize block, add the words you hate, add the moves you lean on. Watch for the failure modes: over-correcting into blandness, trading one bumper sticker for another, leaving the one em dash you could not bear to cut, skipping the audit because the draft feels clean.
 

@@ -81,5 +81,38 @@ Behavior watch:
 ## Where the numbers come from
 QUOTA_MULTIPLE (4x to 6x), COVERAGE (1.15 to 1.25), and the accelerator (1.5x to 2x) are defaults, not laws. They suited a mid-market SaaS motion. If your deals run longer or your win rate is higher, move them. The reconciliation logic does not change. The thresholds are yours.
 
+## Example chat
+Here is the skill running on a real mid-market plan build.
+
+**You:** We need $10M in new ARR from mid-market next year, 8 ramped reps plus 4 new hires. Build the comp and quota plan.
+
+**Claude:** Built both ways, and they don't agree.
+```
+Top-down ask     $12.0M   target $10M x 1.2 coverage
+Bottom-up cap    $10.4M   8 ramped + 4 ramping reps
+Gap              -$1.6M   coverage unfunded by ~1.5 heads
+```
+The plan as scoped is already short by about a head and a half of capacity, that gap shows up before you've even set OTE. Shipping the top-down number as-is would mean asking existing reps to cover work that isn't theirs to cover. One sharpener: connect your CRM so productivity per rep is measured from real deal history instead of a blended team-wide guess.
+
+**You:** Given the gap, what should the accelerator curve look like so we don't quietly reward the wrong thing?
+
+**Claude:** Set at 1.8x on the marginal dollar past 100%, no cliff, decelerating at 150%.
+```
+Behavior watch:
+1. Flat rate on discounts. Add a margin gate or reps trade price for speed.
+2. No new-logo split. Quota met by expansion alone. Add a logo floor.
+```
+The accelerator itself is fine, the real risk is the flat rate on discounted deals, which quietly tells reps to win on price instead of holding it. One sharpener: pull real discount data from closed-won deals so the margin gate threshold is set from what actually happened, not a guess.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Reconcile the plan every planning cycle, not once a year.** Point a scheduled Claude task at Salesforce quarterly and re-run the top-down vs bottom-up check as headcount and productivity shift.
+- **Wire the accelerator into payroll directly.** Connect your comp or payroll system so attainment tiers calculate and flow through without a manual spreadsheet reconciliation.
+- **Watch for the behavior the plan is quietly rewarding.** Feed closed-won discount data into Snowflake monthly and alert if margin erosion tracks with a specific rep or segment.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Change the segments, the mix, the curve. The point is not to run someone else's comp philosophy. It is to build yours, with the top-down and bottom-up actually reconciled. Built by an operator. Customize it, break it, make it better.

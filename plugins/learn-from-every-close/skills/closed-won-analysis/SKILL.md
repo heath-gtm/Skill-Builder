@@ -91,5 +91,39 @@ Next move:
 ## Where the numbers come from
 MIN_SAMPLE (5) and the trailing-4-quarter window are defaults, not laws. They suited a mid-market SaaS cycle with steady volume. If you close a handful of large deals a year, widen the window and lower the floor with your eyes open. If you close hundreds, raise the floor so only strong patterns survive. Lift is always measured against your own base rate, so the profile is yours, not a benchmark.
 
+## Example chat
+Here is the skill running on a real won-deal export.
+
+**You:** Pull the pattern out of our Q2 wins, 34 deals, and tell me who in open pipeline looks like them.
+
+**Claude:** Read's done. Your website ICP and your win data don't agree.
+```
+Signal                        Share of wins   Lift vs base
+Mid-market, 200-800 staff     62%             1.4x
+Champion = Head of Ops        55%             1.8x
+Displaced a manual/DIY setup  44%             2.1x
+```
+"Displaced a manual setup" is your strongest signal by lift, not your biggest by share. It's rare in your total pipeline (21%) but shows up in nearly half your wins. That's the profile that actually predicts a close, not the mid-market segment everyone already assumes. One sharpener: add a competitor/incumbent field to more deals, it's your thinnest signal right now.
+
+**You:** Score my open pipeline against that profile.
+
+**Claude:** Ranked, best match first.
+```
+Account      Signals matched          Missing
+Haledon      3 of 4 (seg, persona, mo) no incumbent read
+Brightsea    3 of 4 (seg, persona, uc) outbound not inbound
+```
+Haledon and Brightsea are your two best bets this quarter, both hit 3 of 4 win signals. One sharpener: connect your CRM so this scoring re-runs automatically as new deals open, instead of a one-time snapshot on today's list.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Rescore the pipeline weekly, not once.** Point a scheduled Claude task at Salesforce nightly and write the lookalike score back to a custom field on the opportunity.
+- **Hand the profile to the SDR team.** Feed the top win signals into Clay to re-rank the outbound target list so reps prospect the accounts that already look like winners.
+- **Alert on a new lookalike the day it appears.** DM the account owner in Slack the moment an open deal crosses the match threshold, instead of waiting for the next QBR.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Change the signals, the segments, the sample floor. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

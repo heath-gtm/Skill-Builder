@@ -88,5 +88,36 @@ Load-bearing assumption: the 20-rep count. Confirm before committee.
 ## Where the inputs come from
 The number-labeling rule, the shown-not-asserted math, and the one-page limit are the defaults that let a champion defend the case without you. The value drivers and the horizon are yours. If your buyer thinks in risk reduction, not time saved, model that. The discipline does not change: every number sourced, every assumption visible. The case is yours.
 
+## Example chat
+**You:** My champion needs to take this to their VP. Build the business case. Here's what I got in discovery: about 6 hrs/wk per rep lost to manual prospecting, 20 reps.
+
+**Claude:** One page, built to be defended without you in the room.
+```
+The problem, today
+  ~6 hrs/wk/rep lost to manual prospecting. At 20 reps, that is roughly
+  6,000 hours a year not spent selling. [buyer's number: 6 hrs; assumption: 20 reps]
+
+The value (12-month horizon)
+  Cost of problem:   ~6,000 hrs/yr x loaded rate   [illustrative]
+  Cost of solution:  annual price                   [list price]
+  Net:               value over 12 months, payback inside the year
+
+Load-bearing assumption: the 20-rep count. Confirm before committee.
+```
+The part that actually protects your champion: every number is labeled as theirs, an assumption, or illustrative. When the committee pokes at the math, they're not defending a black box, they're defending exactly one number, the rep count, and you told them that upfront.
+
+**You:** Should I include the loaded rate calculation?
+
+**Claude:** Only if you have it as a real number, otherwise leave it illustrative and let the champion fill in their own comp data. A rep's actual loaded rate is something the finance person in the room will know better than you do. One sharpener: get the buyer to confirm the 20-rep count before the committee meeting, that's the single assumption the whole case rests on.
+
+## Go further
+Building one case by hand proves your champion can defend it. Here's the version that scales across every deal.
+
+- **Pull the pain metrics from the call automatically.** Connect Gong or your meeting tool so the discovery numbers feed the value model directly instead of you re-typing them from notes.
+- **Match the case to the deal in flight.** Wire Salesforce deal size and stage into the template so the case's price and horizon always match what's actually in the pipeline.
+- **Generate it the moment discovery closes.** Set a scheduled Claude task that drafts the one-pager the day a deal enters the Validation stage, so the case exists before the champion has to ask for it.
+
+A defensible case built once by hand becomes a habit the pipeline expects at every deal.
+
 ## Make it yours
 Fork it. Change the value drivers, the horizon, the math. The point is not to hand over someone else's ROI deck. It is to build a one-pager your champion can defend in a room you are not in, with numbers the committee cannot pick apart. Built by an operator. Customize it, break it, make it better.

@@ -82,5 +82,28 @@ Illustrative figures. Your run reports your real stack and spend.
 ## Where the numbers come from
 The usage window (90-day last-login) and the keep criteria are defaults, not laws. They suited a mid-market SaaS stack review. If your tools are seasonal or your teams smaller, adjust the window. The capability map and the keep bar are yours.
 
+## Example chat
+
+**You:** Here's our GTM tool list with costs and renewal dates, can you audit it?
+
+**Claude:** Mapped it to your capability list first.
+```
+Job              Tools                          Finding
+Enrichment       Tool A ($60K), Tool B ($28K)   OVERLAP, B carries 12% of usage
+Sales analytics  Tool D ($40K)                  UNDERUSED, 6 of 40 seats active
+Lead routing     none                           GAP, routed by hand today
+```
+Key insight: the gap matters as much as the cuts. The routing gap is probably costing more in leaked leads than either overlap saves, so the plan should fund the gap from the cuts, not just bank the savings. One sharpener: connect the CRM's login export so "12% of usage" is a real number instead of an estimate.
+
+## Go further
+The audit runs once, by hand. Here is where an operator takes it once the manual version proves out.
+
+- **Reconcile spend automatically.** Point the audit at a billing export (via a data warehouse like Snowflake) so contract cost and actual usage stay in sync without a quarterly manual pull.
+- **Catch the renewal before it auto-fires.** A scheduled Claude task checks the renewal calendar monthly and flags any tool inside its notice window that is still marked underused.
+- **Prove usage seat by seat.** Pull last-login data straight from each tool's admin API instead of asking IT for an export, so the "unused" call is defensible in the room.
+
+The audit finds the waste once; the calendar is what stops it from creeping back.
+
+
 ## Make it yours
 Fork it. Change the capability map, the usage basis, the keep criteria, the way the plan is sequenced. The point is not to run someone else's stack review. It is to run yours, so the cuts are defensible and the renewals never catch you. Built by an operator. Customize it, break it, make it better.

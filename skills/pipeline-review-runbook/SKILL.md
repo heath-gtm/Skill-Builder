@@ -87,5 +87,37 @@ Ask on the stuck ones:
 ## Where the numbers come from
 COVERAGE_RATIO (3x), and the per-stage AGING_DAYS defaults are starting points, not laws. They suited a mid-market SaaS cycle with a healthy win rate. If your win rate is higher, a lower ratio covers you. If your stages run long, raise the aging thresholds. The runbook does not change. The thresholds are yours.
 
+## Example chat
+
+**You:** Prep my pipeline review. Team target's $600K this period. [pastes stage export]
+
+**Claude:** Here's the agenda, findings first.
+```
+Coverage: $1.42M open / $600K target = 2.4x (below 3x, short ~$360K)
+
+Stage aging (flagged past threshold):
+  Vertex     Negotiation   34 days   no next step
+  Blend Labs Discovery     28 days   single-thread
+```
+Coverage is below your 3x bar, so I'd open the meeting as a pipeline-generation conversation, not a deal-by-deal one. That framing changes what the room should be talking about for the first ten minutes.
+
+**You:** What do I actually ask Vertex's owner?
+
+**Claude:**
+```
+1. Vertex. 34 days in negotiation. What single thing closes this, and when?
+2. Blend Labs. One contact for 4 weeks. Who else needs to be in the room?
+```
+Each question is aimed at the specific reason the deal is stuck, not a general "let's discuss." Sharpener: connect the CRM so week-over-week movement tracks automatically, which removes the need to keep a manual snapshot from last week's review.
+
+## Go further
+Running this off a pasted export proves the runbook finds the right deals. Here's the version that never needs a manual snapshot again.
+
+- **Track movement without keeping your own copy.** Connect the CRM so week-over-week comparison runs automatically against last week's live state, not a file you remembered to save.
+- **Surface the stuck deals before the meeting.** A scheduled Claude task runs the aging and stuck-deal check every Friday and drops the agenda into Slack ahead of Monday's review.
+- **Confirm cold versus quiet.** Connect a meeting or email tool so a "no next step" deal gets checked against real inbox activity before it lands on the stuck list, catching the ones that are actually progressing off-CRM.
+
+The runbook finds the deals worth discussing. The connectors are what keep the list current without you doing the pull.
+
 ## Make it yours
 Fork it. Change the ratio, the aging cutoffs, the questions. The point is not to run someone else's review. It is to run yours, faster, so the meeting ends with commitments instead of a recap. Built by an operator. Customize it, break it, make it better.

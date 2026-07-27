@@ -96,5 +96,33 @@ REVISIT WHEN
 ## Where the inputs come from
 ID_SCHEME and STATUS_SET are defaults, not laws. Some teams like proposed/accepted/deprecated; some like a plain running doc with dates. The five fields are the standard because each one is a question future-you will ask. Change the packaging. Keep the fields.
 
+## Example chat
+Here is the skill running on a real call, start to finish.
+
+**You:** Log this: we just decided to route onboarding by company size instead of persona.
+
+**Claude:** Drafted the five-field entry.
+```
+DECISION 0007 · Route onboarding by company size · status: accepted
+CONTEXT: Persona routing mis-assigned ~1 in 3 signups.
+OPTIONS: Persona match (rejected), Company-size band (chosen), Round-robin (rejected)
+REVISIT WHEN: Persona data coverage passes ~80%, or volume passes 10k/day.
+(draft, not saved. approve to append as 0007)
+```
+The thing this catches: without a stated revisit-when, this decision sits unexamined forever, or gets re-litigated from scratch in six months with nobody remembering why persona routing got dropped.
+
+**You:** Approved, append it.
+
+**Claude:** Appended as 0007 in the log. It does not supersede anything yet, so no link needed. One sharpener: connect the repo so I can append directly and keep the ID numbering straight instead of you copy-pasting it in.
+
+## Go further
+The read is step one. Here is where an operator takes it once the manual version proves out.
+
+- **Append straight to the repo.** Connect a GitHub repo so approved entries write as numbered markdown files automatically, no copy-paste step.
+- **Surface stale decisions on their own.** Schedule a Claude task to grep the log monthly for any entry whose revisit condition has likely been met, and flag it in Slack.
+- **Hand it to the next session automatically.** Wire the decision log into a context-pack or handoff so a new session opens already knowing what was decided and why.
+
+The log is only useful if it gets read back. Automate the reading, not just the writing.
+
 ## Make it yours
 Fork it. Add a "consequences" field, a "who was in the room" field, tags for the area of the system it touches. Cut what you never read back. The point is that no real decision is ever silently lost or re-argued from scratch. Built by an operator. Customize it, break it, make it better.

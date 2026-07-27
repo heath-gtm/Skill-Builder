@@ -83,5 +83,29 @@ Illustrative figures. Your run reports your real numbers.
 ## Where the numbers come from
 The history window (trailing 4 quarters) and the blend that builds the likely case are defaults, not laws. They suited a mid-market SaaS quarter. If your cycle is longer or your volume thinner, widen the history and the range. The category rules and close rates are yours.
 
+## Example chat
+**You:** Build the forecast for this quarter, target is $2.4M, here's the open pipeline.
+
+**Claude:** Ran it against your trailing close rates, not a benchmark.
+```
+Category     Open $      Hist. close   Weighted
+Commit       $1.10M      85%           $0.94M
+Best Case    $0.90M      42%           $0.38M
+Pipeline     $1.80M      14%           $0.25M
+
+Likely case: $1.55M. Gap to target: $0.85M short.
+```
+Coverage is 2.8x, which looks healthy on its own, but the likely case is still short because Best Case would need to nearly double its close rate to close the gap. That's the number leadership needs, not the coverage ratio.
+One sharpener: connect the warehouse so history pulls trailing 4 quarters automatically instead of the single quarter you gave me.
+
+## Go further
+The model works from a pasted pipeline snapshot. Here is where it stops being a one-time build.
+
+- **Refresh it weekly, not once a quarter.** A scheduled Claude task rebuilds the range every Monday from Salesforce so the gap-to-target number is never more than a week stale.
+- **Ground it in real history.** Connect Snowflake or your warehouse so category-to-stage conversion is computed from actual closed deals, not a single quarter's snapshot.
+- **Push the range where leadership already looks.** Send the low/likely/high case into a BI dashboard so the range updates live instead of living in a slide that's out of date by the next standup.
+
+A forecast that updates itself is one nobody has to defend from memory.
+
 ## Make it yours
 Fork it. Change the categories, the entry rules, the history window, the way the range is blended. The point is not to run someone else's forecast. It is to run yours, grounded in your close history, defensible in the room. Built by an operator. Customize it, break it, make it better.

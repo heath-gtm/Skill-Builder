@@ -90,5 +90,40 @@ Moves
 ## Where the numbers come from
 The renewal window (90 days) and QUIET_DAYS (30) are defaults, not laws. They suited a mid-market SaaS book on annual terms. If your terms are monthly, shorten both. If they run multi-year, widen them. The logic does not change. The thresholds are yours.
 
+## Example chat
+Here is the skill running on a real CSM book.
+
+**You:** How's my book looking, 24 accounts?
+
+**Claude:** Rolled up. Your biggest risk isn't the account you'd expect.
+```
+At risk (by value)   3 accounts, ~$180K
+  Acme Corp   $90K   usage down 40% over 6 weeks, champion left
+  Vertex      $55K   support tickets up, health score falling
+
+Going quiet          4 accounts, no contact 30d+
+  Delta Co    $32K   dark 44d, renews in 75d
+```
+Acme leads by value at risk, not by a flashing red flag, that's why ranking by dollars instead of raw count matters. Delta Co is the quieter danger: nothing looks broken because the renewal is still 75 days out, but 44 days of silence before a renewal is exactly the pattern that hides until it's too late. One sharpener: connect a product-analytics tool so "usage down 40%" becomes a real trend line instead of a single snapshot comparison.
+
+**You:** Give me the one move for each of those two.
+
+**Claude:** One move apiece, not a plan to triage.
+```
+1. Acme Corp: book a save conversation this week, name a new champion.
+2. Delta Co: re-open contact before the renewal clock runs down.
+```
+Acme needs a new relationship, not just a check-in, since the champion who left was likely the account's only real advocate. Delta just needs the silence broken now, while there's still runway before the renewal date. One sharpener: connect a meeting tool so "re-open contact" can suggest the actual best contact to reach, not a guess at who's still there.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Refresh the whole book every Monday, automatically.** Point a scheduled Claude task at Salesforce and Amplitude weekly and post the four groups to the CSM team channel before standup.
+- **Catch the quiet ones before they go dark.** Set the going-quiet check to fire the moment an account crosses the threshold, not on a weekly cadence, via a Slack alert to the account owner.
+- **Turn the moves into sent outreach.** Chain this into comms-agent so "book a save conversation" becomes a drafted email or calendar hold, not just a line on a list.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Change the windows, the health signals, the fields. The point is not to run someone else's playbook. It is to run yours, faster. Built by an operator. Customize it, break it, make it better.

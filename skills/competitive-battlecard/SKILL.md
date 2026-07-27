@@ -88,5 +88,40 @@ Proof to go find: our time-to-value claim needs one named reference. Get it.
 ## Where the inputs come from
 The proof-per-claim rule, the traps-not-insults line, and the never-trash discipline are the defaults that let you win competitive deals without looking scared. The competitor set, the win themes, and the reframes are yours. If the alternative is build-it-yourself, the traps change but the discipline does not: every claim proved, every attack reframed, the competitor never trashed. The card is yours.
 
+## Example chat
+Here is the skill running on a real competitive deal.
+
+**You:** We're in a bake-off with Rival A at Acme. Build me a card, they run per-seat pricing and heavy config.
+
+**Claude:** Card's built. The strongest line isn't a feature fight, it's their pricing structure.
+```
+Trap: their pricing scales per seat, which punishes the buyer as
+the team grows past the pilot.
+Landmine: "How does the price change once you roll this out to
+the whole team, not just the pilot group?"
+```
+That question is fair to ask any vendor, and the honest answer favors you because your pricing doesn't punish growth. It also plants a seed the buyer carries into their next call with Rival A. One sharpener: connect your meeting tool so the reframes answer the actual objections the buyer raised on the call, not the ones we're guessing they'll raise.
+
+**You:** They'll probably say we lack their advanced reporting. What's the reframe?
+
+**Claude:** Acknowledge it, then move the ground to the criterion the buyer actually said mattered.
+```
+"They say we lack advanced reporting." Acknowledge: fair, they
+have more report types out of the box. Reframe: move to time-to-
+value, since the buyer named "live before end of quarter" as the
+deciding factor, and reporting depth doesn't get them there faster.
+```
+Never deny it, since a denied claim just makes the buyer dig for proof it's true. One sharpener: flag "advanced reporting" as a proof-to-find item if you want to close that gap for the next deal instead of reframing around it every time.
+
+## Go further
+The read is step one. Here's where an operator takes it once the manual version proves out.
+
+- **Keep the card current without a rebuild each deal.** Point a scheduled Claude task at Gong or Chorus weekly and update the landmines with the objections reps are actually hearing.
+- **Put it where reps already are.** Post the latest card version to a dedicated Slack channel per competitor, so it's one click away before a call, not buried in a doc.
+- **Feed it from the loss data.** Wire this to closed-lost-analysis so every fresh COMPETITOR loss automatically updates the traps and reframes with what really happened.
+
+You built the read once; now it runs itself.
+
+
 ## Make it yours
 Fork it. Change the competitors, the win themes, the reframes. The point is not to run someone else's talk track. It is to win this deal on the buyer's criteria, backed by proof, without ever giving them a reason to defend the other side. Built by an operator. Customize it, break it, make it better.

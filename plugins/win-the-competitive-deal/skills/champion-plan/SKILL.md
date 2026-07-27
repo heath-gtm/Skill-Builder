@@ -88,5 +88,32 @@ Next moves:
 ## Where the inputs come from
 THREADS_TARGET (3) and the champion traits are defaults, not laws. They suited a mid-market committee sale. The names, roles, and scores above are examples, illustrative only, not real people. The method does not change when your account does. Set the traits and the target to your real buying process and the plan shapes itself around it.
 
+## Example chat
+**You:** I've got a good contact at Acme but I'm not sure if she's a real champion or just friendly. Here's who I've talked to. [pastes contacts]
+
+**Claude:** Scored it.
+```
+Dana (VP Ops)      power: yes   pain: high   will act: proven  -> CHAMPION
+Sam (Analyst)      power: no    pain: high   will act: yes     -> coach
+
+Thread map (target: 3 engaged)
+  Economic buyer   CFO            DARK   <- open next, via Dana
+  Technical eval   Sam            engaged
+```
+The distinction that matters: Sam feels the pain just as much as Dana, but no power to move budget makes Sam a coach, not a champion. Calling Sam a champion is how deals stall on someone who can't actually say yes.
+
+**You:** How do I know Dana will really carry this internally?
+
+**Claude:** Give her a small test before you rely on her: ask for the intro to the CFO. If she delivers, she's real. If she stalls, you've got a coach and you open a second thread now, not after the deal's already single-threaded and stuck. One sharpener: connect your email tool so the thread map reflects who's actually replying, not just who's listed as a contact, that's usually where a "champion" turns out to have gone quiet.
+
+## Go further
+Scoring one account by hand catches the risk before it costs you the deal. Here's the version that watches every open deal at once.
+
+- **Flag single-threaded deals automatically.** Connect Salesforce contact roles to a scheduled Claude task that scans open opportunities weekly and surfaces any deal with only one engaged contact.
+- **Catch the champion going quiet.** Wire Gong or your email tool so a champion who stops replying triggers a Slack alert to the rep before the silence becomes a lost deal.
+- **Generate the one-pager on demand.** Connect this to your business-case skill so the moment a champion is scored, the forwardable one-pager drafts itself in their voice, ready to send up the chain.
+
+A champion tested once by hand is a habit once it runs on every deal automatically.
+
 ## Make it yours
 Fork it. Change the traits, the thread target, the one-pager format. The point is not to run someone else's coverage model. It is to make sure your deal never rests on one person again. Built by an operator. Customize it, break it, make it better.
