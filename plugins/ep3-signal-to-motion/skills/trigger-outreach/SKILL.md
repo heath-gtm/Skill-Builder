@@ -84,8 +84,53 @@ Why it works: the raise is the whole reason for the touch. Remove it
 and the message has nothing to stand on. That is the test.
 ```
 
+## Example chat
+Here is the skill turning one real signal into a touch worth sending.
+
+**You:** Northwind just closed a Series B, 9 days ago. VP Sales is Dana Cole. What do I send?
+
+**Claude:** Good timing. Nine days is well inside the freshness window, so the raise is still a live reason to reach out.
+
+One angle, not three. A Series B is new capacity and pressure to deploy it fast, so I'm playing the scaling angle, not "congrats on the round."
+
+```
+Subject: your Series B and the next 20 reps
+
+Dana, saw the round close last week. Rounds this size usually
+mean a hiring plan that outpaces the process meant to support it.
+When a team doubles, the outbound motion is often the first thing
+to crack. Worth 20 minutes to compare notes on what tends to break
+at that size?
+```
+
+Relevance test: pull the raise out of that email and it has nothing to stand on. That's the bar, so it passes. I skipped the "love what you're building" opener on purpose; the signal is the whole reason, not a warm-up line.
+
+**You:** They're already an open opp in Salesforce. Does that change it?
+
+**Claude:** It does. This isn't a cold touch, it's a reason to re-engage an active deal, so I'd drop the introduction framing and reference where you left off:
+
+```
+Subject: the Series B changes the timeline we talked about
+
+Dana, the round probably moves up the hiring you mentioned on our
+last call. If the team's about to scale, the follow-up gap we
+scoped gets more expensive fast. Want to pick the thread back up
+this week?
+```
+
+One sharpener for next time: connect your signal source and I'll catch triggers like this the day they fire instead of nine days later, and check the CRM myself so I know it's an open opp before I write.
+
 ## Where the inputs come from
 The freshness window (14 days) and the angle map are defaults, not laws. They suited a fast outbound motion where signals decay quickly. If your buyers move slower, widen the window. If your product ties to a different implication, remap the angles. The logic does not change. The thresholds and the mapping are yours.
+
+## Go further
+One good touch is the start. Here is where an operator takes it once the manual version works.
+
+- **Watch the signals so you don't have to.** Wire a signal source into a scheduled Claude task that drafts the touch the day a trigger fires and drops it in your sequencer for review. You react to a ready draft, not a news alert.
+- **Check the CRM before it writes.** Have the task read Salesforce or HubSpot first, so an owned account or open deal gets a relationship-aware touch instead of a cold intro to someone you already know.
+- **Route by freshness automatically.** Fresh triggers go straight to a draft; stale ones get parked with a note. You never send "congrats on the round" three weeks late, and the good ones never sit.
+
+The stack stays simple: a signal source fires it, Claude reads and writes it, the CRM keeps it honest about the relationship, your sequencer sends it. You set the angle map once; it runs on every trigger after that.
 
 ## Make it yours
 Fork it. Change the signal sources, the freshness window, the angle map, the voice. The point is not to send someone else's template. It is to turn a real event into a real reason, in your words, faster. Built by an operator. Customize it, break it, make it better.

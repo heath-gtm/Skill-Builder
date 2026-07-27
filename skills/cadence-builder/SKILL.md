@@ -84,8 +84,46 @@ Effort mix: 3 personalized touches (video, first email, breakup),
 7 efficient templated touches. Tighten for higher-fit accounts.
 ```
 
+## Example chat
+Here is the skill designing a full cadence for a real segment.
+
+**You:** Build an outbound cadence for mid-market RevOps. I can run email, phone, and LinkedIn. We cut manual follow-up.
+
+**Claude:** Here's a 10-touch, 18-day cadence, front-loaded, with an intent on every step so it builds a case instead of nagging:
+
+```
+Day  Channel    Intent
+0    Email      Introduce the problem + soft CTA
+1    LinkedIn   Connection request, no pitch
+3    Phone      Reference the email, permission opener
+5    Email      One proof point, new angle
+7    LinkedIn   Value-first message (a resource)
+9    Phone      Second dial, different time of day
+12   Email      Short case-style example
+14   Video      Pattern break, 30-second personal note
+16   Phone      Last live attempt
+18   Email      Graceful break-up, easy exit
+```
+
+Effort mix: 3 personalized touches (the video, the first email, the break-up) and 7 efficient templated ones. The channels reference each other, so the day-3 call points back to the day-0 email. That's what makes it one story through several doors, not eight copies of the same knock.
+
+**You:** This is a must-win segment. Tighten it.
+
+**Claude:** For a must-win I'd raise the effort and cluster tighter: drop to 8 touches over 12 days, make 5 of them personalized (add a researched second email and a written-for-them LinkedIn note), and move the video earlier to day 6 so the pattern break hits while attention is still high. Same intent-per-touch logic, just more hand-work where the account is worth it.
+
+One sharpener: connect your CRM and I'll shape the next one off what actually converted in this segment, and pull phone and social coverage so I only plan channels you can really reach them on.
+
 ## Where the inputs come from
 SEGMENT, CHANNELS, and OFFER are yours to set; the 8-to-12 touches over 14-to-21 days and the front-loaded spacing are defaults that suited a mid-market motion, not laws. Longer enterprise cycles stretch the duration and thin the touches. The intent-per-touch logic holds. The inputs are yours.
+
+## Go further
+The design is step one. Here is where an operator takes it once the shape holds.
+
+- **Ground the shape in what worked.** Connect Salesforce so the cadence reads the segment's past outcomes and weights the channels that actually convert, instead of a sensible default.
+- **Only plan channels you can reach.** Wire an enrichment tool like Clay for phone and social coverage, so the cadence never schedules a dial for a number you don't have.
+- **Load it and turn it on.** Push the steps, channels, and timing straight into your sequencer, so the design becomes a running sequence the same day instead of a doc someone has to rebuild by hand.
+
+Build the intent map once and the cadence stops being a static template. It reshapes itself to the segment in front of it, then goes live where your team already sends.
 
 ## Make it yours
 Fork it. Change the segment, the channels, the length, the intensity, the effort mix. The point is not to run someone else's sequence. It is to run yours, built for who you are actually chasing. Built by an operator. Customize it, break it, make it better.

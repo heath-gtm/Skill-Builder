@@ -85,8 +85,55 @@ I will get out of your inbox. If ramp is a Q3 problem, I am here.
 If not, no hard feelings.
 ```
 
+## Example chat
+Here is the skill writing a first touch, then building it into a sequence.
+
+**You:** Write a cold email to a VP Sales who hired 4 AEs last month. We cut the ramp tax on follow-up.
+
+**Claude:** One idea, one ask, under 90 words. The signal is the hire, so that's the opener, not flattery.
+
+```
+Subject: onboarding 4 at once
+
+Saw the team went from 6 reps to 10 in a month. Fast.
+The usual tax on that: new reps improvising follow-up until
+month three, and pipeline slipping while they learn the motion.
+We help teams hold touch quality from week one. Worth a look,
+or is ramp already handled?
+```
+
+That closes interest-first, not calendar-first, which lands better on a cold first touch. I kept the proof soft on purpose, no hard guarantee stapled to a stranger.
+
+**You:** Make it a 3-touch sequence.
+
+**Claude:** Each touch adds a new angle instead of nagging the same one:
+
+```
+Touch 1 (day 0): the email above (the signal + the problem)
+
+Touch 2 (day 4):
+One thing that tends to move the needle mid-hire is a shared
+follow-up motion so week-one reps sound like month-six reps.
+Happy to send the one-pager, no call needed.
+
+Touch 3 (day 9):
+I'll get out of your inbox. If ramp is a Q3 problem I'm here;
+if not, no hard feelings.
+```
+
+Touch three is a graceful exit, not a fake "final notice." One sharpener: connect an enrichment tool and I'll name the exact stack or the specific reps they hired, so the opener gets more specific than "4 AEs."
+
 ## Where the inputs come from
 PERSONA, OFFER, and SIGNAL are yours to set; the 90-word ceiling and the 3-touch spacing (day 0 / 4 / 9) are defaults that suited a fast outbound motion, not laws. Longer cycles can widen the spacing. The structure holds. The inputs are yours.
+
+## Go further
+A sharp email by hand is the floor. Here is where it goes next.
+
+- **Draft off the read, not a blank page.** Feed the Untouched rows from a product-usage read, or a fresh funding signal, straight in, so every email opens on a real reason instead of a guessed one.
+- **Enrich the opener automatically.** Connect Clay or an enrichment tool so the first line names the exact role, the tech in use, or the hire, with no manual LinkedIn digging per prospect.
+- **Send from where you already work.** Drop the finished touches into your sequencer or HubSpot with the day 0 / 4 / 9 spacing already set, so the draft becomes a live cadence in one step.
+
+The point is not to generate more email. It is to make each one land on a reason the reader recognizes, then get it out the door without leaving your stack.
 
 ## Make it yours
 Fork it. Change the persona, the CTA style, the number of touches, the voice. The point is not to send someone else's email. It is to send yours, faster and sharper. Built by an operator. Customize it, break it, make it better.
