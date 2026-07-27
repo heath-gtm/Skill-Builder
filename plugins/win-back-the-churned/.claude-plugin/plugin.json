@@ -1,0 +1,8 @@
+{
+  "name": "win-back-the-churned",
+  "version": "1.0.0",
+  "description": "You pour everything into onboarding and treat the exit as a cancel button. Audit both ends, then build the boomerang. What you get: a scored onboarding experience, a scored exit, the churned accounts worth chasing, and a warm re-onboarding sequence for each.",
+  "author": { "name": "Heath Barnett", "url": "https://builtgtm.ai" },
+  "homepage": "https://builtgtm.ai/playbooks/win-back-the-churned",
+  "keywords": ["built-gtm", "playbook", "customer-success", "gtm"]
+}
