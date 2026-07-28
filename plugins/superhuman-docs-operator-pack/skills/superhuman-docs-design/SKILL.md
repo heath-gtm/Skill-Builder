@@ -105,6 +105,12 @@ Default to a **References table**: Source, Type (colored pill: Study / Survey / 
 ## Publishing frame
 Set cover, subtitle, and byline first. Organize with nested pages and collapse the extraneous. Keep margins and alignment clean. Choose the interaction mode. Turn on discoverability with a doc category and the right audience for anything public; leave it off for shared-but-unlisted. Use a clean custom URL (or custom domain for brand-facing docs), and "allow others to copy" only for templates. Preview, then publish. The live doc is the deliverable; never print or PDF it.
 
+## Start from a template (template-first)
+Default to starting from a template, not a blank canvas. A template kills the blank-page stall, removes the format debate, and bakes in the hierarchy, color budget, and anti-bullet rules, so the builder spends cycles on the thinking, not the layout. The field agrees: focused single-purpose templates beat all-in-one sprawl.
+Rule: **template for the frame, blank-minded for the content.** The template decides structure, section order, and which patterns to use. It never decides the substance. Use a template when the doc-type recurs and the reader expects a known shape (launch plan, QBR, account plan, weekly update). Go closer to blank when the doc is a one-off argument whose shape is the idea (a novel strategy memo).
+The move that avoids generic output: after picking the template, run an **objective-first prune** - delete every section that does not ladder to this doc's purpose, and add the one section this situation demands. A template you never subtract from is a straitjacket; a template you always prune is a head start.
+Starter set (full specs in `templates/`): Launch Plan, QBR, PRD / one-pager, Strategy Memo, Account Plan, Meeting Notes to Action Items, Weekly Update, Team Hub. Each maps to the pattern language (hero, main+rail, card wall, decision table, timeline, references).
+
 ## Building via the Superhuman Docs MCP (tool mapping)
 - **page_update:** coverPhoto.url + showCoverPhoto, icon + showIcon, subtitle + showSubtitle, pageWidth (narrow/wide/full, kept consistent), title, showAuthor.
 - **content_modify** insert_element: callout, divider, image, codeblock, markdown (headings, bold/italic, tables, lists). Inline color/highlight via `<color:Red>...</color>` and `<color: bg:Yellow>...</color>`. set_collapsible on headings/tables. Batches run in document order and are capped at 10 operations. Inline live values via `<formula>...</formula>`.

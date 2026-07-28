@@ -129,7 +129,7 @@
       "slug": "superhuman-docs-operator-pack",
       "name": "Superhuman Docs Operator Pack",
       "tagline": "Build docs that look senior, not junior.",
-      "problem": "AI can fill a doc, but it comes out a junior vertical stack. This is the design system, the MCP build mechanics, and the planning framework to make Superhuman Docs read like a product.",
+      "problem": "AI can fill a doc, but it comes out a junior vertical stack. This is the design system, the MCP build mechanics, the planning frame, a template library to start from, and skills for the docs a GTM operator builds weekly, so Superhuman Docs read like a product.",
       "audience": "Operators who build in Superhuman Docs or Coda",
       "connectors": [
         "Superhuman Docs"
@@ -137,7 +137,11 @@
       "skills": [
         "superhuman-docs-design",
         "superhuman-docs-builder",
-        "eigenquestion-planner"
+        "eigenquestion-planner",
+        "docs-ship-check",
+        "meeting-to-doc",
+        "customer-doc-generator",
+        "launch-orchestrator"
       ],
       "visibility": "public",
       "status": "published"
