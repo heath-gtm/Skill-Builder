@@ -1,0 +1,8 @@
+{
+  "skill_name": "superhuman-docs-design",
+  "evals": [
+    {"id": 0, "name": "launch-plan-redesign", "prompt": "I have a rough product launch plan in a Superhuman Doc: a problem statement, the plan, a task list, and some research links. Right now it is stacked headings and bullet lists and it looks junior. Redesign it so it reads like a senior, published doc. Give me the exact composition (layout, color, sections, typography), what to build via the Docs MCP vs what I finish by hand in the editor, and how to review it. Be specific and buildable.", "files": []},
+    {"id": 1, "name": "strategy-memo", "prompt": "Turn this into a beautiful Coda / Superhuman doc: a strategy memo with an exec summary, three arguments each backed by data, a recommended decision, and next steps. How should I lay it out, color it, and section it so it looks premium and not like a wall of text? Tell me what is programmatic vs a manual finishing step.", "files": []},
+    {"id": 2, "name": "customer-qbr", "prompt": "Design a customer-facing QBR doc in Superhuman Docs with account health, product usage, an exec summary, and a timeline for next quarter. Make it look premium, not like a form. Give me the layout, the color and background approach, how to show the usage data and the timeline, and the publishing settings.", "files": []}
+  ]
+}
