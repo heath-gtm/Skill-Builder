@@ -49,5 +49,12 @@ CFL is its own dialect. Functions you will wrongly assume exist and that fail: G
 ## What the MCP cannot do (hand to the human)
 Side-by-side columns, text size (Large/Small) and true eyebrow styling, native AI columns, page background and bands beyond callouts and shaded tables, card-face fine settings, timeline dependencies, and all publish settings. For each, superhuman-docs-design has a Docs AI prompt to try first and a manual fallback. Tested: Docs AI will not create true columns; they stay a manual editor gesture.
 
+## Every build ships as three things
+A build is not done when the doc exists. It ships as three artifacts, in order:
+1. **The build.** The substance created through the MCP: pages, tables, views, formulas, content.
+2. **The eval.** An end-to-end check that it actually works. Read the structure back with content_read, run formula_execute on every live formula, confirm the views render, confirm links resolve, and open the rendered doc in Chrome from the account that owns it for a visual pass. Log pass, warn, or block per element.
+3. **The report.** A handoff that lists the eval results and the exact step-by-step UI finishing instructions (each UI-only touch with a Docs AI prompt to try and a manual fallback), plus the publish and share steps. The human runs the report to bring the doc to the finish line.
+Never hand over just the build. The eval catches the broken formula, and the report catches the ten percent only a human can finish.
+
 ## Make it yours
 Fork it. Add the gotchas your stack surfaces, your own build order, your formula snippets. The point is to build real docs through the MCP without relearning the traps every time. Built by an operator. Customize it, break it, make it better.
