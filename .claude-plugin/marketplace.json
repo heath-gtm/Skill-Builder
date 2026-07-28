@@ -366,6 +366,19 @@
     "customer-success"
    ],
    "homepage": "https://builtgtm.ai/playbooks/win-back-the-churned"
+  },
+  {
+   "name": "superhuman-docs-operator-pack",
+   "source": "./plugins/superhuman-docs-operator-pack",
+   "description": "Build docs in Superhuman Docs (Coda) that look senior, not junior - the design system, the MCP build mechanics, and the planning framework behind them",
+   "category": "productivity",
+   "keywords": [
+    "superhuman",
+    "coda",
+    "docs",
+    "design"
+   ],
+   "homepage": "https://builtgtm.ai/playbooks/superhuman-docs-operator-pack"
   }
  ]
 }

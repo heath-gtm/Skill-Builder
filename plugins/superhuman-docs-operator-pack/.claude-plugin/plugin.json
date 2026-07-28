@@ -1,0 +1,8 @@
+{
+  "name": "superhuman-docs-operator-pack",
+  "version": "1.0.0",
+  "description": "Build documents in Superhuman Docs (Coda) that read like a product, not a junior vertical stack. The design system, the MCP build mechanics, and the planning framework behind them. What you get: a doc with real composition, a repeatable build, and reasoning you can show.",
+  "author": { "name": "Heath Barnett", "url": "https://builtgtm.ai" },
+  "homepage": "https://builtgtm.ai/playbooks/superhuman-docs-operator-pack",
+  "keywords": ["built-gtm", "superhuman", "coda", "docs", "design", "playbook"]
+}
