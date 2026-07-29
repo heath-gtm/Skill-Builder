@@ -1,6 +1,6 @@
 ---
 name: superhuman-docs-builder
-description: The engineering companion to superhuman-docs-design: how to actually build a document in Superhuman Docs (Coda) through the Docs MCP. Tool inventory and build order, the gotchas that bite (batch caps, row-as-array writes, the date format token, select-vs-checkbox, card-face hiding, canvas-in-a-cell), Coda Formula Language traps, and the two-pass handoff to the human UI finishing pass. Trigger on "build this doc via the MCP", "create the tables and views", "the MCP call failed", "how do I add a timeline or progress or card view", "why did my table write break", "seed the rows", or any hands-on Superhuman Docs / Coda MCP build task.
+description: The engineering companion to superhuman-docs-design: how to actually build a document in Superhuman Docs (Coda) through the Docs MCP. Tool inventory and build order, the gotchas that bite (batch caps, row-as-array writes, the date format token, select-vs-checkbox, card-face hiding, canvas-in-a-cell), Coda Formula Language traps, and the two-pass handoff to the human UI finishing pass. Trigger on "build this doc via the MCP", "create the tables and views", "the MCP call failed", "how do I add a timeline or progress or card view", "why did my table write break", "seed the rows", or any hands-on Superhuman Docs / Coda MCP build task. v5 adds the AI layer (AI columns/blocks/chat + the computed-cell fallback; Coda AI does NOT browse the web), MCP-native reactions, wiki/KM + nested multi-page builds, and the bespoke-overlay model (template-first base, then charts/rich-detail/reactions via the MCP + one UI columns pass). Also triggers on "add collaborator reactions", "AI column", "build a wiki or hub", "multi-page or nested subpages", "add a chart", "checkbox column broke", "formula shows a stale value".
 ---
 
 # Building in Superhuman Docs through the MCP
@@ -58,3 +58,91 @@ Never hand over just the build. The eval catches the broken formula, and the rep
 
 ## Make it yours
 Fork it. Add the gotchas your stack surfaces, your own build order, your formula snippets. The point is to build real docs through the MCP without relearning the traps every time. Built by an operator. Customize it, break it, make it better.
+
+---
+
+# v5 additions — AI layer, reactions, wiki/KM, multi-page builds, the bespoke overlay
+
+Everything below was tested against the live Docs MCP while building a 4-page "Build Planner V2" doc. Where a claim is marked TESTED, it was verified in that build.
+
+## The AI layer — build AI-native, know what the API can and can't do
+
+Coda has five AI surfaces. Match each to the job; only some are reachable through the MCP.
+
+- **AI column** (per-row generation, auto-populates new rows). Reference same-row fields with `@[Column]`; `=` opens the formula builder. Proven prompts: "write a sales email from each title," "rate 1–5," "prioritize High/Med/Low from the due date." **MCP status: UI-only to create a *live* one.** Build-time move = the **computed-cell fallback**: write the summary/label into a plain `none`/`canvas` cell yourself so the doc ships complete; flag "convert to a live AI column" for the UI pass.
+- **AI Chat / Ask-the-doc** (grounded side panel; Context = no context / page / doc / selection). Live on every doc, no build step — the doc's job is to be *answerable* (clean headers, named tables, one fact per cell). Seed a callout of 3–4 starter questions so the reader knows it's queryable.
+- **AI blocks** (`/Summarize`, `/Find action items from`, `@`-referencing tables/pages). UI-only as *live* blocks — build the summary/action-items yourself as a callout/table now, flag the live swap.
+- **AI Assistant** (first drafts, "create a table…") and **AI Reviewer** (comment-rail feedback) — human aids after handoff, not build targets.
+
+**Web research — the honest limit.** Coda AI has **no live internet access** (training data only, ~10k-word cap). **Never build an AI column that "looks up" or "researches" the web — it will hallucinate.** Route live external data through an **external workflow**: a doc **button** (Webhook/HTTP Pack) fires a Deepline/n8n/Make workflow → writes back into the row via the Coda API (`coda.io/apis/v1`, a Coda token as the workflow's secret). That is the correct home for web research.
+
+## Reactions & collaborator input (build the spots in — MCP-native, TESTED)
+
+- **Reaction column (TESTED MCP-native).** `format: {type:"reaction", imageIcon:"high-five", reactionDisplay:"People"}`. `reactionDisplay`: `People` (who — endorsement/sign-off), `Number` (tally — voting), `None`. Icons: `high-five`, `filled-like`, `fire-element`, `rocket`, `trophy`, `thumbs-down`.
+  - **Gotcha:** a reaction column is interactive, **not value-writable** (`isWritable:false`) — create it, never seed it, and **exclude it from the `rows`/`columnIds` arrays**. Add it after seeding via `table_columns_manage` add if the table already has rows.
+  - **Where:** an "Endorse" reaction (People) on a decisions/activations table; a "Vote" reaction (Number) on a requests/ideas backlog; a "Verified" reaction on a wiki article.
+- **Reaction block** (`/reaction`, page-level) — UI-only; note it for the pass.
+- **Interactive-verification unit (KM gallery):** pair a reaction with an **owner** (person col) and a **last-reviewed** date — vote + owner + freshness is the reusable KM contribution unit.
+
+## Wiki & knowledge-management patterns (mostly MCP-native)
+
+- **Page hierarchy (TESTED MCP-native).** `page_create` with `uri` = the **parent page URI** nests a subpage (top-level uses the doc URI); unlimited depth. `page_update` sets `parentPageUri`, `icon`, `showAuthor`, `showLastEdited`, `pageWidth`. UI-only leftover: turning top pages into **top-nav tabs**.
+- **Home / hub page:** cover + one-line purpose, an escalation line, the information architecture, and link cards (`/link` in UI; MCP inserts markdown links, upgrade to cards in the pass). Hub archetypes: **Team Hub**, **Directory** (filterable index), **Request tracker** (intake + status + vote), **Curation repo** (title + type + source + freshness).
+- **Discovery:** toggle the **Outline/TOC** on for anything over two screens (auto-built from H1/H2/H3 — another reason the section rhythm matters). Name tables and headers for what a person would search.
+- **Attribution:** `showAuthor` + `showLastEdited` = the trust layer. Per-row freshness = owner (person) + last-reviewed (date) + a "Verified" reaction.
+
+## Multi-page / nested-doc builds (TESTED recipe)
+
+A whole multi-page doc builds through the MCP in one session. Recipe:
+
+1. `page_create` the **parent hub** (uri = doc URI), then `page_create` each **subpage** with `uri` = the parent page URI to nest it. Set icons, subtitles, width in the create call.
+2. Fill each page top-down (hero → sections → tables), one page at a time.
+3. **Prefix every table name per page** (e.g. `V2 Build Tasks`) so name-based CFL references resolve unambiguously — two tables of the same name in one doc will break a `[Table]` reference.
+4. **Live cross-page formulas** resolve by table name across the whole doc — a hub progress callout can read a table that lives on a subpage.
+5. Reference: a full 4-page doc (parent + 3 subpages, ~10 tables, timelines, charts, a live progress formula) came in around **~27 write calls in one session**.
+
+Ordering caveat: `page_create` nests correctly, but **`page_update position` does NOT reorder pages** — dragging in the sidebar is UI-only.
+
+## The bespoke overlay — template-first is the base, always
+
+The persuasive layer (the argument lockup, charts, rich-detail cards) is **not** a reason to hand-build a doc from scratch. It's an **overlay you add on top of a template-first base**, and most of it is MCP-native. So the rule is: **template-first for the recurring frame, then run the bespoke overlay** — never blank-mind the base.
+
+The overlay, and how to build each piece:
+
+- **Charts** (progress bar, donut) — MCP-native: `table_view_manage` add a view with `viewLayout: "bar chart" | "pie chart"`, set `chartOptions` (`xColumnIds`, `seriesColumnIds`, `stacking`, `pieDisplayMode`).
+- **Rich-detail cards** (minimal face, depth on open) — MCP-native: add the detail columns, then `columnVisibility.hideColumnIds` on the card view. Populate an "AI summary" col with the computed-cell fallback.
+- **Designed cards** (iterations, options) — MCP-native: `viewLayout: "card"`.
+- **The only UI-only piece:** true side-by-side **columns** (e.g. Eigenquestion | How-to-read). Same one gesture whether the base was template-first or blank-minded — so it never favors blank-minding.
+
+Bespoke-overlay checklist (run after the template-first base): charts on the board → rich-detail on the key card → a starter-questions callout for Ask-the-doc → reaction spots → then the single UI columns pass + publish.
+
+## More gotchas learned the hard way (v5, TESTED)
+
+- **Checkbox coercion.** `table_create` with `format: check` silently becomes a **true/false select**. Fix: create it, then `table_columns_manage` update the column to `check`, then write boolean cells.
+- **select→check flips every non-empty cell to checked** (both "true" and "false" strings read truthy). After converting, explicitly set the false rows.
+- **`content_read` returns a STALE formula cache** right after row writes. Confirm live values with **`formula_execute`**, not `content_read`.
+- **`page_update position` does not move a page** (see multi-page recipe). Nesting via `page_create` parent works; reorder is UI-only.
+- **Collision-safe table naming** in any multi-table/multi-page doc (see recipe).
+
+## The action layer, relations, and self-serve (extras)
+
+- **Buttons are the doc's verbs.** `format: button` with `actionFormula` (CFL, uses `thisRow`), `disableIfFormula`, `label`, `color`. This is the "Optimize in Claude" / "Enrich" pattern — pair a button with an external workflow for anything the API alone can't do.
+- **Relation / lookup columns** (`format: lookup`, `objectId` = target table) keep "one governed surface" real: teams reference the same canonical rows instead of copying. Compare person/lookup values with `.ToText().ContainsText(...)`, never `=`.
+- **Self-serve growth:** an add-a-row or duplicate-page button lets a wiki grow without you.
+- **Conditional format vs. colored pills:** pills for *categorical* status (fast, free at `table_create`); `conditionalFormats` (via `table_view_manage`) for *computed* thresholds (overdue dates, score bands).
+
+## Capability map — MCP-native vs UI-only (corrected)
+
+| Capability | Status |
+| --- | --- |
+| Nested pages / hierarchy / icons / author / last-edited / width | **MCP-native** (`page_create` parent + `page_update`). UI-only leftover = top-nav tabs. |
+| Reaction column | **MCP-native** (`format: reaction`; interactive, exclude from rows). |
+| Charts (bar / pie / line / area) | **MCP-native** (`table_view_manage` chart layouts + `chartOptions`). |
+| Card views + rich-detail (hideColumnIds) | **MCP-native.** |
+| Checkbox column | MCP, but `table_create` coerces `check`→select; fix via `columns_manage`. |
+| AI column / AI block (live) | **UI-only** to make live; ship the computed-cell fallback now. |
+| Ask-the-doc / AI Chat | Live on every doc; design *for* it (structure + starter-questions callout). |
+| Web research via Coda AI | **Not possible** — no internet; route through button → workflow → Coda API. |
+| Side-by-side columns | **UI-only** (the one bespoke gesture; identical work regardless of base). |
+| Page reorder | **UI-only** (`page_update position` no-ops). |
+| Bands beyond callouts/shaded tables, text size, publish | **UI-only.** |
