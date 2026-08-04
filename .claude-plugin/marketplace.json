@@ -379,6 +379,18 @@
     "design"
    ],
    "homepage": "https://builtgtm.ai/playbooks/superhuman-docs-operator-pack"
+  },
+  {
+   "name": "work-the-deal-signals",
+   "source": "./plugins/work-the-deal-signals",
+   "description": "Work the deal signals before the forecast slips - A standing watch on every account in play, a same-week play for every job change and hiring signal, wider coverage on the deals that matter, and a win profile that feeds the next list",
+   "category": "sales",
+   "keywords": [
+    "playbook",
+    "sales",
+    "signals"
+   ],
+   "homepage": "https://builtgtm.ai/playbooks/work-the-deal-signals"
   }
  ]
 }
