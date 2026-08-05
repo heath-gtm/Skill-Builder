@@ -1,0 +1,16 @@
+{
+  "name": "understand-me",
+  "version": "1.0.0",
+  "description": "Show them you understand them. What you get: a message that proves you understand the person, built from real context, and a discovery brief a rep can walk into the call with.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://builtgtm.ai"
+  },
+  "homepage": "https://builtgtm.ai/playbooks/understand-me",
+  "keywords": [
+    "built-gtm",
+    "playbook",
+    "sales-development",
+    "gtm"
+  ]
+}
