@@ -5,7 +5,7 @@ description: >
   The structural forcing function for any Built GTM piece. The Built GTM version
   of strategic-plan-structure. Triage the type first (Build Log, Lens, Field,
   Signal, Playbook, Newsletter), then lock the shape: hook is the verdict, one
-  spine, receipts over claims, scar before lesson, cut the thrash. Trigger on
+  spine, the method over claims, scar before lesson, cut the thrash. Trigger on
   "structure this", "how should this be laid out", "is this thrash", "tighten
   this piece", "what type is this", "structure my playbook / article / post".
 license: MIT
@@ -42,7 +42,7 @@ If you are unsure, ask. If you cannot ask, default to Build Log. It is the spine
 
 1. The hook is the verdict. First sentence is the most interesting one. No context-bombing, no runway.
 2. One spine. One claim, one scar, one receipt, one steal. Cut the rest.
-3. Receipts over claims. Every instructive line carries a receipt: a tool named, minutes saved, dollars moved, or what broke. No receipt, cut the claim.
+3. Approach over claims. Every instructive line carries the method behind it: how the problem got framed, what got tried, what broke, what is still open. If a reader could not run it, add the steps or cut the claim.
 4. Scar before lesson. The failure comes before the instruction. Self-implicating first.
 5. Frequencies, not percentages. 47 percent becomes "about 1 in 2." Weekly targets become daily rituals.
 6. Cut 30 percent. If you can remove a third and lose nothing, you have not shipped yet.
@@ -58,7 +58,7 @@ Open the draft. Read only the first line and the subheads. Ask:
 
 - Do I know the claim from the hook alone?
 - Is there a scar I can feel?
-- Is there a receipt I can check?
+- Is there a method I can run?
 
 If any answer is no, the piece is buried, theoretical, or thrash. Fix that before writing the body.
 
@@ -88,7 +88,7 @@ Present tense only. No "journey." No future-tense speculation.
 4. The steal. What to lift into your own seat.
 
 ### Signal
-One claim. One reason. One bet. One "ignore this." Four lines maximum. No hedging.
+One claim. One reason. One bet. One "ignore this." Four lines maximum. Confidence marked on the answer.
 
 ### Playbook (the strategic spine, closest to a strategic plan)
 This is the Built GTM analog of the Mixmax strategic plan. Same discipline: verdict first, no thrash, receipts, defensible.
@@ -133,7 +133,7 @@ Rules:
 - Keep this file thin. The receipts file carries the depth and the proof.
 
 ### Newsletter (the weekly edition)
-One story (the scar or the build). One build (what to steal this week). One signal (what is coming). No fluff. No motivational content. Receipts only.
+One story (the scar or the build). One build (what to steal this week). One signal (what is coming). No fluff. No motivational content. Approach, not receipts.
 
 ## How to apply this skill
 

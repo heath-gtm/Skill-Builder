@@ -40,4 +40,4 @@ A list of where work moves between your GTM functions. No connectors. You can do
 [the one workflow you picked, and what it costs you per week today]
 
 ## Next move
-Hand the workflow to Stack the Tech. Built GTM. Receipts only.
+Hand the workflow to Stack the Tech. Built GTM. Approach, not receipts.

@@ -5,7 +5,7 @@ description: >
   Writes the Built GTM newsletter (Ghost) in Heath Barnett's voice. One edition
   per week. Structure: one story (the scar or the build), one build (what to
   steal this week), one signal (what's coming). No fluff. No motivational
-  content. Receipts only. Trigger on "write the newsletter", "draft this week's
+  content. Approach, not receipts. Trigger on "write the newsletter", "draft this week's
   edition", "newsletter on", "weekly GTM email about", "Built GTM newsletter",
   or any request to write a newsletter edition for Ghost. Will not draft
   without the specific scar/build/signal — asks for the week's topic first.
@@ -26,8 +26,9 @@ LinkedIn pillars, and the retired list. `DESIGN.md` is its counterpart for anyth
 that renders.
 
 **If this skill and WRITING.md disagree, WRITING.md wins, and this skill gets
-updated in the same session.** Two live copies of a rule is how they drift, which
-is the problem that file exists to solve.
+updated in the same session. On voice, `brand/voice.md` wins over both: it is the
+single canon, and this skill points at it rather than restating it.** Two live
+copies of a rule is how they drift, which is the problem that file exists to solve.
 
 
 # Built GTM Newsletter Writer
@@ -123,7 +124,7 @@ The title is the subject line. It should make someone who's been in a sales seat
    - [ ] No arrows
    - [ ] No em dashes
    - [ ] Story opens on the moment, not the setup
-   - [ ] Build has a receipt (specific outcome)
+   - [ ] Build shows the method (the steps a reader could run)
    - [ ] Stack included in the Build section
    - [ ] Signal takes a position (not hedged)
    - [ ] Total word count under 700

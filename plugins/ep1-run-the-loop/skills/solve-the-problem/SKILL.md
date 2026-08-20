@@ -50,4 +50,4 @@ Name the workflow once, and the system keeps pointing you at the next one.
 
 
 ## Next move
-Hand the workflow to Stack the Tech. Built GTM. Receipts only.
+Hand the workflow to Stack the Tech. Built GTM. Approach, not receipts.

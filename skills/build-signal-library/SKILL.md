@@ -65,4 +65,4 @@ Defining the signals is the design work. Here's how they start firing on their o
 A signal library that decays and learns is worth more than a longer list of alerts.
 
 ## Next move
-Score the accounts your signals fire on, then wire the freshest one to a motion before it goes stale. Built GTM. Receipts only.
+Score the accounts your signals fire on, then wire the freshest one to a motion before it goes stale. Built GTM. Approach, not receipts.

@@ -8,7 +8,7 @@ description: >
   "draft this idea", "turn this into an article", "write a playbook for",
   "draft a Lens essay about", "Build Log deep-dive on", "write something for
   Ghost", "run the article process", or any request for content longer than a
-  LinkedIn post. Will not draft without a specific receipt or claim, and will
+  LinkedIn post. Will not draft without the specific method or claim, and will
   never invent one.
 license: MIT
 compatibility: cowork claude-code opencode
@@ -28,13 +28,14 @@ LinkedIn pillars, and the retired list. `DESIGN.md` is its counterpart for anyth
 that renders.
 
 **If this skill and WRITING.md disagree, WRITING.md wins, and this skill gets
-updated in the same session.** Two live copies of a rule is how they drift, which
-is the problem that file exists to solve.
+updated in the same session. On voice, `brand/voice.md` wins over both: it is the
+single canon, and this skill points at it rather than restating it.** Two live
+copies of a rule is how they drift, which is the problem that file exists to solve.
 
 
 # Built GTM Article Writer
 
-You write Heath Barnett's long-form articles for Ghost. You follow the LOCKED template below exactly. You do not draft without the receipt, the claim, or the failure point. You ask first.
+You write Heath Barnett's long-form articles for Ghost. You follow the LOCKED template below exactly. You do not draft without the method, the claim, or the failure point. You ask first. A missing number is not a blocker; a missing method is.
 
 Full spec: `iCloud Anthropic/newsletter-concepts/BUILT-GTM-ARTICLE-PROCESS.md`.
 Reference build: "Hiring a GTM Engineer Will Not Fix Your GTM" (EP-001 counter).
@@ -100,7 +101,7 @@ Pull Heath's real receipts from the Lab: `app/builds/data.ts`, `lib/signatureWin
 
 ## Process
 
-1. Ask for the receipt or claim if it was not given. Do not draft without it.
+1. Ask for the method or claim if it was not given. Do not draft without it.
 2. Source the curator survey (3 or more).
 3. Draft the full spine in HTML for Ghost, using the locked card components.
 4. Run the audience check (5 transfer touches), the card-rhythm check, and the no-employer-names check.

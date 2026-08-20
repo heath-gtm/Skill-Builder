@@ -61,4 +61,4 @@ The read is step one. Here is where an operator takes it once the manual version
 The cut is only real if the freed hours stay freed. That is the thing to watch.
 
 ## Next move
-Hand the cleared workflow to Keep the Judgment. Built GTM. Receipts only.
+Hand the cleared workflow to Keep the Judgment. Built GTM. Approach, not receipts.

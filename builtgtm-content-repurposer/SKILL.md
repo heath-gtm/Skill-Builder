@@ -27,8 +27,9 @@ LinkedIn pillars, and the retired list. `DESIGN.md` is its counterpart for anyth
 that renders.
 
 **If this skill and WRITING.md disagree, WRITING.md wins, and this skill gets
-updated in the same session.** Two live copies of a rule is how they drift, which
-is the problem that file exists to solve.
+updated in the same session. On voice, `brand/voice.md` wins over both: it is the
+single canon, and this skill points at it rather than restating it.** Two live
+copies of a rule is how they drift, which is the problem that file exists to solve.
 
 
 # Built GTM Content Repurposer
@@ -75,7 +76,7 @@ A repurposed post that opens with "In my latest article, I cover..." is not repu
 
 ### Voice rules apply to all outputs
 - No emojis.
-- No arrows (→).
+- Arrows are fine in framework or step notation. Never as decoration mid-sentence.
 - No em dashes (—).
 - No opening with "I."
 - Short paragraphs.
@@ -103,7 +104,7 @@ If the source content only has one strong post idea inside it, produce one post.
 
 5. Run voice check on each output:
    - [ ] No emojis
-   - [ ] No arrows
+   - [ ] Arrows only in framework or step notation
    - [ ] No em dashes
    - [ ] Every specific detail comes from the source
    - [ ] Each output stands alone without referencing the source

@@ -23,8 +23,9 @@ LinkedIn pillars, and the retired list. `DESIGN.md` is its counterpart for anyth
 that renders.
 
 **If this skill and WRITING.md disagree, WRITING.md wins, and this skill gets
-updated in the same session.** Two live copies of a rule is how they drift, which
-is the problem that file exists to solve.
+updated in the same session. On voice, `brand/voice.md` wins over both: it is the
+single canon, and this skill points at it rather than restating it.** Two live
+copies of a rule is how they drift, which is the problem that file exists to solve.
 
 
 <!-- GENERATED from context/brand/built-gtm-brand.md. Do not edit by hand. -->
@@ -51,7 +52,7 @@ These two definitions are the foundation. Use the human definition on public sur
 
 ## The Brand in One Paragraph
 
-Built GTM is how sales and revenue teams put AI to work the right way, to win more, faster, and bigger. Not to replace reps, to free them. AI does the work that does not need a human (research, prep, busywork). The rep does the work only a human can (the conversation that closes). Most teams point AI at the top of the funnel and at automating people out. Built GTM points it where the money moves: conversion rate, win rate, deal size, sales cycle, retention. Heath is the Sales AI Guy. Battle-tested, scar-approved workflows you can build this week.
+Built GTM is how sales and revenue teams put AI to work the right way, to win more, faster, and bigger. Not to replace reps, to free them. AI does the work that does not need a human (research, prep, busywork). The rep does the work only a human can (the conversation that closes). Most teams point AI at the top of the funnel and at automating people out. Built GTM points it where the money moves: conversion rate, win rate, deal size, sales cycle, retention. Heath is a Sales Operator. Battle-tested, scar-approved workflows you can build this week.
 
 
 ## Built GTM Properties
@@ -71,7 +72,7 @@ This doc governs voice. The show bible governs the show (format, audience, spons
 
 ## The Operator Thesis
 
-- **The position:** The Sales AI Guy. Built GTM is how sales and revenue teams put AI to work the right way. The reputation, not the logo; Built GTM stays the brand name.
+- **The position:** A Sales Operator. Built GTM is how sales and revenue teams put AI to work the right way. The reputation, not the logo; Built GTM stays the brand name.
 - **The Split (the central bet):** AI does the work that does not need a human, the rep does the work only a human can. Split it right and every number moves: conversion, win rate, deal size, cycle time, retention. Augment the operator, do not automate them out.
 - **Define it first:** You cannot hand qualified, a good deal, or SQL-to-Closed-Won to AI until the team has defined what they mean. The bottleneck is the definition, not the tool.
 - **The GTM Operator era:** The lanes between titles (VP Sales, VP CS, VP RevOps) have dissolved. What you do this Tuesday is six different jobs. The titles persist because the org chart hasn't caught up. The work already has.
@@ -80,13 +81,16 @@ This doc governs voice. The show bible governs the show (format, audience, spons
 - **The lens:** Every piece of content gets the three-read treatment: where AI helps, where AI hurts, where AI optimizes. Not balance. A position.
 
 
-## Voice Rules: Locked. No Exceptions.
+## Voice Rules
+
+`brand/voice.md` is the canon for voice. Read it first. What follows is the short
+operating list, and where it and the canon differ, the canon wins.
 
 ### Always do this:
 - Plain declaratives. Short sentences. Subject. Verb. Object. Repeat.
 - Self-implicating before instructive. Heath's scar comes before the lesson.
-- Specific: named tools, specific time saved (in minutes), specific people (first name only), specific dollar amounts.
-- Failure-derived. Receipts include what broke, not just what shipped.
+- Specific: named tools, the real sequence, specific people (first name only). Public result figures publish as floors with a plus, never precise wins, never retention-rate numbers.
+- Failure-derived. Show what broke and what is still unresolved, not just what shipped.
 - Present-tense. What works NOW. What broke NOW. Not future-tense speculation.
 - Direct. If it reads like a SaaS press release, it goes in the bin.
 - Practitioner voice. Not a coach selling theory. An operator narrating the seat.
@@ -98,7 +102,6 @@ This doc governs voice. The show bible governs the show (format, audience, spons
 
 ### Never do this:
 - Emojis. None.
-- Arrows (→, ←, -->, <--). None.
 - Em dashes (—). None. Use a period or a new sentence.
 - "Straightforward," "genuinely," "honestly," "impactful," "robust," "leverage" (as a verb).
 - "Game-changer," "revolutionary," "paradigm shift," "unlock," "synergy."
@@ -129,15 +132,15 @@ What Heath shipped. Actual tool. Actual receipt. Time saved in minutes or revenu
 **Format:** Problem (specific, costed) → What I tried first and why it failed → What I actually built → The receipt → The stack → The one thing worth stealing
 
 ### The Lens
-A GTM, leadership, or AI essay. Three reads: where AI helps, where AI hurts, where AI optimizes. Practitioner read, not a vendor pitch. Takes a position. Does not hedge.
+A GTM, leadership, or AI essay. Three reads: where AI helps, where AI hurts, where AI optimizes. Practitioner read, not a vendor pitch. Takes a position on the problem and marks its confidence on the answer, through adjacent experience rather than a percentage.
 
 **Format:** The claim (declarative) → The old way and why it fails → The better way (receipted) → The implication for the operator
 
 ### The Field
-What other operators are shipping. Curated intel. Named tools, named workflows, receipts only. Always credited.
+What other operators are shipping. Curated intel. Named tools, named workflows, the method they used, credited.
 
 ### The Signal
-What's coming. What to bet on. What to ignore. Short. Strong. No hedging.
+What's coming. What to bet on. What to ignore. Short. Strong. Names what it does not know yet.
 
 
 ## Audience
@@ -159,7 +162,7 @@ What's coming. What to bet on. What to ignore. Short. Strong. No hedging.
 
 ## Key Brand Phrases: Use These
 - "Put AI to work in sales. The right way."
-- "The Sales AI Guy."
+- "As a Sales Operator..."
 - "AI does the grunt work. Reps do the selling."
 - "Augment the rep. Do not automate them out."
 - "Split the work."
@@ -171,7 +174,8 @@ What's coming. What to bet on. What to ignore. Short. Strong. No hedging.
 - "The operator's job is the 20%. AI does the 80%."
 - "What you do this Tuesday is six different jobs."
 - "Here's what I shipped. Here's what broke. Here's what I learned."
-- "Receipts only."
+- "Here is how I went at it."
+- "Here is what I have not figured out."
 - "Not theory. Not someday. What runs in production today."
 - "Built by an operator. Not an engineer."
 
@@ -188,7 +192,7 @@ Before any content ships, run this check:
 
 1. Does it sound like it could come from a SaaS press release? If yes, rewrite.
 2. Does it include a specific scar or failure? If not, add one or cut the instructive claim.
-3. Is every instructive claim backed by a receipt? If not, cut the claim or add the receipt.
+3. Could a reader run the method from what is written? If not, add the steps or cut the claim.
 4. Could someone cut 30% of the words and lose nothing? If yes, cut 30%.
 5. Does it open with the most interesting sentence? If not, find it and move it to the top.
 

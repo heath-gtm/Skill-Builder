@@ -25,8 +25,9 @@ LinkedIn pillars, and the retired list. `DESIGN.md` is its counterpart for anyth
 that renders.
 
 **If this skill and WRITING.md disagree, WRITING.md wins, and this skill gets
-updated in the same session.** Two live copies of a rule is how they drift, which
-is the problem that file exists to solve.
+updated in the same session. On voice, `brand/voice.md` wins over both: it is the
+single canon, and this skill points at it rather than restating it.** Two live
+copies of a rule is how they drift, which is the problem that file exists to solve.
 
 
 # Built GTM Voice Checker
@@ -43,7 +44,6 @@ These must be fixed before any content ships.
 
 ### 1. Banned punctuation/symbols
 - Emojis (any)
-- Arrows: →, ←, →, <--, -->, ⇒, >>
 - Em dashes: —
 
 **How to flag:** Identify the sentence. Rewrite it without the banned element.
@@ -84,9 +84,11 @@ Every instance of these words/phrases must be flagged:
 **How to flag:** Quote the phrase. Provide a rewrite.
 
 ### 4. Ungrounded claims
-Any instructive claim (something the reader should do or believe) that has no receipt attached — no specific time saved, dollars moved, deal outcome, or named failure. The claim exists without evidence.
+Any instructive claim (something the reader should do or believe) with no method behind it and no confidence marker on it. Two separate failures: (a) the reader cannot tell what was actually done, in what order, and what broke; (b) the claim is stated as settled when Heath has not run it.
 
-**How to flag:** Quote the instructive sentence. Ask: "What's the receipt for this? Add the specific outcome or cut the claim."
+**How to flag:** Quote the instructive sentence. Ask one of: "What did you actually do here? Add the steps or write it as a hypothesis." or "How sure are you, and what is that made of? Mark it with the nearest thing you have run."
+
+Do NOT ask for a number. A missing figure is not a violation. A figure used as the argument is.
 
 ### 4a. Naked numbers
 Any number that appears without a behavior consequence attached. "47% of reps miss quota" is naked. "47% of reps miss quota — in most cases it's not activity, it's pipeline quality" is grounded. Flag every bare statistic: "What's the behavior this number is attached to?"
@@ -97,6 +99,9 @@ Any number that appears without a behavior consequence attached. "47% of reps mi
 Sentences hedged into meaninglessness: "It's possible that, in some cases, there may be an opportunity to consider..." Pick a lane. Either it's true or it isn't.
 
 **How to flag:** Quote the hedged sentence. Rewrite as a direct declarative.
+
+### 5. Proof-flexing
+A number in the first line, a precise result figure (94%, 335%) where a floor belongs (90%+, 300%+), a retention or NRR figure on a public surface, or a confidence stated as a percentage ("I am about 70% on this").
 
 ---
 
@@ -159,7 +164,7 @@ Suggested fix: "[rewrite]" — or "Consider opening with: '[the more interesting
 One of:
 - Ready to ship. No changes needed.
 - Minor fixes needed. Hard violations above must be addressed.
-- Significant rework needed. [Identify the main structural issue — padded opening, missing receipts, or generic voice throughout.]
+- Significant rework needed. [Identify the main structural issue: padded opening, no method shown, or generic voice throughout.]
 
 ---
 

@@ -40,4 +40,4 @@ One workflow, broken into its actual steps (the output of Solve the Problem). No
 [what you bought, what you built, and the one thing you refused to rebuild]
 
 ## Next move
-Hand the stacked workflow to Cut the Drag. Built GTM. Receipts only.
+Hand the stacked workflow to Cut the Drag. Built GTM. Approach, not receipts.

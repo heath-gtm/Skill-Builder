@@ -40,4 +40,4 @@ One workflow that has been solved, stacked, and had its drag cut. No connectors 
 [one owner, one context doc, one running automation, one recurring review, on one workflow]
 
 ## Next move
-Repeat the loop on the next most expensive workflow. Built GTM. Receipts only.
+Repeat the loop on the next most expensive workflow. Built GTM. Approach, not receipts.

@@ -40,4 +40,4 @@ One workflow with its steps stacked (the output of Stack the Tech). No connector
 [the drag you cut, and the time it gave back per week]
 
 ## Next move
-Hand the cut workflow to Keep the Judgment. Built GTM. Receipts only.
+Hand the cut workflow to Keep the Judgment. Built GTM. Approach, not receipts.

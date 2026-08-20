@@ -72,4 +72,4 @@ Knowing the mental model is the prerequisite. Here is what running the repo look
 The repo runs itself. You just review what changed.
 
 ## Next move
-Now build the brain. Hand off to the Context Pack to write CLAUDE.md. Built GTM. Receipts only.
+Now build the brain. Hand off to the Context Pack to write CLAUDE.md. Built GTM. Approach, not receipts.

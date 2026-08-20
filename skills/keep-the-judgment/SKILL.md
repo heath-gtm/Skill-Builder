@@ -51,4 +51,4 @@ You handed off the judgment once, now the system checks that it's still being ke
 
 
 ## Next move
-Repeat the loop on the next most expensive workflow. Built GTM. Receipts only.
+Repeat the loop on the next most expensive workflow. Built GTM. Approach, not receipts.

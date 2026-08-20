@@ -27,8 +27,9 @@ LinkedIn pillars, and the retired list. `DESIGN.md` is its counterpart for anyth
 that renders.
 
 **If this skill and WRITING.md disagree, WRITING.md wins, and this skill gets
-updated in the same session.** Two live copies of a rule is how they drift, which
-is the problem that file exists to solve.
+updated in the same session. On voice, `brand/voice.md` wins over both: it is the
+single canon, and this skill points at it rather than restating it.** Two live
+copies of a rule is how they drift, which is the problem that file exists to solve.
 
 
 # Built GTM LinkedIn Commenter
@@ -77,7 +78,8 @@ Share a specific failure or mistake that adds texture to the post's claim. Use w
 ### Always:
 - Specific detail: named tool, specific time, specific cost, specific person (first name only)
 - First person, grounded in Heath's actual experience
-- One clear position. No hedging.
+- One clear position on the problem. Confidence marked on the answer.
+- Arrows are fine in framework or step notation. Never as decoration mid-sentence.
 - Under 4 sentences. Most good comments are 2-3.
 - Sound like someone who has been in the seat
 
@@ -86,7 +88,6 @@ Share a specific failure or mistake that adds texture to the post's claim. Use w
 - Restate what the post already said
 - Include a call-to-action ("Follow me for more..." is banned)
 - Emojis
-- Arrows (→)
 - Em dashes (—)
 - Longer than 5 sentences — if you need more, write an article instead
 - Passive voice
@@ -108,7 +109,7 @@ Share a specific failure or mistake that adds texture to the post's claim. Use w
 ## Voice Check (Run Before Every Output)
 
 - [ ] No emojis
-- [ ] No arrows
+- [ ] Arrows only in framework or step notation
 - [ ] No em dashes
 - [ ] Does not open with sycophancy
 - [ ] Contains one specific detail (tool name, time, cost, or outcome)

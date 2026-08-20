@@ -63,7 +63,7 @@ The read is step one. Here is where an operator takes it once the manual version
 - **Catch drift as the market shifts.** Schedule a Claude task quarterly to compare closed-won and churned accounts against the current tiers and flag when the anti-ICP needs updating.
 - **Push it downstream automatically.** Wire the ICP definition into Clay or an enrichment tool so new leads get scored against your real tiers the moment they hit the CRM.
 
-Hand the ICP to Positioning so your message speaks to exactly who you just defined. Built GTM. Receipts only.
+Hand the ICP to Positioning so your message speaks to exactly who you just defined. Built GTM. Approach, not receipts.
 
 ## Next move
-Hand the ICP to Positioning so your message speaks to exactly who you just defined. Built GTM. Receipts only.
+Hand the ICP to Positioning so your message speaks to exactly who you just defined. Built GTM. Approach, not receipts.

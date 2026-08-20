@@ -50,4 +50,4 @@ The stack is only as good as what is flowing through it, wire the signal, not ju
 
 
 ## Next move
-Hand the stacked workflow to Split: start with Cut the Drag, then Keep the Judgment. Built GTM. Receipts only.
+Hand the stacked workflow to Split: start with Cut the Drag, then Keep the Judgment. Built GTM. Approach, not receipts.

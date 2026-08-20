@@ -271,6 +271,7 @@ The original humanizer lets the user paste a writing sample for voice calibratio
 - Arc: observation → admission of past pattern → the cost paid → the principle he lives by now.
 - Uses "you" to pull the reader in, returns to "I" for accountability.
 - Repeats a short phrase for rhythm when it serves the point.
+- **Coining a named model is on-brand, not an AI tell.** "The Metal and Magnet principle." Keep coined framework names. Only flag one that is clever instead of memorable, or one attached to a method Heath did not actually run.
 
 ### Soulless-but-clean is still failure
 
@@ -286,7 +287,7 @@ After the first rewrite, do this exact ritual — do not skip it:
 Answer briefly in bullets. List the remaining tells (em dashes that snuck back in, a triad, a "key" or "crucial" still sitting there, a hedge, a sycophantic opener).
 
 **Prompt 2:** "What makes the below not sound like Heath?"
-Answer briefly. List the voice misses (a polished line he wouldn't say, a bow-tied ending, a lecture-first sentence, a generic-leader phrase, an invented framework name).
+Answer briefly. List the voice misses (a polished line he wouldn't say, a bow-tied ending, a lecture-first sentence, a generic-leader phrase, a framework name that is clever rather than memorable).
 
 **Prompt 3:** "Now make it not obviously AI-generated, and make it sound like Heath."
 Rewrite. That's the final.

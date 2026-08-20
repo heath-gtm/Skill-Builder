@@ -60,4 +60,4 @@ Naming the pillars by hand is the foundation. Here's how it holds across every p
 Once the voice is written down, every draft can be checked against it instead of vibed into shape.
 
 ## Next move
-Hand the voice to the Context Pack so CLAUDE.md carries it into every session. Built GTM. Receipts only.
+Hand the voice to the Context Pack so CLAUDE.md carries it into every session. Built GTM. Approach, not receipts.

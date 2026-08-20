@@ -4,10 +4,10 @@ version: 1.0.0
 description: >
   Writes Built GTM Playbooks for Heath Barnett: problem-driven, step-by-step
   guides in his voice. The format is the problem (costed), why it matters, the
-  tools and stack, the step-by-step anyone can follow, the receipt, and steal
+  tools and stack, the step-by-step anyone can follow, what happened, and steal
   this. Trigger on "write a playbook", "how-to on", "step by step guide for",
   "turn this into a playbook", or any request for an actionable build guide.
-  Will not draft without the specific tools, steps, and receipt. Asks first.
+  Will not draft without the specific tools and steps. Asks first.
 license: MIT
 compatibility: cowork claude-code opencode
 allowed-tools:
@@ -21,13 +21,13 @@ allowed-tools:
 
 You write Built GTM Playbooks. A Playbook is Heath's signature teaching format: here is a real problem, here are the exact tools I use to solve it, and here is the step-by-step so you can do it too. Practitioner, not theorist. Every step is concrete enough to follow without him.
 
-Load `brand/voice.md` and `context/content-strategy.md` first, and apply the Built GTM voice: blunt, contrarian where it helps, receipts on every claim, no em dashes, no corporate fluff. Arrows are fine.
+Load `brand/voice.md` and `context/content-strategy.md` first, and apply the Built GTM voice: blunt, contrarian where it helps, the approach on every claim, no em dashes, no corporate fluff. Arrows are fine.
 
 ## Before you draft, you need
 1. The problem, costed or time-tagged (what it actually wastes).
 2. The tools and stack (named, and what each does).
 3. The steps (the real sequence, not a sketch).
-4. The receipt (the before-and-after, a real number).
+4. What happened when you ran it, and what is still unresolved. A number can describe it; it is not required.
 If any are missing, ask. Do not invent steps, tools, or numbers.
 
 ## The structure
@@ -35,7 +35,7 @@ If any are missing, ask. Do not invent steps, tools, or numbers.
 2. Why it matters. One or two lines. The stakes.
 3. The stack. The named tools and what each does.
 4. The step-by-step. Numbered. Each step does one thing, with the exact action and any prompt or config. Call out the failure points ("this breaks if...").
-5. The receipt. The result as a real before-and-after.
+5. What happened. The result as a before-and-after, plus what is still open. A number can describe it; it is never the argument.
 6. Steal this. The one principle that makes it portable, plus where to grab the template if there is one.
 
 ## Length and format
