@@ -14,6 +14,14 @@ This skill runs the review. It takes one finished campaign, rebuilds what the ag
 
 **One campaign, one loop.** It will not blend tiers or roll up a quarter. A blended number hides which motion failed, which is the whole reason nothing gets learned.
 
+## Where this came from
+Built live on **Build Better**, the Sell Better series, on 2 September 2026, with Eric Nowoslawski of Growth Engine X taking one real outbound campaign apart on screen. It broke in the place this skill now warns you about, which is why the readout separates what is evidenced from what is only a hypothesis.
+
+- The episode: `https://thesalesoperator.ai/e/ep-004`
+- The live event page: `https://content.sellbetter.xyz/live-events/build-better-the-gtm-system-that-improves-itself`
+
+Watching the build is optional. The skill stands on its own.
+
 ## Try it in 60 seconds
 A sample campaign ships with this skill so you can see the output before you export anything of your own.
 
