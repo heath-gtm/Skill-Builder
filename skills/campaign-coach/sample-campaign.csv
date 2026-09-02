@@ -1,0 +1,61 @@
+record_id,campaign,tier,sent_at,headcount_band,hiring_ops_role_90d,billing_tool,angle,variant,replied,reply_class,meeting_booked
+r001,Ops leaders Q3 trigger,focused,2026-08-05,200-500,yes,Recurly,headcount,B,yes,positive,yes
+r002,Ops leaders Q3 trigger,focused,2026-08-22,200-500,yes,Stripe Billing,headcount,A,yes,positive,yes
+r003,Ops leaders Q3 trigger,focused,2026-08-06,200-500,yes,Zuora,headcount,A,yes,positive,no
+r004,Ops leaders Q3 trigger,focused,2026-08-11,500-1000,yes,Zuora,headcount,B,yes,not interested,no
+r005,Ops leaders Q3 trigger,focused,2026-08-22,500-1000,yes,Zuora,headcount,A,yes,out of office,no
+r006,Ops leaders Q3 trigger,focused,2026-08-22,200-500,yes,Zuora,headcount,A,no,,no
+r007,Ops leaders Q3 trigger,focused,2026-08-05,200-500,yes,Chargebee,headcount,B,no,,no
+r008,Ops leaders Q3 trigger,focused,2026-08-08,500-1000,yes,Recurly,headcount,A,no,,no
+r009,Ops leaders Q3 trigger,focused,2026-08-07,500-1000,yes,Chargebee,headcount,A,no,,no
+r010,Ops leaders Q3 trigger,focused,2026-08-21,500-1000,yes,Zuora,headcount,A,no,,no
+r011,Ops leaders Q3 trigger,focused,2026-08-19,200-500,yes,Chargebee,headcount,A,no,,no
+r012,Ops leaders Q3 trigger,focused,2026-08-22,500-1000,yes,Recurly,headcount,B,no,,no
+r013,Ops leaders Q3 trigger,focused,2026-08-11,500-1000,yes,Stripe Billing,headcount,B,no,,no
+r014,Ops leaders Q3 trigger,focused,2026-08-22,200-500,yes,Zuora,headcount,A,no,,no
+r015,Ops leaders Q3 trigger,focused,2026-08-18,500-1000,yes,Stripe Billing,headcount,B,no,,no
+r016,Ops leaders Q3 trigger,focused,2026-08-20,200-500,yes,Zuora,headcount,B,no,,no
+r017,Ops leaders Q3 trigger,focused,2026-08-08,200-500,yes,Stripe Billing,headcount,B,no,,no
+r018,Ops leaders Q3 trigger,focused,2026-08-06,500-1000,yes,Zuora,headcount,B,no,,no
+r019,Ops leaders Q3 trigger,focused,2026-08-19,500-1000,no,Stripe Billing,headcount,B,yes,positive,no
+r020,Ops leaders Q3 trigger,focused,2026-08-12,200-500,no,Zuora,headcount,B,yes,not interested,no
+r021,Ops leaders Q3 trigger,focused,2026-08-13,200-500,no,Zuora,headcount,B,yes,wrong person,no
+r022,Ops leaders Q3 trigger,focused,2026-08-15,500-1000,no,Recurly,headcount,B,no,,no
+r023,Ops leaders Q3 trigger,focused,2026-08-09,500-1000,no,Stripe Billing,headcount,A,no,,no
+r024,Ops leaders Q3 trigger,focused,2026-08-10,500-1000,no,Zuora,headcount,A,no,,no
+r025,Ops leaders Q3 trigger,focused,2026-08-16,200-500,no,Chargebee,headcount,B,no,,no
+r026,Ops leaders Q3 trigger,focused,2026-08-09,500-1000,no,Zuora,headcount,B,no,,no
+r027,Ops leaders Q3 trigger,focused,2026-08-08,500-1000,no,Stripe Billing,headcount,B,no,,no
+r028,Ops leaders Q3 trigger,focused,2026-08-15,500-1000,no,Recurly,headcount,B,no,,no
+r029,Ops leaders Q3 trigger,focused,2026-08-06,200-500,no,Chargebee,headcount,B,no,,no
+r030,Ops leaders Q3 trigger,focused,2026-08-11,200-500,no,Chargebee,headcount,A,no,,no
+r031,Ops leaders Q3 trigger,focused,2026-08-12,500-1000,no,Chargebee,headcount,A,no,,no
+r032,Ops leaders Q3 trigger,focused,2026-08-17,200-500,no,Chargebee,headcount,B,no,,no
+r033,Ops leaders Q3 trigger,focused,2026-08-20,500-1000,no,Chargebee,headcount,B,no,,no
+r034,Ops leaders Q3 trigger,focused,2026-08-16,500-1000,no,Recurly,headcount,A,no,,no
+r035,Ops leaders Q3 trigger,focused,2026-08-19,500-1000,no,Zuora,headcount,B,no,,no
+r036,Ops leaders Q3 trigger,focused,2026-08-06,200-500,no,Chargebee,headcount,B,no,,no
+r037,Ops leaders Q3 trigger,focused,2026-08-07,500-1000,no,Chargebee,headcount,A,no,,no
+r038,Ops leaders Q3 trigger,focused,2026-08-04,200-500,no,Zuora,headcount,B,no,,no
+r039,Ops leaders Q3 trigger,focused,2026-08-04,200-500,no,Stripe Billing,headcount,A,no,,no
+r040,Ops leaders Q3 trigger,focused,2026-08-08,200-500,no,Recurly,headcount,A,no,,no
+r041,Ops leaders Q3 trigger,focused,2026-08-19,500-1000,no,Stripe Billing,headcount,B,no,,no
+r042,Ops leaders Q3 trigger,focused,2026-08-18,200-500,no,Recurly,headcount,A,no,,no
+r043,Ops leaders Q3 trigger,focused,2026-08-06,500-1000,no,Stripe Billing,headcount,B,no,,no
+r044,Ops leaders Q3 trigger,focused,2026-08-12,200-500,no,Stripe Billing,headcount,A,no,,no
+r045,Ops leaders Q3 trigger,focused,2026-08-10,200-500,no,Zuora,headcount,B,no,,no
+r046,Ops leaders Q3 trigger,focused,2026-08-20,200-500,no,Zuora,headcount,B,no,,no
+r047,Ops leaders Q3 trigger,focused,2026-08-20,200-500,no,Stripe Billing,headcount,B,no,,no
+r048,Ops leaders Q3 trigger,focused,2026-08-11,200-500,no,Stripe Billing,headcount,B,no,,no
+r049,Ops leaders Q3 trigger,focused,2026-08-11,200-500,no,Chargebee,headcount,B,no,,no
+r050,Ops leaders Q3 trigger,focused,2026-08-20,200-500,no,Chargebee,headcount,B,no,,no
+r051,Ops leaders Q3 trigger,focused,2026-08-04,500-1000,no,Zuora,headcount,B,no,,no
+r052,Ops leaders Q3 trigger,focused,2026-08-10,500-1000,no,Stripe Billing,headcount,B,no,,no
+r053,Ops leaders Q3 trigger,focused,2026-08-15,500-1000,no,Stripe Billing,headcount,B,no,,no
+r054,Ops leaders Q3 trigger,focused,2026-08-11,200-500,no,Zuora,headcount,A,no,,no
+r055,Ops leaders Q3 trigger,focused,2026-08-10,200-500,no,Stripe Billing,headcount,B,no,,no
+r056,Ops leaders Q3 trigger,focused,2026-08-15,200-500,no,Recurly,headcount,B,no,,no
+r057,Ops leaders Q3 trigger,focused,2026-08-10,200-500,no,Recurly,headcount,A,no,,no
+r058,Ops leaders Q3 trigger,focused,2026-08-14,200-500,no,Recurly,headcount,B,no,,no
+r059,Ops leaders Q3 trigger,focused,2026-08-16,500-1000,no,Recurly,headcount,A,no,,no
+r060,Ops leaders Q3 trigger,focused,2026-08-08,200-500,no,Chargebee,headcount,A,no,,no
