@@ -21,6 +21,8 @@ compatibility: cowork claude-code
 
 # BRIEF: the prompt framework and the eval harness
 
+## What this does
+
 Two jobs: **write** a structured prompt with the BRIEF framework, and **prove it
 works** with the eval harness. Most prompt tools stop at writing. The reason
 prompts fail in production is that nobody measures them, so the second half is
@@ -146,7 +148,7 @@ floor for a trustworthy read; one run tells you nothing. Live runs need
 uses the `builtgtm-brand` amber system). pass rate and consistency per prompt,
 a bar per criterion, and the BRIEF-vs-naive delta.
 
-### Reading the result
+## Output (example)
 
 - **Pass rate** = average fraction of checks passed across all runs.
 - **Consistency** = 1 minus the spread across datasets. Low consistency means the
@@ -160,7 +162,7 @@ suite (eval), fix the weakest part, rerun.
 
 ---
 
-## How to Apply This Skill
+## The method
 
 1. **Author request** ("write a prompt for X") → run the BRIEF framework, deliver
    the five-block prompt clean.
