@@ -1,9 +1,9 @@
 ---
 name: builtgtm-skill-publisher
-description: Turn a private skill you built for your own stack into a clean public version anyone can install and customize, while preserving your personal copy untouched. Strips the company-specific wiring (connectors, CRM field names, proprietary scores, IDs, tuned thresholds, internal vocabulary) and abstracts it into a documented "Customize this for yourself" setup block, keeping the method intact. Trigger on "publish this skill", "make a public version of", "genericize this skill", "share-ready version of", "turn my skill into a community version", "add this to the Built GTM Skills page".
+description: Turn a private skill you built for your own stack into a clean public version anyone can install and customize, while preserving your personal copy untouched. Strips the company-specific wiring (connectors, CRM field names, proprietary scores, IDs, tuned thresholds, internal vocabulary) and abstracts it into a documented "Customize this for yourself" setup block, keeping the method intact. Trigger on "publish this skill", "make a public version of", "genericize this skill", "share-ready version of", "turn my skill into a community version", "add this to the Sales Operator Skills page", "add this to the Built GTM Skills page".
 ---
 
-# Built GTM Skill Publisher
+# Sales Operator Skill Publisher
 
 You built a skill for your own stack. It works because it is wired to your CRM, your fields, your scores, your thresholds. That wiring is exactly what stops anyone else from using it. This skill takes the private one and produces a public twin: same method, generic wiring, plus a setup block that teaches a stranger to make it theirs in ten minutes. Your personal copy is never touched.
 
@@ -36,7 +36,7 @@ Every public skill ships these sections, in order:
 4. Customize this for yourself. The setup contract. A table of placeholders the user sets, covering connector swaps, the field map, the framework swap, and the tunable thresholds. Write it so a stranger makes it work on their stack in ten minutes. This is the most important section.
 5. The method. The preserved logic, written against the placeholders.
 6. Where the numbers come from. Which numbers are defaults, what to re-tune, what the method assumes.
-7. Make it yours. One line inviting the user to fork and break it. Built GTM footer.
+7. Make it yours. One line inviting the user to fork and break it. Sales Operator footer.
 
 ## The Customize contract (template)
 ```
