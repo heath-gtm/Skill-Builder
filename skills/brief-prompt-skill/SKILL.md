@@ -12,7 +12,7 @@ description: >
   "structure this prompt", "turn this into a prompt", "make this prompt better",
   "eval this prompt", "test this prompt", "what's the success rate of this prompt",
   "score this prompt", "is this prompt reliable", "A/B this prompt", or any request
-  to author or evaluate a prompt. especially a repeatable one meant to run across
+  to author or evaluate a prompt, especially a repeatable one meant to run across
   many rows, deals, or accounts. Also fire when someone references SPICE and wants
   something more complete, or wants a prompt that produces the same quality every run.
 license: MIT
@@ -64,14 +64,14 @@ for.
 ### Writing a BRIEF prompt
 
 1. Interview only for what's missing. Most requests already imply the goal, the
-   inputs, and the constraints. extract those, ask only for the gaps (2-3
+   inputs, and the constraints. Extract those, ask only for the gaps (2-3
    questions max).
 2. Draft all five blocks. Label them in the prompt (`[ROLE]`, `[BRIEF]`,
-   `[INPUTS]`, `[EXECUTION]`, `[FINISH LINE]`). the labels help the model and
+   `[INPUTS]`, `[EXECUTION]`, `[FINISH LINE]`). The labels help the model and
    make the prompt auditable.
 3. Make the Finish line verifiable. Every requirement should be answerable
    yes/no against an output ("has 4 named blocks", "every claim cites a count").
-   Vague Finish lines can't be evaluated. that's the tell they're too soft.
+   Vague Finish lines can't be evaluated. That's the tell they're too soft.
 4. Deliver the prompt clean, ready to paste into Clay, a Claude system prompt,
    an agent, or a one-off ask.
 
@@ -91,16 +91,16 @@ matters: it says whether you get the same quality every run or just got lucky on
 ### How it works
 
 The prompt-specific parts live in a JSON **config**, never in the Python. That's
-what makes the harness universal. swap the config, eval a different use case, same
+what makes the harness universal: swap the config, eval a different use case, same
 engine. It has been validated across SDR, AE, CSM, Marketing, and win/loss configs
 with no code changes.
 
 Two kinds of checks, both derived from the Finish line:
 
-- **Structural** (deterministic, no API, 100% reliable). parsed from the output
+- **Structural** (deterministic, no API, 100% reliable): parsed from the output
   by generic check types: `contains_all`, `ordered`, `regex_min`, `regex_absent`,
   `absent_after` (hard-stop), `present_after`.
-- **Judge** (LLM-as-judge). a second model call grades the subjective parts
+- **Judge** (LLM-as-judge): a second model call grades the subjective parts
   (is every claim supported by the data, is the recommendation actionable) strict
   yes/no against rubric questions.
 
@@ -115,7 +115,7 @@ research use case). The shape:
   "model": "claude-sonnet-4-6",
   "prompt": "the full BRIEF prompt, with {data} where inputs go",
   "baseline_prompt": "optional naive one-liner for the A/B, also uses {data}",
-  "datasets": [ {"name": "..", "data": "the input string"} ],
+  "datasets": [ {"name": "...", "data": "the input string"} ],
   "structural_checks": [
     {"id": "all_blocks", "type": "contains_all", "values": ["BLOCK A", "BLOCK B"]},
     {"id": "order", "type": "ordered", "values": ["BLOCK A", "BLOCK B"]},
@@ -141,21 +141,21 @@ one `baseline_prompt` (the naive version of the ask) to get the A/B delta.
 python scripts/brief_eval.py --config my_config.json --runs 5 --compare
 # many use cases on one board
 python scripts/run_suite.py --runs 5 cfg_a.json cfg_b.json cfg_c.json
-# no API key. verify the scorer against baked-in _mock outputs
+# no API key: verify the scorer against baked-in _mock outputs
 python scripts/brief_eval.py --config my_config.json --mock
 ```
 
 `--compare` runs the baseline too and reports the point delta. `--runs 5` is the
 floor for a trustworthy read; one run tells you nothing. Live runs need
-`ANTHROPIC_API_KEY`. Both scripts write a branded HTML scorecard (`brief-prompt-skill`
-uses the `builtgtm-brand` amber system). pass rate and consistency per prompt,
-a bar per criterion, and the BRIEF-vs-naive delta.
+`ANTHROPIC_API_KEY`. Both scripts write an HTML scorecard in the Built GTM
+Blueprint style: pass rate and consistency per prompt, a bar per criterion, and
+the BRIEF-vs-naive delta.
 
 ## Output (example)
 
 - **Pass rate** = average fraction of checks passed across all runs.
 - **Consistency** = 1 minus the spread across datasets. Low consistency means the
-  prompt is unreliable even if its average looks fine. tighten the Finish line.
+  prompt is unreliable even if its average looks fine. Tighten the Finish line.
 - **Per-criterion bars** show *which* requirement leaks. A low `hard_stop` bar
   means the model keeps adding summaries; a low `claims_supported` bar means it's
   fabricating. Fix the specific block, rerun, watch the bar move.

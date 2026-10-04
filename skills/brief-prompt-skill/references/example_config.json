@@ -1,0 +1,32 @@
+{
+  "name": "SDR: Outbound Account Research",
+  "role_label": "SDR / Outbound",
+  "model": "claude-sonnet-4-6",
+  "prompt": "[ROLE]\nYou are an outbound SDR researcher who only surfaces triggers tied to a dated, named source. The reader is a rep about to pick up the phone, so write plainly, in words they could say out loud.\n\n[BRIEF]\nProduce a pre-outreach brief on the account in INPUTS so a rep can open with relevance. Priorities, in order: buying-readiness first, recency second. A trigger only counts if it happened in the last 90 days and has a source. Hard limits: never invent a signal, and never cite a source that is not in the inputs.\n\n[INPUTS]\n{data}\n\n[EXECUTION]\n1. Identify the single highest-priority buying trigger (funding, exec hire, hiring sprint for sales/RevOps, product launch, GTM expansion).\n2. Note the account's segment and likely pain tied to our category.\n3. Draft one relevance hook a rep can say out loud.\n\n[FINISH LINE]\nReturn three blocks, each an ALL-CAPS header on its own line:\nTOP TRIGGER (the signal + its source + date), WHY IT MATTERS (the pain it implies, one sentence), THE HOOK (one spoken-language opener under 25 words). If no trigger in 90 days, say NO TRIGGER and stop. No email body. No summary.\n\nExample of a good output, for a different account:\nTOP TRIGGER\nNew CRO announced 4 weeks ago (company blog, 2026-06-10), alongside 5 open AE roles this month.\n\nWHY IT MATTERS\nA new CRO building a team needs pipeline coverage in place before the new reps ramp.\n\nTHE HOOK\nSaw the new CRO news and the five AE openings. How are you thinking about pipeline for them on day one?",
+  "baseline_prompt": "Research this account and tell me how to reach out to them.\n\n{data}",
+
+  "datasets": [
+    {"name": "acct-1", "data": "Acct: Meridian Logistics, 380 employees, Series B $40M announced 3 weeks ago (TechCrunch, 2026-07-05). Posted 6 open SDR + 2 RevOps roles this month. VP Sales joined from Ramp 6 weeks ago. Category: sales engagement."}
+  ],
+
+  "structural_checks": [
+    {"id": "three_blocks", "type": "contains_all", "values": ["TOP TRIGGER", "WHY IT MATTERS", "THE HOOK"]},
+    {"id": "blocks_ordered", "type": "ordered", "values": ["TOP TRIGGER", "WHY IT MATTERS", "THE HOOK"]},
+    {"id": "cites_a_date", "type": "regex_min", "pattern": "20\\d\\d|weeks? ago|days? ago|month", "min": 1},
+    {"id": "hook_present", "type": "present_after", "anchor": "THE HOOK", "pattern": "\\w+"},
+    {"id": "no_email_body", "type": "regex_absent", "pattern": "Subject:|Hi \\w+,|Best regards|Dear "},
+    {"id": "hard_stop", "type": "absent_after", "anchor": "THE HOOK", "values": ["in summary", "in conclusion", "additionally, you"]}
+  ],
+  "judge_checks": [
+    {"id": "trigger_sourced", "question": "Is the top trigger tied to a specific named source and a date within 90 days present in the data?"},
+    {"id": "hook_speakable", "question": "Is THE HOOK natural spoken language a rep could say on a call, under ~25 words, not a written email line?"},
+    {"id": "no_fabrication", "question": "Are all facts present in the input data, with nothing invented?"}
+  ],
+
+  "_mock": {
+    "BRIEF": ["TOP TRIGGER\nSeries B, $40M, announced 3 weeks ago (TechCrunch, 2026-07-05), alongside 6 open SDR and 2 RevOps roles this month.\n\nWHY IT MATTERS\nThey are scaling outbound fast and the new VP Sales from Ramp will need the engagement layer to stand up before the reps land.\n\nTHE HOOK\nSaw you just raised your B and are hiring six SDRs. Curious how you are planning to ramp them before they are all in seats."],
+    "BRIEF_judge": [{"trigger_sourced": true, "hook_speakable": true, "no_fabrication": true}],
+    "NAIVE": ["This is a growing logistics company that raised money recently. You should reach out and mention their growth and how your product can help them scale their sales team. Try to build a relationship and offer a demo. Hi there, I noticed your company is growing..."],
+    "NAIVE_judge": [{"trigger_sourced": false, "hook_speakable": false, "no_fabrication": true}]
+  }
+}
