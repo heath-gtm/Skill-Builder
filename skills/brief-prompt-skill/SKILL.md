@@ -36,27 +36,30 @@ BRIEF is the house structure for any prompt Heath runs. It keeps the parts SPICE
 (Clay's framework) got right and adds the four an agent needs. Every block below
 maps to a real failure it prevents.
 
-**B. Brief the goal.** One line on the objective, then the context that makes it
-matter. State what counts and what does not; rank the priorities. The model cannot
-prioritize what you never ranked. (This is SPICE's Context, sharpened with "why.")
+**B. Brief the goal.** One line on the objective, the context that makes it
+matter, ranked priorities, what counts and what does not, and the hard limits the
+agent must never cross. The model cannot prioritize what you never ranked. (This
+is SPICE's Context, sharpened with "why.")
 
-**R. Role.** Name the expert. Not "an assistant." A specific seat ("a skeptical
-RevOps analyst who never states a cause he can't tie to deals") changes every word
-that follows. SPICE has no role block; this is the cheapest quality upgrade there is.
+**R. Role.** Name the expert seat, never "an assistant." A specific seat ("a
+skeptical RevOps analyst who never states a cause he can't tie to deals") changes
+every word that follows. When a person will read the output, name the audience and
+the tone here too. SPICE has no role block; this is the cheapest quality upgrade
+there is.
 
-**I. Inputs.** The data, in its own block, separated from the logic. Use
+**I. Inputs.** The data in its own block, separated from the logic, with
 `{variables}` for anything that changes per run. Dynamic values tangled into
 instructions is where prompts rot. (This is SPICE's variable separation, kept.)
 
-**E. Execution.** The steps, in order, with decision branches, and the tool to
-use at each step. "Check for X. If none, check Y. If none, check Z." Write the
-steps or the model writes them for you, with mixed results.
+**E. Execution.** The steps in order, with decision branches and the tool for each
+step. "Check for X. If none, check Y. If none, check Z." Write the steps or the
+model writes them for you, with mixed results.
 
-**F. Finish line.** What "correct" looks like: the output format/schema, the
-success criteria, the stopping condition, and one labeled example of a finished
-output. This is the block SPICE stops short of. and it doubles as the eval
-rubric (see Part 2). If you can't write the Finish line, you don't yet know what
-you're asking for.
+**F. Finish line.** The output format, the success criteria, the stopping
+condition, and one labeled example of what good looks like. Shown, not just told.
+This is the block SPICE stops short of, and it doubles as the eval rubric (see
+Part 2). If you can't write the Finish line, you don't yet know what you're asking
+for.
 
 ### Writing a BRIEF prompt
 
