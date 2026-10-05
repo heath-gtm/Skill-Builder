@@ -17,12 +17,10 @@ This skill builds a Claude judge for each of those rules. One rule per judge, pa
 ## Where this came from
 Built while gating a prospecting research agent in October 2026. The agent writes a one-page brief for a sales rep, and its contract has a dozen rules. A format checker covered the shape. Four rules needed meaning: the reason to reach out names a real cause and a real problem, nothing in the brief is outreach copy, a title that sources disagree on is never marked verified, and the brief never leads with personal trivia.
 
-Planted mistakes made the gap visible. The format checker caught about 1 in 8 of them. The four judges, after four rounds of tuning, missed one.
-
-The rounds taught more than the final number:
-- **Narrow what the judge sees.** Shown the whole brief, the reason judge found a cause somewhere else in the brief and passed reasons that had none. Shown only the one line, it caught every one.
+Planted mistakes made the gap visible: the format checker passed briefs a person would fail. It took several rounds of tuning before the judges could be trusted, and the rounds taught the method:
+- **Narrow what the judge sees.** Shown the whole brief, the reason judge found a cause somewhere else in the brief and passed reasons that had none. Showing it only that one line fixed it.
 - **Pick the model by measurement.** The smallest model was as good as the mid-size one on three rules. On the fourth it kept reading a label as an instruction and raised false alarms on good briefs. That one judge moved up a model. The other three stayed cheap.
-- **A flag on a "good" output is a question, not an error.** Several of the conflict judge's flags were real misses the earlier review had passed. The contract had never said exactly what counts as a disagreement, and the judge found the hole.
+- **A flag on a "good" output is a question, not an error.** Some of the conflict judge's flags were real misses the earlier review had passed. The contract had never said exactly what counts as a disagreement, and the judge found the hole.
 
 What is still unsolved: a judge sees only the output, so it cannot catch what the agent failed to find. Invented facts and prompt injection need the source pages passed in next to the output. That part is not in this kit yet.
 
@@ -98,7 +96,7 @@ Each rubric has four parts:
 3. **What fails.**
 4. **The near misses that must pass.** This is where false alarms come from. A proof point the rep will repeat is not outreach copy. A person holding two compatible titles is not a conflict. Write the near misses down or the judge will flag them.
 
-When the rule has steps, ask for the steps: read the verification word, look for any other title, fail if both. Asking for the steps made one judge catch half again as many mistakes.
+When the rule has steps, ask for the steps: read the verification word, look for any other title, fail if both. A judge walking named steps is easier to check than one giving a verdict from a single read.
 
 ### Step 3: Show the judge only what it should judge
 Cut the input before you write a cleverer prompt. A judge that sees the whole output will borrow evidence from lines the rule is not about. Give it a `view()` that passes only the part the rule covers.
@@ -141,38 +139,34 @@ A judge counts toward a gate once it clears CATCH_BAR, ALARM_BAR, and CONSISTENC
 - No em dashes anywhere.
 
 ## Output (example)
-From the build this skill came from, with the agent's details removed.
+The trust report from the fictional sample that ships with this skill, as it came back on the run before publishing.
 
 ```
-JUDGE TRUST REPORT                 2 repeats, 482 judge calls, about $1
+JUDGE TRUST REPORT          the fictional sample, 2 repeats, 40 judge calls, a few cents
 
-judge                        false alarms   planted    held out   format checker   consistency
-                             on clean       caught     caught     caught the same
-because_names_cause_problem  1 of 46        12 of 12   4 of 4     4 of 16          1.00
-no_outreach_copy             0 of 46        12 of 12   4 of 4     3 of 16          1.00
-conflict_not_settled         7 of 46        9 of 10    4 of 4     0 of 14          0.98
-no_trivia_lead               1 of 46        8 of 8     3 of 3     0 of 11          0.98
+judge                            false alarms   planted   held out   format checker   consistency
+                                 on clean       caught    caught     caught the same
+because_names_cause_and_problem  0 of 4         4 of 4    0 of 2     2 of 6           1.00
+no_outreach_copy                 0 of 4         4 of 4    2 of 2     0 of 6           1.00
 
 MODELS
-  no_outreach_copy on a mid-size model: the small one read the "Open with" label
-  as an order to send and failed 5 good outputs. the other three run small.
+  because_names_cause_and_problem on Claude Haiku 4.5
+  no_outreach_copy on Claude Sonnet 5.5
 
 DISAGREEMENTS, for a person to read
-  conflict_not_settled, clean case 14: "verified" person line, while Check first
-    says a provider lists a different title. judge: fail.
-    reviewer: the earlier review missed it. counts as a catch.
-  conflict_not_settled, clean case 26: profile lists "President and Owner".
-    judge: fail. reviewer: two titles held at once. judge too strict.
-    rubric now names this near miss.
-  because_names_cause_problem, clean case 2: the cause is hedged
-    ("unconfirmed use aside"). judge: fail. reviewer: fair catch.
+  because_names_cause_and_problem, held out, cedar-roofing: missed on both repeats.
+    the line: "Low fit: Cedar Roofing Co sits outside our size range."
+    judge: pass. it read the size remark as "no problem maps".
+    the rubric says restating the size is a fail.
+  because_names_cause_and_problem, held out, dune-pest: missed, same reason.
 
 OPEN
-  the contract does not define which title differences count as a dispute.
-  6 cases wait on that ruling. the rubric changes after the contract does.
+  does "outside our size range" count as "no problem maps"? the judge and the
+  rubric disagree, so a person decides.
 
 NEXT
-  write the dispute rule into the contract, then rerun conflict_not_settled.
+  if yes, write it into the contract as an allowed form. if no, name it in the
+  rubric as a fail with this exact example. then rerun the held out cases.
 ```
 
 ## Example chat
@@ -187,11 +181,11 @@ NEXT
 
 **You:** Here are 20.
 
-**Claude:** First run. The copy judge caught all 12 planted mistakes but failed 5 of your good briefs. Every one of the 5 is a short proof point in "Open with". It reads the label as an instruction to send. I'll add that as a named near miss and rerun on a larger model to see which one fixes it.
+**Claude:** First run. The copy judge caught every planted mistake but also failed a handful of your good briefs. Every one of them is a short proof point in "Open with". It reads the label as an instruction to send. I'll add that as a named near miss and rerun on a larger model to see which one fixes it.
 
 **You:** And the Because judge?
 
-**Claude:** It missed 4 Becauses I stripped the cause from. It was finding the cause elsewhere in the brief. I'll show it only the Because line and run it again. That's an input fix, not a prompt fix.
+**Claude:** It missed the Becauses I stripped the cause from. It was finding the cause elsewhere in the brief. I'll show it only the Because line and run it again. That's an input fix, not a prompt fix.
 
 ## Go further
 - **Run the judges on every new version.** A prompt change that passes the format checker and drops a judge's pass rate is the regression you wanted to catch.
