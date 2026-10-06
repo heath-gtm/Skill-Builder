@@ -1,0 +1,7 @@
+# The agent-judge starter kit. Python 3.10 or newer.
+# Ragas main at a fixed commit, so a judge scores the same way next month.
+ragas @ git+https://github.com/vibrantlabsai/ragas.git@298b68274234c060deacab3cf5fb52aa3a20e885
+# Ragas imports a module that langchain-community 0.4.2 removed. Keep this pin.
+langchain-community==0.4.1
+# Claude as the judge model.
+anthropic

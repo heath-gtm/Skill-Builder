@@ -1,0 +1,11 @@
+{"id": "q01", "question": "How much discount can a rep give without asking anyone?", "evidence": "up to 10%"}
+{"id": "q02", "question": "Which plan includes route optimization, and how many technicians is it for?", "evidence": "adds route optimization"}
+{"id": "q03", "question": "What is the best buying signal for Fieldstone?", "evidence": "second location"}
+{"id": "q04", "question": "Why do we never discount Scale implementation?", "evidence": "rushed rollout"}
+{"id": "q05", "question": "How should a rep handle a prospect who says their technicians won't use an app?", "evidence": "three buttons"}
+{"id": "q06", "question": "When do we lose to Brightline and what is our advantage?", "evidence": "no route optimization"}
+{"id": "q07", "question": "Do office staff seats cost extra?", "evidence": "free on every plan"}
+{"id": "q08", "question": "Can a customer sign a three-year contract?", "evidence": "longer than two years"}
+{"id": "u01", "question": "What is the per-technician price of the Growth plan?"}
+{"id": "u02", "question": "Who is Fieldstone's CEO?"}
+{"id": "u03", "question": "What is our win rate against Toolbox Pro?"}
