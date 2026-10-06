@@ -16,6 +16,10 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
+# Ragas sends a usage ping on every scored call. Its endpoint can stall and block the judge,
+# and nothing here needs it, so it is off unless you turn it back on.
+os.environ.setdefault("RAGAS_DO_NOT_TRACK", "true")
+
 import anthropic
 from ragas.llms import llm_factory
 
