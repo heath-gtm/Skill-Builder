@@ -34,7 +34,7 @@ The skill ships eleven answers from the fictional sales library in `rag-explaine
 1. Copy the `scripts/` and `example/` folders from this skill somewhere you can run Python 3.10 or newer.
 2. Install and set your key:
    ```
-   python -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
+   python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
    export ANTHROPIC_API_KEY=...
    ```
 3. Check the search, build the planted test set, and run the judges:

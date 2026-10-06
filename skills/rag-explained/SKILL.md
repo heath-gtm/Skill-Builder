@@ -31,7 +31,7 @@ A fictional sales library ships with this skill: five short documents for a made
 1. Copy the `scripts/` and `example/` folders from this skill somewhere you can run Python 3.10 or newer.
 2. Install and set your key:
    ```
-   python -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
+   python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
    export ANTHROPIC_API_KEY=...
    ```
 3. Index the library and ask it something:
