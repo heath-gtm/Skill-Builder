@@ -36,7 +36,7 @@ background-size:44px 44px;
 
 ## The mark
 
-The `[SALES_OPERATOR]` block logo, drawn inline (never the bracket-only wordmark):
+The `[THE_SALES_OPERATOR]` block logo, drawn inline (never the bracket-only wordmark; it read `[SALES_OPERATOR]` until Oct 2026):
 Geist Mono 700, white, on a cobalt block, 2px ink border, 3px hard shadow,
 6px radius. Header AND footer of every document. On dark grounds use the
 inverted block: paper block, cobalt type, cobalt border + shadow.

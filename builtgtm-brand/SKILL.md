@@ -3,19 +3,18 @@ name: builtgtm-brand
 metadata:
   version: "4.0.0"
 description: >
-  The canonical Sales Operator brand foundation for Heath Barnett — voice AND
-  visual. Load before generating any public-facing content (LinkedIn posts,
-  articles, newsletter editions, comments, courses) AND before generating any
-  styled HTML document, one-pager, prep doc, guide, or deliverable carrying
-  The Sales Operator name. Encodes the operator thesis, voice rules, content
-  pillars, key phrases, anti-patterns, and the full visual design system
-  (Blueprint workshop brutalism: warm paper on a faint cobalt grid, Blueprint
-  Cobalt #2B5CE7 accent, the [SALES_OPERATOR] block logo, ink borders with hard
-  offset shadows, Geist type, sticker mono labels, numbered sections). Trigger on "write in my brand",
-  "Sales Operator voice", "Built GTM voice", "brand check", "does this sound like me", "apply my
-  brand rules", "Sales Operator style", "brand this document", "make it look like
-  thesalesoperator.ai", "match the precall page", or any content or document
-  generation request where the Sales Operator brand needs to be established first.
+  The canonical Sales Operator brand foundation for Heath Barnett, voice and
+  visual. Load before writing any public content (LinkedIn posts, articles,
+  newsletters, comments, courses) and before building any styled document,
+  one-pager, deck or deliverable carrying The Sales Operator name. Encodes the
+  operator thesis, voice rules, content pillars, key phrases, anti-patterns,
+  and the Blueprint visual system: warm paper on a cobalt grid, Cobalt #2B5CE7,
+  the Slap name tag as the standard mark ([THE_SALES_OPERATOR] block only where
+  space forces it), ink borders, hard shadows, Geist type, numbered sections.
+  Trigger on "write in my brand", "Sales Operator voice", "brand check", "does
+  this sound like me", "brand this document", "make it look like
+  thesalesoperator.ai", or any content or document request that needs the brand
+  established first.
 license: MIT
 compatibility: cowork claude-code opencode
 allowed-tools:
@@ -179,8 +178,18 @@ The ground is Warm Paper #F6F5EF carrying a faint cobalt blueprint grid.
 Blueprint Cobalt #2B5CE7 is the one accent; Cobalt Deep #1E44B8 for links and
 hovers on paper; Safety Orange #FF6B2C is the rare signal accent only. Warm Ink
 #101014 does the text, the 2px borders, and the hard offset shadows (4-6px,
-never blurred). The mark is the [SALES_OPERATOR] block logo: Geist Mono bold, white
-on a cobalt block, ink border, hard shadow. Labels are sticker chips (mono
+never blurred). The standard mark since Oct 2026 is the Slap: a HELLO MY NAME IS
+sticker with Heath Barnett in marker and the [THE_SALES_OPERATOR] block stamped
+under it. Use it everywhere it fits (hero, cover, footer, banners, merch, talk
+slides), never below about 240px wide. In a bar too short for it (a nav or
+header bar) use the mini Slap: the HELLO band and the name, no block row. The
+block logo alone (Geist Mono bold, white on a cobalt block, ink border, hard
+shadow) is the fallback only where neither fits, like a favicon or a small
+corner. Every
+deck (slides, carousels, decks exported to PDF or PowerPoint) opens and closes on
+the Slap: the title slide and the last slide carry it, always; inner slides keep
+the small block in a corner. Files: /brand/heath-barnett-slap-light.svg
+and -dark.svg on thesalesoperator.ai. Labels are sticker chips (mono
 uppercase in a white chip, 2px ink border, 2px shadow, one-degree tilt).
 Sections sit in white cards with 2px ink borders and hard shadows. `01 /`
 numbered sections in cobalt mono. Geist / Geist Mono type. Light theme only.
