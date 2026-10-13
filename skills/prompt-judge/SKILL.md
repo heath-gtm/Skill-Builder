@@ -12,7 +12,7 @@ Then it ships, and a week later someone finds the one thing the old version neve
 
 This skill runs the old prompt and the new prompt on the same inputs and puts the outputs side by side in front of a Claude judge, one rule at a time. For each input and each rule, the judge answers A, B, or tie. Then it asks again with the two outputs swapped, because judges tend to prefer whichever one they read first. A winner only counts when it wins both times.
 
-You get two answers. Did the change help, rule by rule. And a regression list: every case where the new version is worse on a rule it must never break, even if it wins everywhere else.
+You get two answers. Did the change help, rule by rule. And a regression list: every case where the new version is worse on a rule it must never break or must always keep, even if it wins everywhere else.
 
 **A judge is a prompt.** Before its verdicts count, it gets tested: pairs where you planted the mistake yourself, and pairs where both sides are the same output. If it cannot pick the clean side every time, or cannot call a tie on two copies of the same thing, it is not ready to referee your prompt.
 
@@ -81,7 +81,7 @@ Every run ends with one decision: ship the new version, fix it and rerun, or hol
 | HOLDOUT | new mistake styles added after the first run, never used for tuning | 1 style per rule |
 | JUDGE_MODEL | the model each judge runs on | start on Claude Haiku 4.5, move one up only when a rerun shows it is needed |
 | WIN_RULE | what counts as a win | wins with old as A and with new as A. anything else is a tie |
-| REGRESSION_RULE | what lands on the regression list | any loss on a must-never rule, and any lean toward old on a zero tolerance rule |
+| REGRESSION_RULE | what lands on the regression list | any loss on a must-never or must-always rule, and any lean toward old on a zero tolerance rule |
 | REVIEWER | who reads the regression list and decides | the prompt's owner. never the judge |
 
 **REGRESSION_RULE does not bend to the win count.** A new version that wins 9 of 10 cases and adds outreach copy to one is not ready on a zero tolerance rule. Wins do not cancel a must-never.
@@ -94,7 +94,7 @@ Freeze the inputs. Run the old prompt and the new prompt on the same model with 
 ### Step 2: Split the rules
 Anything checkable by shape (word counts, required lines, valid links, a banned string) goes to a script and runs on both sides first. Only rules that need meaning get a judge. Label each one:
 - **quality**: better is better, a loss is worth reading.
-- **must-always**: a loss is a problem to fix.
+- **must-always**: a loss goes on the regression list. Losing a rule the old version kept is a regression, even when the new version wins elsewhere.
 - **must-never**: a loss goes on the regression list. Mark the ones with zero tolerance.
 
 ### Step 3: Write one pairwise judge per rule
@@ -123,8 +123,8 @@ Every pair runs with old as A, then with new as A.
 The bar: every planted and held out pair caught on a zero tolerance rule, 90% or more on the rest, every identical pair a tie, and the same verdict in both orders on 95% or more of pairs. Read every miss with the judge's reason before you change anything.
 
 ### Step 6: Read the result in this order
-1. **The regression list.** Any must-never loss, case by case, with the judge's reason.
-2. **The other losses.** Where the old version was better on a quality or must-always rule.
+1. **The regression list.** Any must-never or must-always loss, case by case, with the judge's reason.
+2. **The other losses.** Where the old version was better on a quality rule.
 3. **The wins.** Did the change do what you made it for.
 
 ### Step 7: Decide, then grow the set
@@ -168,23 +168,24 @@ MODELS
   decision_up_top and because_names_cause_and_problem on Claude Haiku 4.5
   no_outreach_copy on Claude Sonnet 5.5
 
-REGRESSION LIST
+REGRESSION LIST           any loss on a must-never or must-always rule
   no_outreach_copy, harbor-doors: old won in both orders.
     judge: the new Open with greets Lee, speaks in the second person, and asks
     for 15 minutes next week. that is outreach copy. the old one states a
     customer result, which is not.
-
-OTHER LOSSES, for a person to read
   because_names_cause_and_problem, fern-electric: old won in both orders.
     judge: the old Because names a dated cause (a second dispatcher hire) and
     a problem (dispatch overload). the new one says Marcus "likely owns the
     decision", a stand-in for a problem.
 
+OTHER LOSSES, for a person to read
+  none.
+
 DECISION
   the new prompt does what it was written for: the decision is up top in all 5.
-  it does not ship yet. one zero tolerance regression, and one Because that
-  lost its cause. fix the prompt, plant the harbor-doors line as a test case,
-  and rerun.
+  it does not ship yet. two regressions: one on a zero tolerance rule, and one
+  Because that lost its cause. fix the prompt, plant both as test cases, and
+  rerun.
 ```
 
 ## Example chat
@@ -203,11 +204,11 @@ DECISION
 
 **You:** Did they pass?
 
-**Claude:** All three, every pair, with no flips. So here is the comparison. The new version wins the top block on all five accounts. On the Because, it wins one, loses one, and ties three. And there's one regression: on Harbor Garage Doors, the new Open with line greets Lee by name and asks for 15 minutes next week. The old version wrote a customer result there.
+**Claude:** All three, every pair, with no flips. So here is the comparison. The new version wins the top block on all five accounts. On the Because, it wins one, loses one, and ties three. And there are two regressions. On Harbor Garage Doors, the new Open with line greets Lee by name and asks for 15 minutes next week; the old version wrote a customer result there. On Fern Electric, the new Because lost its cause, a rule the old version kept.
 
 **You:** One out of five.
 
-**Claude:** On a zero tolerance rule, one is the number that matters. I'd fix the prompt, add that exact line as a planted mistake, and look at the Fern Electric Because before you rerun. The win you wanted is real. It just isn't ready yet.
+**Claude:** On a zero tolerance rule, one is the number that matters, and a rule the old version kept and the new one dropped counts too. I'd fix the prompt, add both as planted mistakes, and rerun. The win you wanted is real. It just isn't ready yet.
 
 ## Go further
 - **Compare more than two versions.** Run the new version against the old one and against the version before it. A change that wins against last week and loses against last month is drift.

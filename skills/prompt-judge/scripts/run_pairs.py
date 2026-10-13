@@ -20,7 +20,8 @@ The report (in <out>/results/<time>/) has:
                     identical: a tie in both orders
                     position consistency: the same verdict in both orders
     old vs new      per criterion: new wins, old wins, ties
-    regression list every must-never criterion where old won, even if new wins overall,
+    regression list every must-never or must-always criterion where old won, even if new wins
+                    overall,
                     and every zero-tolerance criterion where old won in even one order
 then every miss and every loss with the judge's reason.
 
@@ -177,7 +178,7 @@ async def main():
         for p in rp:
             why = p["b"]["reason"] if p["b"]["side"] == "old" else p["a"]["reason"]
             leans_old = p["agree"] == "split" and "old" in (p["a"]["side"], p["b"]["side"])
-            if p["outcome"] == "old" and rule.get("kind") == "must-never":
+            if p["outcome"] == "old" and rule.get("kind") in ("must-never", "must-always"):
                 regress.append(f"- **{n}**, `{p['id']}`: old won in both orders. Judge: {why[:400]}")
             elif (p["outcome"] == "old" or leans_old) and rule.get("zero_tolerance"):
                 regress.append(f"- **{n}**, `{p['id']}`: old won in one order, a tie in the other. "
@@ -185,7 +186,7 @@ async def main():
             elif p["outcome"] == "old":
                 losses.append(f"- **{n}**, `{p['id']}`: {why[:400]}")
     lines += ["", "## Regression list", "",
-              "Every case where the new version is worse on a must-never rule, even if it wins overall.", ""]
+              "Every case where the new version is worse on a must-never or must-always rule, even if it wins overall.", ""]
     lines += regress or ["None."]
     lines += ["", "## Other losses, for a person to read", ""] + (losses or ["None."])
     lines += ["", "## Trust-test misses, for a person to read", "",
