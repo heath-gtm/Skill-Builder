@@ -1,6 +1,24 @@
 {
   "plugins": [
     {
+      "slug": "icp-cortex",
+      "name": "ICP Cortex",
+      "tagline": "The foundational blocks everything else is built on.",
+      "problem": "You wrote the ICP doc and nothing downstream behaves as though it exists. Turn it into four plain blocks, what we sell, who buys from us, who we say no to, how we score, in the folder you already have, loaded once into the AI your team already uses, and proven on ten real deals before anyone calls it live. Three skills, in order: write the prompt, build the blocks, find the gaps.",
+      "audience": "Sales and GTM leaders whose ICP lives in a document their reps' AI cannot read",
+      "connectors": [
+        "Google Drive, optional",
+        "A CRM for the ten test deals, optional"
+      ],
+      "skills": [
+        "prompt-architect",
+        "icp-cortex-builder",
+        "icp-cortex-deep-dive"
+      ],
+      "visibility": "public",
+      "status": "draft"
+    },
+    {
       "slug": "prompt-lab",
       "name": "The Prompt Lab",
       "tagline": "Get a killer prompt for any AI tool.",
