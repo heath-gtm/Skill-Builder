@@ -10,6 +10,17 @@
  },
  "plugins": [
   {
+   "name": "understand-me",
+   "source": "./plugins/understand-me",
+   "description": "Show them you understand them - A message that proves you understand the person, built from real context, and a discovery brief a rep can walk into the call with",
+   "category": "sales-development",
+   "keywords": [
+    "playbook",
+    "sales-development"
+   ],
+   "homepage": "https://builtgtm.ai/playbooks/understand-me"
+  },
+  {
    "name": "build-ai-native-gtm",
    "source": "./plugins/build-ai-native-gtm",
    "description": "Build the AI-Native GTM Operating System - A workflow you framed instead of a hire, a context repo any agent can use, a signal wired to a booked motion, and a closed loop where the outcome changes the next action",
