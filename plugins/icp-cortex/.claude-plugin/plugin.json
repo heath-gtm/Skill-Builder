@@ -1,0 +1,17 @@
+{
+  "name": "icp-cortex",
+  "version": "1.0.0",
+  "description": "ICP Cortex: the foundational blocks everything else is built on. Three skills, in order: prompt-architect writes the build prompt as a SCRIPT, icp-cortex-builder turns your own documents into four plain blocks (what we sell, who buys from us, who we say no to, how we score) plus an index, finding contradictions first, and icp-cortex-deep-dive grades each block and runs ten real deals through them. Built for Build Better EP-007 with Samantha Leon of Zipcio.",
+  "author": {
+    "name": "Heath Barnett",
+    "url": "https://thesalesoperator.ai"
+  },
+  "homepage": "https://thesalesoperator.ai/skills#icp-cortex",
+  "keywords": [
+    "built-gtm",
+    "icp",
+    "context",
+    "build-better",
+    "gtm"
+  ]
+}
