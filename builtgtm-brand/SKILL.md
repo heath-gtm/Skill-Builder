@@ -179,7 +179,7 @@ Blueprint Cobalt #2B5CE7 is the one accent; Cobalt Deep #1E44B8 for links and
 hovers on paper; Safety Orange #FF6B2C is the rare signal accent only. Warm Ink
 #101014 does the text, the 2px borders, and the hard offset shadows (4-6px,
 never blurred). The standard mark since Oct 2026 is the Slap: a HELLO MY NAME IS
-sticker with Heath Barnett in marker and the [THE_SALES_OPERATOR] block stamped
+sticker with Heath (first name only) in marker and the [THE_SALES_OPERATOR] block stamped
 under it. Use it everywhere it fits (hero, cover, footer, banners, merch, talk
 slides), never below about 240px wide. In a bar too short for it (a nav or
 header bar) use the mini Slap: the HELLO band and the name, no block row. The
